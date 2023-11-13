@@ -1,0 +1,4 @@
+/* tailwind 自带modern-normalize */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
