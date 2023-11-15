@@ -1,6 +1,7 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
 import LoginView from '@/views/LoginView.vue'
-import DetailView from "@/views/detail/index";
+import DetailView from '@/views/detail/index'
+import CardList from '@/views/list/card-list/index'
 const router = createRouter({
   history: createWebHashHistory(import.meta.env.BASE_URL),
   routes: [
@@ -21,6 +22,12 @@ const router = createRouter({
       path: '/detail',
       name: 'detail',
       component: DetailView
+    },
+    {
+      path: '/cardList',
+
+      name: 'cardList',
+      component: CardList
     }
   ]
 })
