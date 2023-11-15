@@ -7,7 +7,7 @@ import ArcoVue from '@arco-design/web-vue'
 import '@arco-design/web-vue/dist/arco.css'
 import App from './App'
 import router from './router'
-
+import '@/mock/mock'
 const app = createApp(App)
 
 app.use(ArcoVue)
