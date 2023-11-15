@@ -1,13 +1,13 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
 import LoginView from '@/views/LoginView.vue'
-import MainView from '@/views/MainView.vue'
+import DetailView from "@/views/detail/index";
 const router = createRouter({
   history: createWebHashHistory(import.meta.env.BASE_URL),
   routes: [
     {
       path: '/',
       name: 'home',
-      redirect: { name: 'main' }
+      redirect: { name: 'detail' }
     },
     {
       path: '/login',
@@ -18,9 +18,9 @@ const router = createRouter({
       component: LoginView
     },
     {
-      path: '/main',
-      name: 'main',
-      component: MainView
+      path: '/detail',
+      name: 'detail',
+      component: DetailView
     }
   ]
 })
