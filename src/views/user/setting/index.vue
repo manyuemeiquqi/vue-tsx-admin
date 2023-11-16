@@ -18,7 +18,7 @@
 </template>
 
 <script setup lang="ts">
-import BasicInformation from '@/views/user/setting/components/BasicInformation.vue'
+import BasicInformation from '@/views/user/setting/components/BasicInformation'
 import SecuritySettings from '@/views/user/setting/components/SecuritySettings.vue'
 import Certification from '@/views/user/setting/components/Certification.vue'
 import UserPanel from '@/views/user/setting/components/UserPanel.vue'
