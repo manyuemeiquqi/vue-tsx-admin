@@ -14,9 +14,11 @@
   "dependencies": {
     "@types/mockjs": "^1.0.10",
     "axios": "^1.6.2",
+    "echarts": "^5.4.3",
     "mockjs": "^1.1.0",
     "pinia": "^2.1.7",
     "vue": "^3.3.4",
+    "vue-echarts": "^6.6.1",
     "vue-i18n": "^9.6.5",
     "vue-router": "^4.2.5"
   },
