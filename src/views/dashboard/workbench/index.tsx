@@ -1,8 +1,8 @@
 import { Col, Row, Space } from '@arco-design/web-vue'
 import { defineComponent } from 'vue'
-import ContentPercentage from '@/views/dashboard/workbench/components/ContentPercentage'
-import OverView from '@/views/dashboard/workbench/components/OverView'
-import PopularContents from '@/views/dashboard/workbench/components/PopularContents'
+import ContentPercentage from '@/views/dashboard/workbench/ContentPercentage'
+import OverView from '@/views/dashboard/workbench/OverView'
+import PopularContents from '@/views/dashboard/workbench/PopularContents'
 
 export default defineComponent({
   setup() {

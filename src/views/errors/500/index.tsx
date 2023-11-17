@@ -2,6 +2,8 @@ import { defineComponent } from 'vue'
 
 export default defineComponent({
   setup() {
-    return () => <div></div>
+    return () => {
+      ;<div>12</div>
+    }
   }
 })

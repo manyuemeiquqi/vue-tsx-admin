@@ -1,6 +1,6 @@
 import { defineComponent, ref } from 'vue'
-import DataUpdateRecord from '@/views/detail/components/DataUpdateRecord'
-import ProfileItem from '@/views/detail/components/ProfileItem'
+import DataUpdateRecord from '@/views/detail/DataUpdateRecord'
+import ProfileItem from '@/views/detail/ProfileItem'
 import { Card, Space, Steps, Button } from '@arco-design/web-vue'
 export default defineComponent({
   setup() {
