@@ -27,7 +27,7 @@ export default defineComponent({
       }
     ]
     return () => (
-      <Carousel class="h-full flex-1">
+      <Carousel class="h-full">
         {dataList.map((item, index) => {
           return (
             <div class="h-full">

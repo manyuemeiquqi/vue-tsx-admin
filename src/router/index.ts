@@ -9,7 +9,7 @@ const router = createRouter({
     {
       path: '/',
       name: 'home',
-      redirect: { name: 'layout' }
+      redirect: { name: 'login' }
     },
     {
       path: '/login',
@@ -20,20 +20,23 @@ const router = createRouter({
       component: LoginView
     },
     {
-      path: '/detail',
-      name: 'detail',
-      component: DetailView
-    },
-    {
-      path: '/cardList',
-
-      name: 'cardList',
-      component: CardList
-    },
-    {
       path: '/layout',
       name: 'layout',
-      component: () => import('@/components/layout/LayoutComponent.vue')
+      component: () => import('@/components/layout-component/index'),
+      redirect: { name: 'detail' },
+      children: [
+        {
+          path: '/detail',
+          name: 'detail',
+          component: DetailView
+        },
+        {
+          path: '/cardList',
+
+          name: 'cardList',
+          component: CardList
+        }
+      ]
     }
   ]
 })
