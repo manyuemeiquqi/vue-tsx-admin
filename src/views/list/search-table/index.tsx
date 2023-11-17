@@ -7,16 +7,16 @@ export function getColumns(
 ) {
   return [
     {
-      title: t['searchTable.columns.id'],
+      title: t('searchTable.columns.id'),
       dataIndex: 'id',
       render: (value) => <Typography>{value}</Typography>
     },
     {
-      title: t['searchTable.columns.name'],
+      title: t('searchTable.columns.name'),
       dataIndex: 'name'
     },
     {
-      title: t['searchTable.columns.contentType'],
+      title: t('searchTable.columns.contentType'),
       dataIndex: 'contentType',
       render: (value) => (
         <div class={styles['content-type']}>
@@ -26,12 +26,12 @@ export function getColumns(
       )
     },
     {
-      title: t['searchTable.columns.filterType'],
+      title: t('searchTable.columns.filterType'),
       dataIndex: 'filterType',
       render: (value) => FilterType[value]
     },
     {
-      title: t['searchTable.columns.contentNum'],
+      title: t('searchTable.columns.contentNum'),
       dataIndex: 'count',
       sorter: (a, b) => a.count - b.count,
       render(x) {
@@ -39,13 +39,13 @@ export function getColumns(
       }
     },
     {
-      title: t['searchTable.columns.createdTime'],
+      title: t('searchTable.columns.createdTime'),
       dataIndex: 'createdTime',
       render: (x) => dayjs().subtract(x, 'days').format('YYYY-MM-DD HH:mm:ss'),
       sorter: (a, b) => b.createdTime - a.createdTime
     },
     {
-      title: t['searchTable.columns.status'],
+      title: t('searchTable.columns.status'),
       dataIndex: 'status',
       render: (x) => {
         if (x === 0) {
@@ -55,12 +55,12 @@ export function getColumns(
       }
     },
     {
-      title: t['searchTable.columns.operations'],
+      title: t('searchTable.columns.operations'),
       dataIndex: 'operations',
       headerCellStyle: { paddingLeft: '15px' },
       render: (_, record) => (
         <Button type="text" size="small" onClick={() => callback(record, 'view')}>
-          {t['searchTable.columns.operations.view']}
+          {t('searchTable.columns.operations.view')}
         </Button>
       )
     }

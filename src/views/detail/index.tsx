@@ -14,22 +14,22 @@ export default defineComponent({
     return () => (
       <div class=" h-screen">
         <Space size={16} direction="vertical">
-          <Card
-            title="参数流程审批表"
-            v-slots={{
+          <Card title="参数流程审批表">
+            {{
               extra: () => (
                 <Space>
                   <Button>取消流程</Button>
                   <Button type="primary">返回</Button>
                 </Space>
+              ),
+              default: () => (
+                <Steps current={currentStatus.value}>
+                  {stepList.map((step) => (
+                    <Steps.Step>{step.label}</Steps.Step>
+                  ))}
+                </Steps>
               )
             }}
-          >
-            <Steps current={currentStatus.value}>
-              {stepList.map((step) => (
-                <Steps.Step>{step.label}</Steps.Step>
-              ))}
-            </Steps>
           </Card>
           <Card>
             <ProfileItem></ProfileItem>

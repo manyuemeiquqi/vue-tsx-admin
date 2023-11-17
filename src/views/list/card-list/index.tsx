@@ -8,7 +8,7 @@ import { defineComponent } from 'vue'
         extra={
           <Input.Search
             style={{ width: '240px' }}
-            placeholder={t[`cardList.tab.${activeKey}.placeholder`]}
+            placeholder={t(`cardList.tab.${activeKey}.placeholder`)}
           />
         }
       > */

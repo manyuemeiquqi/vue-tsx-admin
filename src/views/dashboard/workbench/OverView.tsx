@@ -4,7 +4,7 @@ import { defineComponent, ref } from 'vue'
 import { ToolTipFormatterParams } from '@/types/echarts'
 import { graphic } from 'echarts'
 import useChartOption from '@/hooks/chartOption'
-import Chart from '@/components/chart/index'
+import Chart from '@/components/chart-component/index'
 import { type AnyObject } from '@/types/global'
 export default defineComponent({
   setup() {
