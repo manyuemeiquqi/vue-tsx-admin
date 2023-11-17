@@ -19,7 +19,6 @@ export default defineComponent({
             </Col>
           </Row>
         </Space>
-        <Space></Space>
       </div>
     )
   }

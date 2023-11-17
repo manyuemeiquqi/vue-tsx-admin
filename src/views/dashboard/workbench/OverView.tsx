@@ -1,11 +1,11 @@
 import { Card, Divider, Typography, Link } from '@arco-design/web-vue'
 import { defineComponent, ref } from 'vue'
 
-import { ToolTipFormatterParams } from '@/types/echarts'
 import { graphic } from 'echarts'
 import useChartOption from '@/hooks/chartOption'
 import Chart from '@/components/chart-component/index'
 import { type AnyObject } from '@/types/global'
+import axios from 'axios'
 export default defineComponent({
   setup() {
     function graphicFactory(side: AnyObject) {
@@ -22,15 +22,65 @@ export default defineComponent({
       }
     }
     const xAxis = ref<string[]>([])
-
+    const tooltipItemsHtmlString = (items: any[]) => {
+      return items
+        .map(
+          (el) => `<div class="content-panel">
+          <p>
+            <span style="background-color: ${el.color}" class="tooltip-item-icon"></span><span>${
+              el.seriesName
+            }</span>
+          </p>
+          <span class="tooltip-value">${el.value.toLocaleString()}</span>
+        </div>`
+        )
+        .reverse()
+        .join('')
+    }
+    const generateSeries = (
+      name: string,
+      lineColor: string,
+      itemBorderColor: string,
+      data: number[]
+    ): any => {
+      return {
+        name,
+        data,
+        stack: 'Total',
+        type: 'line',
+        smooth: true,
+        symbol: 'circle',
+        symbolSize: 10,
+        itemStyle: {
+          color: lineColor
+        },
+        emphasis: {
+          focus: 'series',
+          itemStyle: {
+            color: lineColor,
+            borderWidth: 2,
+            borderColor: itemBorderColor
+          }
+        },
+        lineStyle: {
+          width: 2,
+          color: lineColor
+        },
+        showSymbol: false,
+        areaStyle: {
+          opacity: 0.1,
+          color: lineColor
+        }
+      }
+    }
     const chartsData = ref<number[]>([])
     const { chartOption } = useChartOption(() => {
       return {
         grid: {
           left: '2.6%',
-          right: '0',
-          top: '10',
-          bottom: '30'
+          right: '4',
+          top: '40',
+          bottom: '40'
         },
         xAxis: {
           type: 'category',
@@ -52,15 +102,7 @@ export default defineComponent({
             show: false
           },
           splitLine: {
-            show: true,
-            interval: (idx: number) => {
-              if (idx === 0) return false
-              if (idx === xAxis.value.length - 1) return false
-              return true
-            },
-            lineStyle: {
-              color: '#E5E8EF'
-            }
+            show: false
           },
           axisPointer: {
             show: true,
@@ -76,85 +118,95 @@ export default defineComponent({
             show: false
           },
           axisLabel: {
-            formatter(value: any, idx: number) {
-              if (idx === 0) return value
-              return `${value}k`
+            formatter(value: number, idx: number) {
+              if (idx === 0) return String(value)
+              return `${value / 1000}k`
             }
           },
           splitLine: {
-            show: true,
             lineStyle: {
-              type: 'dashed',
-              color: '#E5E8EF'
+              // color: dark ? '#2E2E30' : '#F2F3F5'
+              color: '#F2F3F5'
             }
           }
         },
         tooltip: {
           trigger: 'axis',
           formatter(params) {
-            const [firstElement] = params as ToolTipFormatterParams[]
+            // const [firstElement] = params as ToolTipFormatterParams[]
+            const [firstElement] = params as any[]
             return `<div>
               <p class="tooltip-title">${firstElement.axisValueLabel}</p>
-              <div class="content-panel"><span>总内容量</span><span class="tooltip-value">${(
-                Number(firstElement.value) * 10000
-              ).toLocaleString()}</span></div>
+              ${tooltipItemsHtmlString(params as any[])}
             </div>`
           },
           className: 'echarts-tooltip-diy'
         },
         graphic: {
-          elements: graphicElements.value
-        },
-        series: [
-          {
-            data: chartsData.value,
-            type: 'line',
-            smooth: true,
-            // symbol: 'circle',
-            symbolSize: 12,
-            emphasis: {
-              focus: 'series',
-              itemStyle: {
-                borderWidth: 2
+          elements: [
+            {
+              type: 'text',
+              left: '2.6%',
+              bottom: '18',
+              style: {
+                text: '12.10',
+                textAlign: 'center',
+                fill: '#4E5969',
+                fontSize: 12
               }
             },
-            lineStyle: {
-              width: 3,
-              color: new graphic.LinearGradient(0, 0, 1, 0, [
-                {
-                  offset: 0,
-                  color: 'rgba(30, 231, 255, 1)'
-                },
-                {
-                  offset: 0.5,
-                  color: 'rgba(36, 154, 255, 1)'
-                },
-                {
-                  offset: 1,
-                  color: 'rgba(111, 66, 251, 1)'
-                }
-              ])
-            },
-            showSymbol: false,
-            areaStyle: {
-              opacity: 0.8,
-              color: new graphic.LinearGradient(0, 0, 0, 1, [
-                {
-                  offset: 0,
-                  color: 'rgba(17, 126, 255, 0.16)'
-                },
-                {
-                  offset: 1,
-                  color: 'rgba(17, 128, 255, 0)'
-                }
-              ])
+            {
+              type: 'text',
+              right: '0',
+              bottom: '18',
+              style: {
+                text: '12.17',
+                textAlign: 'center',
+                fill: '#4E5969',
+                fontSize: 12
+              }
             }
-          }
+          ]
+        },
+        series: [
+          generateSeries('内容生产量', '#722ED1', '#F5E8FF', contentProductionData.value),
+          generateSeries('内容点击量', '#F77234', '#FFE4BA', contentClickData.value),
+          generateSeries('内容曝光量', '#33D1C9', '#E8FFFB', contentExposureData.value),
+          generateSeries('活跃用户数', '#3469FF', '#E8F3FF', activeUsersData.value)
         ]
       }
     })
 
     const graphicElements = ref([graphicFactory({ left: '2.6%' }), graphicFactory({ right: 0 })])
+
+    const contentProductionData = ref<number[]>([])
+
+    const contentClickData = ref<number[]>([])
+    const contentExposureData = ref<number[]>([])
+    const activeUsersData = ref<number[]>([])
+    const fetchData = async () => {
+      try {
+        const data = (await axios.post('/api/data-overview')).data.data
+        console.log('data: ', data)
+        xAxis.value = data.xAxis
+        console.log('xAxis: ', xAxis)
+        data.data.forEach((el: any) => {
+          if (el.name === '内容生产量') {
+            contentProductionData.value = el.value
+          } else if (el.name === '内容点击量') {
+            contentClickData.value = el.value
+          } else if (el.name === '内容曝光量') {
+            contentExposureData.value = el.value
+          }
+          activeUsersData.value = el.value
+        })
+      } catch (err) {
+        // you can report use errorHandler or other
+      } finally {
+        console.log()
+      }
+    }
+    fetchData()
     return () => (
       <Card>
         <Typography.Title heading={5}>欢迎回来</Typography.Title>
@@ -166,7 +218,7 @@ export default defineComponent({
             <span>（近一年）</span>
           </Typography.Paragraph>
           <Link>查看更多</Link>
-          <Chart height="289px" option={chartOption}></Chart>
+          <Chart height="289px" options={chartOption.value}></Chart>
         </div>
       </Card>
     )
