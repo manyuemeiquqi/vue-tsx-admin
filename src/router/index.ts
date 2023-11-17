@@ -3,6 +3,8 @@ import { createRouter, createWebHashHistory } from 'vue-router'
 import DetailView from '@/views/detail/index'
 import CardList from '@/views/list/card-list/index'
 import LoginView from '@/views/login/index'
+
+import Workbench from '@/views/dashboard/workbench/index'
 const router = createRouter({
   history: createWebHashHistory(import.meta.env.BASE_URL),
   routes: [
@@ -23,15 +25,19 @@ const router = createRouter({
       path: '/layout',
       name: 'layout',
       component: () => import('@/components/layout-component/index'),
-      redirect: { name: 'detail' },
       children: [
         {
-          path: '/detail',
+          path: 'workbench',
+          name: 'workbench',
+          component: Workbench
+        },
+        {
+          path: 'detail',
           name: 'detail',
           component: DetailView
         },
         {
-          path: '/cardList',
+          path: 'cardList',
 
           name: 'cardList',
           component: CardList
