@@ -28,11 +28,28 @@ export default defineComponent({
     ]
     return () => (
       <Carousel class="h-full">
-        {dataList.map((item, index) => {
+        {dataList.map((item) => {
           return (
-            <div class="h-full">
-              <img src={item.image} alt="banner-image" />
-            </div>
+            <Carousel.Item>
+              <div class="flex  justify-center items-center  flex-col  h-full">
+                <div
+                  class="text-[color:var(--color-fill-1)]
+                 font-medium
+                  text-xl
+                "
+                >
+                  {item.slogan}
+                </div>
+                <div
+                  class="text-[color:var(--color-text-3)]  mt-2
+                 text-sm
+                "
+                >
+                  {item.subSlogan}
+                </div>
+                <img class="w-[20rem] mt-7" src={item.image} alt="banner-image" />
+              </div>
+            </Carousel.Item>
           )
         })}
       </Carousel>
