@@ -20,10 +20,20 @@ export default {
   'settings.alertContent':
     'After the configuration is only temporarily effective, if you want to really affect the project, click the "Copy Settings" button below and replace the configuration in settings.json.',
   'settings.copySettings': 'Copy Settings',
-  'settings.copySettings.message':
-    'Copy succeeded, please paste to file src/settings.json.',
+  'settings.copySettings.message': 'Copy succeeded, please paste to file src/settings.json.',
   'settings.close': 'Close',
-  'settings.color.tooltip':
-    '10 gradient colors generated according to the theme color',
+  'settings.color.tooltip': '10 gradient colors generated according to the theme color',
   'settings.menuFromServer': 'Menu From Server',
-};
+
+  'messageBox.tab.title.message': 'Message',
+  'messageBox.tab.title.notice': 'Notice',
+  'messageBox.tab.title.todo': 'Todo',
+  'messageBox.tab.button': 'empty',
+  'messageBox.allRead': 'All Read',
+  'messageBox.viewMore': 'View More',
+  'messageBox.noContent': 'No Content',
+  'messageBox.switchRoles': 'Switch Roles',
+  'messageBox.userCenter': 'User Center',
+  'messageBox.userSettings': 'User Settings',
+  'messageBox.logout': 'Logout'
+}

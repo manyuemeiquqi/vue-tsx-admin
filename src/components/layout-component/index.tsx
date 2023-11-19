@@ -3,20 +3,27 @@ import { defineComponent } from 'vue'
 import MenuComponent from './MenuComponent'
 import PageComponent from './PageComponent'
 import FooterComponent from './FooterComponent'
+import Navbar from './Navbar'
+import TabBar from './TabBar'
+import BreadcrumbComponent from './BreadcrumbComponent'
 export default defineComponent({
   setup() {
     return () => {
       return (
         <Layout>
-          <Layout.Sider>
-            <MenuComponent></MenuComponent>
-          </Layout.Sider>
-          <Layout>
-            <div>tab close</div>
-            <Layout.Content class="min-h-screen">
-              <PageComponent />
-            </Layout.Content>
-            <FooterComponent />
+          <Navbar />
+          <Layout class="!pt-16">
+            <Layout.Sider>
+              <MenuComponent></MenuComponent>
+            </Layout.Sider>
+            <Layout class="pt-16">
+              <TabBar />
+              <BreadcrumbComponent />
+              <Layout.Content class="min-h-screen">
+                <PageComponent />
+              </Layout.Content>
+              <FooterComponent />
+            </Layout>
           </Layout>
         </Layout>
       )
