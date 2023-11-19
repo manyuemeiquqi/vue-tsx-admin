@@ -5,6 +5,8 @@ import CardList from '@/views/list/card-list/index'
 import LoginView from '@/views/login/index'
 
 import Workbench from '@/views/dashboard/workbench/index'
+
+import UserInfo from '@/views/user/info/index'
 const router = createRouter({
   history: createWebHashHistory(import.meta.env.BASE_URL),
   routes: [
@@ -41,6 +43,12 @@ const router = createRouter({
 
           name: 'cardList',
           component: CardList
+        },
+        {
+          path: 'userInfo',
+
+          name: 'userInfo',
+          component: UserInfo
         }
       ]
     }
