@@ -12,15 +12,19 @@ import {
   Switch,
   InputTag
 } from '@arco-design/web-vue'
-import { defineComponent } from 'vue'
+import { defineComponent, ref } from 'vue'
+import { useI18n } from 'vue-i18n'
 
 export default defineComponent({
   setup() {
+    const { t } = useI18n()
+    const current = ref(1)
+    const formData = ref({})
     return () => (
       <Card>
         <Typography.Title heading={5}>{t('stepForm.desc.basicInfo')}</Typography.Title>
         <div>
-          <Steps current={current} lineless>
+          <Steps current={current.value}>
             <Steps.Step
               title={t('stepForm.title.basicInfo')}
               description={t('stepForm.desc.basicInfo')}
@@ -34,8 +38,8 @@ export default defineComponent({
               description={t('stepForm.desc.created')}
             />
           </Steps>
-          <Form form={form} className={styles.form}>
-            {current === 1 && (
+          <Form model={formData.value}>
+            {current.value === 1 && (
               <Form.Item noStyle>
                 <Form.Item
                   label={t('stepForm.basicInfo.name')}
@@ -60,7 +64,6 @@ export default defineComponent({
                 <Form.Item
                   label={t('stepForm.basicInfo.channelType')}
                   required
-                  initialValue="app"
                   field="basic.channelType"
                   rules={[
                     {
@@ -93,14 +96,13 @@ export default defineComponent({
                   required
                   extra={t('stepForm.basicInfo.link.tips')}
                   field="basic.link"
-                  initialValue={'https://arco.design'}
                   rules={[{ required: true }]}
                 >
                   <Input placeholder={t('stepForm.basicInfo.link.placeholder')} />
                 </Form.Item>
               </Form.Item>
             )}
-            {current === 2 && (
+            {current.value === 2 && (
               <Form.Item noStyle>
                 <Form.Item
                   label={t('stepForm.channel.source')}
@@ -132,7 +134,6 @@ export default defineComponent({
                   label={t('stepForm.channel.keywords')}
                   required
                   field="channel.keywords"
-                  initialValue={['今日头条', '火山']}
                   rules={[{ required: true }]}
                 >
                   <InputTag />
@@ -140,9 +141,7 @@ export default defineComponent({
                 <Form.Item
                   label={t('stepForm.channel.remind')}
                   required
-                  initialValue={true}
                   field="channel.remind"
-                  triggerPropName="checked"
                   rules={[{ required: true }]}
                 >
                   <Switch />
@@ -163,16 +162,16 @@ export default defineComponent({
                 </Form.Item>
               </Form.Item>
             )}
-            {current !== 3 ? (
+            {current.value !== 3 ? (
               <Form.Item label=" ">
                 <Space>
-                  {current === 2 && (
-                    <Button size="large" onClick={() => setCurrent(current - 1)}>
+                  {current.value === 2 && (
+                    <Button size="large" onClick={() => {}}>
                       {t('stepForm.prev')}
                     </Button>
                   )}
-                  {current !== 3 && (
-                    <Button type="primary" size="large" onClick={toNext}>
+                  {current.value !== 3 && (
+                    <Button type="primary" size="large">
                       {t('stepForm.next')}
                     </Button>
                   )}
@@ -183,27 +182,32 @@ export default defineComponent({
                 <Result
                   status="success"
                   title={t('stepForm.created.success.title')}
-                  subTitle={t('stepForm.created.success.desc')}
-                  extra={[
-                    <Button key="reset" style={{ marginRight: 16 }} onClick={viewForm}>
-                      {t('stepForm.created.success.view')}
-                    </Button>,
-                    <Button key="again" type="primary" onClick={reCreateForm}>
-                      {t('stepForm.created.success.again')}
-                    </Button>
-                  ]}
-                />
+                  subtitle={t('stepForm.created.success.desc')}
+                >
+                  {{
+                    extra: () => (
+                      <>
+                        <Button key="reset" style={{ marginRight: 16 }} onClick={() => {}}>
+                          {t('stepForm.created.success.view')}
+                        </Button>
+                        <Button key="again" type="primary" onClick={() => {}}>
+                          {t('stepForm.created.success.again')}
+                        </Button>
+                      </>
+                    )
+                  }}
+                </Result>
               </Form.Item>
             )}
           </Form>
         </div>
-        {current === 3 && (
-          <div className={styles['form-extra']}>
-            <Title heading={6}>{t('stepForm.created.extra.title')}</Title>
-            <Paragraph type="secondary">
+        {current.value === 3 && (
+          <div>
+            <Typography.Title heading={6}>{t('stepForm.created.extra.title')}</Typography.Title>
+            <Typography.Paragraph>
               {t('stepForm.created.extra.desc')}
               <Button type="text">{t('stepForm.created.extra.detail')}</Button>
-            </Paragraph>
+            </Typography.Paragraph>
           </div>
         )}
       </Card>

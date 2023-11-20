@@ -19,7 +19,7 @@ export default defineComponent({
     const handleSubmit = () => {}
     const formRef = ref<FormInstance>()
     const formData = ref({})
-    return (
+    return () => (
       <div>
         <Form layout="vertical" model={formData} ref={formRef}>
           <Card>
@@ -208,7 +208,7 @@ export default defineComponent({
             <Button onClick={handleReset} size="large">
               {t('groupForm.reset')}
             </Button>
-            <Button type="primary" onClick={handleSubmit} loading={loading} size="large">
+            <Button type="primary" onClick={handleSubmit} size="large">
               {t('groupForm.submit')}
             </Button>
           </Space>
