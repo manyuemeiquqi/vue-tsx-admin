@@ -12,14 +12,14 @@ export default defineComponent({
       return (
         <Layout>
           <Navbar />
-          <Layout class="!pt-16">
-            <Layout.Sider>
+          <Layout>
+            <Layout.Sider class="!pt-16   h-full !fixed left-0 ">
               <MenuComponent></MenuComponent>
             </Layout.Sider>
-            <Layout class="pt-16">
+            <Layout class="!pt-16   !pl-52 min-h-screen bg-cyan-200">
               <TabBar />
               <BreadcrumbComponent />
-              <Layout.Content class="min-h-screen">
+              <Layout.Content class="!pt-4  !pl-5 ">
                 <PageComponent />
               </Layout.Content>
               <FooterComponent />
