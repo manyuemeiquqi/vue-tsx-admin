@@ -7,6 +7,7 @@ import {
   Select,
   Input,
   Button,
+  Textarea,
   type FormInstance
 } from '@arco-design/web-vue'
 import { defineComponent, ref } from 'vue'
@@ -199,7 +200,7 @@ export default defineComponent({
           <Card class="bottom-10">
             <Typography.Title heading={6}>{t('groupForm.title.explanation')}</Typography.Title>
             <Form.Item label={t('groupForm.form.label.explanation')} field="audio.explanation">
-              <Input.TextArea placeholder={t('groupForm.placeholder.explanation')} />
+              <Textarea placeholder={t('groupForm.placeholder.explanation')} />
             </Form.Item>
           </Card>
         </Form>
