@@ -3,7 +3,7 @@ import { defineComponent } from 'vue'
 
 export default defineComponent({
   setup() {
-    ;() => (
+    return () => (
       <Card bordered={false}>
         <Space size={54}>
           <Upload>
