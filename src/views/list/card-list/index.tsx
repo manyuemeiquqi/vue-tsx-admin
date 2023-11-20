@@ -1,18 +1,5 @@
-import { Card, Input, InputSearch, Tabs, Typography } from '@arco-design/web-vue'
+import { Card, Input, Tabs, Typography } from '@arco-design/web-vue'
 import { defineComponent } from 'vue'
-
-{
-  /* activeTab={activeKey}
-        type="rounded"
-        onChange={setActiveKey}
-        extra={
-          <Input.Search
-            style={{ width: '240px' }}
-            placeholder={t(`cardList.tab.${activeKey}.placeholder`)}
-          />
-        }
-      > */
-}
 
 export default defineComponent({
   setup() {
@@ -29,7 +16,6 @@ export default defineComponent({
           activeKey={activeKey}
           v-slots={{
             extra: () => <Input placeholder="121" class="w-60" />
-            // extra: () => <InputSearch placeholder="121" class="w-60" />
           }}
         >
           {tabList.map((tab) => (

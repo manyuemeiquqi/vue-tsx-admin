@@ -7,6 +7,13 @@ import LoginView from '@/views/login/index'
 import Workbench from '@/views/dashboard/workbench/index'
 
 import UserInfo from '@/views/user/info/index'
+
+import ListRoutes from '@/router/routes/modules/list'
+import ExceptionRoutes from '@/router/routes/modules/exception'
+import UserRoutes from '@/router/routes/modules/user'
+
+import ResultRoutes from '@/router/routes/modules/result'
+import FormRoutes from '@/router/routes/modules/form'
 const router = createRouter({
   history: createWebHashHistory(import.meta.env.BASE_URL),
   routes: [
@@ -51,7 +58,12 @@ const router = createRouter({
           component: UserInfo
         }
       ]
-    }
+    },
+    ListRoutes as any,
+    ExceptionRoutes as any,
+    ResultRoutes as any,
+    UserRoutes as any,
+    FormRoutes as any
   ]
 })
 

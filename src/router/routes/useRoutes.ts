@@ -1,7 +1,14 @@
 import ListRoutes from '@/router/routes/modules/list'
+import ExceptionRoutes from '@/router/routes/modules/exception'
+import ResultRoutes from '@/router/routes/modules/result'
+import UserRoutes from '@/router/routes/modules/user'
+import FormRoutes from '@/router/routes/modules/form'
 import { computed, toRaw } from 'vue'
 import type { RouteRecordNormalized, RouteRecordRaw } from 'vue-router'
 import { type AppRouteRecordRaw } from '@/router/routes/types'
+
+import { cloneDeep } from 'lodash'
+
 function formatModules(_modules: any, result: RouteRecordNormalized[]) {
   Object.keys(_modules).forEach((key) => {
     const defaultModule = _modules[key].default
@@ -12,7 +19,7 @@ function formatModules(_modules: any, result: RouteRecordNormalized[]) {
   return result
 }
 //const appRoutes = formatModules()
-const appClientMenus = [...[ListRoutes]]
+const appClientMenus = [...[ListRoutes, ExceptionRoutes, ResultRoutes, UserRoutes, FormRoutes]]
 
 export default function useMenuTree() {
   // const permission = usePermission()
@@ -25,7 +32,7 @@ export default function useMenuTree() {
   })
 
   const menuTree = computed(() => {
-    const copyRouter = structuredClone(appRoute.value) as RouteRecordRaw[]
+    const copyRouter = cloneDeep(appRoute.value) as RouteRecordRaw[]
     copyRouter.sort((a, b) => {
       return ((a.meta!.order as number) || 0) - ((b.meta!.order as number) || 0)
     })

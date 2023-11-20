@@ -1,10 +1,10 @@
 //import { DEFAULT_LAYOUT } from '../base'
 import { type AppRouteRecordRaw } from '@/router/routes/types'
 
-const LIST: AppRouteRecordRaw = {
+const LIST: any = {
   path: '/list',
   name: 'list',
-  //component: DEFAULT_LAYOUT,
+  component: () => import('@/components/layout-component/index'),
   meta: {
     locale: 'menu.list',
     requiresAuth: true,
@@ -15,7 +15,7 @@ const LIST: AppRouteRecordRaw = {
     {
       path: 'search-table', // The midline path complies with SEO specifications
       name: 'SearchTable',
-      //  component: () => import('@/views/list/search-table/index.vue'),
+      component: () => import('@/views/list/search-table/index'),
       meta: {
         locale: 'menu.list.searchTable',
         requiresAuth: true,
@@ -25,7 +25,7 @@ const LIST: AppRouteRecordRaw = {
     {
       path: 'card',
       name: 'Card',
-      //component: () => import('@/views/list/card/index.vue'),
+      component: () => import('@/views/list/card-list/index'),
       meta: {
         locale: 'menu.list.cardList',
         requiresAuth: true,
