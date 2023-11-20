@@ -5,11 +5,15 @@ import {
   type FormInstance,
   Message,
   Input,
-  Cascader
+  Cascader,
+  Select,
+  Textarea
 } from '@arco-design/web-vue'
 import { defineComponent, ref } from 'vue'
+import { useI18n } from 'vue-i18n'
 export default defineComponent({
   setup() {
+    const { t } = useI18n()
     const formData = {}
     const formRef = ref<FormInstance>()
     const handleReset = () => {
@@ -37,11 +41,7 @@ export default defineComponent({
             }
           ]}
         >
-          {loading ? (
-            loadingNode()
-          ) : (
-            <Input placeholder={t('userSetting.info.email.placeholder')} />
-          )}
+          {<Input placeholder={t('userSetting.info.email.placeholder')} />}
         </Form.Item>
         <Form.Item
           label="昵称"
@@ -53,32 +53,21 @@ export default defineComponent({
             }
           ]}
         >
-          {loading ? (
-            loadingNode()
-          ) : (
-            <Input placeholder={t('userSetting.info.nickName.placeholder')} />
-          )}
+          {<Input placeholder={t('userSetting.info.nickName.placeholder')} />}
         </Form.Item>
         <Form.Item label={t('userSetting.info.area')} field="rangeArea">
-          {loading ? (
-            loadingNode()
-          ) : (
-            <Select options={['中国']} placeholder={t('userSetting.info.area.placeholder')} />
-          )}
+          {<Select options={['中国']} placeholder={t('userSetting.info.area.placeholder')} />}
         </Form.Item>
         <Form.Item
           label={t('userSetting.info.location')}
           field="location"
-          initialValue={['BeiJing', 'BeiJing', 'HaiDian']}
           rules={[
             {
               required: true
             }
           ]}
         >
-          {loading ? (
-            loadingNode()
-          ) : (
+          {
             <Cascader
               options={[
                 {
@@ -111,17 +100,14 @@ export default defineComponent({
                 }
               ]}
             />
-          )}
+          }
         </Form.Item>
         <Form.Item label="具体地址" field="address">
-          {loading ? loadingNode() : <Input placeholder="请输入您的地址" />}
+          <Input />
+          {/* {loading ? loadingNode() : <Input placeholder="请输入您的地址" />} */}
         </Form.Item>
         <Form.Item label="个人简介" field="profile">
-          {loading ? (
-            loadingNode(3)
-          ) : (
-            <Input.TextArea placeholder="请输入您的个人简介，最多不超过200字。" />
-          )}
+          <Textarea placeholder="请输入您的个人简介，最多不超过200字。" />
         </Form.Item>
         <Form.Item label="">
           <Space>

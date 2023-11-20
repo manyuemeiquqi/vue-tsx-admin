@@ -23,7 +23,7 @@ export default defineComponent({
         title: '实名认证'
       }
     ]
-    return (
+    return () => (
       <div>
         <Grid.Row>
           <Grid.Col span={24}>
@@ -32,9 +32,13 @@ export default defineComponent({
         </Grid.Row>
         <Grid.Row>
           <Grid.Col span={24}>
-            <Tabs>
+            <Tabs defaultActiveKey={'1'}>
               {componentList.map((item) => {
-                ;<Tabs.TabPane title={item.title}>{h(item.component)}</Tabs.TabPane>
+                return (
+                  <Tabs.TabPane key={item.key} title={item.title}>
+                    {h(item.component)}
+                  </Tabs.TabPane>
+                )
               })}
             </Tabs>
           </Grid.Col>
