@@ -29,6 +29,7 @@
 import localeSettings from './en-US/settings'
 
 export default {
+  '': '',
   'menu.dashboard': 'Dashboard',
   'menu.server.dashboard': 'Dashboard-Server',
   'menu.server.workplace': 'Workplace-Server',
