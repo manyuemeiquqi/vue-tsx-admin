@@ -61,8 +61,6 @@ export default defineComponent({
       ]
     })
     nextTick(() => {
-      console.log(props.options)
-
       renderChart.value = true
     })
     return () =>
