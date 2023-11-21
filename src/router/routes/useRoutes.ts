@@ -3,6 +3,9 @@ import ExceptionRoutes from '@/router/routes/modules/exception'
 import ResultRoutes from '@/router/routes/modules/result'
 import UserRoutes from '@/router/routes/modules/user'
 import FormRoutes from '@/router/routes/modules/form'
+import dashboard from '@/router/routes/modules/dashboard'
+import visualization from '@/router/routes/modules/visualization'
+import detail from '@/router/routes/modules/detail'
 import { computed, toRaw } from 'vue'
 import type { RouteRecordNormalized, RouteRecordRaw } from 'vue-router'
 import { type AppRouteRecordRaw } from '@/router/routes/types'
@@ -19,7 +22,18 @@ function formatModules(_modules: any, result: RouteRecordNormalized[]) {
   return result
 }
 //const appRoutes = formatModules()
-const appClientMenus = [...[ListRoutes, ExceptionRoutes, ResultRoutes, UserRoutes, FormRoutes]]
+const appClientMenus = [
+  ...[
+    ListRoutes,
+    ExceptionRoutes,
+    ResultRoutes,
+    UserRoutes,
+    FormRoutes,
+    dashboard,
+    detail,
+    visualization
+  ]
+]
 
 export default function useMenuTree() {
   // const permission = usePermission()

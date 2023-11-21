@@ -14,6 +14,9 @@ import UserRoutes from '@/router/routes/modules/user'
 
 import ResultRoutes from '@/router/routes/modules/result'
 import FormRoutes from '@/router/routes/modules/form'
+import detail from '@/router/routes/modules/detail'
+import visualization from '@/router/routes/modules/visualization'
+import dashboard from '@/router/routes/modules/dashboard'
 const router = createRouter({
   history: createWebHashHistory(import.meta.env.BASE_URL),
   routes: [
@@ -63,7 +66,10 @@ const router = createRouter({
     ExceptionRoutes as any,
     ResultRoutes as any,
     UserRoutes as any,
-    FormRoutes as any
+    FormRoutes as any,
+    detail,
+    visualization,
+    dashboard
   ]
 })
 
