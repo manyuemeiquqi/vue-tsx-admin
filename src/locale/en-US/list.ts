@@ -58,5 +58,17 @@ export default {
   // actions
   'searchTable.actions.refresh': 'refresh',
   'searchTable.actions.density': 'density',
-  'searchTable.actions.columnSetting': 'columnSetting'
+  'searchTable.actions.columnSetting': 'columnSetting',
+
+  'menu.list': 'List',
+  'searchTable.columns.id': 'Collection ID',
+  'searchTable.columns.contentNum': 'Content quantity',
+  'searchTable.columns.operations.update': 'Edit',
+  'searchTable.columns.operations.offline': 'Offline',
+  'searchTable.columns.operations.online': 'Online',
+  'searchTable.operations.add': 'New',
+  'searchTable.operations.upload': 'Bulk upload',
+  'searchForm.id.placeholder': 'Please enter the collection ID',
+  'searchForm.name.placeholder': 'Please enter the collection name',
+  'searchForm.all.placeholder': 'all'
 }

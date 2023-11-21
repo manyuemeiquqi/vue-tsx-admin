@@ -59,5 +59,17 @@ export default {
   // actions
   'searchTable.actions.refresh': '刷新',
   'searchTable.actions.density': '密度',
-  'searchTable.actions.columnSetting': '列设置'
+  'searchTable.actions.columnSetting': '列设置',
+
+  'menu.list': '列表页',
+  'searchTable.columns.id': '集合编号',
+  'searchTable.columns.contentNum': '内容量',
+  'searchTable.columns.operations.update': '修改',
+  'searchTable.columns.operations.online': '上线',
+  'searchTable.columns.operations.offline': '下线',
+  'searchTable.operations.add': '新建',
+  'searchTable.operations.upload': '批量导入',
+  'searchForm.id.placeholder': '请输入集合编号',
+  'searchForm.name.placeholder': '请输入集合名称',
+  'searchForm.all.placeholder': '全部'
 }
