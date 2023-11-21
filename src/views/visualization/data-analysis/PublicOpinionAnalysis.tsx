@@ -1,42 +1,60 @@
-import { Card, Divider, Typography, Link } from '@arco-design/web-vue'
-import { defineComponent, ref } from 'vue'
-
-import { graphic } from 'echarts'
+import ChartComponent from '@/components/chart-component'
 import useChartOption from '@/hooks/chartOption'
-import Chart from '@/components/chart-component/index'
-import { type AnyObject } from '@/types/global'
+import { Card, Space, Statistic } from '@arco-design/web-vue'
 import axios from 'axios'
+import { computed, defineComponent, ref, h } from 'vue'
+import { useI18n } from 'vue-i18n'
+import ChainItem from './ChainItem'
 export default defineComponent({
   setup() {
-    function graphicFactory(side: AnyObject) {
-      return {
-        type: 'text',
-        bottom: '8',
-        ...side,
-        style: {
-          text: '',
-          textAlign: 'center',
-          fill: '#4E5969',
-          fontSize: 12
-        }
-      }
-    }
-    const xAxis = ref<string[]>([])
+    const { t } = useI18n()
+    const isDark = ref(false)
     const tooltipItemsHtmlString = (items: any[]) => {
       return items
         .map(
           (el) => `<div class="content-panel">
-          <p>
-            <span style="background-color: ${el.color}" class="tooltip-item-icon"></span><span>${
-              el.seriesName
-            }</span>
-          </p>
-          <span class="tooltip-value">${el.value.toLocaleString()}</span>
-        </div>`
+            <p>
+              <span style="background-color: ${el.color}" class="tooltip-item-icon"></span><span>${
+                el.seriesName
+              }</span>
+            </p>
+            <span class="tooltip-value">${el.value.toLocaleString()}</span>
+          </div>`
         )
         .reverse()
         .join('')
     }
+    const renderData = computed(() => [
+      {
+        title: t('dataAnalysis.card.title.allVisitors'),
+        quota: 'visitors',
+
+        chartType: 'line'
+      },
+      {
+        title: t('dataAnalysis.card.title.contentPublished'),
+        quota: 'published',
+
+        chartType: 'bar'
+      },
+      {
+        title: t('dataAnalysis.card.title.totalComment'),
+        quota: 'comment',
+
+        chartType: 'line'
+      },
+      {
+        title: t('dataAnalysis.card.title.totalShare'),
+        quota: 'share',
+
+        chartType: 'pie'
+      }
+    ])
+    const xAxis = ref<string[]>([])
+    const contentProductionData = ref<number[]>([])
+    const contentClickData = ref<number[]>([])
+    const contentExposureData = ref<number[]>([])
+    const activeUsersData = ref<number[]>([])
     const generateSeries = (
       name: string,
       lineColor: string,
@@ -73,8 +91,7 @@ export default defineComponent({
         }
       }
     }
-    const chartsData = ref<number[]>([])
-    const { chartOption } = useChartOption(() => {
+    const { chartOption } = useChartOption((dark) => {
       return {
         grid: {
           left: '2.6%',
@@ -125,20 +142,18 @@ export default defineComponent({
           },
           splitLine: {
             lineStyle: {
-              // color: dark ? '#2E2E30' : '#F2F3F5'
-              color: '#F2F3F5'
+              color: dark ? '#2E2E30' : '#F2F3F5'
             }
           }
         },
         tooltip: {
           trigger: 'axis',
           formatter(params) {
-            // const [firstElement] = params as ToolTipFormatterParams[]
             const [firstElement] = params as any[]
             return `<div>
-              <p class="tooltip-title">${firstElement.axisValueLabel}</p>
-              ${tooltipItemsHtmlString(params as any[])}
-            </div>`
+                <p class="tooltip-title">${firstElement.axisValueLabel}</p>
+                ${tooltipItemsHtmlString(params as any[])}
+              </div>`
           },
           className: 'echarts-tooltip-diy'
         },
@@ -176,20 +191,11 @@ export default defineComponent({
         ]
       }
     })
-
-    const graphicElements = ref([graphicFactory({ left: '2.6%' }), graphicFactory({ right: 0 })])
-
-    const contentProductionData = ref<number[]>([])
-
-    const contentClickData = ref<number[]>([])
-    const contentExposureData = ref<number[]>([])
-    const activeUsersData = ref<number[]>([])
     const fetchData = async () => {
+      //   setLoading(true)
       try {
-        const data = (await axios.post('/api/data-overview')).data.data
-        console.log('data: ', data)
+        const { data } = (await axios.post<any>('/api/data-overview')).data
         xAxis.value = data.xAxis
-        console.log('xAxis: ', xAxis)
         data.data.forEach((el: any) => {
           if (el.name === '内容生产量') {
             contentProductionData.value = el.value
@@ -203,23 +209,18 @@ export default defineComponent({
       } catch (err) {
         // you can report use errorHandler or other
       } finally {
-        console.log()
+        // setLoading(false)
       }
     }
     fetchData()
+
     return () => (
       <Card>
-        <Typography.Title heading={5}>欢迎回来</Typography.Title>
-        <Divider />
-
-        <div>
-          <Typography.Paragraph>
-            内容数据
-            <span>（近一年）</span>
-          </Typography.Paragraph>
-          <Link>查看更多</Link>
-          <Chart height="289px" options={chartOption.value}></Chart>
-        </div>
+        <Space>
+          {renderData.value.map((item) => (
+            <ChainItem title={item.title} quota={item.quota} chartType={item.chartType} />
+          ))}
+        </Space>
       </Card>
     )
   }
