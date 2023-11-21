@@ -240,5 +240,55 @@ setupMock({
       haveReadIds.push(...(ids || []))
       return successResponseWrap(true)
     })
+
+    Mock.mock(new RegExp('/api/content-period-analysis'), () => {
+      const getLineData = (name: string) => {
+        return {
+          name,
+          value: new Array(12).fill(0).map(() => Mock.Random.natural(30, 90))
+        }
+      }
+      return successResponseWrap({
+        xAxis: new Array(12).fill(0).map((_item, index) => `${index * 2}:00`),
+        data: [getLineData('纯文本'), getLineData('图文类'), getLineData('视频类')]
+      })
+    })
+
+    Mock.mock(new RegExp('/api/content-publish'), () => {
+      const generateLineData = (name: string) => {
+        const result = {
+          name,
+          x: [] as string[],
+          y: [] as number[]
+        }
+        new Array(12).fill(0).forEach((_item, index) => {
+          result.x.push(`${index * 2}:00`)
+          result.y.push(Mock.Random.natural(1000, 3000))
+        })
+        return result
+      }
+      return successResponseWrap([
+        generateLineData('纯文本'),
+        generateLineData('图文类'),
+        generateLineData('视频类')
+      ])
+    })
+
+    Mock.mock(new RegExp('/api/popular-author/list'), () => {
+      const generateData = () => {
+        const list = new Array(7).fill(0).map((_item, index) => ({
+          ranking: index + 1,
+          author: Mock.mock('@ctitle(5)'),
+          contentCount: Mock.mock(/[0-9]{4}/),
+          clickCount: Mock.mock(/[0-9]{4}/)
+        }))
+        return {
+          list
+        }
+      }
+      return successResponseWrap({
+        ...generateData()
+      })
+    })
   }
 })
