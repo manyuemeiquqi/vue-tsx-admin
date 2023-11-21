@@ -6,7 +6,7 @@ export default defineComponent({
     const tabList = [{ title: '全部' }]
     const activeKey = ''
     const setActiveKey = () => {}
-
+    const list: any = []
     return () => (
       <Card>
         <Typography.Title heading={6}>卡片列表</Typography.Title>
@@ -22,7 +22,13 @@ export default defineComponent({
             <Tabs.TabPane key={tab.title} title={tab.title}></Tabs.TabPane>
           ))}
         </Tabs>
-        <div></div>
+        <div>
+          {list.map((item: any) => (
+            <div>
+              <Typography.Title></Typography.Title>
+            </div>
+          ))}
+        </div>
       </Card>
     )
   }
