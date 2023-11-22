@@ -1,3 +1,5 @@
+import { queryMyTeamList } from '@/api/userRequest'
+import useRequest from '@/hooks/request'
 import { Avatar, Card, List } from '@arco-design/web-vue'
 import axios from 'axios'
 import { defineComponent, ref } from 'vue'
@@ -10,6 +12,7 @@ export default defineComponent({
     //   defaultValue
     // )
     const fetchData = () => {
+      const { loading, response } = useRequest(queryMyTeamList)
       axios.post('/api/user/my-team/list').then((res) => {
         console.log('res: ', res)
         dataSource.value = res.data.data
