@@ -17,6 +17,8 @@ import FormRoutes from '@/router/routes/modules/form'
 import detail from '@/router/routes/modules/detail'
 import visualization from '@/router/routes/modules/visualization'
 import dashboard from '@/router/routes/modules/dashboard'
+import useUserStore from '@/store/modules/user'
+import { getUserInfo } from '@/api/user'
 const router = createRouter({
   history: createWebHashHistory(import.meta.env.BASE_URL),
   routes: [
@@ -73,4 +75,15 @@ const router = createRouter({
   ]
 })
 
+// router beforeEach 的是事件注册
+router.beforeEach(async (to, from, next) => {
+  const userStore = useUserStore()
+  try {
+    const res = await getUserInfo()
+    userStore.setUserInfo(res.data)
+  } catch (error) {
+    console.log('error: ', error)
+  }
+  next()
+})
 export default router
