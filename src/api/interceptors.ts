@@ -41,7 +41,9 @@ axios.interceptors.response.use(
       }
       return Promise.reject(new Error(responseData.msg || 'Error'))
     }
-    return response
+    console.log('responseData: ', responseData)
+
+    return responseData
   },
   (error) => {
     Message.error({

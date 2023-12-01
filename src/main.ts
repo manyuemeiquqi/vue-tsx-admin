@@ -10,6 +10,10 @@ import '@/mock/mock'
 import i18n from './locale'
 import ArcoVueIcon from '@arco-design/web-vue/es/icon'
 import store from '@/store/index'
+
+// 这里最好注入到实例内部
+import '@/api/interceptors'
+
 const app = createApp(App)
 
 app.use(ArcoVueIcon)
