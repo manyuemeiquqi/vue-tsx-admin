@@ -80,7 +80,7 @@ export default defineComponent({
       >
         <Space>
           <img src={Logo} alt="" />
-          <Typography.Title heading={5}>Arco Pro</Typography.Title>
+          <Typography.Title heading={5}>Vtsx Pro</Typography.Title>
         </Space>
         <Space>
           <Input placeholder={t('navbar.search.placeholder')}></Input>
