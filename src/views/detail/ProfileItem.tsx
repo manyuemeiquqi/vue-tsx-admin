@@ -1,37 +1,7 @@
 import { Card, Descriptions, Skeleton } from '@arco-design/web-vue'
-import { defineComponent, type PropType } from 'vue'
+import { defineComponent, ref, type PropType } from 'vue'
 import { useI18n } from 'vue-i18n'
-interface ProfileBasicRes {
-  status: number
-  video: {
-    mode: string
-    acquisition: {
-      resolution: string
-      frameRate: number
-    }
-    encoding: {
-      resolution: string
-      rate: {
-        min: number
-        max: number
-        default: number
-      }
-      frameRate: number
-      profile: string
-    }
-  }
-  audio: {
-    mode: string
-    acquisition: {
-      channels: number
-    }
-    encoding: {
-      channels: number
-      rate: number
-      profile: string
-    }
-  }
-}
+
 export default defineComponent({
   props: {
     profileData: {
@@ -42,19 +12,22 @@ export default defineComponent({
     }
   },
   setup(props) {
-    console.log('props: ', props)
-
     const { t } = useI18n()
     const data = props.profileData
-    const blockDataList: {
-      title: string
-      data: {
-        label: string
-        value: string
+
+    const blockDataList = ref<
+      {
+        title: string
+        data: {
+          label: string
+          value: string
+        }[]
       }[]
-    }[] = []
-    blockDataList.push({
-      title: t(`basicProfile.title.${'current'}Video`),
+    >([])
+
+    // TODO 这里是有问题的，如何监听到 prop 的响应式变化从而更新渲染状态
+    blockDataList.value.push({
+      title: t(`basicProfile.title.preVideo`),
       data: [
         {
           label: t('basicProfile.label.video.mode'),
@@ -95,8 +68,8 @@ export default defineComponent({
       ]
     })
 
-    blockDataList.push({
-      title: t(`basicProfile.title.${'origin'}Audio`),
+    blockDataList.value.push({
+      title: t(`basicProfile.title.video`),
       data: [
         {
           label: t('basicProfile.label.audio.mode'),
@@ -123,21 +96,33 @@ export default defineComponent({
       ]
     })
     return () => (
-      <Card>
-        {blockDataList.map((item) => (
-          <Descriptions title={item.title} data={item.data}>
-            {{
-              value: () =>
-                props.loading ? (
-                  <Skeleton>
-                    <Skeleton.Line rows={1}></Skeleton.Line>
-                  </Skeleton>
-                ) : (
-                  <span></span>
-                )
-            }}
-          </Descriptions>
-        ))}
+      <Card class="general-card">
+        <div class="pt-5">
+          {blockDataList.value.map((item) => (
+            <Descriptions
+              title={item.title}
+              data={item.data}
+              label-style={{
+                textAlign: 'right',
+                width: '200px',
+                paddingRight: '10px',
+                color: 'rgb(var(--gray-8))'
+              }}
+              value-style={{ width: '400px' }}
+            >
+              {{
+                value: ({ value }: any) =>
+                  props.loading ? (
+                    <Skeleton>
+                      <Skeleton.Line widths={['200px']} rows={1}></Skeleton.Line>
+                    </Skeleton>
+                  ) : (
+                    <span>{value}</span>
+                  )
+              }}
+            </Descriptions>
+          ))}
+        </div>
       </Card>
     )
   }

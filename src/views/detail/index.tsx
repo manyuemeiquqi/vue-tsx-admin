@@ -4,54 +4,26 @@ import ProfileItem from '@/views/detail/ProfileItem'
 import { Card, Space, Steps, Button } from '@arco-design/web-vue'
 import axios from 'axios'
 import useLoading from '@/hooks/loading'
+import { useI18n } from 'vue-i18n'
 
-interface ProfileBasicRes {
-  status: number
-  video: {
-    mode: string
-    acquisition: {
-      resolution: string
-      frameRate: number
-    }
-    encoding: {
-      resolution: string
-      rate: {
-        min: number
-        max: number
-        default: number
-      }
-      frameRate: number
-      profile: string
-    }
-  }
-  audio: {
-    mode: string
-    acquisition: {
-      channels: number
-    }
-    encoding: {
-      channels: number
-      rate: number
-      profile: string
-    }
-  }
-}
 export default defineComponent({
   setup() {
-    const currentStatus = ref(1)
+    const { t } = useI18n()
+
     const currentData = ref({})
     const preData = ref({})
     const stepList = [
-      { status: 1, label: '提交更改' },
-      { status: 2, label: '审批中' },
-      { status: 3, label: '修改完成' }
+      { status: 1, label: t('basicProfile.steps.commit') },
+      { status: 2, label: t('basicProfile.steps.approval') },
+      { status: 3, label: t('basicProfile.steps.finish') }
     ]
     const { loading, setLoading } = useLoading(true)
     const fetchData = async () => {
       try {
-        const data = (await axios.get('/api/profile/basic')).data as ProfileBasicRes
-        currentData.value = data
-        preData.value = data
+        const data = await axios.get('/api/profile/basic')
+        console.log('data: ', data.data)
+        currentData.value = data.data
+        preData.value = data.data
       } catch (error) {
         console.log('error: ', error)
       } finally {
@@ -60,18 +32,18 @@ export default defineComponent({
     }
     fetchData()
     return () => (
-      <div class=" h-screen">
-        <Space size={16} direction="vertical">
-          <Card title="参数流程审批表">
+      <div>
+        <Space size={16} direction="vertical" fill>
+          <Card class="general-card" title={t('basicProfile.title.form')}>
             {{
               extra: () => (
                 <Space>
-                  <Button>取消流程</Button>
-                  <Button type="primary">返回</Button>
+                  <Button>{t('basicProfile.cancel')}</Button>
+                  <Button type="primary">{t('basicProfile.goBack')}</Button>
                 </Space>
               ),
               default: () => (
-                <Steps current={currentStatus.value}>
+                <Steps line-less current={2}>
                   {stepList.map((step) => (
                     <Steps.Step>{step.label}</Steps.Step>
                   ))}
@@ -79,12 +51,8 @@ export default defineComponent({
               )
             }}
           </Card>
-          <Card>
-            <ProfileItem loading={loading.value} profileData={currentData.value}></ProfileItem>
-          </Card>
-          <Card>
-            <ProfileItem loading={loading.value} profileData={preData.value}></ProfileItem>
-          </Card>
+          <ProfileItem loading={loading.value} profileData={currentData.value}></ProfileItem>
+          <ProfileItem loading={loading.value} profileData={preData.value}></ProfileItem>
           <DataUpdateRecord></DataUpdateRecord>
         </Space>
       </div>
