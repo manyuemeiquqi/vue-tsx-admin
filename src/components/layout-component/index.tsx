@@ -7,6 +7,12 @@ import Navbar from './Navbar'
 import TabBar from './TabBar'
 import BreadcrumbComponent from './BreadcrumbComponent'
 export default defineComponent({
+  /*
+  Based on TailwindCSS recommendations,
+  consider using classes instead of the `@apply` directive
+  @see https://tailwindcss.com/docs/reusing-styles#avoiding-premature-abstraction
+*/
+
   setup() {
     return () => {
       return (
@@ -16,10 +22,15 @@ export default defineComponent({
             <Layout.Sider class="!pt-16   h-full !fixed left-0 ">
               <MenuComponent></MenuComponent>
             </Layout.Sider>
-            <Layout class="!pt-16   !pl-52 min-h-screen bg-cyan-200">
+            <Layout
+              class="!pt-16   !pl-52 min-h-screen  bg-[color:var(--color-fill-2)] 
+            min-w-[1100px]
+            transition-[padding-left] duration-[0.2s]
+            "
+            >
               <TabBar />
               <BreadcrumbComponent />
-              <Layout.Content class="!pt-4  !pl-5 ">
+              <Layout.Content>
                 <PageComponent />
               </Layout.Content>
               <FooterComponent />
