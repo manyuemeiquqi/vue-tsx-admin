@@ -1,3 +1,4 @@
+import Logo from '@/assets/logo.svg'
 import {
   Avatar,
   Badge,
@@ -10,11 +11,9 @@ import {
   Typography
 } from '@arco-design/web-vue'
 import {
-  IconCheck,
   IconExport,
   IconFullscreen,
   IconLanguage,
-  IconMoon,
   IconMoonFill,
   IconNotification,
   IconSettings,
@@ -22,10 +21,9 @@ import {
   IconUser
 } from '@arco-design/web-vue/es/icon'
 import { defineComponent } from 'vue'
-import Logo from '@/assets/logo.svg'
 import { useI18n } from 'vue-i18n'
 
-import { useDark, useToggle, useFullscreen } from '@vueuse/core'
+import { useFullscreen } from '@vueuse/core'
 const { isFullscreen, toggle: toggleFullScreen } = useFullscreen()
 export default defineComponent({
   setup() {
@@ -70,11 +68,14 @@ export default defineComponent({
       })
     return () => (
       <div
+        style={{
+          borderBottom: '1px solid var(--color-border)'
+        }}
         class="flex  w-full fixed h-16 justify-between
          items-center
        top-0
      left-0 z-[100]
-     bg-[color:var(--color-bg-2)] border-b-[color:var(--color-border)] border-b
+     bg-[color:var(--color-bg-2)]
        pl-5
       "
       >

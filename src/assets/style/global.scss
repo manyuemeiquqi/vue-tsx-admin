@@ -5,6 +5,18 @@
   justify-content: center;
   min-height: calc(100vh - 130px);
   border-radius: 0.25rem !important;
-  margin: 0 20px 0 20px;
   background-color: var(--color-bg-1);
+}
+
+.general-card {
+  border-radius: 4px;
+  border: none;
+  & > .arco-card-header {
+    height: auto;
+    padding: 20px;
+    border: none;
+  }
+  & > .arco-card-body {
+    padding: 0 20px 20px 20px;
+  }
 }

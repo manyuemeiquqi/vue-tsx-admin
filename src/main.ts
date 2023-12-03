@@ -1,8 +1,11 @@
-import './assets/style/style.scss'
 import { createApp } from 'vue'
 
 import ArcoVue from '@arco-design/web-vue'
+
+// 这里需要注意引入顺序
 import '@arco-design/web-vue/dist/arco.css'
+import './assets/style/style.scss'
+
 import App from './App'
 import router from './router'
 import '@/mock/mock'

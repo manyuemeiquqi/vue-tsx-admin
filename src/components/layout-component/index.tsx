@@ -13,7 +13,7 @@ export default defineComponent({
         <Layout>
           <Navbar />
           <Layout>
-            <Layout.Sider class="!pt-16   h-full !fixed left-0 ">
+            <Layout.Sider class="!pt-16   h-full !fixed left-0  z-50">
               <MenuComponent></MenuComponent>
             </Layout.Sider>
             <Layout
@@ -22,11 +22,13 @@ export default defineComponent({
             transition-[padding-left] duration-[0.2s]
             "
             >
-              <TabBar />
-              <BreadcrumbComponent />
-              <Layout.Content>
-                <PageComponent />
-              </Layout.Content>
+              <div class="pt-4 pb-0 px-5">
+                <TabBar />
+                <BreadcrumbComponent />
+                <Layout.Content>
+                  <PageComponent />
+                </Layout.Content>
+              </div>
               <FooterComponent />
             </Layout>
           </Layout>
