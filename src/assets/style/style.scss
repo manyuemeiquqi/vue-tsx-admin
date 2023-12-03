@@ -1,5 +1,6 @@
 /* tailwind 自带modern-normalize */
 @import url('./global.scss');
+@import url('./normalize.scss');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
