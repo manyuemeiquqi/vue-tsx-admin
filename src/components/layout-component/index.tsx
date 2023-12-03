@@ -7,12 +7,6 @@ import Navbar from './Navbar'
 import TabBar from './TabBar'
 import BreadcrumbComponent from './BreadcrumbComponent'
 export default defineComponent({
-  /*
-  Based on TailwindCSS recommendations,
-  consider using classes instead of the `@apply` directive
-  @see https://tailwindcss.com/docs/reusing-styles#avoiding-premature-abstraction
-*/
-
   setup() {
     return () => {
       return (

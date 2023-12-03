@@ -74,7 +74,7 @@ export default defineComponent({
          items-center
        top-0
      left-0 z-[100]
-     bg-[color:var(--color-bg-2)] border-b-[color:var(--color-border)] border-b border-solid
+     bg-[color:var(--color-bg-2)] border-b-[color:var(--color-border)] border-b
        pl-5
       "
       >
