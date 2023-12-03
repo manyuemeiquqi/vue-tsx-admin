@@ -1,34 +1,46 @@
 import { Avatar, AvatarGroup, Card, Grid, Link, Space, Typography } from '@arco-design/web-vue'
 import axios from 'axios'
 import { defineComponent, ref } from 'vue'
+import { useI18n } from 'vue-i18n'
 export default defineComponent({
   setup() {
     const dataSource = ref<any[]>([])
     const fetchData = () => {
       axios.post('/api/user/my-project/list').then((res) => {
-        console.log('res: ', res)
-        dataSource.value = res.data.data
+        dataSource.value = res.data
       })
     }
     fetchData()
+    const { t } = useI18n()
     return () => (
-      <Card>
-        {dataSource.value.map((item) => (
-          <div>
-            <Typography.Text>{item.name}</Typography.Text>
-            <Typography.Text>{item.description}</Typography.Text>
-            <Space>
-              <AvatarGroup size={24}>
-                {item.contributors.map((contributor: any) => (
-                  <Avatar>
-                    <img src={contributor.avatar} />
-                  </Avatar>
+      <Card class="general-card" bordered={false} title={t('userInfo.title.myProject')}>
+        {{
+          default: () => {
+            return (
+              <Grid cols={{ xs: 2, sm: 2, md: 2, lg: 2, xl: 3, xxl: 3 }} colGap={16} rowGap={16}>
+                {dataSource.value.map((item) => (
+                  <Card>
+                    <Space direction="vertical">
+                      <Typography.Text>{item.name}</Typography.Text>
+                      <Typography.Text>{item.description}</Typography.Text>
+                      <Space>
+                        <AvatarGroup size={24}>
+                          {item.contributors.map((contributor: any) => (
+                            <Avatar size={32}>
+                              <img src={contributor.avatar} />
+                            </Avatar>
+                          ))}
+                        </AvatarGroup>
+                        <Typography.Text>等{item.peopleNumber}人</Typography.Text>
+                      </Space>
+                    </Space>
+                  </Card>
                 ))}
-              </AvatarGroup>
-              <Typography.Text>等人</Typography.Text>
-            </Space>
-          </div>
-        ))}
+              </Grid>
+            )
+          },
+          extra: () => <Link>{t('userInfo.showMore')}</Link>
+        }}
       </Card>
     )
   }

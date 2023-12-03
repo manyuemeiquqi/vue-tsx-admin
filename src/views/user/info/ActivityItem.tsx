@@ -22,7 +22,7 @@ export default defineComponent({
           {{
             avatar: () => (
               <Avatar>
-                <img src={props.avatar} />
+                <img src={props.avatar} alt="avatar" />
               </Avatar>
             )
           }}

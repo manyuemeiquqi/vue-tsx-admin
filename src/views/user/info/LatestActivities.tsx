@@ -2,6 +2,7 @@ import { Card, Link, List } from '@arco-design/web-vue'
 import { defineComponent, ref } from 'vue'
 import ActivityItem from '@/views/user/info/ActivityItem'
 import axios from 'axios'
+import { useI18n } from 'vue-i18n'
 interface LatestActivity {
   id: number
   title: string
@@ -10,12 +11,13 @@ interface LatestActivity {
 }
 export default defineComponent({
   setup() {
+    const { t } = useI18n()
     const activityList = ref<LatestActivity[]>([])
     const fetchData = async () => {
       try {
         const res = await axios.post<any>('/api/user/latest-activity')
 
-        activityList.value = res.data!.data as LatestActivity[]
+        activityList.value = res.data
       } catch (error) {
         console.log('error: ', error)
       }
@@ -23,9 +25,9 @@ export default defineComponent({
     fetchData()
 
     return () => (
-      <Card title="最新动态">
+      <Card class="general-card" title={t('userInfo.title.latestActivity')}>
         {{
-          extra: () => <Link>查看全部</Link>,
+          extra: () => <Link>{t('userInfo.viewAll')}</Link>,
           default: () => (
             <List bordered={false}>
               {activityList.value.map((item, index) => (
