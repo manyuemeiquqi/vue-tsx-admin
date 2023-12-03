@@ -1,3 +1,4 @@
+import type { UnitChannelModel } from '@/api/form'
 import {
   Typography,
   Card,
@@ -10,7 +11,8 @@ import {
   DatePicker,
   Result,
   Switch,
-  InputTag
+  InputTag,
+  Textarea
 } from '@arco-design/web-vue'
 import { defineComponent, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
@@ -19,12 +21,21 @@ export default defineComponent({
   setup() {
     const { t } = useI18n()
     const current = ref(1)
-    const formData = ref({})
+    const formData = ref<UnitChannelModel>({
+      activityName: '',
+      channelType: '',
+      promotionTime: [],
+      promoteLink: 'https://arco.design',
+      advertisingSource: '',
+      advertisingMedia: '',
+      keyword: [],
+      pushNotify: true,
+      advertisingContent: ''
+    })
     return () => (
-      <Card>
-        <Typography.Title heading={5}>{t('stepForm.desc.basicInfo')}</Typography.Title>
-        <div>
-          <Steps current={current.value}>
+      <Card class="general-card " title={t('stepForm.desc.basicInfo')}>
+        <div class="flex   items-center   flex-col">
+          <Steps class=" mb-8   w-[800px]" line-less current={current.value}>
             <Steps.Step
               title={t('stepForm.title.basicInfo')}
               description={t('stepForm.desc.basicInfo')}
@@ -38,13 +49,18 @@ export default defineComponent({
               description={t('stepForm.desc.created')}
             />
           </Steps>
-          <Form model={formData.value}>
+          <Form
+            class="max-w-lg"
+            labelColProps={{ span: 6 }}
+            wrapperColProps={{ span: 18 }}
+            model={formData.value}
+          >
             {current.value === 1 && (
               <Form.Item noStyle>
                 <Form.Item
                   label={t('stepForm.basicInfo.name')}
                   required
-                  field="basic.name"
+                  field="activityName"
                   rules={[
                     {
                       required: true,
@@ -59,12 +75,15 @@ export default defineComponent({
                     }
                   ]}
                 >
-                  <Input placeholder={t('stepForm.basicInfo.name.placeholder')} />
+                  <Input
+                    v-model={formData.value.activityName}
+                    placeholder={t('stepForm.basicInfo.name.placeholder')}
+                  />
                 </Form.Item>
                 <Form.Item
                   label={t('stepForm.basicInfo.channelType')}
                   required
-                  field="basic.channelType"
+                  field="channelType"
                   rules={[
                     {
                       required: true,
@@ -72,7 +91,10 @@ export default defineComponent({
                     }
                   ]}
                 >
-                  <Select>
+                  <Select
+                    v-model={formData.value.channelType}
+                    placeholder={t('stepForm.placeholder.channelType')}
+                  >
                     <Select.Option value="app">APP通用渠道</Select.Option>
                     <Select.Option value="site">网页通用渠道</Select.Option>
                     <Select.Option value="game">游戏通用渠道</Select.Option>
@@ -81,7 +103,7 @@ export default defineComponent({
                 <Form.Item
                   label={t('stepForm.basicInfo.time')}
                   required
-                  field="basic.time"
+                  field="promotionTime"
                   rules={[
                     {
                       required: true,
@@ -89,16 +111,22 @@ export default defineComponent({
                     }
                   ]}
                 >
-                  <DatePicker.RangePicker style={{ width: '100%' }} />
+                  <DatePicker.RangePicker
+                    v-model={formData.value.promotionTime}
+                    style={{ width: '100%' }}
+                  />
                 </Form.Item>
                 <Form.Item
                   label={t('stepForm.basicInfo.link')}
                   required
                   extra={t('stepForm.basicInfo.link.tips')}
-                  field="basic.link"
+                  field="promoteLink"
                   rules={[{ required: true }]}
                 >
-                  <Input placeholder={t('stepForm.basicInfo.link.placeholder')} />
+                  <Input
+                    v-model={formData.value.promoteLink}
+                    placeholder={t('stepForm.basicInfo.link.placeholder')}
+                  />
                 </Form.Item>
               </Form.Item>
             )}
@@ -107,7 +135,7 @@ export default defineComponent({
                 <Form.Item
                   label={t('stepForm.channel.source')}
                   required
-                  field="channel.source"
+                  field="advertisingSource"
                   rules={[
                     {
                       required: true,
@@ -115,12 +143,15 @@ export default defineComponent({
                     }
                   ]}
                 >
-                  <Input placeholder={t('stepForm.channel.source.placeholder')} />
+                  <Input
+                    v-model={formData.value.advertisingSource}
+                    placeholder={t('stepForm.channel.source.placeholder')}
+                  />
                 </Form.Item>
                 <Form.Item
                   label={t('stepForm.channel.media')}
                   required
-                  field="channel.media"
+                  field="advertisingMedia"
                   rules={[
                     {
                       required: true,
@@ -128,29 +159,32 @@ export default defineComponent({
                     }
                   ]}
                 >
-                  <Input placeholder={t('stepForm.channel.media.placeholder')} />
+                  <Input
+                    v-model={formData.value.advertisingMedia}
+                    placeholder={t('stepForm.channel.media.placeholder')}
+                  />
                 </Form.Item>
                 <Form.Item
+                  field="keyword"
                   label={t('stepForm.channel.keywords')}
                   required
-                  field="channel.keywords"
                   rules={[{ required: true }]}
                 >
-                  <InputTag />
+                  <InputTag v-model={formData.value.keyword} />
                 </Form.Item>
                 <Form.Item
                   label={t('stepForm.channel.remind')}
                   required
-                  field="channel.remind"
+                  field="pushNotify"
                   rules={[{ required: true }]}
                 >
-                  <Switch />
+                  <Switch v-model={formData.value.pushNotify} />
                 </Form.Item>
 
                 <Form.Item
                   label={t('stepForm.channel.content')}
                   required
-                  field="channel.content"
+                  field="advertisingContent"
                   rules={[
                     {
                       required: true,
@@ -158,7 +192,10 @@ export default defineComponent({
                     }
                   ]}
                 >
-                  <Input.TextArea placeholder={t('stepForm.channel.content.placeholder')} />
+                  <Textarea
+                    v-model={formData.value.advertisingContent}
+                    placeholder={t('stepForm.channel.content.placeholder')}
+                  />
                 </Form.Item>
               </Form.Item>
             )}
@@ -166,12 +203,17 @@ export default defineComponent({
               <Form.Item label=" ">
                 <Space>
                   {current.value === 2 && (
-                    <Button size="large" onClick={() => {}}>
+                    <Button
+                      size="large"
+                      onClick={() => {
+                        current.value--
+                      }}
+                    >
                       {t('stepForm.prev')}
                     </Button>
                   )}
                   {current.value !== 3 && (
-                    <Button type="primary" size="large">
+                    <Button onClick={() => current.value++} type="primary" size="large">
                       {t('stepForm.next')}
                     </Button>
                   )}
@@ -186,30 +228,38 @@ export default defineComponent({
                 >
                   {{
                     extra: () => (
-                      <>
+                      <Space size="medium">
                         <Button key="reset" style={{ marginRight: 16 }} onClick={() => {}}>
                           {t('stepForm.created.success.view')}
                         </Button>
                         <Button key="again" type="primary" onClick={() => {}}>
                           {t('stepForm.created.success.again')}
                         </Button>
-                      </>
+                      </Space>
                     )
                   }}
                 </Result>
               </Form.Item>
             )}
           </Form>
+          {current.value === 3 && (
+            <div
+              style={{
+                width: '895px',
+                marginTop: '54px',
+                padding: '20px',
+                textAlign: 'left',
+                backgroundColor: 'var(--color-fill-2)'
+              }}
+            >
+              <Typography.Title heading={6}>{t('stepForm.created.extra.title')}</Typography.Title>
+              <Typography.Paragraph>
+                {t('stepForm.created.extra.desc')}
+                <Button type="text">{t('stepForm.created.extra.detail')}</Button>
+              </Typography.Paragraph>
+            </div>
+          )}
         </div>
-        {current.value === 3 && (
-          <div>
-            <Typography.Title heading={6}>{t('stepForm.created.extra.title')}</Typography.Title>
-            <Typography.Paragraph>
-              {t('stepForm.created.extra.desc')}
-              <Button type="text">{t('stepForm.created.extra.detail')}</Button>
-            </Typography.Paragraph>
-          </div>
-        )}
       </Card>
     )
   }
