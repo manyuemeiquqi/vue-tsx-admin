@@ -3,6 +3,7 @@ import { Space, Button, Typography, Link, Result, Steps } from '@arco-design/web
 import { computed, defineComponent } from 'vue'
 import { useI18n } from 'vue-i18n'
 export default defineComponent({
+  name: 'success',
   setup() {
     const { t } = useI18n()
     const stepList = computed(() => {
