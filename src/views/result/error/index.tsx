@@ -1,30 +1,53 @@
-import ResultCard from '@/components/result-card'
-import { Space, Button, Typography, Link } from '@arco-design/web-vue'
+import CardLayout from '@/components/card-layout'
+import { Space, Button, Typography, Link, Result } from '@arco-design/web-vue'
+import { IconLink } from '@arco-design/web-vue/es/icon'
 import { defineComponent } from 'vue'
+import { useI18n } from 'vue-i18n'
 export default defineComponent({
   setup() {
+    const { t } = useI18n()
     return () => (
       <div>
-        <ResultCard status="success">
-          {{
-            extra: () => (
-              <Space>
-                <Button>返回</Button>
-                <Button>重试</Button>
-              </Space>
-            ),
-            default: () => (
-              <div>
-                <Typography.Title></Typography.Title>
-                <Typography.Paragraph>
-                  <Link>记录</Link>
-                  <Link>连接</Link>
-                  <Link></Link>
-                </Typography.Paragraph>
-              </div>
-            )
-          }}
-        </ResultCard>
+        <CardLayout>
+          <Result
+            class="!px-32"
+            status={'error'}
+            title={t('error.result.title')}
+            subtitle={t('error.result.subTitle')}
+          >
+            {{
+              extra: () => (
+                <Space size={'medium'}>
+                  <Button type={'secondary'}>{t('error.result.goBack')}</Button>
+                  <Button type={'primary'}>{t('error.result.retry')}</Button>
+                </Space>
+              ),
+              default: () => (
+                <div
+                  class="bg-[rgb(var(--gray-1))]
+                mt-10
+                min-w-fit
+                p-5
+             "
+                >
+                  <Typography.Title heading={6}>{t('error.detailTitle')}</Typography.Title>
+                  <Typography.Paragraph>
+                    <ol>
+                      <li>
+                        {t('error.detailLine.record')}
+                        <Link>
+                          <IconLink />
+                          {t('error.detailLine.record.link')}
+                        </Link>
+                      </li>
+                      <li>{t('error.detailLine.auth')}</li>
+                    </ol>
+                  </Typography.Paragraph>
+                </div>
+              )
+            }}
+          </Result>
+        </CardLayout>
       </div>
     )
   }

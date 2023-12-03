@@ -1,16 +1,19 @@
 import { defineComponent } from 'vue'
-import { Button, Card, Result } from '@arco-design/web-vue'
+import { Button, Result } from '@arco-design/web-vue'
+import { useI18n } from 'vue-i18n'
 
 export default defineComponent({
+  name: '500',
   setup() {
+    const { t } = useI18n()
     return () => (
-      <Card class="content-wrapper">
-        <Result status={'500'} subtitle="抱歉，服务器出了点问题～">
+      <div class="content-wrapper">
+        <Result status={'500'} subtitle={t('exception.result.500.description')}>
           {{
-            extra: () => <Button type="primary">返回</Button>
+            extra: () => <Button type="primary">{t('exception.result.500.back')}</Button>
           }}
         </Result>
-      </Card>
+      </div>
     )
   }
 })

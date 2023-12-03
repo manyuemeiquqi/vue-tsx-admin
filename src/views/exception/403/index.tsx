@@ -1,16 +1,22 @@
+import { Button, Result, Space } from '@arco-design/web-vue'
 import { defineComponent } from 'vue'
-import { Button, Card, Result } from '@arco-design/web-vue'
-
+import { useI18n } from 'vue-i18n'
 export default defineComponent({
+  name: '403',
   setup() {
+    const { t } = useI18n()
     return () => (
-      <Card class="content-wrapper">
-        <Result status={'403'} subtitle="对不起，您没有访问该资源的权限">
+      <div class="content-wrapper">
+        <Result status={'403'} subtitle={t('exception.result.403.description')}>
           {{
-            extra: () => <Button type="primary">返回</Button>
+            extra: () => (
+              <Space size={'medium'}>
+                <Button type="primary">{t('exception.result.403.back')}</Button>
+              </Space>
+            )
           }}
         </Result>
-      </Card>
+      </div>
     )
   }
 })

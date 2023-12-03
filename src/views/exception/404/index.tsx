@@ -1,21 +1,23 @@
-import { Card, Button, Result, Space } from '@arco-design/web-vue'
+import { Button, Result, Space } from '@arco-design/web-vue'
 import { defineComponent } from 'vue'
-
+import { useI18n } from 'vue-i18n'
 export default defineComponent({
+  name: '404',
   setup() {
+    const { t } = useI18n()
     return () => (
-      <Card class="content-wrapper">
-        <Result status={'404'} subtitle="抱歉，页面不见了～">
+      <div class="content-wrapper">
+        <Result status={'404'} subtitle={t('exception.result.404.description')}>
           {{
             extra: () => (
-              <Space>
-                <Button>重试</Button>
-                <Button type="primary">返回</Button>
+              <Space size={'medium'}>
+                <Button>{t('exception.result.404.retry')}</Button>
+                <Button type="primary">{t('exception.result.404.back')}</Button>
               </Space>
             )
           }}
         </Result>
-      </Card>
+      </div>
     )
   }
 })
