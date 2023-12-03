@@ -1,7 +1,10 @@
 // 定义全局的 class
-.content-wrapper{   
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    min-height: calc(100vh - 150px);
+.content-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: calc(100vh - 130px);
+  border-radius: 0.25rem !important;
+  margin: 0 20px 0 20px;
+  background-color: var(--color-bg-1);
 }
