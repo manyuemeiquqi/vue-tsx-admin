@@ -31,44 +31,65 @@ export default defineComponent({
     return () => (
       <Form ref={formRef} model={formData}>
         <Form.Item
-          label="邮箱"
+          label={t('userSetting.basicInfo.form.label.email')}
           field="email"
           rules={[
             {
               type: 'email',
               required: true,
-              message: '请输入邮箱'
+              message: t('userSetting.form.error.email.required')
             }
           ]}
         >
-          {<Input placeholder={t('userSetting.info.email.placeholder')} />}
+          {<Input placeholder={t('userSetting.basicInfo.placeholder.email')} />}
         </Form.Item>
         <Form.Item
-          label="昵称"
+          label={t('userSetting.basicInfo.form.label.nickname')}
           field="nickName"
           rules={[
             {
               required: true,
-              message: '请输入您的昵称'
+              message: t('userSetting.form.error.nickname.required')
             }
           ]}
         >
-          {<Input placeholder={t('userSetting.info.nickName.placeholder')} />}
-        </Form.Item>
-        <Form.Item label={t('userSetting.info.area')} field="rangeArea">
-          {<Select options={['中国']} placeholder={t('userSetting.info.area.placeholder')} />}
+          {<Input placeholder={t('userSetting.basicInfo.placeholder.nickname')} />}
         </Form.Item>
         <Form.Item
-          label={t('userSetting.info.location')}
-          field="location"
+          label={t('userSetting.basicInfo.form.label.countryRegion')}
+          field="countryRegion"
           rules={[
             {
-              required: true
+              required: true,
+              message: t('userSetting.form.error.countryRegion.required')
+            }
+          ]}
+        >
+          {
+            <Select
+              options={[
+                {
+                  label: '中国',
+                  value: 'china'
+                }
+              ]}
+              placeholder={t('userSetting.basicInfo.placeholder.area')}
+            />
+          }
+        </Form.Item>
+        <Form.Item
+          label={t('userSetting.basicInfo.form.label.area')}
+          field="area"
+          rules={[
+            {
+              required: true,
+              message: t('userSetting.form.error.area.required')
             }
           ]}
         >
           {
             <Cascader
+              placeholder={t('userSetting.basicInfo.placeholder.area')}
               options={[
                 {
                   label: '北京市',
@@ -102,19 +123,30 @@ export default defineComponent({
             />
           }
         </Form.Item>
-        <Form.Item label="具体地址" field="address">
-          <Input />
+        <Form.Item label={t('userSetting.basicInfo.form.label.address')} field="address">
+          <Input placeholder={t('userSetting.basicInfo.placeholder.address')} />
           {/* {loading ? loadingNode() : <Input placeholder="请输入您的地址" />} */}
         </Form.Item>
-        <Form.Item label="个人简介" field="profile">
-          <Textarea placeholder="请输入您的个人简介，最多不超过200字。" />
+        <Form.Item
+          label={t('userSetting.basicInfo.form.label.profile')}
+          rules={[
+            {
+              maxLength: 200,
+              message: t('userSetting.form.error.profile.maxLength')
+            }
+          ]}
+          field="profile"
+        >
+          <Textarea placeholder={t('userSetting.basicInfo.placeholder.profile')} />
         </Form.Item>
         <Form.Item label="">
           <Space>
             <Button type="primary" onClick={handleSave}>
-              保存
+              {t('userSetting.save')}
             </Button>
-            <Button onClick={handleReset}>重置</Button>
+            <Button type="secondary" onClick={handleReset}>
+              {t('userSetting.reset')}
+            </Button>
           </Space>
         </Form.Item>
       </Form>

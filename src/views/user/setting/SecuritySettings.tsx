@@ -1,11 +1,12 @@
-import { Link, List, Typography } from '@arco-design/web-vue'
+import { useUserStore } from '@/store'
+import { Link, List, Space, Typography } from '@arco-design/web-vue'
 import { defineComponent } from 'vue'
 import { useI18n } from 'vue-i18n'
 
 export default defineComponent({
   setup() {
     const { t } = useI18n()
-    const userInfo: any = {}
+    const userInfo = useUserStore()
     const data = [
       {
         title: t('userSetting.security.password'),
@@ -18,9 +19,7 @@ export default defineComponent({
       },
       {
         title: t('userSetting.security.phone'),
-        value: userInfo.phoneNumber
-          ? `${t('userSetting.security.phone.tips')} ${userInfo.phoneNumber}`
-          : ''
+        value: userInfo.phone ? `${t('userSetting.security.phone.tips')} ${userInfo.phone}` : ''
       },
       {
         title: t('userSetting.security.email'),
@@ -30,19 +29,23 @@ export default defineComponent({
     ]
     return () => (
       <div>
-        <List>
+        <List bordered={false}>
           {data.map((item) => (
             <List.Item>
               <List.Item.Meta>
                 {{
                   avatar: () => <Typography.Paragraph>{item.title}</Typography.Paragraph>,
                   description: () => (
-                    <>
+                    <div class="flex ">
                       <Typography.Paragraph>
                         {item.value ? item.value : item.placeholder}
                       </Typography.Paragraph>
-                      {item.value ? <Link>12222222</Link> : <Link>2</Link>}
-                    </>
+                      {item.value ? (
+                        <Link>{t('userSetting.SecuritySettings.button.update')}</Link>
+                      ) : (
+                        <Link>{t('userSetting.SecuritySettings.button.settings')}</Link>
+                      )}
+                    </div>
                   )
                 }}
               </List.Item.Meta>
