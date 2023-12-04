@@ -68,3 +68,9 @@ export interface TabBarState {
   tagList: TagProps[]
   cacheTabList: Set<string>
 }
+
+export interface Pagination {
+  current: number
+  pageSize: number
+  total?: number
+}
