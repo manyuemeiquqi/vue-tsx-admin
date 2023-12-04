@@ -194,7 +194,7 @@ export default defineComponent({
     const fetchData = async () => {
       //   setLoading(true)
       try {
-        const { data } = (await axios.post<any>('/api/data-overview')).data
+        const { data } = await axios.post<any>('/api/data-overview')
         xAxis.value = data.xAxis
         data.data.forEach((el: any) => {
           if (el.name === '内容生产量') {

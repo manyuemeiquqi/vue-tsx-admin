@@ -36,7 +36,7 @@ export default defineComponent({
     const fetchData = async () => {
       try {
         // setLoading(true)
-        const { data } = await (await axios.get<any>('/api/popular-author/list')).data
+        const { data } = await axios.get<any>('/api/popular-author/list')
         console.log('data: ', data)
         tableData.value.list = data.list
       } catch (err) {

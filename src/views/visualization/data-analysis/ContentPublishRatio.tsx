@@ -119,7 +119,7 @@ export default defineComponent({
     const fetchData = async () => {
       //   setLoading(true)
       try {
-        const { data: chartData } = (await axios.get<any[]>('/api/content-publish')).data as any
+        const { data: chartData } = await axios.get<any[]>('/api/content-publish')
         xAxis.value = chartData[0].x
         chartData.forEach((el: any) => {
           if (el.name === '纯文本') {

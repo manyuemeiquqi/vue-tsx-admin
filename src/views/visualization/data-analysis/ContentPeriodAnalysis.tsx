@@ -176,7 +176,7 @@ export default defineComponent({
     const fetchData = async () => {
       //   setLoading(true)
       try {
-        const { data: chartData } = (await axios.post<any>('/api/content-period-analysis')).data
+        const { data: chartData } = await axios.post<any>('/api/content-period-analysis')
         xAxis.value = chartData.xAxis
         chartData.data.forEach((el: any) => {
           if (el.name === '纯文本') {

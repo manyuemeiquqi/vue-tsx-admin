@@ -186,7 +186,7 @@ export default defineComponent({
     const activeUsersData = ref<number[]>([])
     const fetchData = async () => {
       try {
-        const data = (await axios.post('/api/data-overview')).data.data
+        const data = (await axios.post('/api/data-overview')).data
         console.log('data: ', data)
         xAxis.value = data.xAxis
         console.log('xAxis: ', xAxis)

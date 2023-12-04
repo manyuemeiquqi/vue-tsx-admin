@@ -172,7 +172,7 @@ export default defineComponent({
     const chartOption = ref({})
     const fetchData = async (params: any) => {
       try {
-        const { data } = (await axios.post<any>('/api/public-opinion-analysis', params)).data
+        const { data } = await axios.post<any>('/api/public-opinion-analysis', params)
         renderData.value = data
         const { chartData } = data
         if (props.chartType === 'bar') {
