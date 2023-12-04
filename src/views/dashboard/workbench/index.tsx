@@ -1,7 +1,7 @@
 import { Carousel, Col, Grid, Space } from '@arco-design/web-vue'
 import { defineComponent } from 'vue'
 import ContentPercentage from '@/views/dashboard/workbench/ContentPercentage'
-import OverView from '@/views/dashboard/workbench/Overview'
+import OverView from '@/views/dashboard/workbench/OverView'
 import PopularContents from '@/views/dashboard/workbench/PopularContents'
 import Announcement from './Announcement'
 import HelpDocs from './HelpDocs'
