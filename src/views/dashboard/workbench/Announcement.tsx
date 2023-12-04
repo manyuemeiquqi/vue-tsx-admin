@@ -34,7 +34,7 @@ export default defineComponent({
     ]
 
     return () => (
-      <Card>
+      <Card class="general-card" title={t('workplace.announcement')}>
         {{
           extra: () => <Link>{t('workplace.viewMore')}</Link>,
           default: () =>

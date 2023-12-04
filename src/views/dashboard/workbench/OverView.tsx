@@ -189,7 +189,7 @@ export default defineComponent({
     fetchData()
     return () => (
       <Card>
-        <Typography.Title heading={5}>欢迎回来</Typography.Title>
+        <Typography.Title heading={5}></Typography.Title>
         <Divider />
 
         <div>
