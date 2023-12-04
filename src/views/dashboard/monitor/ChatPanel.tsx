@@ -1,8 +1,9 @@
-import { Button, Card, Grid, Input, Link, Select, Space } from '@arco-design/web-vue'
+import { Button, Card, Grid, Input, Link, Option, Select, Space } from '@arco-design/web-vue'
 import { IconDownload, IconFaceSmileFill } from '@arco-design/web-vue/es/icon'
 import axios from 'axios'
 import { defineComponent, ref } from 'vue'
 import MessageItem from './MessageItem'
+import { useI18n } from 'vue-i18n'
 
 export default defineComponent({
   setup() {
@@ -10,8 +11,7 @@ export default defineComponent({
     const fetchData = async () => {
       try {
         const { data } = await axios.post<any>('/api/message/list')
-        console.log('data: ', data)
-        chatData.value = data.data
+        chatData.value = data
       } catch (err) {
         // you can report use errorHandler or other
       } finally {
@@ -19,11 +19,14 @@ export default defineComponent({
       }
     }
     fetchData()
+    const { t } = useI18n()
     return () => (
-      <Card>
-        <Space>
-          <Select></Select>
-          <Input></Input>
+      <Card class="general-card" title={t('monitor.title.chatPanel')}>
+        <Space size="small">
+          <Select defaultValue="all">
+            <Option value="all">{t('monitor.chat.options.all')}</Option>
+          </Select>
+          <Input placeholder={t('monitor.chat.placeholder.searchCategory')}></Input>
           <Link>
             <IconDownload />
           </Link>
@@ -31,13 +34,13 @@ export default defineComponent({
         {chatData.value.map((item) => (
           <MessageItem data={item} />
         ))}
-        <Space>
+        <Space size="small">
           <Input>
             {{
               suffix: () => <IconFaceSmileFill />
             }}
           </Input>
-          <Button>112</Button>
+          <Button type="primary">{t('monitor.chat.update')}</Button>
         </Space>
       </Card>
     )
