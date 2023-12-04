@@ -15,6 +15,8 @@ import { defineComponent, ref } from 'vue'
 
 import { graphic } from 'echarts'
 import axios from 'axios'
+import { useI18n } from 'vue-i18n'
+import { useUserStore } from '@/store'
 export default defineComponent({
   setup() {
     function graphicFactory(side: any) {
@@ -37,7 +39,7 @@ export default defineComponent({
       return {
         grid: {
           left: '2.6%',
-          right: '0',
+          right: 0,
           top: '10',
           bottom: '30'
         },
@@ -166,9 +168,7 @@ export default defineComponent({
     const fetchData = async () => {
       //   setLoading(true)
       try {
-        let { data: chartData } = await axios.get<any[]>('/api/content-data')
-        chartData = (chartData as any).data
-        console.log('chartData: ', chartData)
+        const { data: chartData } = await axios.get<any[]>('/api/content-data')
 
         chartData.forEach((el: any, idx: number) => {
           xAxis.value.push(el.x)
@@ -187,9 +187,69 @@ export default defineComponent({
       }
     }
     fetchData()
+    const userInfo = useUserStore()
+    const { t } = useI18n()
+
+    const dataList = [
+      {
+        imgSrc:
+          '//p3-armor.byteimg.com/tos-cn-i-49unhts6dw/288b89194e657603ff40db39e8072640.svg~tplv-49unhts6dw-image.image',
+        value: 368,
+        precision: 1,
+        valueFrom: 0,
+        title: t('workplace.onlineContent'),
+        suffix: () => (
+          <>
+            W+ <span class="unit">{t('workplace.pecs')}</span>
+          </>
+        )
+      },
+      {
+        imgSrc:
+          '//p3-armor.byteimg.com/tos-cn-i-49unhts6dw/fdc66b07224cdf18843c6076c2587eb5.svg~tplv-49unhts6dw-image.image',
+        value: 368,
+        precision: 1,
+        valueFrom: 0,
+        title: t('workplace.onlineContent'),
+        suffix: () => (
+          <>
+            W+ <span class="unit">{t('workplace.pecs')}</span>
+          </>
+        )
+      },
+      {
+        imgSrc:
+          '//p3-armor.byteimg.com/tos-cn-i-49unhts6dw/288b89194e657603ff40db39e8072640.svg~tplv-49unhts6dw-image.image',
+        value: 368,
+        precision: 1,
+        valueFrom: 0,
+        title: t('workplace.onlineContent'),
+        suffix: () => (
+          <>
+            W+ <span class="unit">{t('workplace.pecs')}</span>
+          </>
+        )
+      },
+      {
+        imgSrc:
+          '//p3-armor.byteimg.com/tos-cn-i-49unhts6dw/288b89194e657603ff40db39e8072640.svg~tplv-49unhts6dw-image.image',
+        value: 368,
+        precision: 1,
+        valueFrom: 0,
+        title: t('workplace.onlineContent'),
+        suffix: () => (
+          <>
+            W+ <span class="unit">{t('workplace.pecs')}</span>
+          </>
+        )
+      }
+    ]
     return () => (
-      <Card>
-        <Typography.Title heading={5}></Typography.Title>
+      <Card class="general-card">
+        <Typography.Title heading={5}>
+          {t('workplace.welcome')}
+          {userInfo.name}
+        </Typography.Title>
         <Divider />
 
         <div>
@@ -199,15 +259,23 @@ export default defineComponent({
           </Typography.Paragraph>
           <Link>查看更多</Link>
           <Grid>
-            <Grid.Item>
-              <Space>
-                <Avatar></Avatar>
-                <Statistic></Statistic>
-              </Space>
-            </Grid.Item>
-            <Grid.Item>
-              <Divider />
-            </Grid.Item>
+            {dataList.map((item) => (
+              <>
+                <Avatar size={54}>
+                  <img src={item.imgSrc} alt="alt" />
+                </Avatar>
+                <Statistic
+                  value={item.value}
+                  valueFrom={item.valueFrom}
+                  animation
+                  show-group-separator
+                  title={item.title}
+                  v-slots={{
+                    suffix: () => item.suffix()
+                  }}
+                ></Statistic>
+              </>
+            ))}
           </Grid>
           <ChartComponent options={chartOption.value} />
         </div>

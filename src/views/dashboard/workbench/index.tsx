@@ -40,10 +40,10 @@ export default defineComponent({
           <Grid.Col span={10}>
             <PopularContents />
           </Grid.Col>
-          <Grid.Col span={10}>
+          <Grid.Col span={5}>
             <ContentPercentage />
           </Grid.Col>
-          <Grid.Col span={4}>
+          <Grid.Col span={9}>
             <Grid.Row>
               <Announcement />
             </Grid.Row>

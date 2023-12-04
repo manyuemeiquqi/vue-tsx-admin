@@ -40,7 +40,9 @@ export default defineComponent({
           default: () =>
             list.map((item) => (
               <div>
-                <Tag>{item.label}</Tag>
+                <Tag size="small" color={item.type}>
+                  {item.label}
+                </Tag>
                 <span>{item.content}</span>
               </div>
             ))

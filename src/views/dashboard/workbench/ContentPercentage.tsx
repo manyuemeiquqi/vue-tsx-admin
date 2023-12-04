@@ -1,8 +1,9 @@
 import ChartComponent from '@/components/chart-component'
 import useChartOption from '@/hooks/chartOption'
 import useLoading from '@/hooks/loading'
-import { Card, Spin } from '@arco-design/web-vue'
+import { Card, Link, Spin } from '@arco-design/web-vue'
 import { defineComponent } from 'vue'
+import { useI18n } from 'vue-i18n'
 export default defineComponent({
   setup() {
     const { loading } = useLoading()
@@ -95,9 +96,16 @@ export default defineComponent({
         ]
       }
     })
+    const { t } = useI18n()
     return () => (
-      <Spin>
-        <Card>
+      <Spin loading={loading.value}>
+        <Card
+          v-slots={{
+            extra: () => <Link>{t('workplace.viewMore')}</Link>
+          }}
+          class="general-card"
+          title={t('workplace.contentData')}
+        >
           <ChartComponent options={chartOption.value} />
         </Card>
       </Spin>
