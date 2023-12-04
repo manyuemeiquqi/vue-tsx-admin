@@ -1,3 +1,5 @@
+import { queryPolicyList, type PolicyParams, type PolicyRecord } from '@/api/list'
+import useLoading from '@/hooks/loading'
 import {
   Button,
   Card,
@@ -12,7 +14,9 @@ import {
   Tooltip,
   Dropdown,
   Popover,
-  Checkbox
+  Checkbox,
+  Input,
+  Select
 } from '@arco-design/web-vue'
 import {
   IconDownload,
@@ -60,7 +64,7 @@ export default defineComponent({
         {
           title: t('searchTable.columns.createdTime'),
           dataIndex: 'createdTime',
-          render: <div></div>
+          render: <div>1212</div>
         },
         {
           title: t('searchTable.columns.status'),
@@ -84,7 +88,7 @@ export default defineComponent({
         }
       ]
     }
-    const formData = {}
+    const formData = ref({})
     const densityList = [
       {
         name: t('searchTable.size.mini'),
@@ -104,15 +108,58 @@ export default defineComponent({
       }
     ]
     const showColumns = ref<any[]>([])
+    const { loading, setLoading } = useLoading()
+
+    const renderData = ref<PolicyRecord[]>([])
+    const fetchData = async (params: PolicyParams = { current: 1, pageSize: 20 }) => {
+      setLoading(true)
+      try {
+        const { data } = await queryPolicyList(params)
+        renderData.value = data.list
+        // pagination.current = params.current
+        // pagination.total = data.total
+      } catch (err) {
+        // you can report use errorHandler or other
+      } finally {
+        setLoading(false)
+      }
+    }
+    fetchData()
     return () => (
-      <Card>
-        <Grid.Row>
+      <Card class="general-card " title={t('menu.list.searchTable')}>
+        {/* <Grid.Row>
           <Grid.Col flex={1}>
-            <Form model={formData}></Form>
+            <Form model={formData}>
+              <Form.Item field="number" label={t('searchTable.form.number')}>
+                <Input
+                  v-model={formData.value.number}
+                  placeholder={t('searchTable.form.number.placeholder')}
+                />
+              </Form.Item>
+              <Form.Item field="name" label={t('searchTable.form.name')}>
+                <Input
+                  v-model={formData.value.name}
+                  placeholder={t('searchTable.form.name.placeholder')}
+                />
+              </Form.Item>
+              <Form.Item field="contentType" label={t('searchTable.form.contentType')}>
+                <Input
+                  v-model={formData.value.contentType}
+                  placeholder={t('searchTable.form.selectDefault')}
+                />
+              </Form.Item>
+              <Form.Item field="status" label={t('searchTable.form.status')}>
+                <Select
+                  v-model={formData.value.status}
+                  options={statusOptions}
+                  placeholder={t('searchTable.form.selectDefault')}
+                />
+              </Form.Item>
+            </Form>
           </Grid.Col>
           <Divider direction="vertical" />
           <Grid.Col flex={'86px'}>
-            <Space>
+            <Space direction="vertical">
               <Button
                 v-slots={{
                   icon: () => <IconSearch></IconSearch>
@@ -129,7 +176,7 @@ export default defineComponent({
               </Button>
             </Space>
           </Grid.Col>
-        </Grid.Row>
+        </Grid.Row> */}
         <Divider />
         <Grid.Row>
           <Grid.Col span={12}>
@@ -205,7 +252,12 @@ export default defineComponent({
           </Grid.Col>
         </Grid.Row>
         <Typography.Title heading={6}>121</Typography.Title>
-        <Table columns={getColumns() as any}></Table>
+        {/* <Table
+          loading={loading.value}
+          data={renderData.value}
+          bordered={false}
+          columns={getColumns() as any}
+        ></Table> */}
       </Card>
     )
   }

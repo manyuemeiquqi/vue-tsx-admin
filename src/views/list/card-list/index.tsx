@@ -8,8 +8,13 @@ export default defineComponent({
     const setActiveKey = () => {}
     const list: any = []
     return () => (
-      <Card>
-        <Typography.Title heading={6}>卡片列表</Typography.Title>
+      <Card
+        class="general-card "
+        v-slots={{
+          title: () => <Typography.Title heading={6}>卡片列表</Typography.Title>,
+          extra: () => <Input />
+        }}
+      >
         <Tabs
           type="rounded"
           onChange={setActiveKey}
