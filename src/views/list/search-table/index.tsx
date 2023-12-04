@@ -16,7 +16,10 @@ import {
   Popover,
   Checkbox,
   Input,
-  Select
+  Select,
+  Link,
+  Avatar,
+  RangePicker
 } from '@arco-design/web-vue'
 import {
   IconDownload,
@@ -27,18 +30,33 @@ import {
   IconSearch,
   IconSettings
 } from '@arco-design/web-vue/es/icon'
-import { defineComponent, ref } from 'vue'
+import { computed, defineComponent, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
+import { type Pagination } from '@/types/global'
 
+import type { SelectOptionData } from '@arco-design/web-vue/es/select/interface'
 export default defineComponent({
   setup() {
+    const basePagination: Pagination = {
+      current: 1,
+      pageSize: 20
+    }
+    const pagination = ref({
+      ...basePagination
+    })
     const { t } = useI18n()
     function getColumns() {
       return [
         {
-          title: t('searchTable.columns.id'),
-          dataIndex: 'id',
-          render: (value: any) => <Typography>{value}</Typography>
+          title: t('searchTable.columns.index'),
+          dataIndex: 'index',
+          render: ({ rowIndex }: any) => (
+            <>{rowIndex + 1 + (pagination.value.current - 1) * pagination.value.pageSize}</>
+          )
+        },
+        {
+          title: t('searchTable.columns.number'),
+          dataIndex: 'number'
         },
         {
           title: t('searchTable.columns.name'),
@@ -47,44 +65,56 @@ export default defineComponent({
         {
           title: t('searchTable.columns.contentType'),
           dataIndex: 'contentType',
-          render: (value: any) => <div></div>
+          render: ({ record }: any) => {
+            const map = {
+              img: '//p3-armor.byteimg.com/tos-cn-i-49unhts6dw/581b17753093199839f2e327e726b157.svg~tplv-49unhts6dw-image.image',
+              horizontalVideo:
+                '//p3-armor.byteimg.com/tos-cn-i-49unhts6dw/77721e365eb2ab786c889682cbc721c1.svg~tplv-49unhts6dw-image.image',
+              img1: '//p3-armor.byteimg.com/tos-cn-i-49unhts6dw/ea8b09190046da0ea7e070d83c5d1731.svg~tplv-49unhts6dw-image.image'
+            }
+            return (
+              <>
+                <Space>
+                  <Avatar size={16} shape="square">
+                    <img
+                      alt="avatar"
+                      src="//p3-armor.byteimg.com/tos-cn-i-49unhts6dw/581b17753093199839f2e327e726b157.svg~tplv-49unhts6dw-image.image"
+                    />
+                  </Avatar>
+                  {t(`searchTable.form.contentType.${record.contentType}`)}
+                </Space>
+              </>
+            )
+          }
         },
         {
           title: t('searchTable.columns.filterType'),
           dataIndex: 'filterType',
-          render: () => <div></div>
+          render: ({ record }: any) => <>{t(`searchTable.form.filterType.${record.filterType}`)}</>
         },
         {
-          title: t('searchTable.columns.contentNum'),
-          dataIndex: 'count',
-          render() {
-            return Number(1).toLocaleString()
-          }
+          title: t('searchTable.columns.count'),
+          dataIndex: 'count'
         },
         {
           title: t('searchTable.columns.createdTime'),
-          dataIndex: 'createdTime',
-          render: <div>1212</div>
+          dataIndex: 'createdTime'
         },
         {
           title: t('searchTable.columns.status'),
           dataIndex: 'status',
-          render: (x: any) => {
-            if (x === 0) {
-              return <Badge status="danger"></Badge>
+          render: ({ record }: any) => {
+            if (record.status === 0) {
+              return <Badge status="danger">{t(`searchTable.form.status.${record.status}`)}</Badge>
             }
-            return <Badge status="success"></Badge>
+            return <Badge status="success">{t(`searchTable.form.status.${record.status}`)}</Badge>
           }
         },
         {
           title: t('searchTable.columns.operations'),
           dataIndex: 'operations',
           headerCellStyle: { paddingLeft: '15px' },
-          render: () => (
-            <Button type="text" size="small">
-              {t('searchTable.columns.operations.view')}
-            </Button>
-          )
+          render: () => <Link>{t('searchTable.columns.operations.view')}</Link>
         }
       ]
     }
@@ -124,10 +154,44 @@ export default defineComponent({
         setLoading(false)
       }
     }
+    const contentTypeOptions = computed<SelectOptionData[]>(() => [
+      {
+        label: t('searchTable.form.contentType.img'),
+        value: 'img'
+      },
+      {
+        label: t('searchTable.form.contentType.horizontalVideo'),
+        value: 'horizontalVideo'
+      },
+      {
+        label: t('searchTable.form.contentType.verticalVideo'),
+        value: 'verticalVideo'
+      }
+    ])
+    const filterTypeOptions = computed<SelectOptionData[]>(() => [
+      {
+        label: t('searchTable.form.filterType.artificial'),
+        value: 'artificial'
+      },
+      {
+        label: t('searchTable.form.filterType.rules'),
+        value: 'rules'
+      }
+    ])
+    const statusOptions = computed<SelectOptionData[]>(() => [
+      {
+        label: t('searchTable.form.status.online'),
+        value: 'online'
+      },
+      {
+        label: t('searchTable.form.status.offline'),
+        value: 'offline'
+      }
+    ])
     fetchData()
     return () => (
       <Card class="general-card " title={t('menu.list.searchTable')}>
-        {/* <Grid.Row>
+        <Grid.Row>
           <Grid.Col flex={1}>
             <Form model={formData}>
               <Form.Item field="number" label={t('searchTable.form.number')}>
@@ -148,10 +212,20 @@ export default defineComponent({
                   placeholder={t('searchTable.form.selectDefault')}
                 />
               </Form.Item>
+              <Form.Item field="filterType" label={t('searchTable.form.filterType')}>
+                <Select
+                  v-model={formData.value.filterType}
+                  options={filterTypeOptions.value}
+                  placeholder={t('searchTable.form.selectDefault')}
+                />
+              </Form.Item>
+              <Form.Item field="createdTime" label={t('searchTable.form.createdTime')}>
+                <RangePicker v-model={formData.value.createdTime} />
+              </Form.Item>
               <Form.Item field="status" label={t('searchTable.form.status')}>
                 <Select
                   v-model={formData.value.status}
-                  options={statusOptions}
+                  options={statusOptions.value}
                   placeholder={t('searchTable.form.selectDefault')}
                 />
               </Form.Item>
@@ -176,7 +250,7 @@ export default defineComponent({
               </Button>
             </Space>
           </Grid.Col>
-        </Grid.Row> */}
+        </Grid.Row>
         <Divider />
         <Grid.Row>
           <Grid.Col span={12}>
@@ -252,12 +326,12 @@ export default defineComponent({
           </Grid.Col>
         </Grid.Row>
         <Typography.Title heading={6}>121</Typography.Title>
-        {/* <Table
+        <Table
           loading={loading.value}
           data={renderData.value}
           bordered={false}
           columns={getColumns() as any}
-        ></Table> */}
+        ></Table>
       </Card>
     )
   }
