@@ -1,11 +1,13 @@
-import { Card, Divider, Typography, Link } from '@arco-design/web-vue'
-import { defineComponent, ref } from 'vue'
+import { Card, Divider, Typography, Link, Grid, Statistic } from '@arco-design/web-vue'
+import { computed, defineComponent, ref, h } from 'vue'
 
 import { graphic } from 'echarts'
 import useChartOption from '@/hooks/chartOption'
 import Chart from '@/components/chart-component/index'
 import { type AnyObject } from '@/types/global'
 import axios from 'axios'
+import { useI18n } from 'vue-i18n'
+import { IconEdit, IconHeart, IconThumbUp, IconUser } from '@arco-design/web-vue/es/icon'
 export default defineComponent({
   setup() {
     function graphicFactory(side: AnyObject) {
@@ -206,9 +208,68 @@ export default defineComponent({
         console.log()
       }
     }
+
+    const isDark = ref(false) //TODO 需要从themes 里面获取，暂时这么写
+    const statisticDataList = computed(() => [
+      {
+        title: t('multiDAnalysis.dataOverview.contentProduction'),
+        value: 1902,
+        prefix: {
+          icon: <IconEdit />,
+          background: isDark.value ? '#593E2F' : '#FFE4BA',
+          iconColor: isDark.value ? '#F29A43' : '#F77234'
+        }
+      },
+      {
+        title: t('multiDAnalysis.dataOverview.contentClick'),
+        value: 2445,
+        prefix: {
+          icon: <IconThumbUp />,
+          background: isDark.value ? '#3D5A62' : '#E8FFFB',
+          iconColor: isDark.value ? '#6ED1CE' : '#33D1C9'
+        }
+      },
+      {
+        title: t('multiDAnalysis.dataOverview.contentExposure'),
+        value: 3034,
+        prefix: {
+          icon: <IconHeart />,
+          background: isDark.value ? '#354276' : '#E8F3FF',
+          iconColor: isDark.value ? '#4A7FF7' : '#165DFF'
+        }
+      },
+      {
+        title: t('multiDAnalysis.dataOverview.activeUsers'),
+        value: 1275,
+        prefix: {
+          icon: <IconUser />,
+          background: isDark.value ? '#3F385E' : '#F5E8FF',
+          iconColor: isDark.value ? '#8558D3' : '#722ED1'
+        }
+      }
+    ])
     fetchData()
+    const { t } = useI18n()
     return () => (
-      <Card>
+      <Card class="general-card " title={t('multiDAnalysis.card.title.dataOverview')}>
+        <Grid.Row>
+          {statisticDataList.value.map((item) => (
+            <Grid.Col span={6}>
+              <Statistic
+                title={item.title}
+                animation
+                showGroupSeparator
+                valueFrom={0}
+                value={item.value}
+              >
+                {{
+                  prefix: () => <>{item.prefix.icon}</>
+                }}
+              </Statistic>
+            </Grid.Col>
+          ))}
+        </Grid.Row>
+
         <div>
           <Chart height="289px" options={chartOption.value}></Chart>
         </div>

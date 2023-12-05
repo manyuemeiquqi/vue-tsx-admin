@@ -2,6 +2,7 @@ import ChartComponent from '@/components/chart-component'
 import useChartOption from '@/hooks/chartOption'
 import { Card, Spin } from '@arco-design/web-vue'
 import { defineComponent } from 'vue'
+import { useI18n } from 'vue-i18n'
 export default defineComponent({
   setup() {
     const { chartOption } = useChartOption((isDark) => {
@@ -215,10 +216,11 @@ export default defineComponent({
         ]
       }
     })
+    const { t } = useI18n()
     return () => (
       <Spin class="w-full">
-        <Card>
-          <ChartComponent height="500px" options={chartOption.value} />
+        <Card class="general-card" title={t('multiDAnalysis.card.title.contentPublishingSource')}>
+          <ChartComponent height="300px" options={chartOption.value} />
         </Card>
       </Spin>
     )

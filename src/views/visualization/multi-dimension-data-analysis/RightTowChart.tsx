@@ -2,6 +2,7 @@ import ChartComponent from '@/components/chart-component'
 import useChartOption from '@/hooks/chartOption'
 import { Card, Space } from '@arco-design/web-vue'
 import { defineComponent } from 'vue'
+import { useI18n } from 'vue-i18n'
 export default defineComponent({
   setup() {
     const { chartOption: radarChartOption } = useChartOption((isDark) => {
@@ -152,13 +153,14 @@ export default defineComponent({
         ]
       }
     })
+    const { t } = useI18n()
     return () => (
-      <Space direction="vertical" fill>
-        <Card>
-          <ChartComponent height="200px" options={barChartOption.value} />
+      <Space direction="vertical" size="medium" fill>
+        <Card title={t('multiDAnalysis.card.title.userActions')} class="general-card">
+          <ChartComponent height="122px" options={barChartOption.value} />
         </Card>
-        <Card>
-          <ChartComponent height="200px" options={radarChartOption.value} />
+        <Card title={t('multiDAnalysis.card.title.contentTypeDistribution')} class="general-card">
+          <ChartComponent height="222px" options={radarChartOption.value} />
         </Card>
       </Space>
     )

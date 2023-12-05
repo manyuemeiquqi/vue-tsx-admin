@@ -1,4 +1,4 @@
-import { Card, Grid } from '@arco-design/web-vue'
+import { Card, Grid, Space } from '@arco-design/web-vue'
 import { defineComponent } from 'vue'
 import ContentPublishSource from './ContentPublishSource'
 import CardList from './CardList'
@@ -8,22 +8,18 @@ import RightTowChart from './RightTowChart'
 export default defineComponent({
   setup() {
     return () => (
-      <div>
-        <Grid.Row>
-          <Grid.Col span={20}>
+      <Space direction="vertical" size="medium" fill>
+        <Grid.Row gutter={16}>
+          <Grid.Col span={18}>
             <DataOverview />
           </Grid.Col>
-          <Grid.Col span={4}>
+          <Grid.Col span={6}>
             <RightTowChart />
           </Grid.Col>
         </Grid.Row>
-        <Grid.Row>
-          <CardList />
-        </Grid.Row>
-        <Grid.Row>
-          <ContentPublishSource />
-        </Grid.Row>
-      </div>
+        <CardList />
+        <ContentPublishSource />
+      </Space>
     )
   }
 })
