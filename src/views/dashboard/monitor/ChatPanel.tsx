@@ -22,7 +22,7 @@ export default defineComponent({
     const { t } = useI18n()
     return () => (
       <Card class="general-card" title={t('monitor.title.chatPanel')}>
-        <Space size="small">
+        <Space fill>
           <Select defaultValue="all">
             <Option value="all">{t('monitor.chat.options.all')}</Option>
           </Select>
@@ -34,7 +34,7 @@ export default defineComponent({
         {chatData.value.map((item) => (
           <MessageItem data={item} />
         ))}
-        <Space size="small">
+        <Space>
           <Input>
             {{
               suffix: () => <IconFaceSmileFill />

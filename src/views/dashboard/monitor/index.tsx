@@ -9,7 +9,7 @@ import LiveInformation from './LiveInformation'
 export default defineComponent({
   setup() {
     return () => (
-      <Grid.Row>
+      <Grid.Row gutter={16}>
         <Grid.Col span={8}>
           <ChatPanel></ChatPanel>
         </Grid.Col>

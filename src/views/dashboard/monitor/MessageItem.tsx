@@ -13,7 +13,7 @@ export default defineComponent({
   },
   setup(props) {
     return () => (
-      <Space size={4} direction="vertical">
+      <Space size={4} direction="vertical" fill>
         <Typography.Text>{props.data.username}</Typography.Text>
         <Typography.Text>{props.data.content}</Typography.Text>
         <div>
