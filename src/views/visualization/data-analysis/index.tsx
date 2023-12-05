@@ -7,13 +7,9 @@ import PublicOpinionAnalysis from './PublicOpinionAnalysis'
 export default defineComponent({
   setup() {
     return () => (
-      <div>
-        <Grid.Row>
-          <Grid.Col>
-            <PublicOpinionAnalysis />
-          </Grid.Col>
-        </Grid.Row>
-        <Grid.Row>
+      <Space direction="vertical" fill size="medium">
+        <PublicOpinionAnalysis />
+        <Grid.Row gutter={16}>
           <Grid.Col span={12}>
             <ContentPublishRatio />
           </Grid.Col>
@@ -21,10 +17,8 @@ export default defineComponent({
             <PopularTable />
           </Grid.Col>
         </Grid.Row>
-        <Grid.Row>
-          <ContentPeriodAnalysis />
-        </Grid.Row>
-      </div>
+        <ContentPeriodAnalysis />
+      </Space>
     )
   }
 })

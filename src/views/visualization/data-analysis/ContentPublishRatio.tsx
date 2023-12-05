@@ -137,9 +137,9 @@ export default defineComponent({
     }
     fetchData()
     return () => (
-      <Spin>
+      <Spin class="w-full">
         <Card>
-          <ChartComponent options={chartOption.value} />
+          <ChartComponent height="600px" options={chartOption.value} />
         </Card>
       </Spin>
     )

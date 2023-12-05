@@ -175,6 +175,7 @@ export default defineComponent({
         const { data } = await axios.post<any>('/api/public-opinion-analysis', params)
         renderData.value = data
         const { chartData } = data
+        console.log('chartData: ', chartData)
         if (props.chartType === 'bar') {
           chartData.forEach((el: any, idx: number) => {
             barData.value.push({
@@ -218,7 +219,7 @@ export default defineComponent({
         >
           {/* {{ prefix: () => h(renderData.value.prefix.icon) }} */}
         </Statistic>
-        <ChartComponent options={chartOption.value} />
+        <ChartComponent height="400px" options={chartOption.value} />
       </div>
     )
   }
