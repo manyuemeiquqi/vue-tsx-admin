@@ -1,4 +1,4 @@
-import { Card, Table } from '@arco-design/web-vue'
+import { Card, Link, Table } from '@arco-design/web-vue'
 import axios from 'axios'
 import { defineComponent, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
@@ -7,28 +7,20 @@ export default defineComponent({
     const { t } = useI18n()
     const columns = [
       {
-        title: t('dataAnalysis.authorTable.rank'),
-        dataIndex: 'id'
+        title: t('dataAnalysis.popularAuthor.column.ranking'),
+        dataIndex: 'ranking'
       },
       {
-        title: t('dataAnalysis.authorTable.author'),
+        title: t('dataAnalysis.popularAuthor.column.author'),
         dataIndex: 'author'
       },
       {
-        title: t('dataAnalysis.authorTable.content'),
-        dataIndex: 'contentCount',
-
-        render(x: any) {
-          return Number(x).toLocaleString()
-        }
+        title: t('dataAnalysis.popularAuthor.column.content'),
+        dataIndex: 'contentCount'
       },
       {
-        title: t('dataAnalysis.authorTable.click'),
-        dataIndex: 'clickCount',
-
-        render(x: any) {
-          return Number(x).toLocaleString()
-        }
+        title: t('dataAnalysis.popularAuthor.column.click'),
+        dataIndex: 'clickCount'
       }
     ]
 
@@ -47,8 +39,19 @@ export default defineComponent({
     }
     fetchData()
     return () => (
-      <Card>
-        <Table columns={columns} data={tableData.value.list}></Table>
+      <Card
+        class="general-card"
+        title={t('dataAnalysis.popularAuthor')}
+        v-slots={{
+          extra: () => <Link>{t('workplace.viewMore')}</Link>
+        }}
+      >
+        <Table
+          pagination={false}
+          bordered={false}
+          columns={columns}
+          data={tableData.value.list}
+        ></Table>
       </Card>
     )
   }

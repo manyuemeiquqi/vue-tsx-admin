@@ -3,6 +3,7 @@ import useChartOption from '@/hooks/chartOption'
 import { Card, Spin } from '@arco-design/web-vue'
 import axios from 'axios'
 import { defineComponent, ref } from 'vue'
+import { useI18n } from 'vue-i18n'
 export default defineComponent({
   setup() {
     const tooltipItemsHtmlString = (items: any[]) => {
@@ -136,9 +137,10 @@ export default defineComponent({
       }
     }
     fetchData()
+    const { t } = useI18n()
     return () => (
       <Spin class="w-full">
-        <Card>
+        <Card class="general-card" title={t('dataAnalysis.contentPublishRatio')}>
           <ChartComponent height="600px" options={chartOption.value} />
         </Card>
       </Spin>

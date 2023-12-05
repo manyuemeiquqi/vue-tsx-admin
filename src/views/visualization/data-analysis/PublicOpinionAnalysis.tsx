@@ -24,7 +24,7 @@ export default defineComponent({
         .reverse()
         .join('')
     }
-    const renderData = computed(() => [
+    const renderDataList = computed(() => [
       {
         title: t('dataAnalysis.card.title.allVisitors'),
         quota: 'visitors',
@@ -91,106 +91,7 @@ export default defineComponent({
         }
       }
     }
-    const { chartOption } = useChartOption((dark) => {
-      return {
-        grid: {
-          left: '2.6%',
-          right: '4',
-          top: '40',
-          bottom: '40'
-        },
-        xAxis: {
-          type: 'category',
-          offset: 2,
-          data: xAxis.value,
-          boundaryGap: false,
-          axisLabel: {
-            color: '#4E5969',
-            formatter(value: number, idx: number) {
-              if (idx === 0) return ''
-              if (idx === xAxis.value.length - 1) return ''
-              return `${value}`
-            }
-          },
-          axisLine: {
-            show: false
-          },
-          axisTick: {
-            show: false
-          },
-          splitLine: {
-            show: false
-          },
-          axisPointer: {
-            show: true,
-            lineStyle: {
-              color: '#23ADFF',
-              width: 2
-            }
-          }
-        },
-        yAxis: {
-          type: 'value',
-          axisLine: {
-            show: false
-          },
-          axisLabel: {
-            formatter(value: number, idx: number) {
-              if (idx === 0) return String(value)
-              return `${value / 1000}k`
-            }
-          },
-          splitLine: {
-            lineStyle: {
-              color: dark ? '#2E2E30' : '#F2F3F5'
-            }
-          }
-        },
-        tooltip: {
-          trigger: 'axis',
-          formatter(params) {
-            const [firstElement] = params as any[]
-            return `<div>
-                <p class="tooltip-title">${firstElement.axisValueLabel}</p>
-                ${tooltipItemsHtmlString(params as any[])}
-              </div>`
-          },
-          className: 'echarts-tooltip-diy'
-        },
-        graphic: {
-          elements: [
-            {
-              type: 'text',
-              left: '2.6%',
-              bottom: '18',
-              style: {
-                text: '12.10',
-                textAlign: 'center',
-                fill: '#4E5969',
-                fontSize: 12
-              }
-            },
-            {
-              type: 'text',
-              right: '0',
-              bottom: '18',
-              style: {
-                text: '12.17',
-                textAlign: 'center',
-                fill: '#4E5969',
-                fontSize: 12
-              }
-            }
-          ]
-        },
-        series: [
-          generateSeries('内容生产量', '#722ED1', '#F5E8FF', contentProductionData.value),
-          generateSeries('内容点击量', '#F77234', '#FFE4BA', contentClickData.value),
-          generateSeries('内容曝光量', '#33D1C9', '#E8FFFB', contentExposureData.value),
-          generateSeries('活跃用户数', '#3469FF', '#E8F3FF', activeUsersData.value)
-        ]
-      }
-    })
+
     const fetchData = async () => {
       //   setLoading(true)
       try {
@@ -215,9 +116,9 @@ export default defineComponent({
     fetchData()
 
     return () => (
-      <Card>
+      <Card class="general-card" title={t('dataAnalysis.title.publicOpinion')}>
         <Space>
-          {renderData.value.map((item) => (
+          {renderDataList.value.map((item) => (
             <ChainItem title={item.title} quota={item.quota} chartType={item.chartType} />
           ))}
         </Space>

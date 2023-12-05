@@ -51,7 +51,9 @@ export default defineComponent({
           title: t('searchTable.columns.index'),
           dataIndex: 'index',
           render: ({ rowIndex }: any) => (
-            <>{rowIndex + 1 + (pagination.value.current - 1) * pagination.value.pageSize}</>
+            <Typography>
+              {rowIndex + 1 + (pagination.value.current - 1) * pagination.value.pageSize}
+            </Typography>
           )
         },
         {
@@ -118,7 +120,21 @@ export default defineComponent({
         }
       ]
     }
-    const formData = ref({})
+    const formData = ref<{
+      number: string
+      name: string
+      createdTime: string | number | Date[]
+      contentType: string
+      filterType: string
+      status: string
+    }>({
+      number: '',
+      name: '',
+      contentType: '',
+      filterType: '',
+      createdTime: [],
+      status: ''
+    })
     const densityList = [
       {
         name: t('searchTable.size.mini'),
@@ -194,44 +210,59 @@ export default defineComponent({
         <Grid.Row>
           <Grid.Col flex={1}>
             <Form model={formData}>
-              <Form.Item field="number" label={t('searchTable.form.number')}>
-                <Input
-                  v-model={formData.value.number}
-                  placeholder={t('searchTable.form.number.placeholder')}
-                />
-              </Form.Item>
-              <Form.Item field="name" label={t('searchTable.form.name')}>
-                <Input
-                  v-model={formData.value.name}
-                  placeholder={t('searchTable.form.name.placeholder')}
-                />
-              </Form.Item>
-              <Form.Item field="contentType" label={t('searchTable.form.contentType')}>
-                <Input
-                  v-model={formData.value.contentType}
-                  placeholder={t('searchTable.form.selectDefault')}
-                />
-              </Form.Item>
-              <Form.Item field="filterType" label={t('searchTable.form.filterType')}>
-                <Select
-                  v-model={formData.value.filterType}
-                  options={filterTypeOptions.value}
-                  placeholder={t('searchTable.form.selectDefault')}
-                />
-              </Form.Item>
-              <Form.Item field="createdTime" label={t('searchTable.form.createdTime')}>
-                <RangePicker v-model={formData.value.createdTime} />
-              </Form.Item>
-              <Form.Item field="status" label={t('searchTable.form.status')}>
-                <Select
-                  v-model={formData.value.status}
-                  options={statusOptions.value}
-                  placeholder={t('searchTable.form.selectDefault')}
-                />
-              </Form.Item>
+              <Grid.Row>
+                <Grid.Col span={8}>
+                  <Form.Item field="number" label={t('searchTable.form.number')}>
+                    <Input
+                      v-model={formData.value.number}
+                      placeholder={t('searchTable.form.number.placeholder')}
+                    />
+                  </Form.Item>
+                </Grid.Col>
+                <Grid.Col span={8}>
+                  <Form.Item field="name" label={t('searchTable.form.name')}>
+                    <Input
+                      v-model={formData.value.name}
+                      placeholder={t('searchTable.form.name.placeholder')}
+                    />
+                  </Form.Item>
+                </Grid.Col>
+                <Grid.Col span={8}>
+                  <Form.Item field="contentType" label={t('searchTable.form.contentType')}>
+                    <Input
+                      v-model={formData.value.contentType}
+                      placeholder={t('searchTable.form.selectDefault')}
+                    />
+                  </Form.Item>
+                </Grid.Col>
+
+                <Grid.Col span={8}>
+                  <Form.Item field="filterType" label={t('searchTable.form.filterType')}>
+                    <Select
+                      v-model={formData.value.filterType}
+                      options={filterTypeOptions.value}
+                      placeholder={t('searchTable.form.selectDefault')}
+                    />
+                  </Form.Item>
+                </Grid.Col>
+                <Grid.Col span={8}>
+                  <Form.Item field="createdTime" label={t('searchTable.form.createdTime')}>
+                    <RangePicker v-model={formData.value.createdTime} />
+                  </Form.Item>
+                </Grid.Col>
+                <Grid.Col span={8}>
+                  <Form.Item field="status" label={t('searchTable.form.status')}>
+                    <Select
+                      v-model={formData.value.status}
+                      options={statusOptions.value}
+                      placeholder={t('searchTable.form.selectDefault')}
+                    />
+                  </Form.Item>
+                </Grid.Col>
+              </Grid.Row>
             </Form>
           </Grid.Col>
-          <Divider direction="vertical" />
+          <Divider direction="vertical" class=" h-20" />
           <Grid.Col flex={'86px'}>
             <Space direction="vertical">
               <Button
@@ -252,25 +283,23 @@ export default defineComponent({
           </Grid.Col>
         </Grid.Row>
         <Divider />
-        <Grid.Row>
-          <Grid.Col span={12}>
-            <Space>
-              <Button
-                v-slots={{
-                  icon: () => <IconPlus />
-                }}
-                type="primary"
-              >
-                {t('searchTable.operation.create')}
-              </Button>
-              <Upload action="/">
-                {{
-                  'upload-button': () => <Button>{t('searchTable.operation.import')}</Button>
-                }}
-              </Upload>
-            </Space>
-          </Grid.Col>
-          <Grid.Col span={12}>
+        <div class="flex justify-between">
+          <Space>
+            <Button
+              v-slots={{
+                icon: () => <IconPlus />
+              }}
+              type="primary"
+            >
+              {t('searchTable.operation.create')}
+            </Button>
+            <Upload action="/">
+              {{
+                'upload-button': () => <Button>{t('searchTable.operation.import')}</Button>
+              }}
+            </Upload>
+          </Space>
+          <Space>
             <Button
               v-slots={{
                 icon: () => <IconDownload />
@@ -304,15 +333,15 @@ export default defineComponent({
                   ))
               }}
             </Dropdown>
-            <Tooltip>
-              <Popover>
+            <Tooltip content={t('searchTable.actions.columnSetting')}>
+              <Popover trigger="click" position="bl">
                 {{
                   content: () =>
                     showColumns.value.map((item) => (
                       <div>
                         <IconDragArrow />
                         <Checkbox />
-                        <div></div>
+                        <div>{item.title}</div>
                       </div>
                     )),
                   default: () => (
@@ -323,9 +352,8 @@ export default defineComponent({
                 }}
               </Popover>
             </Tooltip>
-          </Grid.Col>
-        </Grid.Row>
-        <Typography.Title heading={6}>121</Typography.Title>
+          </Space>
+        </div>
         <Table
           loading={loading.value}
           data={renderData.value}
