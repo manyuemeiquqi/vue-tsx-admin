@@ -209,15 +209,7 @@ export default defineComponent({
     fetchData()
     return () => (
       <Card>
-        <Typography.Title heading={5}>欢迎回来</Typography.Title>
-        <Divider />
-
         <div>
-          <Typography.Paragraph>
-            内容数据
-            <span>（近一年）</span>
-          </Typography.Paragraph>
-          <Link>查看更多</Link>
           <Chart height="289px" options={chartOption.value}></Chart>
         </div>
       </Card>

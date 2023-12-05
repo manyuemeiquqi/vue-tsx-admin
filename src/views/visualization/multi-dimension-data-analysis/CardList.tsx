@@ -62,8 +62,8 @@ export default defineComponent({
             quota: item.quota
           })
           console.log('data: ', resData)
-          count.value = resData.data.data.count
-          growth.value = resData.data.data.growth
+          count.value = resData.data.count
+          growth.value = resData.data.growth
         })
         // const { chartData: resChartData } = data
 
@@ -87,7 +87,7 @@ export default defineComponent({
     }
     fetchData()
     return () => (
-      <Space>
+      <Space fill>
         {data.map((item) => (
           <Card>
             <Statistic></Statistic>

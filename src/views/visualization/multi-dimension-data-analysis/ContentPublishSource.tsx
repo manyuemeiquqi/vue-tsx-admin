@@ -218,7 +218,7 @@ export default defineComponent({
     return () => (
       <Spin class="w-full">
         <Card>
-          <ChartComponent options={chartOption.value} />
+          <ChartComponent height="500px" options={chartOption.value} />
         </Card>
       </Spin>
     )
