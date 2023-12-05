@@ -1,12 +1,21 @@
 import { Card, Input, Tabs, Typography } from '@arco-design/web-vue'
 import { defineComponent } from 'vue'
+import QualityInspection from './QualityInspection'
+import { useI18n } from 'vue-i18n'
+import TheService from './TheService'
 
+import RulesPreset from './RulesPreset'
 export default defineComponent({
   setup() {
-    const tabList = [{ title: '全部' }]
+    const { t } = useI18n()
+    const tabList = [
+      { title: t('cardList.tab.title.all'), value: 1 },
+      { title: t('cardList.tab.title.content'), value: 2 },
+      { title: t('cardList.tab.title.service'), value: 3 },
+      { title: t('cardList.tab.title.preset'), value: 4 }
+    ]
     const activeKey = ''
     const setActiveKey = () => {}
-    const list: any = []
     return () => (
       <Card
         class="general-card "
@@ -24,16 +33,12 @@ export default defineComponent({
           }}
         >
           {tabList.map((tab) => (
-            <Tabs.TabPane key={tab.title} title={tab.title}></Tabs.TabPane>
+            <Tabs.TabPane key={tab.value} title={tab.title}></Tabs.TabPane>
           ))}
         </Tabs>
-        <div>
-          {list.map((item: any) => (
-            <div>
-              <Typography.Title></Typography.Title>
-            </div>
-          ))}
-        </div>
+        <QualityInspection />
+        <TheService />
+        <RulesPreset />
       </Card>
     )
   }

@@ -44,13 +44,13 @@ export interface ServiceRecord {
   expires?: boolean
 }
 export function queryInspectionList() {
-  return axios.get('/api/list/quality-inspection')
+  return axios.get<ServiceRecord[]>('/api/list/quality-inspection')
 }
 
 export function queryTheServiceList() {
-  return axios.get('/api/list/the-service')
+  return axios.get<ServiceRecord[]>('/api/list/the-service')
 }
 
 export function queryRulesPresetList() {
-  return axios.get('/api/list/rules-preset')
+  return axios.get<ServiceRecord[]>('/api/list/rules-preset')
 }
