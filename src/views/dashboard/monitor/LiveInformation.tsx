@@ -6,9 +6,9 @@ export default defineComponent({
     const { t } = useI18n()
     const formData = ref({})
     return () => (
-      <Card>
+      <Card class="general-card" title={t('monitor.title.studioInfo')}>
         <Form model={formData.value} layout="vertical">
-          <Form.Item label="t('monitor.studioInfo.label.studioTitle')" required>
+          <Form.Item label={t('monitor.studioInfo.label.studioTitle')} required>
             <Input placeholder={`王立群${t('monitor.studioInfo.placeholder.studioTitle')}`} />
           </Form.Item>
           <Form.Item label={t('monitor.studioInfo.label.onlineNotification')} required>

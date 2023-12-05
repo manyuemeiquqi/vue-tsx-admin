@@ -49,7 +49,7 @@ export default defineComponent({
       }
     ])
     return () => (
-      <Card>
+      <Card class="general-card" title={t('monitor.studioStatus.title.studioStatus')}>
         {{
           default: () => {
             return (
@@ -75,7 +75,7 @@ export default defineComponent({
             )
           },
           extra: () => {
-            return <Tag>{t('monitor.studioStatus.smooth')}</Tag>
+            return <Tag color="green">{t('monitor.studioStatus.smooth')}</Tag>
           }
         }}
       </Card>

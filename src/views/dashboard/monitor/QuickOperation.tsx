@@ -1,4 +1,4 @@
-import { Button, Card } from '@arco-design/web-vue'
+import { Button, Card, Space } from '@arco-design/web-vue'
 import { IconTags, IconStop, IconSwap, IconArrowRight } from '@arco-design/web-vue/es/icon'
 import { defineComponent, h } from 'vue'
 import { useI18n } from 'vue-i18n'
@@ -12,17 +12,19 @@ export default defineComponent({
       { title: t('monitor.quickOperation.pushFlowGasket'), icon: IconArrowRight }
     ]
     return () => (
-      <Card>
-        {quickOperationList.map((item) => (
-          <Button long>
-            {{
-              icon: () => {
-                return h(item.icon)
-              },
-              default: () => item.title
-            }}
-          </Button>
-        ))}
+      <Card class="general-card" title={t('monitor.title.quickOperation')}>
+        <Space direction="vertical" size="small" fill>
+          {quickOperationList.map((item) => (
+            <Button long>
+              {{
+                icon: () => {
+                  return h(item.icon)
+                },
+                default: () => item.title
+              }}
+            </Button>
+          ))}
+        </Space>
       </Card>
     )
   }
