@@ -15,44 +15,41 @@ export default defineComponent({
       '//p1-arco.byteimg.com/tos-cn-i-uwbnlip3yd/1d1580d2a5a1e27415ff594c756eabd8.jpg~tplv-uwbnlip3yd-webp.webp'
     ]
     return () => (
-      <div>
-        <Grid.Row>
-          <Grid.Col span={16}>
-            <OverView />
-          </Grid.Col>
-          <Grid.Col span={8}>
-            <Grid.Row></Grid.Row>
-            <Grid.Row>
-              <Carousel indicatorType="slider" showArrow="never" autoPlay class="h-40 w-full">
-                {imageSrc.map((src, index) => (
-                  <Carousel.Item>
-                    <div key={index}>
-                      <img src={src} />
-                    </div>
-                  </Carousel.Item>
-                ))}
-              </Carousel>
-            </Grid.Row>
-          </Grid.Col>
-        </Grid.Row>
+      <Grid.Row gutter={16}>
+        <Grid.Col span={16}>
+          <OverView />
 
-        <Grid.Row>
-          <Grid.Col span={10}>
-            <PopularContents />
-          </Grid.Col>
-          <Grid.Col span={5}>
-            <ContentPercentage />
-          </Grid.Col>
-          <Grid.Col span={9}>
-            <Grid.Row>
-              <Announcement />
-            </Grid.Row>
-            <Grid.Row>
-              <HelpDocs />
-            </Grid.Row>
-          </Grid.Col>
-        </Grid.Row>
-      </div>
+          <Grid.Row gutter={16}>
+            <Grid.Col span={12}>
+              <PopularContents />
+            </Grid.Col>
+            <Grid.Col span={12}>
+              <ContentPercentage />
+            </Grid.Col>
+          </Grid.Row>
+        </Grid.Col>
+        <Grid.Col span={8}>
+          <Space size="medium" direction="vertical" fill>
+            <Announcement />
+
+            <Carousel
+              indicatorType="slider"
+              showArrow="hover"
+              autoPlay
+              class="h-40 w-full overflow-hidden  "
+            >
+              {imageSrc.map((src, index) => (
+                <Carousel.Item>
+                  <div key={index}>
+                    <img src={src} />
+                  </div>
+                </Carousel.Item>
+              ))}
+            </Carousel>
+            <HelpDocs />
+          </Space>
+        </Grid.Col>
+      </Grid.Row>
     )
   }
 })

@@ -245,40 +245,46 @@ export default defineComponent({
       }
     ]
     return () => (
-      <Card class="general-card">
-        <Typography.Title heading={5}>
-          {t('workplace.welcome')}
-          {userInfo.name}
-        </Typography.Title>
+      <Card
+        class="general-card"
+        v-slots={{
+          title: () => (
+            <Typography.Title heading={5}>
+              {t('workplace.welcome')}
+              {userInfo.name}
+            </Typography.Title>
+          )
+        }}
+      >
         <Divider />
-
-        <div>
+        <Grid colGap={12} rowGap={16}>
+          {dataList.map((item) => (
+            <Grid.Item span={{ xs: 12, sm: 12, md: 12, lg: 12, xl: 12, xxl: 12 }}>
+              <Avatar size={54}>
+                <img src={item.imgSrc} alt="alt" />
+              </Avatar>
+              <Statistic
+                value={item.value}
+                valueFrom={item.valueFrom}
+                animation
+                show-group-separator
+                title={item.title}
+                v-slots={{
+                  suffix: () => item.suffix()
+                }}
+              ></Statistic>
+            </Grid.Item>
+          ))}
+        </Grid>
+        <Card>
           <Typography.Paragraph>
             内容数据
             <span>（近一年）</span>
           </Typography.Paragraph>
           <Link>查看更多</Link>
-          <Grid>
-            {dataList.map((item) => (
-              <>
-                <Avatar size={54}>
-                  <img src={item.imgSrc} alt="alt" />
-                </Avatar>
-                <Statistic
-                  value={item.value}
-                  valueFrom={item.valueFrom}
-                  animation
-                  show-group-separator
-                  title={item.title}
-                  v-slots={{
-                    suffix: () => item.suffix()
-                  }}
-                ></Statistic>
-              </>
-            ))}
-          </Grid>
-          <ChartComponent options={chartOption.value} />
-        </div>
+
+          <ChartComponent height="298px" options={chartOption.value} />
+        </Card>
       </Card>
     )
   }

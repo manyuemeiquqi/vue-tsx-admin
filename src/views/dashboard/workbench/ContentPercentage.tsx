@@ -98,7 +98,7 @@ export default defineComponent({
     })
     const { t } = useI18n()
     return () => (
-      <Spin loading={loading.value}>
+      <Spin loading={loading.value} class="w-full">
         <Card
           v-slots={{
             extra: () => <Link>{t('workplace.viewMore')}</Link>
@@ -106,7 +106,7 @@ export default defineComponent({
           class="general-card"
           title={t('workplace.contentData')}
         >
-          <ChartComponent options={chartOption.value} />
+          <ChartComponent height="500px" options={chartOption.value} />
         </Card>
       </Spin>
     )
