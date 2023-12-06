@@ -5,6 +5,7 @@ import OverView from '@/views/dashboard/workbench/OverView'
 import PopularContents from '@/views/dashboard/workbench/PopularContents'
 import Announcement from './Announcement'
 import HelpDocs from './HelpDocs'
+import RightTopArea from './RightTopArea'
 
 export default defineComponent({
   setup() {
@@ -30,22 +31,23 @@ export default defineComponent({
         </Grid.Col>
         <Grid.Col span={8}>
           <Space size="medium" direction="vertical" fill>
-            <Announcement />
-
+            <RightTopArea />
             <Carousel
+              class="h-40  rounded  overflow-auto"
               indicatorType="slider"
               showArrow="hover"
               autoPlay
-              class="h-40 w-full overflow-hidden  "
             >
               {imageSrc.map((src, index) => (
                 <Carousel.Item>
                   <div key={index}>
-                    <img src={src} />
+                    <img src={src} alt="image" class="w-full" />
                   </div>
                 </Carousel.Item>
               ))}
             </Carousel>
+            <Announcement />
+
             <HelpDocs />
           </Space>
         </Grid.Col>

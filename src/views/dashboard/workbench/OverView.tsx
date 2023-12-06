@@ -276,13 +276,13 @@ export default defineComponent({
             </Grid.Item>
           ))}
         </Grid>
-        <Card>
-          <Typography.Paragraph>
-            内容数据
-            <span>（近一年）</span>
-          </Typography.Paragraph>
-          <Link>查看更多</Link>
-
+        <Card
+          bordered={false}
+          title={t('workplace.contentData')}
+          v-slots={{
+            extra: () => <Link>{t('workplace.viewMore')}</Link>
+          }}
+        >
           <ChartComponent height="298px" options={chartOption.value} />
         </Card>
       </Card>

@@ -1,4 +1,4 @@
-import { Card, Link, Tag } from '@arco-design/web-vue'
+import { Card, Link, Space, Tag, Typography } from '@arco-design/web-vue'
 import { defineComponent } from 'vue'
 import { useI18n } from 'vue-i18n'
 
@@ -37,15 +37,25 @@ export default defineComponent({
       <Card class="general-card" title={t('workplace.announcement')}>
         {{
           extra: () => <Link>{t('workplace.viewMore')}</Link>,
-          default: () =>
-            list.map((item) => (
-              <div>
-                <Tag size="small" color={item.type}>
-                  {item.label}
-                </Tag>
-                <span>{item.content}</span>
-              </div>
-            ))
+          default: () => (
+            <Space size="small" direction="vertical">
+              {list.map((item) => (
+                <div class="flex  items-baseline">
+                  <Tag size="small" color={item.type}>
+                    {item.label}
+                  </Tag>
+                  <Typography.Text
+                    class="flex-1 
+                     text-xs
+                  ml-1 text-[color:var(--color-text-2)]"
+                    ellipsis
+                  >
+                    {item.content}
+                  </Typography.Text>
+                </div>
+              ))}
+            </Space>
+          )
         }}
       </Card>
     )

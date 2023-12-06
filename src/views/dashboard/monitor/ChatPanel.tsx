@@ -15,7 +15,7 @@ export default defineComponent({
       } catch (err) {
         // you can report use errorHandler or other
       } finally {
-        console.log('121')
+        // you can report use errorHandler or other
       }
     }
     fetchData()
