@@ -68,20 +68,18 @@ export default defineComponent({
           title: t('searchTable.columns.contentType'),
           dataIndex: 'contentType',
           render: ({ record }: any) => {
-            const map = {
+            const map: Record<string, string> = {
               img: '//p3-armor.byteimg.com/tos-cn-i-49unhts6dw/581b17753093199839f2e327e726b157.svg~tplv-49unhts6dw-image.image',
               horizontalVideo:
                 '//p3-armor.byteimg.com/tos-cn-i-49unhts6dw/77721e365eb2ab786c889682cbc721c1.svg~tplv-49unhts6dw-image.image',
-              img1: '//p3-armor.byteimg.com/tos-cn-i-49unhts6dw/ea8b09190046da0ea7e070d83c5d1731.svg~tplv-49unhts6dw-image.image'
+              verticalVideo:
+                '//p3-armor.byteimg.com/tos-cn-i-49unhts6dw/ea8b09190046da0ea7e070d83c5d1731.svg~tplv-49unhts6dw-image.image'
             }
             return (
               <>
                 <Space>
                   <Avatar size={16} shape="square">
-                    <img
-                      alt="avatar"
-                      src="//p3-armor.byteimg.com/tos-cn-i-49unhts6dw/581b17753093199839f2e327e726b157.svg~tplv-49unhts6dw-image.image"
-                    />
+                    <img alt="avatar" src={map[record.contentType]} />
                   </Avatar>
                   {t(`searchTable.form.contentType.${record.contentType}`)}
                 </Space>
@@ -106,10 +104,12 @@ export default defineComponent({
           title: t('searchTable.columns.status'),
           dataIndex: 'status',
           render: ({ record }: any) => {
-            if (record.status === 0) {
-              return <Badge status="danger">{t(`searchTable.form.status.${record.status}`)}</Badge>
-            }
-            return <Badge status="success">{t(`searchTable.form.status.${record.status}`)}</Badge>
+            return (
+              <Space>
+                <Badge status={record.status === 0 ? 'danger' : 'success'}></Badge>
+                {t(`searchTable.form.status.${record.status}`)}
+              </Space>
+            )
           }
         },
         {
@@ -283,7 +283,7 @@ export default defineComponent({
           </Grid.Col>
         </Grid.Row>
         <Divider />
-        <div class="flex justify-between">
+        <div class="flex justify-between mb-4">
           <Space>
             <Button
               v-slots={{

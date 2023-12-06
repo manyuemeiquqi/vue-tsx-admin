@@ -12,7 +12,7 @@ export default defineComponent({
   setup(props) {
     const { t } = useI18n()
     return () => (
-      <Card hoverable>
+      <Card class=" h-44" hoverable>
         <Result title={t('cardList.content.action')}>
           {{
             icon: () => <IconPlus />

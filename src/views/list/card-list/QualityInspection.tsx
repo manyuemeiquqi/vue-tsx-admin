@@ -13,7 +13,7 @@ export default defineComponent({
     const { t } = useI18n()
     fetchData()
     return () => (
-      <Grid colGap={24}>
+      <Grid rowGap={24} colGap={24}>
         <Grid.Item
           span={{
             xs: 12,
