@@ -11,6 +11,7 @@ import UserInfo from '@/views/user/info/index'
 import ListRoutes from '@/router/routes/modules/list'
 import ExceptionRoutes from '@/router/routes/modules/exception'
 import UserRoutes from '@/router/routes/modules/user'
+import NestRoutes from '@/router/routes/modules/nest'
 
 import ResultRoutes from '@/router/routes/modules/result'
 import FormRoutes from '@/router/routes/modules/form'
@@ -71,7 +72,8 @@ const router = createRouter({
     FormRoutes as any,
     detail,
     visualization,
-    dashboard
+    dashboard,
+    NestRoutes
   ]
 })
 

@@ -6,6 +6,7 @@ import FormRoutes from '@/router/routes/modules/form'
 import dashboard from '@/router/routes/modules/dashboard'
 import visualization from '@/router/routes/modules/visualization'
 import detail from '@/router/routes/modules/detail'
+import nest from '@/router/routes/modules/nest'
 import { computed, toRaw } from 'vue'
 import type { RouteRecordNormalized, RouteRecordRaw } from 'vue-router'
 import { type AppRouteRecordRaw } from '@/router/routes/types'
@@ -31,7 +32,8 @@ const appClientMenus = [
     FormRoutes,
     dashboard,
     detail,
-    visualization
+    visualization,
+    nest
   ]
 ]
 
