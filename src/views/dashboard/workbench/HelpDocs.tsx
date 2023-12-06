@@ -1,4 +1,4 @@
-import { Card, Typography, Link } from '@arco-design/web-vue'
+import { Card, Typography, Link, Grid, Button } from '@arco-design/web-vue'
 import { computed, defineComponent } from 'vue'
 import { useI18n } from 'vue-i18n'
 
@@ -31,11 +31,20 @@ export default defineComponent({
           extra: () => <Link>{t('workplace.viewMore')}</Link>
         }}
       >
-        <div>
+        <Grid.Row>
           {linkList.value.map(({ href, desc }) => (
-            <Link href={href}>{desc}</Link>
+            <Grid.Col span={12}>
+              <Link
+                style={{
+                  color: 'rgb(var(--gray-8))',
+                  marginBottom: '8px'
+                }}
+              >
+                {desc}
+              </Link>
+            </Grid.Col>
           ))}
-        </div>
+        </Grid.Row>
       </Card>
     )
   }
