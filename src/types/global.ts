@@ -74,3 +74,8 @@ export interface Pagination {
   pageSize: number
   total?: number
 }
+
+export interface GeneralChart {
+  xAxis: string[]
+  data: Array<{ name: string; value: number[] }>
+}

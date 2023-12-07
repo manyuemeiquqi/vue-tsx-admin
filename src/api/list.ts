@@ -54,3 +54,14 @@ export function queryTheServiceList() {
 export function queryRulesPresetList() {
   return axios.get<ServiceRecord[]>('/api/list/rules-preset')
 }
+export interface ChatRecord {
+  id: number
+  username: string
+  content: string
+  time: string
+  isCollect: boolean
+}
+
+export function queryChatList() {
+  return axios.post<ChatRecord[]>('/api/chat/list')
+}
