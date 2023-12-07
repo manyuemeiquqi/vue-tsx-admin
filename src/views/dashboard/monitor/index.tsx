@@ -1,4 +1,4 @@
-import { Grid } from '@arco-design/web-vue'
+import { Grid, Space } from '@arco-design/web-vue'
 import { defineComponent } from 'vue'
 import ChatPanel from './ChatPanel'
 import LivePanel from './LivePanel'
@@ -10,16 +10,18 @@ export default defineComponent({
   setup() {
     return () => (
       <Grid.Row gutter={16}>
-        <Grid.Col span={8}>
+        <Grid.Col flex="300px">
           <ChatPanel></ChatPanel>
         </Grid.Col>
-        <Grid.Col span={8}>
+        <Grid.Col flex={1}>
           <LivePanel />
         </Grid.Col>
-        <Grid.Col span={8}>
-          <LiveStatus />
-          <QuickOperation />
-          <LiveInformation />
+        <Grid.Col flex="280px">
+          <Space fill direction="vertical" size="medium">
+            <LiveStatus />
+            <QuickOperation />
+            <LiveInformation />
+          </Space>
         </Grid.Col>
       </Grid.Row>
     )

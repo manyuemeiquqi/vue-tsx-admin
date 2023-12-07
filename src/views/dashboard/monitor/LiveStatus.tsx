@@ -54,23 +54,47 @@ export default defineComponent({
           default: () => {
             return (
               <div>
-                <Descriptions layout="horizontal" data={dataStatus.value} column={2}>
+                <Descriptions
+                  layout="horizontal"
+                  valueStyle={{
+                    whiteSpace: 'nowrap'
+                  }}
+                  labelStyle={{
+                    paddingRight: '8px'
+                  }}
+                  data={dataStatus.value}
+                  column={2}
+                >
                   {{
                     label: ({ label }: { label: any }) =>
                       ['mainstream', 'hotStandby', 'coldStandby'].includes(label) ? (
-                        <span>
-                          <Typography.Text>{t(`monitor.studioStatus.${label}`)}</Typography.Text>
-                          {t('monitor.studioStatus.bitRate')}
-                        </span>
+                        <>
+                          <Typography.Text class="whitespace-nowrap  mr-1">
+                            {t(`monitor.studioStatus.${label}`)}
+                          </Typography.Text>
+                          <span>{t('monitor.studioStatus.bitRate')}:</span>
+                        </>
                       ) : (
-                        <span>{label}</span>
+                        <span>{label}:</span>
                       )
                   }}
                 </Descriptions>
                 <Typography.Title heading={6}>
                   {t('monitor.studioStatus.title.pictureInfo')}
                 </Typography.Title>
-                <Descriptions layout="horizontal" data={dataPicture.value} column={2} />
+                <Descriptions
+                  v-slots={{
+                    label({ label }: any) {
+                      return <span>{label}:</span>
+                    }
+                  }}
+                  labelStyle={{
+                    paddingRight: '8px'
+                  }}
+                  layout="horizontal"
+                  data={dataPicture.value}
+                  column={2}
+                />
               </div>
             )
           },

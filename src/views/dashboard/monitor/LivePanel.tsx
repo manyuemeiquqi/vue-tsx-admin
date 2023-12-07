@@ -10,7 +10,8 @@ import {
   Radio,
   Button,
   Link,
-  Tag
+  Tag,
+  Grid
 } from '@arco-design/web-vue'
 import { IconMore } from '@arco-design/web-vue/es/icon'
 import { computed, defineComponent, h, compile } from 'vue'
@@ -33,9 +34,13 @@ export default defineComponent({
           title: t('monitor.list.title.cover'),
           render({ record }: { record: TableData; column: TableColumnData; rowIndex: number }) {
             return (
-              <div class=" h-9 w-8">
-                <img src={record.cover} />
-                {record.status === -1 && <Tag color="red">{t('monitor.list.tag.auditFailed')}</Tag>}
+              <div class="  h-16  relative">
+                <img class="h-full" src={record.cover} />
+                {record.status === -1 && (
+                  <Tag color="red" class="absolute top-1 left-1">
+                    {t('monitor.list.tag.auditFailed')}
+                  </Tag>
+                )}
               </div>
             )
           }
@@ -72,43 +77,66 @@ export default defineComponent({
       }
     ]
     return () => (
-      <Space direction="vertical" fill>
+      <Space direction="vertical" size="medium" fill>
         <Card class="general-card" title={t('monitor.title.studioPreview')}>
           {{
             default: () => (
               <div>
                 <img
-                  style={{
-                    maxWidth: '600px'
-                  }}
+                  class=" w-full max-w-xl  block  my-0 mx-auto mb-4  "
                   src="http://p1-arco.byteimg.com/tos-cn-i-uwbnlip3yd/c788fc704d32cf3b1136c7d45afc2669.png~tplv-uwbnlip3yd-webp.webp"
                 />
-                <Space size="medium">
-                  <Avatar size={24}>
-                    <img src={userInfo.avatar} alt="alt" />
-                  </Avatar>
-                  <Typography.Text>
-                    {userInfo.name} {t('monitor.studioPreview.studio')}
+                <Grid.Row align="center" justify="space-between">
+                  <Space size="small">
+                    <Avatar size={24}>
+                      <img src={userInfo.avatar} alt="alt" />
+                    </Avatar>
+                    <Typography.Text>
+                      {userInfo.name}
+                      {t('monitor.studioPreview.studio')}
+                    </Typography.Text>
+                  </Space>
+                  <Typography.Text class="text-[var(--color-text-3)]">
+                    36,000 {t('monitor.studioPreview.watching')}
                   </Typography.Text>
-                </Space>
-                <Typography.Text>36,000 {t('monitor.studioPreview.watching')}</Typography.Text>
+                </Grid.Row>
               </div>
             ),
             extra: () => <IconMore />
           }}
         </Card>
         <Card class="general-card">
-          <RadioGroup defaultValue="3" type="button">
-            <Radio value="1">{t('monitor.liveMethod.normal')}</Radio>
-            <Radio value="2">{t('monitor.liveMethod.flowControl')}</Radio>
-            <Radio value="3">{t('monitor.liveMethod.video')}</Radio>
-            <Radio value="4">{t('monitor.liveMethod.web')}</Radio>
-          </RadioGroup>
-          <Space>
-            <Link>{t('monitor.editCarousel')}</Link>
-            <Button disabled>{t('monitor.startCarousel')}</Button>
+          <Tabs defaultActiveKey="liveMethod">
+            <Tabs.TabPane key="liveMethod" title={t('monitor.tab.title.liveMethod')}></Tabs.TabPane>
+            <Tabs.TabPane
+              key="onlinePopulation"
+              title={t('monitor.tab.title.onlinePopulation')}
+            ></Tabs.TabPane>
+          </Tabs>
+          <Space size="medium" direction="vertical" fill class="mb-4">
+            <RadioGroup defaultValue="1" type="button">
+              <Radio value="1">{t('monitor.liveMethod.normal')}</Radio>
+              <Radio value="2">{t('monitor.liveMethod.flowControl')}</Radio>
+              <Radio value="3">{t('monitor.liveMethod.video')}</Radio>
+              <Radio value="4">{t('monitor.liveMethod.web')}</Radio>
+            </RadioGroup>
+            <Grid.Row justify="space-between" align="center">
+              <Link>{t('monitor.editCarousel')}</Link>
+              <Button disabled>{t('monitor.startCarousel')}</Button>
+            </Grid.Row>
           </Space>
-          <Table columns={columns.value} pagination={false} data={data} bordered={false}></Table>
+          <Table
+            class="mb-4"
+            columns={columns.value}
+            pagination={false}
+            data={data}
+            bordered={false}
+          ></Table>
+
+          <Typography.Text class=" text-center block">
+            {t('monitor.list.tip.rotations')} {data.length}
+            {t('monitor.list.tip.rest')}
+          </Typography.Text>
         </Card>
       </Space>
     )

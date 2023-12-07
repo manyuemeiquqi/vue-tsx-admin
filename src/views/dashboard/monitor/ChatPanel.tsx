@@ -1,16 +1,15 @@
-import { Button, Card, Grid, Input, Link, Option, Select, Space } from '@arco-design/web-vue'
+import { Button, Card, Input, Link, Option, Select, Space } from '@arco-design/web-vue'
 import { IconDownload, IconFaceSmileFill } from '@arco-design/web-vue/es/icon'
-import axios from 'axios'
 import { defineComponent, ref } from 'vue'
 import MessageItem from './MessageItem'
 import { useI18n } from 'vue-i18n'
-
+import { queryChatList, type ChatRecord } from '@/api/list'
 export default defineComponent({
   setup() {
-    const chatData = ref([])
+    const chatData = ref<ChatRecord[]>([])
     const fetchData = async () => {
       try {
-        const { data } = await axios.post<any>('/api/message/list')
+        const { data } = await queryChatList()
         chatData.value = data
       } catch (err) {
         // you can report use errorHandler or other
@@ -22,7 +21,7 @@ export default defineComponent({
     const { t } = useI18n()
     return () => (
       <Card class="general-card" title={t('monitor.title.chatPanel')}>
-        <Space fill>
+        <Space fill class="mb-4">
           <Select defaultValue="all">
             <Option value="all">{t('monitor.chat.options.all')}</Option>
           </Select>
@@ -31,9 +30,11 @@ export default defineComponent({
             <IconDownload />
           </Link>
         </Space>
-        {chatData.value.map((item) => (
-          <MessageItem data={item} />
-        ))}
+        <div class="mb-4">
+          {chatData.value.map((item) => (
+            <MessageItem data={item} />
+          ))}
+        </div>
         <Space>
           <Input>
             {{
