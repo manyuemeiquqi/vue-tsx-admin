@@ -1,4 +1,4 @@
-import { Card, Divider, Grid, Link, Space, Typography } from '@arco-design/web-vue'
+import { Button, Card, Divider, Grid, Link, Space, Typography } from '@arco-design/web-vue'
 import {
   IconFile,
   IconFire,
@@ -8,7 +8,7 @@ import {
 } from '@arco-design/web-vue/es/icon'
 import { defineComponent } from 'vue'
 import { useI18n } from 'vue-i18n'
-
+import styles from './style.module.scss'
 export default defineComponent({
   setup() {
     const { t } = useI18n()
@@ -44,22 +44,26 @@ export default defineComponent({
           }}
           title={t('workplace.quick.operation')}
         >
-          <Grid.Row>
+          <Grid.Row gutter={16}>
             {links.map((item) => (
               <Grid.Col span={8}>
-                {item.icon}
-                <Typography.Paragraph>{t(item.text)}</Typography.Paragraph>
+                <Space class={[styles.wrapper]} align="center" direction="vertical" size="small">
+                  <div class={[styles.icon]}>{item.icon}</div>
+                  <Typography.Paragraph class={[styles.text]}>{t(item.text)}</Typography.Paragraph>
+                </Space>
               </Grid.Col>
             ))}
           </Grid.Row>
         </Card>
-        <Divider />
+        <Divider margin={0} />
         <Card class="general-card" title={t('workplace.recently.visited')}>
-          <Grid.Row>
+          <Grid.Row gutter={16}>
             {quickLinks.map((item) => (
               <Grid.Col span={8}>
-                {item.icon}
-                <Typography.Paragraph>{t(item.text)}</Typography.Paragraph>
+                <Space class={[styles.wrapper]} align="center" direction="vertical" size="small">
+                  <div class={[styles.icon]}>{item.icon}</div>
+                  <Typography.Paragraph class={[styles.text]}>{t(item.text)}</Typography.Paragraph>
+                </Space>
               </Grid.Col>
             ))}
           </Grid.Row>

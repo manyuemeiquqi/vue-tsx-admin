@@ -17,19 +17,20 @@ export default defineComponent({
     ]
     return () => (
       <Grid.Row gutter={16}>
-        <Grid.Col span={16}>
-          <OverView />
-
-          <Grid.Row gutter={16}>
-            <Grid.Col span={12}>
-              <PopularContents />
-            </Grid.Col>
-            <Grid.Col span={12}>
-              <ContentPercentage />
-            </Grid.Col>
-          </Grid.Row>
+        <Grid.Col flex={1}>
+          <Space size="medium" direction="vertical" fill>
+            <OverView />
+            <Grid.Row gutter={16}>
+              <Grid.Col span={12}>
+                <PopularContents />
+              </Grid.Col>
+              <Grid.Col span={12}>
+                <ContentPercentage />
+              </Grid.Col>
+            </Grid.Row>
+          </Space>
         </Grid.Col>
-        <Grid.Col span={8}>
+        <Grid.Col flex="288px">
           <Space size="medium" direction="vertical" fill>
             <RightTopArea />
             <Carousel

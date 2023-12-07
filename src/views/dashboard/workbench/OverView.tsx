@@ -7,7 +7,6 @@ import {
   Link,
   Divider,
   Grid,
-  GridItem,
   Avatar,
   Statistic
 } from '@arco-design/web-vue'
@@ -17,6 +16,7 @@ import { graphic } from 'echarts'
 import axios from 'axios'
 import { useI18n } from 'vue-i18n'
 import { useUserStore } from '@/store'
+import { IconCaretUp } from '@arco-design/web-vue/es/icon'
 export default defineComponent({
   setup() {
     function graphicFactory(side: any) {
@@ -193,14 +193,27 @@ export default defineComponent({
     const dataList = [
       {
         imgSrc:
-          '//p3-armor.byteimg.com/tos-cn-i-49unhts6dw/288b89194e657603ff40db39e8072640.svg~tplv-49unhts6dw-image.image',
-        value: 368,
+          '//p3-armor.byteimg.com/tos-cn-i-49unhts6dw/c8b36e26d2b9bb5dbf9b74dd6d7345af.svg~tplv-49unhts6dw-image.image',
+        value: 2.8,
+        precision: 1,
+        valueFrom: 0,
+        title: t('workplace.newFromYesterday'),
+        suffix: () => (
+          <>
+            % <IconCaretUp class="text-[green]"></IconCaretUp>
+          </>
+        )
+      },
+      {
+        imgSrc:
+          '//p3-armor.byteimg.com/tos-cn-i-49unhts6dw/fdc66b07224cdf18843c6076c2587eb5.svg~tplv-49unhts6dw-image.image',
+        value: 373.5,
         precision: 1,
         valueFrom: 0,
         title: t('workplace.onlineContent'),
         suffix: () => (
           <>
-            W+ <span class="unit">{t('workplace.pecs')}</span>
+            W+ <span class="text-[rgb(var(--gray-8))]">{t('workplace.pecs')}</span>
           </>
         )
       },
@@ -210,72 +223,72 @@ export default defineComponent({
         value: 368,
         precision: 1,
         valueFrom: 0,
-        title: t('workplace.onlineContent'),
+        title: t('workplace.putIn'),
         suffix: () => (
           <>
-            W+ <span class="unit">{t('workplace.pecs')}</span>
+            W+ <span class="text-[rgb(var(--gray-8))]">{t('workplace.pecs')}</span>
           </>
         )
       },
       {
         imgSrc:
-          '//p3-armor.byteimg.com/tos-cn-i-49unhts6dw/288b89194e657603ff40db39e8072640.svg~tplv-49unhts6dw-image.image',
-        value: 368,
+          '//p3-armor.byteimg.com/tos-cn-i-49unhts6dw/77d74c9a245adeae1ec7fb5d4539738d.svg~tplv-49unhts6dw-image.image',
+        value: 8874,
         precision: 1,
         valueFrom: 0,
-        title: t('workplace.onlineContent'),
+        title: t('workplace.newDay'),
         suffix: () => (
           <>
-            W+ <span class="unit">{t('workplace.pecs')}</span>
-          </>
-        )
-      },
-      {
-        imgSrc:
-          '//p3-armor.byteimg.com/tos-cn-i-49unhts6dw/288b89194e657603ff40db39e8072640.svg~tplv-49unhts6dw-image.image',
-        value: 368,
-        precision: 1,
-        valueFrom: 0,
-        title: t('workplace.onlineContent'),
-        suffix: () => (
-          <>
-            W+ <span class="unit">{t('workplace.pecs')}</span>
+            W+ <span class="text-[rgb(var(--gray-8))]">{t('workplace.pecs')}</span>
           </>
         )
       }
     ]
     return () => (
-      <Card
-        class="general-card"
-        v-slots={{
-          title: () => (
-            <Typography.Title heading={5}>
-              {t('workplace.welcome')}
-              {userInfo.name}
-            </Typography.Title>
-          )
-        }}
-      >
-        <Divider />
-        <Grid colGap={12} rowGap={16}>
-          {dataList.map((item) => (
-            <Grid.Item span={{ xs: 12, sm: 12, md: 12, lg: 12, xl: 12, xxl: 12 }}>
-              <Avatar size={54}>
-                <img src={item.imgSrc} alt="alt" />
-              </Avatar>
-              <Statistic
-                value={item.value}
-                valueFrom={item.valueFrom}
-                animation
-                show-group-separator
-                title={item.title}
-                v-slots={{
-                  suffix: () => item.suffix()
-                }}
-              ></Statistic>
-            </Grid.Item>
+      <Card bordered={false} class="rounded">
+        <Typography.Title class="!mt-0" heading={5}>
+          {t('workplace.welcome')}
+          {userInfo.name}
+        </Typography.Title>
+        <Divider margin={20} />
+        <Grid.Row>
+          {dataList.map((item, index) => (
+            <Grid.Col span={6}>
+              <Space align="center">
+                <Avatar size={54}>
+                  <img src={item.imgSrc} alt="alt" />
+                </Avatar>
+                <div class="flex flex-col">
+                  <span class=" text-xs">{item.title}</span>
+                  <Statistic
+                    valueStyle={{
+                      fontWeight: 600
+                    }}
+                    value={item.value}
+                    valueFrom={item.valueFrom}
+                    animation
+                    show-group-separator
+                    v-slots={{
+                      suffix: () => item.suffix()
+                    }}
+                  ></Statistic>
+                </div>
+
+                {
+                  <Divider
+                    class="ml-20 h-20"
+                    style={
+                      index === dataList.length - 1 && {
+                        opacity: 0
+                      }
+                    }
+                    direction="vertical"
+                  />
+                }
+              </Space>
+            </Grid.Col>
           ))}
-        </Grid>
+        </Grid.Row>
         <Card
           bordered={false}
           title={t('workplace.contentData')}

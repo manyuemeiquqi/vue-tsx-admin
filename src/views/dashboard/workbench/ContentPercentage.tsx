@@ -106,7 +106,7 @@ export default defineComponent({
           class="general-card"
           title={t('workplace.contentData')}
         >
-          <ChartComponent height="500px" options={chartOption.value} />
+          <ChartComponent height="354px" options={chartOption.value} />
         </Card>
       </Spin>
     )
