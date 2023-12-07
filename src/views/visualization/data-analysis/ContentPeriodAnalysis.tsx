@@ -2,7 +2,6 @@ import { queryContentPeriodAnalysis } from '@/api/visualization'
 import ChartComponent from '@/components/chart-component'
 import useChartOption from '@/hooks/chartOption'
 import { Card, Spin } from '@arco-design/web-vue'
-import axios from 'axios'
 import { defineComponent, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 export default defineComponent({

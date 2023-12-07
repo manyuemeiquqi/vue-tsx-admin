@@ -1,9 +1,10 @@
-import { queryPublicOpinionAnalysis } from '@/api/visualization'
 import ChartComponent from '@/components/chart-component/index'
 import useChartOption from '@/hooks/chartOption'
-import { Statistic } from '@arco-design/web-vue'
-import axios from 'axios'
-import { defineComponent, h, ref } from 'vue'
+import { Card, Grid, Statistic, TypographyText } from '@arco-design/web-vue'
+import { defineComponent, ref } from 'vue'
+import { queryPublicOpinionAnalysis, type PublicOpinionAnalysisRes } from '@/api/visualization'
+import { useI18n } from 'vue-i18n'
+import { IconArrowRise } from '@arco-design/web-vue/es/icon'
 export default defineComponent({
   props: {
     title: {
@@ -165,18 +166,19 @@ export default defineComponent({
     const { chartOption: lineChartOption, data: lineData } = lineChartOptionsFactory()
     const { chartOption: barChartOption, data: barData } = barChartOptionsFactory()
     const { chartOption: pieChartOption, data: pieData } = pieChartOptionsFactory()
-    const renderData = ref<any>({
+    const renderData = ref<PublicOpinionAnalysisRes>({
       count: 0,
       growth: 0,
       chartData: []
     })
     const chartOption = ref({})
     const fetchData = async (params: any) => {
+      console.log('params: ', params)
       try {
         const { data } = await queryPublicOpinionAnalysis(params)
+        console.log('data: ', data)
         renderData.value = data
         const { chartData } = data
-        console.log('chartData: ', chartData)
         if (props.chartType === 'bar') {
           chartData.forEach((el: any, idx: number) => {
             barData.value.push({
@@ -209,19 +211,28 @@ export default defineComponent({
       }
     }
     fetchData({ quota: props.quota })
+    const { t } = useI18n()
+
     return () => (
-      <div>
+      <Card class="rounded" bordered={false} style={props.cardStyle}>
         <Statistic
-          title={renderData.value.title}
-          value={renderData.value.value}
+          title={props.title}
+          value={renderData.value.count}
           animation
           showGroupSeparator
           valueFrom={0}
         >
           {/* {{ prefix: () => h(renderData.value.prefix.icon) }} */}
         </Statistic>
-        <ChartComponent height="400px" options={chartOption.value} />
-      </div>
+        <div>
+          <TypographyText>{t('dataAnalysis.card.yesterday')}</TypographyText>
+          <TypographyText>
+            {renderData.value.growth}
+            <IconArrowRise />
+          </TypographyText>
+        </div>
+        <ChartComponent height="90px" class="align-bottom" options={chartOption.value} />
+      </Card>
     )
   }
 })

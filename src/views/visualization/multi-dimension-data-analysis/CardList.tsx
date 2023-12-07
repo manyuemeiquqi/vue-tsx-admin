@@ -1,9 +1,8 @@
 import { queryDataChainGrowth } from '@/api/visualization'
 import ChartComponent from '@/components/chart-component'
 import useChartOption from '@/hooks/chartOption'
-import { Card, Grid, Space, Statistic, Typography } from '@arco-design/web-vue'
+import { Card, Grid, Statistic, Typography } from '@arco-design/web-vue'
 import { IconArrowFall, IconArrowRise } from '@arco-design/web-vue/es/icon'
-import axios from 'axios'
 import { defineComponent, ref } from 'vue'
 export default defineComponent({
   setup() {

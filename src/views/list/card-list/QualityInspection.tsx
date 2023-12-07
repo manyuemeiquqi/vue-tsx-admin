@@ -13,20 +13,9 @@ export default defineComponent({
     const { t } = useI18n()
     fetchData()
     return () => (
-      <Grid rowGap={24} colGap={24}>
-        <Grid.Item
-          span={{
-            xs: 12,
-            sm: 12,
-            md: 12,
-            lg: 6,
-            xl: 6,
-            xxl: 6
-          }}
-        >
-          <AddCard />
-        </Grid.Item>
-        {cardList.value.map((item) => (
+      <div>
+        <Typography.Title heading={6}>{t('cardList.tab.title.content')}</Typography.Title>
+        <Grid rowGap={24} colGap={24}>
           <Grid.Item
             span={{
               xs: 12,
@@ -37,47 +26,61 @@ export default defineComponent({
               xxl: 6
             }}
           >
-            <Card>
-              {{
-                default: () => (
-                  <Card.Meta>
-                    {{
-                      title: () => <Typography.Text>{item.title}</Typography.Text>,
-                      description: () => (
-                        <>
-                          {item.description}
-                          <Descriptions
-                            data={item.data}
-                            layout="inline-horizontal"
-                            column={2}
-                            v-slots={{
-                              skeleton: () => (
-                                <Skeleton animation>
-                                  <Skeleton.Line
-                                    widths={['50%', '50%', '100%', '40%']}
-                                    rows={4}
-                                  ></Skeleton.Line>
-                                  <Skeleton.Line widths={['40%']} rows={1}></Skeleton.Line>
-                                </Skeleton>
-                              )
-                            }}
-                          ></Descriptions>
-                        </>
-                      )
-                    }}
-                  </Card.Meta>
-                ),
-                actions: () => (
-                  <Space>
-                    <Button>{t('cardList.content.delete')}</Button>
-                    <Button type="primary">{t('cardList.content.inspection')}</Button>
-                  </Space>
-                )
-              }}
-            </Card>
+            <AddCard />
           </Grid.Item>
-        ))}
-      </Grid>
+          {cardList.value.map((item) => (
+            <Grid.Item
+              span={{
+                xs: 12,
+                sm: 12,
+                md: 12,
+                lg: 6,
+                xl: 6,
+                xxl: 6
+              }}
+            >
+              <Card>
+                {{
+                  default: () => (
+                    <Card.Meta>
+                      {{
+                        title: () => <Typography.Text>{item.title}</Typography.Text>,
+                        description: () => (
+                          <>
+                            {item.description}
+                            <Descriptions
+                              data={item.data}
+                              layout="inline-horizontal"
+                              column={2}
+                              v-slots={{
+                                skeleton: () => (
+                                  <Skeleton animation>
+                                    <Skeleton.Line
+                                      widths={['50%', '50%', '100%', '40%']}
+                                      rows={4}
+                                    ></Skeleton.Line>
+                                    <Skeleton.Line widths={['40%']} rows={1}></Skeleton.Line>
+                                  </Skeleton>
+                                )
+                              }}
+                            ></Descriptions>
+                          </>
+                        )
+                      }}
+                    </Card.Meta>
+                  ),
+                  actions: () => (
+                    <Space>
+                      <Button>{t('cardList.content.delete')}</Button>
+                      <Button type="primary">{t('cardList.content.inspection')}</Button>
+                    </Space>
+                  )
+                }}
+              </Card>
+            </Grid.Item>
+          ))}
+        </Grid>
+      </div>
     )
   }
 })

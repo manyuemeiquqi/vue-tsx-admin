@@ -49,7 +49,6 @@ export default defineComponent({
         )
       }
     ]
-    const setActiveKey = () => {}
     return () => (
       <Card
         class="general-card "
