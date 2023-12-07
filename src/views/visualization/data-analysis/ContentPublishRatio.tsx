@@ -1,3 +1,4 @@
+import { queryContentPublish } from '@/api/visualization'
 import ChartComponent from '@/components/chart-component'
 import useChartOption from '@/hooks/chartOption'
 import { Card, Spin } from '@arco-design/web-vue'
@@ -120,7 +121,7 @@ export default defineComponent({
     const fetchData = async () => {
       //   setLoading(true)
       try {
-        const { data: chartData } = await axios.get<any[]>('/api/content-publish')
+        const { data: chartData } = await queryContentPublish()
         xAxis.value = chartData[0].x
         chartData.forEach((el: any) => {
           if (el.name === '纯文本') {
@@ -141,7 +142,7 @@ export default defineComponent({
     return () => (
       <Spin class="w-full">
         <Card class="general-card" title={t('dataAnalysis.contentPublishRatio')}>
-          <ChartComponent height="600px" options={chartOption.value} />
+          <ChartComponent height="326px" options={chartOption.value} />
         </Card>
       </Spin>
     )

@@ -17,6 +17,7 @@ import axios from 'axios'
 import { useI18n } from 'vue-i18n'
 import { useUserStore } from '@/store'
 import { IconCaretUp } from '@arco-design/web-vue/es/icon'
+import { queryContentData } from '@/api/dashboard'
 export default defineComponent({
   setup() {
     function graphicFactory(side: any) {
@@ -168,7 +169,7 @@ export default defineComponent({
     const fetchData = async () => {
       //   setLoading(true)
       try {
-        const { data: chartData } = await axios.get<any[]>('/api/content-data')
+        const { data: chartData } = await queryContentData()
 
         chartData.forEach((el: any, idx: number) => {
           xAxis.value.push(el.x)

@@ -2,9 +2,9 @@ import { defineComponent, ref } from 'vue'
 import DataUpdateRecord from '@/views/detail/DataUpdateRecord'
 import ProfileItem from '@/views/detail/ProfileItem'
 import { Card, Space, Steps, Button } from '@arco-design/web-vue'
-import axios from 'axios'
 import useLoading from '@/hooks/loading'
 import { useI18n } from 'vue-i18n'
+import { queryProfileBasic } from '@/api/detail'
 
 export default defineComponent({
   setup() {
@@ -20,8 +20,7 @@ export default defineComponent({
     const { loading, setLoading } = useLoading(true)
     const fetchData = async () => {
       try {
-        const data = await axios.get('/api/profile/basic')
-        console.log('data: ', data.data)
+        const data = await queryProfileBasic()
         currentData.value = data.data
         preData.value = data.data
       } catch (error) {

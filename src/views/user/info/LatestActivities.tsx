@@ -1,8 +1,8 @@
 import { Card, Link, List } from '@arco-design/web-vue'
 import { defineComponent, ref } from 'vue'
 import ActivityItem from '@/views/user/info/ActivityItem'
-import axios from 'axios'
 import { useI18n } from 'vue-i18n'
+import { queryLatestActivity } from '@/api/user'
 interface LatestActivity {
   id: number
   title: string
@@ -15,8 +15,7 @@ export default defineComponent({
     const activityList = ref<LatestActivity[]>([])
     const fetchData = async () => {
       try {
-        const res = await axios.post<any>('/api/user/latest-activity')
-
+        const res = await queryLatestActivity()
         activityList.value = res.data
       } catch (error) {
         console.log('error: ', error)

@@ -1,3 +1,4 @@
+import { queryContentPeriodAnalysis } from '@/api/visualization'
 import ChartComponent from '@/components/chart-component'
 import useChartOption from '@/hooks/chartOption'
 import { Card, Spin } from '@arco-design/web-vue'
@@ -177,7 +178,7 @@ export default defineComponent({
     const fetchData = async () => {
       //   setLoading(true)
       try {
-        const { data: chartData } = await axios.post<any>('/api/content-period-analysis')
+        const { data: chartData } = await queryContentPeriodAnalysis()
         xAxis.value = chartData.xAxis
         chartData.data.forEach((el: any) => {
           if (el.name === '纯文本') {

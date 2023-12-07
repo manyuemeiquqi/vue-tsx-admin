@@ -1,12 +1,13 @@
+import { queryMyProjectList, type ProjectItem } from '@/api/user'
 import { Avatar, AvatarGroup, Card, Grid, Link, Space, Typography } from '@arco-design/web-vue'
 import axios from 'axios'
 import { defineComponent, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 export default defineComponent({
   setup() {
-    const dataSource = ref<any[]>([])
+    const dataSource = ref<ProjectItem[]>([])
     const fetchData = () => {
-      axios.post('/api/user/my-project/list').then((res) => {
+      queryMyProjectList().then((res) => {
         dataSource.value = res.data
       })
     }

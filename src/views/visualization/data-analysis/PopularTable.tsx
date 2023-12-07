@@ -1,3 +1,4 @@
+import { queryPopularAuthor } from '@/api/visualization'
 import { Card, Link, Table } from '@arco-design/web-vue'
 import axios from 'axios'
 import { defineComponent, ref } from 'vue'
@@ -28,7 +29,8 @@ export default defineComponent({
     const fetchData = async () => {
       try {
         // setLoading(true)
-        const { data } = await axios.get<any>('/api/popular-author/list')
+        const { data } = await queryPopularAuthor()
+
         console.log('data: ', data)
         tableData.value.list = data.list
       } catch (err) {
@@ -40,7 +42,7 @@ export default defineComponent({
     fetchData()
     return () => (
       <Card
-        class="general-card"
+        class="general-card "
         title={t('dataAnalysis.popularAuthor')}
         v-slots={{
           extra: () => <Link>{t('workplace.viewMore')}</Link>

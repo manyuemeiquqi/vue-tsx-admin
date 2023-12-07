@@ -8,6 +8,7 @@ import { type AnyObject } from '@/types/global'
 import axios from 'axios'
 import { useI18n } from 'vue-i18n'
 import { IconEdit, IconHeart, IconThumbUp, IconUser } from '@arco-design/web-vue/es/icon'
+import { queryDataOverview } from '@/api/visualization'
 export default defineComponent({
   setup() {
     function graphicFactory(side: AnyObject) {
@@ -188,10 +189,8 @@ export default defineComponent({
     const activeUsersData = ref<number[]>([])
     const fetchData = async () => {
       try {
-        const data = (await axios.post('/api/data-overview')).data
-        console.log('data: ', data)
+        const data = (await queryDataOverview()).data
         xAxis.value = data.xAxis
-        console.log('xAxis: ', xAxis)
         data.data.forEach((el: any) => {
           if (el.name === '内容生产量') {
             contentProductionData.value = el.value

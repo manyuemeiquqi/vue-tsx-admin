@@ -1,3 +1,4 @@
+import { queryDataChainGrowth } from '@/api/visualization'
 import ChartComponent from '@/components/chart-component'
 import useChartOption from '@/hooks/chartOption'
 import { Card, Grid, Space, Statistic, Typography } from '@arco-design/web-vue'
@@ -15,7 +16,7 @@ export default defineComponent({
     const fetchData = async () => {
       try {
         data.value.map(async (item) => {
-          const { data: resData } = await axios.post<any>('/api/data-chain-growth', {
+          const { data: resData } = await queryDataChainGrowth({
             quota: item.quota
           })
 

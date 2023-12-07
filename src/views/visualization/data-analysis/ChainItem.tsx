@@ -1,3 +1,4 @@
+import { queryPublicOpinionAnalysis } from '@/api/visualization'
 import ChartComponent from '@/components/chart-component/index'
 import useChartOption from '@/hooks/chartOption'
 import { Statistic } from '@arco-design/web-vue'
@@ -172,7 +173,7 @@ export default defineComponent({
     const chartOption = ref({})
     const fetchData = async (params: any) => {
       try {
-        const { data } = await axios.post<any>('/api/public-opinion-analysis', params)
+        const { data } = await queryPublicOpinionAnalysis(params)
         renderData.value = data
         const { chartData } = data
         console.log('chartData: ', chartData)
