@@ -254,40 +254,37 @@ export default defineComponent({
         <Divider margin={20} />
         <Grid.Row>
           {dataList.map((item, index) => (
-            <Grid.Col span={6}>
-              <Space align="center">
-                <Avatar size={54}>
-                  <img src={item.imgSrc} alt="alt" />
-                </Avatar>
-                <div class="flex flex-col">
-                  <span class=" text-xs">{item.title}</span>
-                  <Statistic
-                    valueStyle={{
-                      fontWeight: 600
-                    }}
-                    value={item.value}
-                    valueFrom={item.valueFrom}
-                    animation
-                    show-group-separator
-                    v-slots={{
-                      suffix: () => item.suffix()
-                    }}
-                  ></Statistic>
+            <>
+              <Grid.Col flex={1}>
+                <div
+                  class="pl-11"
+                  style={{
+                    borderRight: '1px solid rgb(var(--gray-2))'
+                  }}
+                >
+                  <Space align="center">
+                    <Avatar size={54}>
+                      <img src={item.imgSrc} alt="alt" />
+                    </Avatar>
+                    <div class="flex flex-col">
+                      <span class=" text-xs">{item.title}</span>
+                      <Statistic
+                        valueStyle={{
+                          fontWeight: 600
+                        }}
+                        value={item.value}
+                        valueFrom={item.valueFrom}
+                        animation
+                        show-group-separator
+                        v-slots={{
+                          suffix: () => item.suffix()
+                        }}
+                      ></Statistic>
+                    </div>
+                  </Space>
                 </div>
-
-                {
-                  <Divider
-                    class="ml-20 h-20"
-                    style={
-                      index === dataList.length - 1 && {
-                        opacity: 0
-                      }
-                    }
-                    direction="vertical"
-                  />
-                }
-              </Space>
-            </Grid.Col>
+              </Grid.Col>
+            </>
           ))}
         </Grid.Row>
         <Card
