@@ -1,6 +1,6 @@
 import useMenuTree from '@/router/routes/useRoutes'
 import { Menu } from '@arco-design/web-vue'
-import { defineComponent, h, compile } from 'vue'
+import { defineComponent } from 'vue'
 import { get } from 'lodash'
 import { useI18n } from 'vue-i18n'
 import { useRouter, type RouteRecordRaw } from 'vue-router'
