@@ -29,7 +29,6 @@ jobs:
       - uses: pnpm/action-setup@v2 # pnpm is optional but recommended, you can also use npm / yarn
         with:
           version: 8.5.0
-          cache: pnpm
       - name: Setup Node
         uses: actions/setup-node@v3
         with:
@@ -39,7 +38,7 @@ jobs:
         uses: actions/configure-pages@v3
       - name: Install dependencies
         run: pnpm install
-      - name: Build with Rspress
+      - name: Build with Vtsc
         run: |
           pnpm run build
       - name: Upload artifact
