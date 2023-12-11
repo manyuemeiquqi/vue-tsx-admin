@@ -3,16 +3,12 @@ import { createRouter, createWebHashHistory } from 'vue-router'
 import DetailView from '@/views/detail/index'
 import CardList from '@/views/list/card-list/index'
 import LoginView from '@/views/login/index'
-
 import Workbench from '@/views/dashboard/workbench/index'
-
 import UserInfo from '@/views/user/info/index'
-
 import ListRoutes from '@/router/routes/modules/list'
 import ExceptionRoutes from '@/router/routes/modules/exception'
 import UserRoutes from '@/router/routes/modules/user'
 import NestRoutes from '@/router/routes/modules/nest'
-
 import ResultRoutes from '@/router/routes/modules/result'
 import FormRoutes from '@/router/routes/modules/form'
 import detail from '@/router/routes/modules/detail'
@@ -20,6 +16,8 @@ import visualization from '@/router/routes/modules/visualization'
 import dashboard from '@/router/routes/modules/dashboard'
 import useUserStore from '@/store/modules/user'
 import { getUserInfo } from '@/api/user'
+
+import { setRouteEmitter } from '@/utils/routerListener'
 const router = createRouter({
   history: createWebHashHistory(import.meta.env.BASE_URL),
   routes: [
@@ -76,9 +74,9 @@ const router = createRouter({
     NestRoutes
   ]
 })
-
 // router beforeEach 的是事件注册
 router.beforeEach(async (to, from, next) => {
+  setRouteEmitter(to)
   const userStore = useUserStore()
   try {
     const res = await getUserInfo()
