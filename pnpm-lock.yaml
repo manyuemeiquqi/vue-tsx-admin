@@ -1,9 +1,5 @@
 lockfileVersion: '6.0'
 
-settings:
-  autoInstallPeers: true
-  excludeLinksFromLockfile: false
-
 dependencies:
   '@vueuse/core':
     specifier: ^10.6.1
@@ -20,6 +16,9 @@ dependencies:
   lodash:
     specifier: ^4.17.21
     version: 4.17.21
+  mitt:
+    specifier: ^3.0.1
+    version: 3.0.1
   mockjs:
     specifier: ^1.1.0
     version: 1.1.0
@@ -2335,6 +2334,10 @@ packages:
       brace-expansion: 2.0.1
     dev: true
 
+  /mitt@3.0.1:
+    resolution: {integrity: sha512-vKivATfr97l2/QBCYAkXYDbrIWPM2IIKEl7YPhjCvKlG3kE2gm+uBo6nEXK3M5/Ffh/FLpKExzOQ3JJoJGFKBw==}
+    dev: false
+
   /mockjs@1.1.0:
     resolution: {integrity: sha512-eQsKcWzIaZzEZ07NuEyO4Nw65g0hdWAyurVol1IPl1gahRwY+svqzfgfey8U8dahLwG44d6/RwEzuK52rSa/JQ==}
     hasBin: true
@@ -3273,3 +3276,7 @@ packages:
     dependencies:
       tslib: 2.3.0
     dev: false
+
+settings:
+  autoInstallPeers: true
+  excludeLinksFromLockfile: false
