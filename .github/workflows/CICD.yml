@@ -4,7 +4,7 @@ on:
   push:
     branches: [master]
   schedule:
-  - cron: "0 2 * * 0-6"
+    - cron: '0 2 * * 0-6'
 
   workflow_dispatch:
 
@@ -33,7 +33,7 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v3
         with:
-          node-version: 16.18.1
+          node-version: 18.18.0
           cache: pnpm
       - name: Setup Pages
         uses: actions/configure-pages@v3
