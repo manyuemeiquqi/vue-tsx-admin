@@ -1,4 +1,8 @@
 {
-  "*.js": "eslint --fix",
-  "*.{json,md}": "prettier --write"
+  "**/*.{ts,tsx,js,jsx}": [
+    "vue-tsc --noEmit -p tsconfig.app.json --composite false",
+    "eslint  --fix"
+  ],
+  "**/*.{css,scss}": ["stylelint  --fix"],
+  "**/*.vue": ["eslint  --fix"]
 }
