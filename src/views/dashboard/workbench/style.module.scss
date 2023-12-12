@@ -11,22 +11,24 @@
   border-radius: 4px;
 }
 
+.text {
+  font-size: 12px;
+}
+
 .wrapper {
   text-align: center;
   cursor: pointer;
+
   &:hover {
     .icon {
       color: rgb(var(--arcoblue-6));
       background-color: #e8f3ff;
     }
+
     .text {
       color: rgb(var(--arcoblue-6));
     }
   }
-}
-
-.text {
-  font-size: 12px;
 }
 
 .arco-card-body {
