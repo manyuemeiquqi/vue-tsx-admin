@@ -1,4 +1,11 @@
-import { Card, Divider, Typography, Link, Grid, Statistic } from '@arco-design/web-vue'
+import {
+  Card,
+  Divider,
+  Typography,
+  Link,
+  Grid,
+  Statistic
+} from '@arco-design/web-vue'
 import { computed, defineComponent, ref, h } from 'vue'
 
 import { graphic } from 'echarts'
@@ -7,7 +14,12 @@ import Chart from '@/components/chart-component/index'
 import { type AnyObject } from '@/types/global'
 import axios from 'axios'
 import { useI18n } from 'vue-i18n'
-import { IconEdit, IconHeart, IconThumbUp, IconUser } from '@arco-design/web-vue/es/icon'
+import {
+  IconEdit,
+  IconHeart,
+  IconThumbUp,
+  IconUser
+} from '@arco-design/web-vue/es/icon'
 import { queryDataOverview } from '@/api/visualization'
 export default defineComponent({
   setup() {
@@ -30,9 +42,9 @@ export default defineComponent({
         .map(
           (el) => `<div class="content-panel">
           <p>
-            <span style="background-color: ${el.color}" class="tooltip-item-icon"></span><span>${
-              el.seriesName
-            }</span>
+            <span style="background-color: ${
+              el.color
+            }" class="tooltip-item-icon"></span><span>${el.seriesName}</span>
           </p>
           <span class="tooltip-value">${el.value.toLocaleString()}</span>
         </div>`
@@ -172,15 +184,38 @@ export default defineComponent({
           ]
         },
         series: [
-          generateSeries('内容生产量', '#722ED1', '#F5E8FF', contentProductionData.value),
-          generateSeries('内容点击量', '#F77234', '#FFE4BA', contentClickData.value),
-          generateSeries('内容曝光量', '#33D1C9', '#E8FFFB', contentExposureData.value),
-          generateSeries('活跃用户数', '#3469FF', '#E8F3FF', activeUsersData.value)
+          generateSeries(
+            '内容生产量',
+            '#722ED1',
+            '#F5E8FF',
+            contentProductionData.value
+          ),
+          generateSeries(
+            '内容点击量',
+            '#F77234',
+            '#FFE4BA',
+            contentClickData.value
+          ),
+          generateSeries(
+            '内容曝光量',
+            '#33D1C9',
+            '#E8FFFB',
+            contentExposureData.value
+          ),
+          generateSeries(
+            '活跃用户数',
+            '#3469FF',
+            '#E8F3FF',
+            activeUsersData.value
+          )
         ]
       }
     })
 
-    const graphicElements = ref([graphicFactory({ left: '2.6%' }), graphicFactory({ right: 0 })])
+    const graphicElements = ref([
+      graphicFactory({ left: '2.6%' }),
+      graphicFactory({ right: 0 })
+    ])
 
     const contentProductionData = ref<number[]>([])
 
@@ -239,7 +274,7 @@ export default defineComponent({
       },
       {
         title: t('multiDAnalysis.dataOverview.activeUsers'),
-        value: 1275,
+        value: 1293,
         prefix: {
           icon: <IconUser />,
           background: isDark.value ? '#3F385E' : '#F5E8FF',
@@ -250,7 +285,10 @@ export default defineComponent({
     fetchData()
     const { t } = useI18n()
     return () => (
-      <Card class="general-card " title={t('multiDAnalysis.card.title.dataOverview')}>
+      <Card
+        class="general-card "
+        title={t('multiDAnalysis.card.title.dataOverview')}
+      >
         <Grid.Row>
           {statisticDataList.value.map((item) => (
             <Grid.Col span={6}>
