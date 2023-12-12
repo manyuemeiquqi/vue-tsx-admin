@@ -1,6 +1,6 @@
 {
   "**/*.{ts,tsx,js,jsx}": [
-    "vue-tsc --noEmit -p tsconfig.app.json --composite false",
+    "bash -c vue-tsc --noEmit -p tsconfig.app.json --composite false",
     "eslint  --fix"
   ],
   "**/*.{css,scss}": ["stylelint  --fix"],
