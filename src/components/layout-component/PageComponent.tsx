@@ -5,7 +5,13 @@ export default defineComponent({
   setup() {
     return () => (
       <RouterView>
-        {({ Component, route }: { Component: VNode; route: RouteLocationNormalizedLoaded }) => (
+        {({
+          Component,
+          route
+        }: {
+          Component: VNode
+          route: RouteLocationNormalizedLoaded
+        }) => (
           <Transition>
             {get(route, 'meta.ignoreCache') ? (
               <KeepAlive>

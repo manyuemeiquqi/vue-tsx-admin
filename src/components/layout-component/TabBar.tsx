@@ -3,7 +3,10 @@ import { computed, defineComponent, onUnmounted, ref, watch } from 'vue'
 import TabItem from './TabItem'
 import useTabStore from '@/store/modules/tab/index'
 import type { RouteLocationNormalized } from 'vue-router'
-import { listenerRouteChange, removeRouteListener } from '@/utils/routerListener'
+import {
+  listenerRouteChange,
+  removeRouteListener
+} from '@/utils/routerListener'
 
 import styles from './style.module.scss'
 export default defineComponent({
@@ -21,7 +24,10 @@ export default defineComponent({
     //   }
     // )
     listenerRouteChange((route: RouteLocationNormalized) => {
-      if (!route.meta.noAffix && !tagList.value.some((tag) => tag.fullPath === route.fullPath)) {
+      if (
+        !route.meta.noAffix &&
+        !tagList.value.some((tag) => tag.fullPath === route.fullPath)
+      ) {
         tabStore.updateTabList(route)
       }
     }, true)

@@ -5,6 +5,8 @@ interface Slots {
 export default defineComponent({
   name: 'CardLayout',
   setup(_, { slots }) {
-    return () => <div class="content-wrapper">{(slots as unknown as Slots).default()}</div>
+    return () => (
+      <div class="content-wrapper">{(slots as unknown as Slots).default()}</div>
+    )
   }
 })

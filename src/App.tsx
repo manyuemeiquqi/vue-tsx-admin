@@ -1,8 +1,8 @@
-import { defineComponent } from "vue";
-import { RouterView } from "vue-router";
+import { defineComponent } from 'vue'
+import { RouterView } from 'vue-router'
 
-export default  defineComponent({
-    setup(){
-        return ()=><RouterView/>
-    }
+export default defineComponent({
+  setup() {
+    return () => <RouterView />
+  }
 })
