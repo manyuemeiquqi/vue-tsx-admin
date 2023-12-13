@@ -17,6 +17,7 @@ import {
   IconMoonFill,
   IconNotification,
   IconSettings,
+  IconSunFill,
   IconTag,
   IconUser
 } from '@arco-design/web-vue/es/icon'
@@ -26,13 +27,17 @@ import { useI18n } from 'vue-i18n'
 import { useFullscreen } from '@vueuse/core'
 import { LocaleOptions } from '@/types/enum'
 import useLocale from '@/hooks/locale'
+import useTheme from '@/hooks/theme'
 import { isString } from 'lodash'
+import { useApplicationStore } from '@/store'
 
 export default defineComponent({
   setup() {
+    const { isDark } = useTheme()
     const { isFullscreen, toggle: toggleFullScreen } = useFullscreen()
     const { currentLocale, changeLocale } = useLocale()
     const { t } = useI18n()
+    const applicationStroe = useApplicationStore()
 
     const hanleLocaleChange = (val: unknown) => {
       if (isString(val)) {
@@ -41,6 +46,10 @@ export default defineComponent({
     }
     const setDropDownVisible = () => {}
     const setVisible = () => {}
+
+    const handleToggleTheme = () => {
+      applicationStroe.toggleTheme(isDark.value)
+    }
     const handleLogout = () => {
       console.log('click')
     }
@@ -111,7 +120,7 @@ export default defineComponent({
           >
             {{
               trigger: () => (
-                <Tooltip content={t('settings.title')}>
+                <Tooltip content={t('settings.language')}>
                   <Button
                     class=" !border-[rgb(var(--gray-2))] !text-[rgb(var(--gray-8))] !text-base"
                     type="outline"
@@ -131,11 +140,14 @@ export default defineComponent({
               class=" !border-[rgb(var(--gray-2))] !text-[rgb(var(--gray-8))] !text-base"
               type="outline"
               shape="circle"
-              onClick={setVisible}
+              onClick={handleToggleTheme}
             >
               {{
-                icon: () => <IconMoonFill />
+                icon: () => {
+                  isDark.value ? <IconMoonFill /> : <IconSunFill />
+                }
               }}
+              121212
             </Button>
           </Tooltip>
           <Tooltip content={t('settings.title')}>

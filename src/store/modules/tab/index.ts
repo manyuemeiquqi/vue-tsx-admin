@@ -1,6 +1,7 @@
 import type { RouteLocationNormalized } from 'vue-router'
 import { defineStore } from 'pinia'
 import { isString } from 'lodash'
+import { StoreName } from '@/store/type'
 
 export const REDIRECT_ROUTE_NAME = 'Redirect'
 
@@ -38,7 +39,7 @@ const formatTag = (route: RouteLocationNormalized): TagProps => {
 
 const BAN_LIST = [REDIRECT_ROUTE_NAME]
 
-const useAppStore = defineStore('tabBar', {
+const useAppStore = defineStore(StoreName.tab, {
   state: (): TabBarState => ({
     cacheTabList: new Set([DEFAULT_ROUTE_NAME]),
     tagList: [DEFAULT_ROUTE]
