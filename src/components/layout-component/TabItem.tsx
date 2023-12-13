@@ -64,20 +64,13 @@ export default defineComponent({
     })
 
     return () => (
-      <Dropdown
-        onSelect={handleSelect}
-        trigger="contextMenu"
-        popupMaxHeight={false}
-      >
+      <Dropdown onSelect={handleSelect} trigger="contextMenu" popupMaxHeight={false}>
         {{
           default: () => (
             <span onClick={() => handleTabClick(props.itemData.name)}>
               <span>{t(props.itemData.title)}</span>
               <span
-                onClick={withModifiers(
-                  () => handleTabClose(props.index, props.itemData),
-                  ['stop']
-                )}
+                onClick={withModifiers(() => handleTabClose(props.index, props.itemData), ['stop'])}
               >
                 <IconClose />
               </span>
@@ -100,10 +93,7 @@ export default defineComponent({
                 <span>关闭左侧标签页</span>
               </Doption>
 
-              <Doption
-                disabled={disabledRight.value}
-                value={TabActionType.right}
-              >
+              <Doption disabled={disabledRight.value} value={TabActionType.right}>
                 <IconToRight />
                 <span>关闭右侧标签页</span>
               </Doption>
