@@ -24,10 +24,21 @@ import { defineComponent } from 'vue'
 import { useI18n } from 'vue-i18n'
 
 import { useFullscreen } from '@vueuse/core'
-const { isFullscreen, toggle: toggleFullScreen } = useFullscreen()
+import { LocaleOptions } from '@/types/enum'
+import useLocale from '@/hooks/locale'
+import { isString } from 'lodash'
+
 export default defineComponent({
   setup() {
+    const { isFullscreen, toggle: toggleFullScreen } = useFullscreen()
+    const { currentLocale, changeLocale } = useLocale()
     const { t } = useI18n()
+
+    const hanleLocaleChange = (val: unknown) => {
+      if (isString(val)) {
+        changeLocale(val)
+      }
+    }
     const setDropDownVisible = () => {}
     const setVisible = () => {}
     const handleLogout = () => {
@@ -86,9 +97,10 @@ export default defineComponent({
         <Space>
           <Input placeholder={t('navbar.search.placeholder')}></Input>
           <Select
+            onChange={hanleLocaleChange}
             options={[
-              { label: '中文', value: 'zh-CN' },
-              { label: 'English', value: 'en-US' }
+              { label: '中文', value: LocaleOptions.cn },
+              { label: 'English', value: LocaleOptions.en }
             ]}
             triggerProps={{
               position: 'br',
