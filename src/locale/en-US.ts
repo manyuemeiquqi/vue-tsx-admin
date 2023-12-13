@@ -8,21 +8,9 @@ import result from './en-US/result.json'
 import settings from './en-US/settings.json'
 import user from './en-US/user.json'
 import visualization from './en-US/visualization.json'
+import global from './en-US/global.json'
 
 export default {
-  'menu.dashboard': 'Dashboard',
-  'menu.server.dashboard': 'Dashboard-Server',
-  'menu.server.workplace': 'Workplace-Server',
-  'menu.server.monitor': 'Monitor-Server',
-  'menu.result': 'Result',
-  'menu.exception': 'Exception',
-  'menu.profile': 'Profile',
-  'menu.visualization': 'Data Visualization',
-  'menu.arcoWebsite': 'Arco Design',
-  'menu.faq': 'FAQ',
-  'navbar.docs': 'Docs',
-  'navbar.action.locale': 'Switch to English',
-
   'messageBox.tab.title.message': 'Message',
   'messageBox.tab.title.notice': 'Notice',
   'messageBox.tab.title.todo': 'Todo',
@@ -46,5 +34,6 @@ export default {
   ...result,
   ...settings,
   ...user,
-  ...visualization
+  ...visualization,
+  ...global
 }
