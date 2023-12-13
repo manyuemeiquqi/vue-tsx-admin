@@ -11,6 +11,7 @@
     "build-only": "vite build",
     "type-check": "vue-tsc --noEmit -p tsconfig.app.json --composite false",
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore",
+    "lint-style": "npx stylelint **/*.{css,scss} --fix",
     "format": "prettier --write src/",
     "prepare": "husky install"
   },
