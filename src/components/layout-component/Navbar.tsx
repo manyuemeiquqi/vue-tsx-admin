@@ -27,7 +27,6 @@ import { useI18n } from 'vue-i18n'
 import { useFullscreen } from '@vueuse/core'
 import { LocaleOptions } from '@/types/enum'
 import useLocale from '@/hooks/locale'
-import useTheme from '@/hooks/theme'
 import { isString } from 'lodash'
 import { useApplicationStore } from '@/store'
 
@@ -90,7 +89,7 @@ export default defineComponent({
        top-0
      left-0 z-[100]
      bg-[color:var(--color-bg-2)]
-       pl-5
+       pl-5  box-border
       "
       >
         <Space>
