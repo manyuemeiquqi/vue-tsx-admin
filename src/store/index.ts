@@ -4,13 +4,18 @@ import useUserStore from './modules/user'
 import useTabStore from './modules/tab'
 import useApplicationStore from './modules/application'
 
+import piniaPluginPersistedstate from 'pinia-plugin-persistedstate'
 const pinia = createPinia()
 
-export { useUserStore, useTabStore, useApplicationStore }
+pinia.use(piniaPluginPersistedstate)
 
 export enum StoreName {
   user = 'userStore',
   tab = 'tabrStore',
   application = 'applicationStore'
 }
+console.log(StoreName)
+
+export { useUserStore, useTabStore, useApplicationStore }
+
 export default pinia

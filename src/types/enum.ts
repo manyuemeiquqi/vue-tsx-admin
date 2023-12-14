@@ -3,5 +3,6 @@ export enum LocaleOptions {
   en = 'en-US'
 }
 export enum LocalStorageKey {
-  localeKey = 'vtsc-locale'
+  localeKey = 'vtsc-locale',
+  applicationTheme = 'vtsc-theme'
 }

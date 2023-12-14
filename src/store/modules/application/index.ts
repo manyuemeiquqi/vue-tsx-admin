@@ -1,9 +1,13 @@
-import { StoreName } from '@/store/type'
+import { StoreName } from '@/store'
 import { Notification } from '@arco-design/web-vue'
 import { defineStore } from 'pinia'
 import type { RouteRecordNormalized } from 'vue-router'
 
 import type { NotificationReturn } from '@arco-design/web-vue/es/notification/interface'
+console.log(StoreName)
+
+import { LocalStorageKey } from '@/types/enum'
+import { isNull } from 'lodash'
 export interface ApplicationState {
   theme: ApplicationTheme
   colorWeak: boolean
@@ -24,13 +28,26 @@ export interface ApplicationState {
 }
 
 export enum ApplicationTheme {
-  lingt = 'light',
+  light = 'light',
   dark = 'dark'
+}
+
+const getSupportTheme = (): ApplicationTheme => {
+  const isSupportTheme = (theme: string | null): theme is ApplicationTheme => {
+    if (isNull(theme)) return false
+    return (Object.values(ApplicationTheme) as string[]).includes(theme)
+  }
+
+  const themeValue = localStorage.getItem(LocalStorageKey.applicationTheme)
+  if (isSupportTheme(themeValue)) {
+    return themeValue
+  }
+  return ApplicationTheme.light
 }
 export default defineStore(StoreName.application, {
   state(): ApplicationState {
     return {
-      theme: ApplicationTheme.lingt,
+      theme: ApplicationTheme.light,
       colorWeak: false,
       navbar: true,
       menu: true,
@@ -47,18 +64,23 @@ export default defineStore(StoreName.application, {
       serverMenu: []
     }
   },
+  persist: true,
+  getters: {
+    isDark(state: ApplicationState) {
+      return state.theme === ApplicationTheme.dark
+    }
+  },
   actions: {
     updateSettings(partial: Partial<ApplicationState>) {
       // @ts-ignore-next-line
       this.$patch(partial)
     },
-    toggleTheme(dark: boolean) {
-      if (dark) {
-        this.theme = ApplicationTheme.dark
-        document.body.setAttribute('arco-theme', ApplicationTheme.dark)
+
+    toggleDarkLightMode() {
+      if (this.isDark) {
+        this.theme = ApplicationTheme.light
       } else {
-        this.theme = ApplicationTheme.lingt
-        document.body.removeAttribute('arco-theme')
+        this.theme = ApplicationTheme.dark
       }
     },
     toggleDevice(device: string) {

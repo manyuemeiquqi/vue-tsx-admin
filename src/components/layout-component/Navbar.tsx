@@ -33,7 +33,6 @@ import { useApplicationStore } from '@/store'
 
 export default defineComponent({
   setup() {
-    const { isDark } = useTheme()
     const { isFullscreen, toggle: toggleFullScreen } = useFullscreen()
     const { currentLocale, changeLocale } = useLocale()
     const { t } = useI18n()
@@ -47,9 +46,6 @@ export default defineComponent({
     const setDropDownVisible = () => {}
     const setVisible = () => {}
 
-    const handleToggleTheme = () => {
-      applicationStroe.toggleTheme(isDark.value)
-    }
     const handleLogout = () => {
       console.log('click')
     }
@@ -140,14 +136,13 @@ export default defineComponent({
               class=" !border-[rgb(var(--gray-2))] !text-[rgb(var(--gray-8))] !text-base"
               type="outline"
               shape="circle"
-              onClick={handleToggleTheme}
+              onClick={applicationStroe.toggleDarkLightMode}
             >
               {{
                 icon: () => {
-                  isDark.value ? <IconMoonFill /> : <IconSunFill />
+                  return applicationStroe.isDark ? <IconMoonFill /> : <IconSunFill />
                 }
               }}
-              121212
             </Button>
           </Tooltip>
           <Tooltip content={t('settings.title')}>
