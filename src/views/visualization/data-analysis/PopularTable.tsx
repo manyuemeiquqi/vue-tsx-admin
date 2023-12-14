@@ -31,7 +31,6 @@ export default defineComponent({
         // setLoading(true)
         const { data } = await queryPopularAuthor()
 
-        console.log('data: ', data)
         tableData.value.list = data.list
       } catch (err) {
         // you can report use errorHandler or other

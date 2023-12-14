@@ -173,10 +173,8 @@ export default defineComponent({
     })
     const chartOption = ref({})
     const fetchData = async (params: any) => {
-      console.log('params: ', params)
       try {
         const { data } = await queryPublicOpinionAnalysis(params)
-        console.log('data: ', data)
         renderData.value = data
         const { chartData } = data
         if (props.chartType === 'bar') {

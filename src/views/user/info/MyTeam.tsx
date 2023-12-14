@@ -14,7 +14,6 @@ export default defineComponent({
     // )
     const fetchData = () => {
       queryMyTeamList().then((res) => {
-        console.log('res: ', res)
         dataSource.value = res.data
       })
     }

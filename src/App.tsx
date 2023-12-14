@@ -28,7 +28,6 @@ export default defineComponent({
     watch(
       () => applicationStroe.theme,
       (theme) => {
-        console.log(theme)
         if (theme === ApplicationTheme.dark) {
           document.body.setAttribute('arco-theme', ApplicationTheme.dark)
         } else {

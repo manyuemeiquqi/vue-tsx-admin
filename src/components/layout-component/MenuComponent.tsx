@@ -57,7 +57,6 @@ export default defineComponent({
     }
 
     const handleMenuItemClick = (item: RouteRecordRaw) => {
-      console.log('item: ', item)
       // Open external link
       // if (regexUrl.test(item.path)) {
       //   openWindow(item.path)

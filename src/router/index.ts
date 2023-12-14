@@ -82,7 +82,7 @@ router.beforeEach(async (to, from, next) => {
     const res = await getUserInfo()
     userStore.setUserInfo(res.data)
   } catch (error) {
-    console.log('error: ', error)
+    /* empty */
   }
   next()
 })

@@ -24,7 +24,7 @@ export default defineComponent({
         currentData.value = data.data
         preData.value = data.data
       } catch (error) {
-        console.log('error: ', error)
+        /* empty */
       } finally {
         setLoading(false)
       }

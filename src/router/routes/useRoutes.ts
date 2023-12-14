@@ -32,8 +32,8 @@ const appClientMenus = [
     FormRoutes,
     dashboard,
     detail,
-    visualization,
-    nest
+    visualization
+    // nest
   ]
 ]
 

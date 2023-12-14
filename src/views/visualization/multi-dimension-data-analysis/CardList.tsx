@@ -19,7 +19,6 @@ export default defineComponent({
             quota: item.quota
           })
 
-          console.log('resData: ', resData)
           const dataList: { value: any; itemStyle: { color: string } }[] = []
           resData.chartData.data.value.forEach((el: any, idx: number) => {
             if (item.chartType === 'bar') {
@@ -35,7 +34,6 @@ export default defineComponent({
           })
           item.count = resData.count
           item.growth = resData.growth
-          console.log('dataList: ', dataList)
 
           item.chartOption = useChartOption(() => {
             return {

@@ -18,7 +18,7 @@ export default defineComponent({
         const res = await queryLatestActivity()
         activityList.value = res.data
       } catch (error) {
-        console.log('error: ', error)
+        /* empty */
       }
     }
     fetchData()

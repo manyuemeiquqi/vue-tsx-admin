@@ -46,9 +46,7 @@ export default defineComponent({
     const setDropDownVisible = () => {}
     const setVisible = () => {}
 
-    const handleLogout = () => {
-      console.log('click')
-    }
+    const handleLogout = () => {}
     const dOptionList = [
       {
         label: t('messageBox.switchRoles'),

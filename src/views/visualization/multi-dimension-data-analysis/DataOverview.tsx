@@ -204,7 +204,7 @@ export default defineComponent({
       } catch (err) {
         // you can report use errorHandler or other
       } finally {
-        console.log()
+        /* empty */
       }
     }
 

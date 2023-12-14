@@ -25,7 +25,7 @@ export default defineComponent({
         await formRef.value?.validate()
         Message.success('userSetting.saveSuccess')
       } catch (e) {
-        console.log('e: ', e)
+        /* empty */
       }
     }
     return () => (

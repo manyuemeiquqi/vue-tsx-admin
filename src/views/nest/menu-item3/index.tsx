@@ -27,7 +27,6 @@ export default defineComponent({
           <Button onClick={() => count.value++}>+++</Button>
           <RouterView>
             {({ Component }: { Component: VNode }) => {
-              console.log('Component: ', Component)
               return Component && <KeepAlive>{h(Component)}</KeepAlive>
             }}
           </RouterView>

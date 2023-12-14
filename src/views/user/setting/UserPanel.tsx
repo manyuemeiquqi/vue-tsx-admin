@@ -30,7 +30,6 @@ export default defineComponent({
         value: userStore.registrationDate
       }
     ] as DescData[]
-    console.log('userInfoData : ', userInfoData)
     return () => (
       <Card bordered={false} class=" rounded">
         <Space size={54}>
