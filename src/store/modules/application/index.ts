@@ -1,13 +1,11 @@
-import { StoreName } from '@/store'
 import { Notification } from '@arco-design/web-vue'
 import { defineStore } from 'pinia'
 import type { RouteRecordNormalized } from 'vue-router'
 
 import type { NotificationReturn } from '@arco-design/web-vue/es/notification/interface'
-console.log(StoreName)
-
-import { LocalStorageKey } from '@/types/enum'
+import { ApplicationTheme, LocalStorageKey, StoreName } from '@/types/enum'
 import { isNull } from 'lodash'
+
 export interface ApplicationState {
   theme: ApplicationTheme
   colorWeak: boolean
@@ -25,11 +23,6 @@ export interface ApplicationState {
   menuFromServer: boolean
   serverMenu: RouteRecordNormalized[]
   [key: string]: unknown
-}
-
-export enum ApplicationTheme {
-  light = 'light',
-  dark = 'dark'
 }
 
 const getSupportTheme = (): ApplicationTheme => {

@@ -9,13 +9,6 @@ const pinia = createPinia()
 
 pinia.use(piniaPluginPersistedstate)
 
-export enum StoreName {
-  user = 'userStore',
-  tab = 'tabrStore',
-  application = 'applicationStore'
-}
-console.log(StoreName)
-
 export { useUserStore, useTabStore, useApplicationStore }
 
 export default pinia

@@ -1,7 +1,6 @@
 import { defineStore } from 'pinia'
 import type { UserInfo } from '@/types/global'
-import { StoreName } from '@/store/type'
-
+import { StoreName } from '@/types/enum'
 const useUserStore = defineStore(StoreName.user, {
   state: (): UserInfo => ({
     name: undefined,

@@ -4,10 +4,10 @@ import { RouterView } from 'vue-router'
 
 import zhCN from '@arco-design/web-vue/es/locale/lang/zh-cn'
 import enUS from '@arco-design/web-vue/es/locale/lang/en-us'
-import { LocaleOptions } from './types/enum'
+import { ApplicationTheme, LocaleOptions } from './types/enum'
 import useLocale from './hooks/locale'
 import { useApplicationStore } from './store'
-import { ApplicationTheme } from './store/modules/application'
+
 export default defineComponent({
   setup() {
     const arcoLocaleMap = {
