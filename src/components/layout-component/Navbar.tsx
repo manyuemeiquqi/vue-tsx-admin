@@ -188,7 +188,7 @@ export default defineComponent({
                 <Avatar size={32} class={'cursor-pointer mr-2'}>
                   <img
                     alt="avatar"
-                    src="https://avatars.githubusercontent.com/u/54520846?s=40&v=4"
+                    src="https://cdn.jsdelivr.net/gh/manyuemeiquqi/my-image-bed/dist54520846%20(1).jpg"
                   />
                 </Avatar>
               ),

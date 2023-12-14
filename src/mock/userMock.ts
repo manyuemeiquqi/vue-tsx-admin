@@ -11,15 +11,15 @@ setupMock({
       if (a) {
         const role = window.localStorage.getItem('userRole') || 'admin'
         return successResponseWrap({
-          name: '王立群',
-          avatar: 'https://avatars.githubusercontent.com/u/54520846?s=48&v=4',
+          name: '蔓越莓曲奇',
+          avatar: 'https://cdn.jsdelivr.net/gh/manyuemeiquqi/my-image-bed/dist/54520846%20(1).jpg',
           email: 'wangliqun@email.com',
           job: 'frontend',
           jobName: '前端艺术家',
           organization: 'Frontend',
           organizationName: '前端',
-          location: 'beijing',
-          locationName: '北京',
+          location: 'hangzhou',
+          locationName: '杭州',
           introduction: '人潇洒，性温存',
           personalWebsite: 'https://www.arco.design',
           phone: '150****0000',
@@ -102,32 +102,27 @@ setupMock({
         {
           name: '秦臻宇',
           email: 'qingzhenyu@arco.design',
-          avatar:
-            '//p1-arco.byteimg.com/tos-cn-i-uwbnlip3yd/a8c8cdb109cb051163646151a4a5083b.png~tplv-uwbnlip3yd-webp.webp'
+          avatar: 'https://cdn.jsdelivr.net/gh/manyuemeiquqi/my-image-bed/dist/avatar3.webp'
         },
         {
           name: '于涛',
           email: 'yuebao@arco.design',
-          avatar:
-            '//p1-arco.byteimg.com/tos-cn-i-uwbnlip3yd/a8c8cdb109cb051163646151a4a5083b.png~tplv-uwbnlip3yd-webp.webp'
+          avatar: 'https://cdn.jsdelivr.net/gh/manyuemeiquqi/my-image-bed/dist/avatar3.webp'
         },
         {
           name: '宁波',
           email: 'ningbo@arco.design',
-          avatar:
-            '//p1-arco.byteimg.com/tos-cn-i-uwbnlip3yd/3ee5f13fb09879ecb5185e440cef6eb9.png~tplv-uwbnlip3yd-webp.webp'
+          avatar: 'https://cdn.jsdelivr.net/gh/manyuemeiquqi/my-image-bed/dist/avatar2.webp'
         },
         {
           name: '郑曦月',
           email: 'zhengxiyue@arco.design',
-          avatar:
-            '//p1-arco.byteimg.com/tos-cn-i-uwbnlip3yd/8361eeb82904210b4f55fab888fe8416.png~tplv-uwbnlip3yd-webp.webp'
+          avatar: 'https://cdn.jsdelivr.net/gh/manyuemeiquqi/my-image-bed/dist/avatar1.webp'
         },
         {
           name: '宁波',
           email: 'ningbo@arco.design',
-          avatar:
-            '//p1-arco.byteimg.com/tos-cn-i-uwbnlip3yd/3ee5f13fb09879ecb5185e440cef6eb9.png~tplv-uwbnlip3yd-webp.webp'
+          avatar: 'https://cdn.jsdelivr.net/gh/manyuemeiquqi/my-image-bed/dist/avatar2.webp'
         }
       ]
       const units = [
@@ -174,8 +169,7 @@ setupMock({
           id: index,
           title: '发布了项目 Arco Design System',
           description: '企业级产品设计系统',
-          avatar:
-            '//p1-arco.byteimg.com/tos-cn-i-uwbnlip3yd/a8c8cdb109cb051163646151a4a5083b.png~tplv-uwbnlip3yd-webp.webp'
+          avatar: 'https://cdn.jsdelivr.net/gh/manyuemeiquqi/my-image-bed/dist/avatar3.webp'
         }))
       )
     })
@@ -223,29 +217,25 @@ setupMock({
       return successResponseWrap([
         {
           id: 1,
-          avatar:
-            '//p1-arco.byteimg.com/tos-cn-i-uwbnlip3yd/a8c8cdb109cb051163646151a4a5083b.png~tplv-uwbnlip3yd-webp.webp',
+          avatar: 'https://cdn.jsdelivr.net/gh/manyuemeiquqi/my-image-bed/dist/avatar3.webp',
           name: '火山引擎智能应用团队',
           peopleNumber: Mock.Random.natural(10, 100)
         },
         {
           id: 2,
-          avatar:
-            '//p1-arco.byteimg.com/tos-cn-i-uwbnlip3yd/3ee5f13fb09879ecb5185e440cef6eb9.png~tplv-uwbnlip3yd-webp.webp',
+          avatar: 'https://cdn.jsdelivr.net/gh/manyuemeiquqi/my-image-bed/dist/avatar2.webp',
           name: '企业级产品设计团队',
           peopleNumber: Mock.Random.natural(5000, 6000)
         },
         {
           id: 3,
-          avatar:
-            '//p1-arco.byteimg.com/tos-cn-i-uwbnlip3yd/3ee5f13fb09879ecb5185e440cef6eb9.png~tplv-uwbnlip3yd-webp.webp',
+          avatar: 'https://cdn.jsdelivr.net/gh/manyuemeiquqi/my-image-bed/dist/avatar2.webp',
           name: '前端/UE小分队',
           peopleNumber: Mock.Random.natural(10, 5000)
         },
         {
           id: 4,
-          avatar:
-            '//p1-arco.byteimg.com/tos-cn-i-uwbnlip3yd/8361eeb82904210b4f55fab888fe8416.png~tplv-uwbnlip3yd-webp.webp',
+          avatar: 'https://cdn.jsdelivr.net/gh/manyuemeiquqi/my-image-bed/dist/avatar1.webp',
           name: '内容识别插件小分队',
           peopleNumber: Mock.Random.natural(10, 100)
         }

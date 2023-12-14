@@ -107,8 +107,7 @@ const getMessageList = () => {
       type: 'message',
       title: '郑曦月',
       subTitle: '的私信',
-      avatar:
-        '//p1-arco.byteimg.com/tos-cn-i-uwbnlip3yd/8361eeb82904210b4f55fab888fe8416.png~tplv-uwbnlip3yd-webp.webp',
+      avatar: 'https://cdn.jsdelivr.net/gh/manyuemeiquqi/my-image-bed/dist/avatar1.webp',
       content: '审批请求已发送，请查收',
       time: '今天 12:30:01'
     },
@@ -117,8 +116,7 @@ const getMessageList = () => {
       type: 'message',
       title: '宁波',
       subTitle: '的回复',
-      avatar:
-        '//p1-arco.byteimg.com/tos-cn-i-uwbnlip3yd/3ee5f13fb09879ecb5185e440cef6eb9.png~tplv-uwbnlip3yd-webp.webp',
+      avatar: 'https://cdn.jsdelivr.net/gh/manyuemeiquqi/my-image-bed/dist/avatar2.webp',
       content: '此处 bug 已经修复',
       time: '今天 12:30:01'
     },
@@ -127,8 +125,7 @@ const getMessageList = () => {
       type: 'message',
       title: '宁波',
       subTitle: '的回复',
-      avatar:
-        '//p1-arco.byteimg.com/tos-cn-i-uwbnlip3yd/3ee5f13fb09879ecb5185e440cef6eb9.png~tplv-uwbnlip3yd-webp.webp',
+      avatar: 'https://cdn.jsdelivr.net/gh/manyuemeiquqi/my-image-bed/dist/avatar2.webp',
       content: '此处 bug 已经修复',
       time: '今天 12:20:01'
     },

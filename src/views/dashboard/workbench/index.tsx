@@ -10,10 +10,10 @@ import RightTopArea from './RightTopArea'
 export default defineComponent({
   setup() {
     const imageSrc = [
-      '//p1-arco.byteimg.com/tos-cn-i-uwbnlip3yd/f7e8fc1e09c42e30682526252365be1c.jpg~tplv-uwbnlip3yd-webp.webp',
-      '//p1-arco.byteimg.com/tos-cn-i-uwbnlip3yd/94e8dd2d6dc4efb2c8cfd82c0ff02a2c.jpg~tplv-uwbnlip3yd-webp.webp',
-      '//p1-arco.byteimg.com/tos-cn-i-uwbnlip3yd/ec447228c59ae1ebe185bab6cd776ca4.jpg~tplv-uwbnlip3yd-webp.webp',
-      '//p1-arco.byteimg.com/tos-cn-i-uwbnlip3yd/1d1580d2a5a1e27415ff594c756eabd8.jpg~tplv-uwbnlip3yd-webp.webp'
+      'https://cdn.jsdelivr.net/gh/manyuemeiquqi/my-image-bed/dist/f7e8fc1e09c42e30682526252365be1c.jpg~tplv-uwbnlip3yd-webp.webp',
+      'https://cdn.jsdelivr.net/gh/manyuemeiquqi/my-image-bed/dist/94e8dd2d6dc4efb2c8cfd82c0ff02a2c.jpg~tplv-uwbnlip3yd-webp.webp',
+      'https://cdn.jsdelivr.net/gh/manyuemeiquqi/my-image-bed/dist/ec447228c59ae1ebe185bab6cd776ca4.jpg~tplv-uwbnlip3yd-webp.webp',
+      'https://cdn.jsdelivr.net/gh/manyuemeiquqi/my-image-bed/dist/1d1580d2a5a1e27415ff594c756eabd8.jpg~tplv-uwbnlip3yd-webp.webp'
     ]
     return () => (
       <Grid.Row gutter={16}>

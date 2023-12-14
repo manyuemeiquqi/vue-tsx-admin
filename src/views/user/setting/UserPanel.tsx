@@ -40,7 +40,12 @@ export default defineComponent({
                   <Avatar size={100}>
                     {{
                       'trigger-icon': () => <IconCamera />,
-                      default: () => <img src="" alt="" />
+                      default: () => (
+                        <img
+                          src="https://cdn.jsdelivr.net/gh/manyuemeiquqi/my-image-bed/dist/54520846%20(1).jpg"
+                          alt="alt"
+                        />
+                      )
                     }}
                   </Avatar>
                 </div>

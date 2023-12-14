@@ -15,13 +15,19 @@ export default defineComponent({
       "
         style={{
           background:
-            'url(//p3-armor.byteimg.com/tos-cn-i-49unhts6dw/41c6b125cc2e27021bf7fcc9a9b1897c.svg~tplv-49unhts6dw-image.image) no-repeat'
+            'url(https://cdn.jsdelivr.net/gh/manyuemeiquqi/my-image-bed/dist/header-banner.fcb7b1aa6ce12d210c85.png) no-repeat',
+          backgroundSize: '100%'
         }}
       >
         <Space direction="vertical" align="center">
           <Avatar size={64}>
             {{
-              default: () => <img src="" />,
+              default: () => (
+                <img
+                  src="https://cdn.jsdelivr.net/gh/manyuemeiquqi/my-image-bed/dist/54520846%20(1).jpg"
+                  alt="avatar"
+                />
+              ),
               'trigger-icon': () => <IconCamera />
             }}
           </Avatar>

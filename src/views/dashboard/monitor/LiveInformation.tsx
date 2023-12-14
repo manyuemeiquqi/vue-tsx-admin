@@ -9,7 +9,7 @@ export default defineComponent({
       <Card class="general-card" title={t('monitor.title.studioInfo')}>
         <Form model={formData.value} layout="vertical">
           <Form.Item label={t('monitor.studioInfo.label.studioTitle')} required>
-            <Input placeholder={`王立群${t('monitor.studioInfo.placeholder.studioTitle')}`} />
+            <Input placeholder={`蔓越莓曲奇${t('monitor.studioInfo.placeholder.studioTitle')}`} />
           </Form.Item>
           <Form.Item label={t('monitor.studioInfo.label.onlineNotification')} required>
             <a-textarea />

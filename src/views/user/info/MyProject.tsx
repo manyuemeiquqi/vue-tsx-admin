@@ -28,7 +28,7 @@ export default defineComponent({
                         <AvatarGroup size={24}>
                           {item.contributors.map((contributor: any) => (
                             <Avatar size={32}>
-                              <img src={contributor.avatar} />
+                              <img src={contributor.avatar} alt="avatar" />
                             </Avatar>
                           ))}
                         </AvatarGroup>

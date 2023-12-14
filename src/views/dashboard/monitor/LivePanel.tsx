@@ -69,7 +69,7 @@ export default defineComponent({
     const data: PreviewRecord[] = [
       {
         cover:
-          'http://p1-arco.byteimg.com/tos-cn-i-uwbnlip3yd/c788fc704d32cf3b1136c7d45afc2669.png~tplv-uwbnlip3yd-webp.webp',
+          'https://cdn.jsdelivr.net/gh/manyuemeiquqi/my-image-bed/dist/c788fc704d32cf3b1136c7d45afc2669.png~tplv-uwbnlip3yd-webp.webp',
         name: '视频直播',
         duration: '00:05:19',
         id: '54e23ade',
@@ -84,7 +84,7 @@ export default defineComponent({
               <div>
                 <img
                   class=" w-full max-w-xl  block  my-0 mx-auto mb-4  "
-                  src="http://p1-arco.byteimg.com/tos-cn-i-uwbnlip3yd/c788fc704d32cf3b1136c7d45afc2669.png~tplv-uwbnlip3yd-webp.webp"
+                  src="https://cdn.jsdelivr.net/gh/manyuemeiquqi/my-image-bed/dist/c788fc704d32cf3b1136c7d45afc2669.png~tplv-uwbnlip3yd-webp.webp"
                 />
                 <Grid.Row align="center" justify="space-between">
                   <Space size="small">

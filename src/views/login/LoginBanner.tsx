@@ -11,19 +11,19 @@ export default defineComponent({
         slogan: t('login.banner.slogan1'),
         subSlogan: t('login.banner.subSlogan1'),
         image:
-          'http://p1-arco.byteimg.com/tos-cn-i-uwbnlip3yd/6c85f43aed61e320ebec194e6a78d6d3.png~tplv-uwbnlip3yd-png.png'
+          'https://cdn.jsdelivr.net/gh/manyuemeiquqi/my-image-bed/dist/%E8%BD%AE%E6%92%AD%E5%9B%BE.png'
       },
       {
         slogan: t('login.banner.slogan2'),
         subSlogan: t('login.banner.subSlogan2'),
         image:
-          'http://p1-arco.byteimg.com/tos-cn-i-uwbnlip3yd/6c85f43aed61e320ebec194e6a78d6d3.png~tplv-uwbnlip3yd-png.png'
+          'https://cdn.jsdelivr.net/gh/manyuemeiquqi/my-image-bed/dist/%E8%BD%AE%E6%92%AD%E5%9B%BE.png'
       },
       {
         slogan: t('login.banner.slogan3'),
         subSlogan: t('login.banner.subSlogan3'),
         image:
-          'http://p1-arco.byteimg.com/tos-cn-i-uwbnlip3yd/6c85f43aed61e320ebec194e6a78d6d3.png~tplv-uwbnlip3yd-png.png'
+          'https://cdn.jsdelivr.net/gh/manyuemeiquqi/my-image-bed/dist/%E8%BD%AE%E6%92%AD%E5%9B%BE.png'
       }
     ]
     return () => (
