@@ -8,6 +8,12 @@ export default defineComponent({
 
     const dataList = [
       {
+        slogan: t('login.banner.slogan3'),
+        subSlogan: t('login.banner.subSlogan3'),
+        image:
+          'https://cdn.jsdelivr.net/gh/manyuemeiquqi/my-image-bed/dist/%E8%BD%AE%E6%92%AD%E5%9B%BE.png'
+      },
+      {
         slogan: t('login.banner.slogan1'),
         subSlogan: t('login.banner.subSlogan1'),
         image:
@@ -16,12 +22,6 @@ export default defineComponent({
       {
         slogan: t('login.banner.slogan2'),
         subSlogan: t('login.banner.subSlogan2'),
-        image:
-          'https://cdn.jsdelivr.net/gh/manyuemeiquqi/my-image-bed/dist/%E8%BD%AE%E6%92%AD%E5%9B%BE.png'
-      },
-      {
-        slogan: t('login.banner.slogan3'),
-        subSlogan: t('login.banner.subSlogan3'),
         image:
           'https://cdn.jsdelivr.net/gh/manyuemeiquqi/my-image-bed/dist/%E8%BD%AE%E6%92%AD%E5%9B%BE.png'
       }
@@ -47,7 +47,7 @@ export default defineComponent({
                 >
                   {item.subSlogan}
                 </div>
-                <img class="w-[20rem] mt-7" src={item.image} alt="banner-image" />
+                <img class=" w-80 mt-7" src={item.image} alt="banner-image" />
               </div>
             </Carousel.Item>
           )
