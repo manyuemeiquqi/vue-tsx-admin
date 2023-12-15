@@ -24,9 +24,9 @@ export default defineComponent({
           return enUS
       }
     })
-    const applicationStroe = useApplicationStore()
+    const applicationStore = useApplicationStore()
     watch(
-      () => applicationStroe.theme,
+      () => applicationStore.theme,
       (theme) => {
         if (theme === ApplicationTheme.dark) {
           document.body.setAttribute('arco-theme', ApplicationTheme.dark)

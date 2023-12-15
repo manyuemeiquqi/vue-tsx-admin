@@ -35,7 +35,7 @@ export default defineComponent({
     const { isFullscreen, toggle: toggleFullScreen } = useFullscreen()
     const { currentLocale, changeLocale } = useLocale()
     const { t } = useI18n()
-    const applicationStroe = useApplicationStore()
+    const applicationStore = useApplicationStore()
 
     const hanleLocaleChange = (val: unknown) => {
       if (isString(val)) {
@@ -133,11 +133,11 @@ export default defineComponent({
               class=" !border-[rgb(var(--gray-2))] !text-[rgb(var(--gray-8))] !text-base"
               type="outline"
               shape="circle"
-              onClick={applicationStroe.toggleDarkLightMode}
+              onClick={applicationStore.toggleDarkLightMode}
             >
               {{
                 icon: () => {
-                  return applicationStroe.isDark ? <IconMoonFill /> : <IconSunFill />
+                  return applicationStore.isDark ? <IconMoonFill /> : <IconSunFill />
                 }
               }}
             </Button>
