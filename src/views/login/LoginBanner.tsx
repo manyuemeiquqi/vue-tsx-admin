@@ -27,7 +27,7 @@ export default defineComponent({
       }
     ]
     return () => (
-      <Carousel class="h-full">
+      <Carousel class="h-full" animationName="fade">
         {dataList.map((item) => {
           return (
             <Carousel.Item>
