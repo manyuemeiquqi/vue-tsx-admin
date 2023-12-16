@@ -4,7 +4,8 @@ export enum LocaleOptions {
 }
 export enum LocalStorageKey {
   localeKey = 'vtsc-locale',
-  applicationTheme = 'vtsc-theme'
+  applicationTheme = 'vtsc-theme',
+  loginFormInfo = 'login-form-info'
 }
 export enum ApplicationTheme {
   light = 'light',
@@ -15,4 +16,8 @@ export enum StoreName {
   user = 'userStore',
   tab = 'tabStore',
   application = 'applicationStore'
+}
+
+export enum ApplicationInfo {
+  appTitle = 'Vue TSX Admin'
 }
