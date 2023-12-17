@@ -12,13 +12,13 @@ export interface EnterpriseCertificationModel {
   enterpriseCertificateType: string
   organizationCode: string
 }
-
-export type CertificationRecord = Array<{
+export type Certification = {
   certificationType: number
   certificationContent: string
   status: number
   time: string
-}>
+}
+export type CertificationRecord = Certification[]
 export interface UnitCertification {
   enterpriseInfo: EnterpriseCertificationModel
   record: CertificationRecord
@@ -83,4 +83,45 @@ export function logout() {
 
 export function getMenuList() {
   return axios.post<RouteRecordNormalized[]>('/api/user/menu')
+}
+
+export interface MyProjectRecord {
+  id: number
+  name: string
+  description: string
+  peopleNumber: number
+  contributors: {
+    name: string
+    email: string
+    avatar: string
+  }[]
+}
+
+export function saveUserInfo() {
+  return axios.post('/api/user/save-info')
+}
+
+export interface BasicInfoModel {
+  email: string
+  nickname: string
+  countryRegion: string
+  area: string
+  address: string
+  profile: string
+}
+
+export interface EnterpriseCertificationModel {
+  accountType: number
+  status: number
+  time: string
+  legalPerson: string
+  certificateType: string
+  authenticationNumber: string
+  enterpriseName: string
+  enterpriseCertificateType: string
+  organizationCode: string
+}
+
+export function userUploadApi(data: FormData) {
+  return axios.post('/api/user/upload', data)
 }

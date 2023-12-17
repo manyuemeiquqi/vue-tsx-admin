@@ -1,10 +1,10 @@
 import { Card, Grid, Tabs } from '@arco-design/web-vue'
 import { defineComponent, h } from 'vue'
-import UserPanel from './UserPanel'
+import { useI18n } from 'vue-i18n'
+import BasicInformation from './BasicInformation'
 import Certification from './Certification'
 import SecuritySettings from './SecuritySettings'
-import BasicInformation from './BasicInformation'
-import { useI18n } from 'vue-i18n'
+import UserPanel from './UserPanel'
 export default defineComponent({
   setup() {
     const { t } = useI18n()
@@ -12,17 +12,17 @@ export default defineComponent({
       {
         key: '1',
         component: BasicInformation,
-        title: t('userSetting.tab.basicInformation')
+        getTitle: () => t('userSetting.tab.basicInformation')
       },
       {
         key: '2',
         component: SecuritySettings,
-        title: t('userSetting.tab.securitySettings')
+        getTitle: () => t('userSetting.tab.securitySettings')
       },
       {
         key: '3',
         component: Certification,
-        title: t('userSetting.tab.certification')
+        getTitle: () => t('userSetting.tab.certification')
       }
     ]
     return () => (
@@ -38,7 +38,7 @@ export default defineComponent({
               <Tabs type="rounded" defaultActiveKey={'1'}>
                 {componentList.map((item) => {
                   return (
-                    <Tabs.TabPane key={item.key} title={item.title}>
+                    <Tabs.TabPane key={item.key} title={item.getTitle()}>
                       {h(item.component)}
                     </Tabs.TabPane>
                   )

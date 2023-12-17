@@ -270,5 +270,9 @@ setupMock({
         ]
       })
     })
+
+    Mock.mock(new RegExp('/api/user/upload'), () => {
+      return successResponseWrap('ok')
+    })
   }
 })

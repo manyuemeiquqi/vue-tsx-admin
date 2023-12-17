@@ -1,37 +1,80 @@
-import { Avatar, Card, Descriptions, Space, Tag, Upload } from '@arco-design/web-vue'
-import { defineComponent } from 'vue'
-import type { DescData } from '@arco-design/web-vue/es/descriptions/interface'
+import { userUploadApi } from '@/api/user'
 import { useUserStore } from '@/store'
-import { useI18n } from 'vue-i18n'
+import {
+  Avatar,
+  Card,
+  Descriptions,
+  Message,
+  Space,
+  Tag,
+  Upload,
+  type FileItem,
+  type RequestOption
+} from '@arco-design/web-vue'
+import type { DescData } from '@arco-design/web-vue/es/descriptions/interface'
 import { IconCamera } from '@arco-design/web-vue/es/icon'
-const userStore = useUserStore()
+import { computed, defineComponent, ref } from 'vue'
+import { useI18n } from 'vue-i18n'
 export default defineComponent({
   setup() {
     const { t } = useI18n()
-    const userInfoData = [
+    const userStore = useUserStore()
+    const userInfoData = computed(() => [
       {
-        label: 'userSetting.label.name',
+        label: t('userSetting.label.name'),
         value: userStore.name
       },
       {
-        label: 'userSetting.label.certification',
+        label: t('userSetting.label.certification'),
         value: userStore.certification
       },
       {
-        label: 'userSetting.label.accountId',
+        label: t('userSetting.label.accountId'),
         value: userStore.accountId
       },
       {
-        label: 'userSetting.label.phone',
+        label: t('userSetting.label.phone'),
         value: userStore.phone
       },
       {
-        label: 'userSetting.label.registrationDate',
+        label: t('userSetting.label.registrationDate'),
         value: userStore.registrationDate
       }
-    ] as DescData[]
+    ])
+
+    const fileList = ref<FileItem[]>()
+    const handleUploadChange = (fileItemList: FileItem[], fileItem: FileItem) => {
+      fileList.value = [fileItem]
+    }
+    const avatarSrc = computed(() => {
+      if (fileList.value) {
+        return fileList.value[0].url
+      }
+      return userStore.userInfo.avatar
+    })
+    const customRequest = (options: RequestOption) => {
+      const controller = new AbortController()
+      ;(async function requestWrap() {
+        const { onError, onSuccess, fileItem, name = 'file' } = options
+        const formData = new FormData()
+        formData.append(name as string, fileItem.file as Blob)
+        try {
+          const res = await userUploadApi(formData)
+          onSuccess(res)
+          Message.success('上传成功')
+        } catch (error) {
+          onError(error)
+        }
+      })()
+      return {
+        abort() {
+          controller.abort()
+        }
+      }
+    }
+
     return () => (
-      <Card bordered={false} class=" rounded">
+      <Card bordered={false} class="rounded">
         <Space size={54}>
           <Upload
             v-slots={{
@@ -40,23 +83,20 @@ export default defineComponent({
                   <Avatar size={100}>
                     {{
                       'trigger-icon': () => <IconCamera />,
-                      default: () => (
-                        <img
-                          src="https://cdn.jsdelivr.net/gh/manyuemeiquqi/my-image-bed/dist/54520846%20(1).jpg"
-                          alt="alt"
-                        />
-                      )
+                      default: () => <img src={avatarSrc.value} alt="alt" />
                     }}
                   </Avatar>
                 </div>
               )
             }}
             showUploadButton={true}
-            listType={'picture-card'}
+            listType="picture-card"
             showFileList={false}
+            onChange={handleUploadChange}
+            customRequest={customRequest}
           />
           <Descriptions
-            layout={'inline-horizontal'}
+            layout="inline-horizontal"
             label-style={{
               width: '140px',
               fontWeight: 'normal',
@@ -67,13 +107,13 @@ export default defineComponent({
               paddingLeft: '8px',
               textAlign: 'left'
             }}
-            align={'right'}
+            align="right"
             column={2}
-            data={userInfoData}
+            data={userInfoData.value as DescData[]}
           >
             {{
               label: ({ label }: { label: string }) => {
-                return t(label) + ' ：'
+                return label
               },
               value: ({ value, data }: { value: string; data: DescData }) => {
                 if (data.label === 'userSetting.label.certification')
