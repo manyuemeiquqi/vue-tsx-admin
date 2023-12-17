@@ -1,11 +1,44 @@
-import { Card, Descriptions, Skeleton } from '@arco-design/web-vue'
-import { defineComponent, ref, type PropType } from 'vue'
+import type { ProfileBasicRes } from '@/api/detail'
+import { Card, Descriptions, Skeleton, type DescData } from '@arco-design/web-vue'
+import { computed, defineComponent, type PropType } from 'vue'
 import { useI18n } from 'vue-i18n'
 
 export default defineComponent({
+  name: 'ProfileItem',
   props: {
     profileData: {
-      type: Object as PropType<any>
+      type: Object as PropType<ProfileBasicRes>,
+      default: () => ({
+        status: 0,
+        video: {
+          mode: '',
+          acquisition: {
+            resolution: '',
+            frameRate: 0
+          },
+          encoding: {
+            resolution: '',
+            rate: {
+              min: 0,
+              max: 0,
+              default: 0
+            },
+            frameRate: 0,
+            profile: ''
+          }
+        },
+        audio: {
+          mode: '',
+          acquisition: {
+            channels: 0
+          },
+          encoding: {
+            channels: 0,
+            rate: 0,
+            profile: ''
+          }
+        }
+      })
     },
     loading: {
       type: Boolean
@@ -13,95 +46,90 @@ export default defineComponent({
   },
   setup(props) {
     const { t } = useI18n()
-    const data = props.profileData
-
-    const blockDataList = ref<
-      {
-        title: string
-        data: {
-          label: string
-          value: string
-        }[]
-      }[]
-    >([])
-
-    // TODO 这里是有问题的，如何监听到 prop 的响应式变化从而更新渲染状态
-    blockDataList.value.push({
-      title: t(`basicProfile.title.preVideo`),
-      data: [
-        {
-          label: t('basicProfile.label.video.mode'),
-          value: data?.video?.mode || '-'
-        },
-        {
-          label: t('basicProfile.label.video.acquisition.resolution'),
-          value: data?.video?.acquisition.resolution || '-'
-        },
-        {
-          label: t('basicProfile.label.video.acquisition.frameRate'),
-          value: `${data?.video?.acquisition.frameRate || '-'} fps`
-        },
-        {
-          label: t('basicProfile.label.video.encoding.resolution'),
-          value: data?.video?.encoding.resolution || '-'
-        },
-        {
-          label: t('basicProfile.label.video.encoding.rate.min'),
-          value: `${data?.video?.encoding.rate.min || '-'} bps`
-        },
-        {
-          label: t('basicProfile.label.video.encoding.rate.max'),
-          value: `${data?.video?.encoding.rate.max || '-'} bps`
-        },
-        {
-          label: t('basicProfile.label.video.encoding.rate.default'),
-          value: `${data?.video?.encoding.rate.default || '-'} bps`
-        },
-        {
-          label: t('basicProfile.label.video.encoding.frameRate'),
-          value: `${data?.video?.encoding.frameRate || '-'} fpx`
-        },
-        {
-          label: t('basicProfile.label.video.encoding.profile'),
-          value: data?.video?.encoding.profile || '-'
-        }
-      ]
+    interface BlockData {
+      title: string
+      descData: DescData[]
+    }
+    const blockDataList = computed(() => {
+      const ret: BlockData[] = []
+      const { video, audio } = props.profileData
+      // assign render data
+      ret.push({
+        title: t(`basicProfile.title.preVideo`),
+        descData: [
+          {
+            label: t('basicProfile.label.video.mode'),
+            value: video?.mode || '-'
+          },
+          {
+            label: t('basicProfile.label.video.acquisition.resolution'),
+            value: video?.acquisition.resolution || '-'
+          },
+          {
+            label: t('basicProfile.label.video.acquisition.frameRate'),
+            value: `${video?.acquisition.frameRate || '-'} fps`
+          },
+          {
+            label: t('basicProfile.label.video.encoding.resolution'),
+            value: video?.encoding.resolution || '-'
+          },
+          {
+            label: t('basicProfile.label.video.encoding.rate.min'),
+            value: `${video?.encoding.rate.min || '-'} bps`
+          },
+          {
+            label: t('basicProfile.label.video.encoding.rate.max'),
+            value: `${video?.encoding.rate.max || '-'} bps`
+          },
+          {
+            label: t('basicProfile.label.video.encoding.rate.default'),
+            value: `${video?.encoding.rate.default || '-'} bps`
+          },
+          {
+            label: t('basicProfile.label.video.encoding.frameRate'),
+            value: `${video?.encoding.frameRate || '-'} fpx`
+          },
+          {
+            label: t('basicProfile.label.video.encoding.profile'),
+            value: video?.encoding.profile || '-'
+          }
+        ]
+      })
+      ret.push({
+        title: t(`basicProfile.title.video`),
+        descData: [
+          {
+            label: t('basicProfile.label.audio.mode'),
+            value: audio?.mode || '-'
+          },
+          {
+            label: t('basicProfile.label.audio.acquisition.channels'),
+            value: `${audio?.acquisition.channels || '-'} ${t('basicProfile.unit.audio.channels')}`
+          },
+          {
+            label: t('basicProfile.label.audio.encoding.channels'),
+            value: `${audio?.encoding.channels || '-'} ${t('basicProfile.unit.audio.channels')}`
+          },
+          {
+            label: t('basicProfile.label.audio.encoding.rate'),
+            value: `${audio?.encoding.rate || '-'} kbps`
+          },
+          {
+            label: t('basicProfile.label.audio.encoding.profile'),
+            value: audio?.encoding.profile || '-'
+          }
+        ]
+      })
+      return ret
     })
 
-    blockDataList.value.push({
-      title: t(`basicProfile.title.video`),
-      data: [
-        {
-          label: t('basicProfile.label.audio.mode'),
-          value: data?.audio?.mode || '-'
-        },
-        {
-          label: t('basicProfile.label.audio.acquisition.channels'),
-          value: `${data?.audio?.acquisition.channels || '-'} ${t(
-            'basicProfile.unit.audio.channels'
-          )}`
-        },
-        {
-          label: t('basicProfile.label.audio.encoding.channels'),
-          value: `${data?.audio?.encoding.channels || '-'} ${t('basicProfile.unit.audio.channels')}`
-        },
-        {
-          label: t('basicProfile.label.audio.encoding.rate'),
-          value: `${data?.audio?.encoding.rate || '-'} kbps`
-        },
-        {
-          label: t('basicProfile.label.audio.encoding.profile'),
-          value: data?.audio?.encoding.profile || '-'
-        }
-      ]
-    })
     return () => (
       <Card class="general-card">
         <div class="pt-5">
           {blockDataList.value.map((item) => (
             <Descriptions
               title={item.title}
-              data={item.data}
+              data={item.descData}
               label-style={{
                 textAlign: 'right',
                 width: '200px',

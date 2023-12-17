@@ -1,10 +1,11 @@
 import { queryOperationLog, type operationLogRes } from '@/api/detail'
 import useLoading from '@/hooks/loading'
-import { Card, Table, Badge, Button, Spin } from '@arco-design/web-vue'
+import { Badge, Button, Card, Spin, Table } from '@arco-design/web-vue'
 import { defineComponent, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 
 export default defineComponent({
+  name: 'DataUpdateRecord',
   setup() {
     const { t } = useI18n()
     const { loading, setLoading } = useLoading(true)
@@ -12,10 +13,9 @@ export default defineComponent({
     const fetchData = async () => {
       try {
         const { data } = await queryOperationLog()
-        // 先暂时这么写
         tableData.value = data
       } catch (err) {
-        // you can report use errorHandler or other
+        /* empty */
       } finally {
         setLoading(false)
       }
