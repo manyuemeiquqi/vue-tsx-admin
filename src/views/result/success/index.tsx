@@ -1,5 +1,5 @@
 import CardLayout from '@/components/card-layout'
-import { Space, Button, Typography, Link, Result, Steps } from '@arco-design/web-vue'
+import { Button, Result, Space, Steps, Typography } from '@arco-design/web-vue'
 import { computed, defineComponent } from 'vue'
 import { useI18n } from 'vue-i18n'
 export default defineComponent({
@@ -36,25 +36,19 @@ export default defineComponent({
           <Result
             title={t('success.result.title')}
             subtitle={t('success.result.subTitle')}
-            status={'success'}
+            status="success"
           >
             {{
               extra: () => (
-                <Space size={'medium'}>
-                  <Button type={'secondary'}>{t('success.result.printResult')}</Button>
-                  <Button type={'primary'}>{t('success.result.projectList')}</Button>
+                <Space size="medium">
+                  <Button type="secondary">{t('success.result.printResult')}</Button>
+                  <Button type="primary">{t('success.result.projectList')}</Button>
                 </Space>
               ),
               default: () => (
-                <div
-                  class="bg-[rgb(var(--gray-1))]
-                   mt-10
-                   min-w-fit
-                   p-5
-                "
-                >
+                <div class={['bg-[rgb(var(--gray-1))]', 'mt-10', 'min-w-fit', 'p-5']}>
                   <Typography.Paragraph>{t('success.result.progress')}</Typography.Paragraph>
-                  <Steps type={'dot'} current={2}>
+                  <Steps type="dot" current={2}>
                     {stepList.value.map((item) => {
                       return (
                         <Steps.Step title={item.title} description={item.description}></Steps.Step>

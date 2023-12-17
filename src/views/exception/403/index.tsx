@@ -7,10 +7,10 @@ export default defineComponent({
     const { t } = useI18n()
     return () => (
       <div class="content-wrapper">
-        <Result status={'403'} subtitle={t('exception.result.403.description')}>
+        <Result status="403" subtitle={t('exception.result.403.description')}>
           {{
             extra: () => (
-              <Space size={'medium'}>
+              <Space size="medium">
                 <Button type="primary">{t('exception.result.403.back')}</Button>
               </Space>
             )

@@ -1,5 +1,5 @@
 import CardLayout from '@/components/card-layout'
-import { Space, Button, Typography, Link, Result } from '@arco-design/web-vue'
+import { Button, Link, Result, Space, Typography } from '@arco-design/web-vue'
 import { IconLink } from '@arco-design/web-vue/es/icon'
 import { defineComponent } from 'vue'
 import { useI18n } from 'vue-i18n'
@@ -12,25 +12,19 @@ export default defineComponent({
         <CardLayout>
           <Result
             class="!px-32"
-            status={'error'}
+            status="error"
             title={t('error.result.title')}
             subtitle={t('error.result.subTitle')}
           >
             {{
               extra: () => (
-                <Space size={'medium'}>
-                  <Button type={'secondary'}>{t('error.result.goBack')}</Button>
-                  <Button type={'primary'}>{t('error.result.retry')}</Button>
+                <Space size="medium">
+                  <Button type="secondary">{t('error.result.goBack')}</Button>
+                  <Button type="primary">{t('error.result.retry')}</Button>
                 </Space>
               ),
               default: () => (
-                <div
-                  class="bg-[rgb(var(--gray-1))]
-                mt-10
-                min-w-fit
-                p-5
-             "
-                >
+                <div class={['bg-[rgb(var(--gray-1))]', 'mt-10', 'min-w-fit', 'p-5']}>
                   <Typography.Title heading={6}>{t('error.detailTitle')}</Typography.Title>
                   <Typography.Paragraph>
                     <ol>
