@@ -1,35 +1,51 @@
+import type { BasicInfoModel } from '@/api/user'
 import {
-  Form,
-  Space,
   Button,
-  type FormInstance,
-  Message,
-  Input,
   Cascader,
+  Form,
+  Input,
+  Message,
   Select,
-  Textarea
+  Space,
+  Textarea,
+  type FormInstance
 } from '@arco-design/web-vue'
+import { isEmpty } from 'lodash'
 import { defineComponent, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 export default defineComponent({
   setup() {
     const { t } = useI18n()
-    const formData = {}
     const formRef = ref<FormInstance>()
+    const formData = ref<BasicInfoModel>({
+      email: '',
+      nickname: '',
+      countryRegion: '',
+      area: '',
+      address: '',
+      profile: ''
+    })
+
+    // actions
     const handleReset = () => {
       formRef.value?.resetFields()
     }
-
     const handleSave = async () => {
       try {
-        await formRef.value?.validate()
-        Message.success('userSetting.saveSuccess')
+        const validRet = await formRef.value?.validate()
+        if (isEmpty(validRet)) Message.success('保存成功')
       } catch (e) {
         /* empty */
       }
     }
     return () => (
-      <Form ref={formRef} model={formData}>
+      <Form
+        class={['w-[500px]', 'mx-auto', 'my-0']}
+        ref={formRef}
+        model={formData}
+        labelColProps={{ span: 8 }}
+        wrapperColProps={{ span: 16 }}
+      >
         <Form.Item
           label={t('userSetting.basicInfo.form.label.email')}
           field="email"
@@ -41,11 +57,16 @@ export default defineComponent({
             }
           ]}
         >
-          {<Input placeholder={t('userSetting.basicInfo.placeholder.email')} />}
+          {
+            <Input
+              v-model={formData.value.email}
+              placeholder={t('userSetting.basicInfo.placeholder.email')}
+            />
+          }
         </Form.Item>
         <Form.Item
           label={t('userSetting.basicInfo.form.label.nickname')}
-          field="nickName"
+          field="nickname"
           rules={[
             {
               required: true,
@@ -53,7 +74,12 @@ export default defineComponent({
             }
           ]}
         >
-          {<Input placeholder={t('userSetting.basicInfo.placeholder.nickname')} />}
+          {
+            <Input
+              v-model={formData.value.nickname}
+              placeholder={t('userSetting.basicInfo.placeholder.nickname')}
+            />
+          }
         </Form.Item>
         <Form.Item
           label={t('userSetting.basicInfo.form.label.countryRegion')}
@@ -67,6 +93,7 @@ export default defineComponent({
         >
           {
             <Select
+              v-model={formData.value.countryRegion}
               options={[
                 {
                   label: '中国',
@@ -89,6 +116,7 @@ export default defineComponent({
         >
           {
             <Cascader
+              v-model={formData.value.area}
               placeholder={t('userSetting.basicInfo.placeholder.area')}
               options={[
                 {
@@ -124,7 +152,10 @@ export default defineComponent({
           }
         </Form.Item>
         <Form.Item label={t('userSetting.basicInfo.form.label.address')} field="address">
-          <Input placeholder={t('userSetting.basicInfo.placeholder.address')} />
+          <Input
+            v-model={formData.value.address}
+            placeholder={t('userSetting.basicInfo.placeholder.address')}
+          />
           {/* {loading ? loadingNode() : <Input placeholder="请输入您的地址" />} */}
         </Form.Item>
         <Form.Item
@@ -137,7 +168,10 @@ export default defineComponent({
           ]}
           field="profile"
         >
-          <Textarea placeholder={t('userSetting.basicInfo.placeholder.profile')} />
+          <Textarea
+            v-model={formData.value.profile}
+            placeholder={t('userSetting.basicInfo.placeholder.profile')}
+          />
         </Form.Item>
         <Form.Item label="">
           <Space>
