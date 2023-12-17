@@ -1,13 +1,13 @@
 import { useUserStore } from '@/store'
-import { Link, List, Space, Typography } from '@arco-design/web-vue'
-import { defineComponent } from 'vue'
+import { Link, List, Typography } from '@arco-design/web-vue'
+import { computed, defineComponent } from 'vue'
 import { useI18n } from 'vue-i18n'
-
+import styles from './style.module.scss'
 export default defineComponent({
   setup() {
     const { t } = useI18n()
-    const userInfo = useUserStore()
-    const data = [
+    const userStore = useUserStore()
+    const settingList = computed(() => [
       {
         title: t('userSetting.security.password'),
         value: t('userSetting.security.password.tips')
@@ -19,33 +19,38 @@ export default defineComponent({
       },
       {
         title: t('userSetting.security.phone'),
-        value: userInfo.phone ? `${t('userSetting.security.phone.tips')} ${userInfo.phone}` : ''
+        value: userStore.userInfo.phone
+          ? `${t('userSetting.security.phone.tips')} ${userStore.userInfo.phone}`
+          : ''
       },
       {
         title: t('userSetting.security.email'),
         value: '',
         placeholder: t('userSetting.security.email.placeholder')
       }
-    ]
+    ])
+
     return () => (
       <div>
-        <List bordered={false}>
-          {data.map((item) => (
+        <List split={false} bordered={false}>
+          {settingList.value.map((item) => (
             <List.Item>
-              <List.Item.Meta>
+              <List.Item.Meta class={[styles['list-item']]}>
                 {{
                   avatar: () => <Typography.Paragraph>{item.title}</Typography.Paragraph>,
                   description: () => (
-                    <div class="flex ">
-                      <Typography.Paragraph>
+                    <>
+                      <Typography.Paragraph class={[!item.value && 'text-[rgb(var(--gray-6))]']}>
                         {item.value ? item.value : item.placeholder}
                       </Typography.Paragraph>
-                      {item.value ? (
-                        <Link>{t('userSetting.SecuritySettings.button.update')}</Link>
-                      ) : (
-                        <Link>{t('userSetting.SecuritySettings.button.settings')}</Link>
-                      )}
-                    </div>
+                      <Typography.Paragraph>
+                        {item.value ? (
+                          <Link>{t('userSetting.SecuritySettings.button.update')}</Link>
+                        ) : (
+                          <Link>{t('userSetting.SecuritySettings.button.settings')}</Link>
+                        )}
+                      </Typography.Paragraph>
+                    </>
                   )
                 }}
               </List.Item.Meta>
