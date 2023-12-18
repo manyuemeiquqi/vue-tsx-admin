@@ -31,6 +31,13 @@ const useUserStore = defineStore(StoreName.user, {
     },
     resetUserInfo() {
       this.$reset()
+    },
+
+    switchRoles() {
+      return new Promise<string>((resolve) => {
+        this.role = this.role === 'user' ? 'admin' : 'user'
+        resolve(this.role)
+      })
     }
   }
 })
