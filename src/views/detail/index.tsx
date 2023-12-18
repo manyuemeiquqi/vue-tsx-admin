@@ -18,7 +18,6 @@ export default defineComponent({
     ])
 
     const { loading, setLoading } = useLoading(true)
-    const { loading: preLoading, setLoading: preSetLoading } = useLoading(true)
     const currentData = ref<ProfileBasicRes>()
     const preData = ref<ProfileBasicRes>()
 
@@ -38,7 +37,6 @@ export default defineComponent({
       } catch (error) {
         /* empty */
       } finally {
-        preSetLoading(false)
         setLoading(false)
       }
     }
@@ -64,7 +62,7 @@ export default defineComponent({
             }}
           </Card>
           <ProfileItem loading={loading.value} profileData={currentData.value}></ProfileItem>
-          <ProfileItem loading={preLoading.value} profileData={preData.value}></ProfileItem>
+          <ProfileItem loading={loading.value} profileData={preData.value}></ProfileItem>
           <DataUpdateRecord></DataUpdateRecord>
         </Space>
       </div>
