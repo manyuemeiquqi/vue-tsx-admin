@@ -30,26 +30,27 @@ export default defineComponent({
           extra: () => <Link>{t('userInfo.viewAll')}</Link>,
           default: () => (
             <List bordered={false}>
-              {fillList.map(() => (
-                <Skeleton loading={loading.value} animation>
-                  <Grid.Row gutter={6}>
-                    <Grid.Col span={2}>
-                      <Skeleton.Shape shape="circle"></Skeleton.Shape>
-                    </Grid.Col>
-                    <Grid.Col span={22}>
-                      <Skeleton.Line widths={['40%', '100%']} rows={2}></Skeleton.Line>
-                    </Grid.Col>
-                  </Grid.Row>
-                </Skeleton>
-              ))}
-              {activityList.value.map((item, index) => (
-                <ActivityItem
-                  key={index}
-                  avatar={item.avatar}
-                  title={item.title}
-                  description={item.description}
-                />
-              ))}
+              {loading.value
+                ? fillList.map(() => (
+                    <Skeleton loading={loading.value} animation class="mb-4">
+                      <Grid.Row gutter={6}>
+                        <Grid.Col span={2}>
+                          <Skeleton.Shape shape="circle"></Skeleton.Shape>
+                        </Grid.Col>
+                        <Grid.Col span={22}>
+                          <Skeleton.Line widths={['40%', '100%']} rows={2}></Skeleton.Line>
+                        </Grid.Col>
+                      </Grid.Row>
+                    </Skeleton>
+                  ))
+                : activityList.value.map((item, index) => (
+                    <ActivityItem
+                      key={index}
+                      avatar={item.avatar}
+                      title={item.title}
+                      description={item.description}
+                    />
+                  ))}
             </List>
           )
         }}
