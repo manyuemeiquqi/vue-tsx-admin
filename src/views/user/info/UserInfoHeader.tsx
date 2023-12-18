@@ -1,18 +1,14 @@
 import { useUserStore } from '@/store'
-import { Avatar, Skeleton, Space, Typography } from '@arco-design/web-vue'
+import { Avatar, Space, Typography } from '@arco-design/web-vue'
 import { IconCamera, IconHome, IconLocation, IconUser } from '@arco-design/web-vue/es/icon'
 import { defineComponent } from 'vue'
 export default defineComponent({
+  name: 'UserInfoHeader',
   setup() {
-    const loadingNode = <Skeleton></Skeleton>
-    const loadingImgNode = <Skeleton></Skeleton>
-    const userInfo = useUserStore()
-    // 这里userInfo 是否要保持响应式，需要测试
+    const { userInfo } = useUserStore()
     return () => (
       <div
-        class="h-52
-         flex items-center justify-center
-      "
+        class={['h-52', 'flex', 'items-center', 'justify-center ']}
         style={{
           background:
             'url(https://cdn.jsdelivr.net/gh/manyuemeiquqi/my-image-bed/dist/header-banner.fcb7b1aa6ce12d210c85.png) no-repeat',
@@ -34,16 +30,15 @@ export default defineComponent({
           <Typography.Title heading={6}> {userInfo.name}</Typography.Title>
           <Space size={'small'}>
             <div>
-              <IconUser />
-
+              <IconUser class="mr-1" />
               <Typography.Text>{userInfo.jobName}</Typography.Text>
             </div>
             <div>
-              <IconHome />
+              <IconHome class="mr-1" />
               <Typography.Text>{userInfo.organizationName}</Typography.Text>
             </div>
             <div>
-              <IconLocation />
+              <IconLocation class="mr-1" />
               <Typography.Text>{userInfo.locationName}</Typography.Text>
             </div>
           </Space>

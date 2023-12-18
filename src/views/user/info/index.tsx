@@ -9,7 +9,7 @@ export default defineComponent({
   setup() {
     return () => (
       <div>
-        <UserInfoHeader />
+        <UserInfoHeader class="mb-4" />
         <Grid.Row gutter={16}>
           <Grid.Col span={16}>
             <Space direction="vertical" fill size={'medium'}>

@@ -14,6 +14,7 @@ import { useI18n } from 'vue-i18n'
 import AddCard from './AddCard'
 
 export default defineComponent({
+  name: 'RulesPreset',
   setup() {
     const cardList = ref<ServiceRecord[]>([])
     const fetchData = async () => {
@@ -36,12 +37,16 @@ export default defineComponent({
                 xxl: 6
               }}
             >
-              <Card>
+              <Card hoverable>
                 {{
                   default: () => (
                     <Card.Meta>
                       {{
-                        title: () => <Typography.Text>{item.title}</Typography.Text>,
+                        title: () => (
+                          <>
+                            <Typography.Text>{item.title}</Typography.Text>
+                          </>
+                        ),
                         description: () => (
                           <>
                             {item.description}

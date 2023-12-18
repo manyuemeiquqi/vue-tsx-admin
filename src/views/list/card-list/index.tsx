@@ -6,11 +6,12 @@ import TheService from './TheService'
 
 import RulesPreset from './RulesPreset'
 export default defineComponent({
+  name: 'CardList',
   setup() {
     const { t } = useI18n()
     const tabList = [
       {
-        title: t('cardList.tab.title.all'),
+        getTitle: () => t('cardList.tab.title.all'),
         value: 1,
         pane: (
           <>
@@ -21,7 +22,7 @@ export default defineComponent({
         )
       },
       {
-        title: t('cardList.tab.title.content'),
+        getTitle: () => t('cardList.tab.title.content'),
         value: 2,
 
         pane: (
@@ -31,7 +32,7 @@ export default defineComponent({
         )
       },
       {
-        title: t('cardList.tab.title.service'),
+        getTitle: () => t('cardList.tab.title.service'),
         value: 3,
         pane: (
           <>
@@ -40,7 +41,7 @@ export default defineComponent({
         )
       },
       {
-        title: t('cardList.tab.title.preset'),
+        getTitle: () => t('cardList.tab.title.preset'),
         value: 4,
         pane: (
           <>
@@ -64,7 +65,7 @@ export default defineComponent({
           }}
         >
           {tabList.map((tab) => (
-            <Tabs.TabPane key={tab.value} title={tab.title}>
+            <Tabs.TabPane key={tab.value} title={tab.getTitle()}>
               {tab.pane}
             </Tabs.TabPane>
           ))}

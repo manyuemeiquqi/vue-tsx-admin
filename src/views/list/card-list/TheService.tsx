@@ -17,6 +17,7 @@ import AddCard from './AddCard'
 import { IconCheckCircleFill, IconFilter } from '@arco-design/web-vue/es/icon'
 
 export default defineComponent({
+  name: 'TheService',
   setup() {
     const cardList = ref<ServiceRecord[]>([])
     const fetchData = async () => {

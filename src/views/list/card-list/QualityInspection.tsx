@@ -5,6 +5,7 @@ import { useI18n } from 'vue-i18n'
 import AddCard from './AddCard'
 
 export default defineComponent({
+  name: 'QualityInspection',
   setup() {
     const cardList = ref<ServiceRecord[]>([])
     const fetchData = async () => {

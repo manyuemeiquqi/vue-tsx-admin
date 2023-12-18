@@ -6,6 +6,7 @@ export default defineComponent({
   setup() {
     const { t } = useI18n()
     const { loading, setLoading } = useLoading(true)
+    // just mock
     setTimeout(() => {
       setLoading(false)
     }, 500)
