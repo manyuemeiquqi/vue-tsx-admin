@@ -1,4 +1,4 @@
-import type { GroupFormModel } from '@/api/form'
+import { submitGroupForm, type GroupFormModel } from '@/api/form'
 import useLoading from '@/hooks/loading'
 import {
   Button,
@@ -6,11 +6,14 @@ import {
   Form,
   Grid,
   Input,
+  InputNumber,
+  Message,
   Select,
   Space,
   Textarea,
   type FormInstance
 } from '@arco-design/web-vue'
+import { isEmpty } from 'lodash'
 import { defineComponent, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 export default defineComponent({
@@ -20,45 +23,51 @@ export default defineComponent({
     const { loading, setLoading } = useLoading()
 
     const formRef = ref<FormInstance>()
-    const formData = ref<GroupFormModel>({
+    const formData = ref({
       video: {
-        mode: '',
+        mode: undefined,
         acquisition: {
-          resolution: '',
-          frameRate: 0
+          resolution: undefined,
+          frameRate: undefined
         },
         encoding: {
-          resolution: '',
+          resolution: undefined,
           rate: {
-            min: 0,
-            max: 0,
-            default: 0
+            min: undefined,
+            max: undefined,
+            default: undefined
           },
-          frameRate: 0,
-          profile: ''
+          frameRate: undefined,
+          profile: undefined
         }
       },
       audio: {
-        mode: '',
+        mode: undefined,
         acquisition: {
-          channels: 0
+          channels: undefined
         },
-        explanation: '',
+        explanation: undefined,
         encoding: {
-          channels: 0,
-          rate: 0,
-          profile: ''
+          channels: undefined,
+          rate: undefined,
+          profile: undefined
         }
       }
     })
     const handleSubmit = async () => {
-      const res = await formRef.value?.validate()
-      if (!res) {
-        setLoading(true)
-      }
-      setTimeout(() => {
-        setLoading(false)
-      }, 1000)
+      formRef.value?.validate().then((errors) => {
+        if (isEmpty(errors)) {
+          try {
+            setLoading(true)
+            submitGroupForm(formData.value as unknown as GroupFormModel)
+            Message.success('提交成功')
+          } catch (e) {
+            /* empty */
+          } finally {
+            setLoading(false)
+          }
+        }
+      })
     }
     const handleReset = () => {
       formRef.value?.resetFields()
@@ -66,7 +75,7 @@ export default defineComponent({
 
     return () => (
       <div>
-        <Form layout="vertical" model={formData} ref={formRef}>
+        <Form layout="vertical" model={formData.value} ref={formRef}>
           <Space size="medium" direction="vertical">
             <Card class="general-card" title={t('groupForm.title.video')}>
               <Grid.Row gutter={80}>
@@ -102,11 +111,12 @@ export default defineComponent({
                     label={t('groupForm.form.label.video.acquisition.frameRate')}
                     field="video.acquisition.frameRate"
                   >
-                    <Input
+                    <InputNumber
+                      hideButton
                       v-model={formData.value.video.acquisition.frameRate}
                       placeholder={t('groupForm.placeholder.video.acquisition.frameRate')}
                       v-slots={{
-                        prepend: () => 'fps'
+                        append: () => 'fps'
                       }}
                     />
                   </Form.Item>
@@ -133,11 +143,12 @@ export default defineComponent({
                     label={t('groupForm.form.label.video.encoding.rate.min')}
                     field="video.encoding.rate.min"
                   >
-                    <Input
+                    <InputNumber
+                      hideButton
                       v-model={formData.value.video.encoding.rate.min}
                       placeholder={t('groupForm.placeholder.video.encoding.rate.min')}
                       v-slots={{
-                        prepend: () => 'fps'
+                        append: () => 'bps'
                       }}
                     />
                   </Form.Item>
@@ -147,11 +158,12 @@ export default defineComponent({
                     label={t('groupForm.form.label.video.encoding.rate.max')}
                     field="video.encoding.rate.max"
                   >
-                    <Input
+                    <InputNumber
+                      hideButton
                       v-model={formData.value.video.encoding.rate.max}
                       placeholder={t('groupForm.placeholder.video.encoding.rate.max')}
                       v-slots={{
-                        prepend: () => 'fps'
+                        append: () => 'bps'
                       }}
                     />
                   </Form.Item>
@@ -163,11 +175,12 @@ export default defineComponent({
                     label={t('groupForm.form.label.video.encoding.rate.default')}
                     field="video.encoding.rate.default"
                   >
-                    <Input
+                    <InputNumber
+                      hideButton
                       v-model={formData.value.video.encoding.rate.default}
                       placeholder={t('groupForm.placeholder.video.encoding.rate.default')}
                       v-slots={{
-                        prepend: () => 'fps'
+                        append: () => 'bps'
                       }}
                     />
                   </Form.Item>
@@ -177,11 +190,12 @@ export default defineComponent({
                     label={t('groupForm.form.label.video.encoding.frameRate')}
                     field="video.encoding.frameRate"
                   >
-                    <Input
+                    <InputNumber
+                      hideButton
                       v-model={formData.value.video.encoding.frameRate}
                       placeholder={t('groupForm.placeholder.video.encoding.frameRate')}
                       v-slots={{
-                        prepend: () => 'fps'
+                        append: () => 'fps'
                       }}
                     />
                   </Form.Item>
@@ -195,7 +209,7 @@ export default defineComponent({
                       v-model={formData.value.video.encoding.profile}
                       placeholder={t('groupForm.placeholder.video.encoding.profile')}
                       v-slots={{
-                        prepend: () => 'fps'
+                        append: () => 'bps'
                       }}
                     />
                   </Form.Item>
@@ -225,28 +239,44 @@ export default defineComponent({
                       v-model={formData.value.audio.acquisition.channels}
                       placeholder={t('groupForm.placeholder.audio.acquisition.channels')}
                     >
-                      <Select.Option value="1">1</Select.Option>
-                      <Select.Option value="2">2</Select.Option>
-                      <Select.Option value="3">3</Select.Option>
+                      <Select.Option value={1}>1</Select.Option>
+                      <Select.Option value={2}>2</Select.Option>
+                      <Select.Option value={3}>3</Select.Option>
                     </Select>
                   </Form.Item>
                 </Grid.Col>
                 <Grid.Col span={8}>
                   <Form.Item
-                    label={t('groupForm.form.label.audio.encoding.rate')}
-                    field="audio.encoding.rate"
+                    label={t('groupForm.form.label.audio.encoding.channels')}
+                    field="audio.encoding.channels"
                   >
-                    <Input
-                      v-model={formData.value.audio.encoding.rate}
-                      placeholder={t('groupForm.placeholder.audio.encoding.rate')}
+                    <InputNumber
+                      hideButton
+                      v-model={formData.value.audio.encoding.channels}
+                      placeholder={t('groupForm.placeholder.audio.encoding.channels')}
                       v-slots={{
-                        prepend: () => 'fps'
+                        append: () => 'bps'
                       }}
                     />
                   </Form.Item>
                 </Grid.Col>
               </Grid.Row>
               <Grid.Row gutter={80}>
+                <Grid.Col span={8}>
+                  <Form.Item
+                    label={t('groupForm.form.label.audio.encoding.rate')}
+                    field="audio.encoding.rate"
+                  >
+                    <InputNumber
+                      hideButton
+                      v-model={formData.value.audio.encoding.rate}
+                      placeholder={t('groupForm.placeholder.audio.encoding.rate')}
+                      v-slots={{
+                        append: () => 'bps'
+                      }}
+                    />
+                  </Form.Item>
+                </Grid.Col>
                 <Grid.Col span={8}>
                   <Form.Item
                     label={t('groupForm.form.label.audio.encoding.profile')}
@@ -256,7 +286,7 @@ export default defineComponent({
                       v-model={formData.value.audio.encoding.profile}
                       placeholder={t('groupForm.placeholder.audio.encoding.profile')}
                       v-slots={{
-                        prepend: () => 'fps'
+                        append: () => 'fps'
                       }}
                     />
                   </Form.Item>
@@ -284,7 +314,7 @@ export default defineComponent({
             'right-0',
             'text-right',
             'p-5',
-            'bg-[color:var(--color-bg-2)'
+            'bg-[color:var(--color-bg-2)]'
           ]}
         >
           <Space>

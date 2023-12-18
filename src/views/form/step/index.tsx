@@ -1,4 +1,5 @@
-import type { UnitChannelModel } from '@/api/form'
+import { submitChannelForm, type UnitChannelModel } from '@/api/form'
+import useLoading from '@/hooks/loading'
 import {
   Button,
   Card,
@@ -6,33 +7,69 @@ import {
   Form,
   Input,
   InputTag,
+  Message,
   Result,
   Select,
   Space,
   Steps,
   Switch,
   Textarea,
-  Typography
+  Typography,
+  type FormInstance
 } from '@arco-design/web-vue'
+import { isEmpty } from 'lodash'
 import { defineComponent, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 
 export default defineComponent({
   name: 'Step',
   setup() {
+    const { loading, setLoading } = useLoading(false)
     const { t } = useI18n()
     const current = ref(1)
-    const formData = ref<UnitChannelModel>({
+    const getDefaultFormData = () => ({
       activityName: '',
       channelType: '',
       promotionTime: [],
-      promoteLink: 'https://arco.design',
+      promoteLink: 'https://github.com/',
       advertisingSource: '',
       advertisingMedia: '',
       keyword: [],
       pushNotify: true,
       advertisingContent: ''
     })
+    const formData = ref<UnitChannelModel>(getDefaultFormData())
+    const formRef = ref<FormInstance>()
+
+    // form actions
+    const handlePrev = () => {
+      current.value--
+    }
+    const handleNext = async () => {
+      try {
+        setLoading(true)
+        const errors = await formRef.value?.validate()
+        if (isEmpty(errors)) {
+          if (current.value === 2) {
+            await submitChannelForm(formData.value)
+            Message.success('提交成功')
+          }
+          current.value++
+        }
+      } catch (e) {
+        /* empty */
+      } finally {
+        setLoading(false)
+      }
+    }
+    const viewForm = () => {
+      current.value = 1
+    }
+    const recreateForm = () => {
+      formData.value = getDefaultFormData()
+      current.value = 1
+    }
+
     return () => (
       <Card class="general-card " title={t('stepForm.desc.basicInfo')}>
         <div class={['flex', 'items-center', 'flex-col']}>
@@ -52,8 +89,9 @@ export default defineComponent({
           </Steps>
           <Form
             class="max-w-lg"
-            labelColProps={{ span: 6 }}
-            wrapperColProps={{ span: 18 }}
+            ref={formRef}
+            labelColProps={{ span: 8 }}
+            wrapperColProps={{ span: 16 }}
             model={formData.value}
           >
             {current.value === 1 && (
@@ -113,6 +151,7 @@ export default defineComponent({
                   ]}
                 >
                   <DatePicker.RangePicker
+                    class="w-full"
                     v-model={formData.value.promotionTime}
                     style={{ width: '100%' }}
                   />
@@ -190,6 +229,10 @@ export default defineComponent({
                     {
                       required: true,
                       message: t('stepForm.channel.content.required')
+                    },
+                    {
+                      maxLength: 200,
+                      message: t('stepForm.form.error.advertisingContent.maxLength')
                     }
                   ]}
                 >
@@ -204,17 +247,17 @@ export default defineComponent({
               <Form.Item label=" ">
                 <Space>
                   {current.value === 2 && (
-                    <Button
-                      size="large"
-                      onClick={() => {
-                        current.value--
-                      }}
-                    >
+                    <Button size="large" onClick={handlePrev}>
                       {t('stepForm.prev')}
                     </Button>
                   )}
                   {current.value !== 3 && (
-                    <Button onClick={() => current.value++} type="primary" size="large">
+                    <Button
+                      loading={loading.value}
+                      onClick={handleNext}
+                      type="primary"
+                      size="large"
+                    >
                       {t('stepForm.next')}
                     </Button>
                   )}
@@ -230,10 +273,10 @@ export default defineComponent({
                   {{
                     extra: () => (
                       <Space size="medium">
-                        <Button key="reset" style={{ marginRight: 16 }} onClick={() => {}}>
+                        <Button key="reset" class="mr-4" onClick={viewForm}>
                           {t('stepForm.created.success.view')}
                         </Button>
-                        <Button key="again" type="primary" onClick={() => {}}>
+                        <Button key="again" type="primary" onClick={recreateForm}>
                           {t('stepForm.created.success.again')}
                         </Button>
                       </Space>
@@ -245,13 +288,7 @@ export default defineComponent({
           </Form>
           {current.value === 3 && (
             <div
-              style={{
-                width: '895px',
-                marginTop: '54px',
-                padding: '20px',
-                textAlign: 'left',
-                backgroundColor: 'var(--color-fill-2)'
-              }}
+              class={['w-[895px]', 'text-left', 'bg-[color:var(--color-fill-2)]', 'p-5', 'mt-14']}
             >
               <Typography.Title heading={6}>{t('stepForm.created.extra.title')}</Typography.Title>
               <Typography.Paragraph>
