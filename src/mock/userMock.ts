@@ -15,7 +15,7 @@ setupMock({
           avatar: 'https://cdn.jsdelivr.net/gh/manyuemeiquqi/my-image-bed/dist/54520846%20(1).jpg',
           email: 'wangliqun@email.com',
           job: 'frontend',
-          jobName: '前端艺术家',
+          jobName: '前端开发',
           organization: 'Frontend',
           organizationName: '前端',
           location: 'hangzhou',
