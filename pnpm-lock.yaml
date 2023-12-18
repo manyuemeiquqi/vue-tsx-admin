@@ -38,6 +38,9 @@ dependencies:
   query-string:
     specifier: ^8.1.0
     version: 8.1.0
+  sortablejs:
+    specifier: ^1.15.1
+    version: 1.15.1
   vue:
     specifier: ^3.3.4
     version: 3.3.4
@@ -3887,6 +3890,10 @@ packages:
       ansi-styles: 6.2.1
       is-fullwidth-code-point: 5.0.0
     dev: true
+
+  /sortablejs@1.15.1:
+    resolution: {integrity: sha512-P5Cjvb0UG1ZVNiDPj/n4V+DinttXG6K8n7vM/HQf0C25K3YKQTQY6fsr/sEGsJGpQ9exmPxluHxKBc0mLKU1lQ==}
+    dev: false
 
   /source-map-js@1.0.2:
     resolution: {integrity: sha512-R0XvVJ9WusLiqTCEiGCmICCMplcCkIwwR11mOSD9CR5u+IXYdiseeEuXCVAjS54zqwkLcPNnmU4OeJ6tUrWhDw==}
