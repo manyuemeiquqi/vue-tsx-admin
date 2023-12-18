@@ -157,7 +157,6 @@ export default defineComponent({
             v-model={formData.value.address}
             placeholder={t('userSetting.basicInfo.placeholder.address')}
           />
-          {/* {loading ? loadingNode() : <Input placeholder="请输入您的地址" />} */}
         </Form.Item>
         <Form.Item
           label={t('userSetting.basicInfo.form.label.profile')}

@@ -36,7 +36,7 @@ export default defineComponent({
         <Grid.Row>
           <Grid.Col span={24} class="mt-4">
             <Card class="general-card pt-5">
-              <Tabs type="rounded" defaultActiveKey={'1'}>
+              <Tabs type="rounded" defaultActiveKey="1">
                 {componentList.map((item) => {
                   return (
                     <Tabs.TabPane key={item.key} title={item.getTitle()}>

@@ -40,9 +40,11 @@ export default defineComponent({
               <Grid cols={{ xs: 2, sm: 2, md: 2, lg: 2, xl: 3, xxl: 3 }} colGap={16} rowGap={16}>
                 {loading.value
                   ? fillList.map(() => (
-                      <Skeleton loading={loading.value} animation>
-                        <Skeleton.Line rows={3}></Skeleton.Line>
-                      </Skeleton>
+                      <Card>
+                        <Skeleton loading={loading.value} animation>
+                          <Skeleton.Line rows={3}></Skeleton.Line>
+                        </Skeleton>
+                      </Card>
                     ))
                   : dataSource.value.map((item) => (
                       <Card>
