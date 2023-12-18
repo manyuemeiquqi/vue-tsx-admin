@@ -64,7 +64,8 @@ export default defineComponent({
     return () => (
       <div
         style={{
-          borderBottom: '1px solid var(--color-border)'
+          borderBottom: '1px solid var(--color-border)',
+          minWidth: '1100px'
         }}
         class="flex  w-full fixed h-16 justify-between
          items-center
