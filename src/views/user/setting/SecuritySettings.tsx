@@ -4,6 +4,7 @@ import { computed, defineComponent } from 'vue'
 import { useI18n } from 'vue-i18n'
 import styles from './style.module.scss'
 export default defineComponent({
+  name: 'SecuritySettings',
   setup() {
     const { t } = useI18n()
     const userStore = useUserStore()

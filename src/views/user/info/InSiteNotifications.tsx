@@ -3,6 +3,7 @@ import { Card, Result, Skeleton } from '@arco-design/web-vue'
 import { defineComponent } from 'vue'
 import { useI18n } from 'vue-i18n'
 export default defineComponent({
+  name: 'InSiteNotifications',
   setup() {
     const { t } = useI18n()
     const { loading, setLoading } = useLoading(true)

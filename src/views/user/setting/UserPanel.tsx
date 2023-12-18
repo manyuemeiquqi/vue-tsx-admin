@@ -16,6 +16,7 @@ import { IconCamera } from '@arco-design/web-vue/es/icon'
 import { computed, defineComponent, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 export default defineComponent({
+  name: 'UserPanel',
   setup() {
     const { t } = useI18n()
     const userStore = useUserStore()

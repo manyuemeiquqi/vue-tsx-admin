@@ -14,6 +14,7 @@ import { isEmpty } from 'lodash'
 import { defineComponent, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 export default defineComponent({
+  name: 'BasicInformation',
   setup() {
     const { t } = useI18n()
     const formRef = ref<FormInstance>()

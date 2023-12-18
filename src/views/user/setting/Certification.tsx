@@ -14,6 +14,7 @@ import type { DescData } from '@arco-design/web-vue/es/descriptions/interface'
 import { computed, defineComponent, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 export default defineComponent({
+  name: 'Certification',
   setup() {
     const { t } = useI18n()
 

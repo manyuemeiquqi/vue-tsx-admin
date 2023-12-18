@@ -1,11 +1,12 @@
-import { Card, Grid, Space } from '@arco-design/web-vue'
-import { defineComponent } from 'vue'
-import UserInfoHeader from '@/views/user/info/UserInfoHeader'
 import InSiteNotifications from '@/views/user/info/InSiteNotifications'
 import LatestActivities from '@/views/user/info/LatestActivities'
-import MyTeam from '@/views/user/info/MyTeam'
 import MyProject from '@/views/user/info/MyProject'
+import MyTeam from '@/views/user/info/MyTeam'
+import UserInfoHeader from '@/views/user/info/UserInfoHeader'
+import { Grid, Space } from '@arco-design/web-vue'
+import { defineComponent } from 'vue'
 export default defineComponent({
+  name: 'Info',
   setup() {
     return () => (
       <div>
@@ -19,7 +20,7 @@ export default defineComponent({
           </Grid.Col>
           <Grid.Col span={8}>
             <Space direction="vertical" fill size={'medium'}>
-              <MyTeam></MyTeam>
+              <MyTeam />
               <InSiteNotifications />
             </Space>
           </Grid.Col>

@@ -6,6 +6,7 @@ import Certification from './Certification'
 import SecuritySettings from './SecuritySettings'
 import UserPanel from './UserPanel'
 export default defineComponent({
+  name: 'Setting',
   setup() {
     const { t } = useI18n()
     const componentList = [
