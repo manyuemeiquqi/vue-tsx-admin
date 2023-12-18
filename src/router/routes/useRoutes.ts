@@ -4,7 +4,6 @@ import ResultRoutes from '@/router/routes/modules/result'
 import UserRoutes from '@/router/routes/modules/user'
 import FormRoutes from '@/router/routes/modules/form'
 import dashboard from '@/router/routes/modules/dashboard'
-import visualization from '@/router/routes/modules/visualization'
 import detail from '@/router/routes/modules/detail'
 import nest from '@/router/routes/modules/nest'
 import { computed, toRaw } from 'vue'
@@ -31,8 +30,7 @@ const appClientMenus = [
     UserRoutes,
     FormRoutes,
     dashboard,
-    detail,
-    visualization
+    detail
     // nest
   ]
 ]

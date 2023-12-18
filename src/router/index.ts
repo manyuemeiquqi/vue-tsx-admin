@@ -12,7 +12,6 @@ import NestRoutes from '@/router/routes/modules/nest'
 import ResultRoutes from '@/router/routes/modules/result'
 import FormRoutes from '@/router/routes/modules/form'
 import detail from '@/router/routes/modules/detail'
-import visualization from '@/router/routes/modules/visualization'
 import dashboard from '@/router/routes/modules/dashboard'
 import useUserStore from '@/store/modules/user'
 import { getUserInfo } from '@/api/user'
@@ -69,7 +68,6 @@ const router = createRouter({
     UserRoutes as any,
     FormRoutes as any,
     detail,
-    visualization,
     dashboard,
     NestRoutes
   ]

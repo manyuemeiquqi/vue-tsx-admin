@@ -7,7 +7,6 @@ import login from './zh-CN/login.json'
 import result from './zh-CN/result.json'
 import settings from './zh-CN/settings.json'
 import user from './zh-CN/user.json'
-import visualization from './zh-CN/visualization.json'
 import global from './zh-CN/global.json'
 
 export default {
@@ -21,6 +20,5 @@ export default {
   ...login,
   ...result,
   ...settings,
-  ...user,
-  ...visualization
+  ...user
 }

@@ -7,7 +7,6 @@ import login from './en-US/login.json'
 import result from './en-US/result.json'
 import settings from './en-US/settings.json'
 import user from './en-US/user.json'
-import visualization from './en-US/visualization.json'
 import global from './en-US/global.json'
 
 export default {
@@ -21,6 +20,5 @@ export default {
   ...result,
   ...settings,
   ...user,
-  ...visualization,
   ...global
 }
