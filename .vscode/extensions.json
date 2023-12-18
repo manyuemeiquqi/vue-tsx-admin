@@ -1,3 +1,10 @@
 {
-  "recommendations": ["esbenp.prettier-vscode", "lokalise.i18n-ally"]
+  "recommendations": [
+    "esbenp.prettier-vscode",
+    "lokalise.i18n-ally",
+    "wmaurer.change-case",
+    "formulahendry.auto-rename-tag",
+    "mhutchie.git-graph",
+    "eamodio.gitlens"
+  ]
 }
