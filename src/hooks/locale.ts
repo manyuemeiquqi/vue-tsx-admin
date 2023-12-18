@@ -6,8 +6,11 @@ import { useI18n } from 'vue-i18n'
 /**
  *
  * @desc get project locale state hook
+ * >state flow:
+ * - i18n read storage to init
+ * - proejct read i18n state and prodece reacitve data currentLocale
+ * - update currentLocale with updating storage and i18n stance
  */
-
 export default function useLocale() {
   const i18n = useI18n()
   const currentLocale = computed(() => i18n.locale.value)
