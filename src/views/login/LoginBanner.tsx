@@ -1,12 +1,12 @@
 import { Carousel } from '@arco-design/web-vue'
-import { defineComponent } from 'vue'
+import { computed, defineComponent } from 'vue'
 import { useI18n } from 'vue-i18n'
 
 export default defineComponent({
   setup() {
     const { t } = useI18n()
 
-    const dataList = [
+    const dataList = computed(() => [
       {
         slogan: t('login.banner.slogan3'),
         subSlogan: t('login.banner.subSlogan3'),
@@ -25,10 +25,10 @@ export default defineComponent({
         image:
           'https://cdn.jsdelivr.net/gh/manyuemeiquqi/my-image-bed/dist/%E8%BD%AE%E6%92%AD%E5%9B%BE.png'
       }
-    ]
+    ])
     return () => (
       <Carousel class="h-full" animationName="fade">
-        {dataList.map((item) => {
+        {dataList.value.map((item) => {
           return (
             <Carousel.Item>
               <div class="flex  justify-center items-center  flex-col  h-full">
@@ -40,14 +40,10 @@ export default defineComponent({
                 >
                   {item.slogan}
                 </div>
-                <div
-                  class="text-[color:var(--color-text-3)]  mt-2
-                 text-sm
-                "
-                >
+                <div class={['text-[color:var(--color-text-3)]', 'mt-2', 'text-sm']}>
                   {item.subSlogan}
                 </div>
-                <img class=" w-80 mt-7" src={item.image} alt="banner-image" />
+                <img class={['w-80', 'mt-7']} src={item.image} alt="banner-image" />
               </div>
             </Carousel.Item>
           )

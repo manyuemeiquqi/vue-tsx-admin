@@ -76,14 +76,14 @@ const router = createRouter({
 })
 // router beforeEach 的是事件注册
 router.beforeEach(async (to, from, next) => {
-  setRouteEmitter(to)
-  const userStore = useUserStore()
-  try {
-    const res = await getUserInfo()
-    userStore.setUserInfo(res.data)
-  } catch (error) {
-    /* empty */
-  }
+  // setRouteEmitter(to)
+  // const userStore = useUserStore()
+  // try {
+  //   const res = await getUserInfo()
+  //   userStore.setUserInfo(res.data)
+  // } catch (error) {
+  //   /* empty */
+  // }
   next()
 })
 export default router

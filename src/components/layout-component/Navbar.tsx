@@ -5,6 +5,7 @@ import {
   Button,
   Dropdown,
   Input,
+  Message,
   Select,
   Space,
   Tooltip,
@@ -13,6 +14,7 @@ import {
 import {
   IconExport,
   IconFullscreen,
+  IconFullscreenExit,
   IconLanguage,
   IconMoonFill,
   IconNotification,
@@ -27,58 +29,38 @@ import { useI18n } from 'vue-i18n'
 import { useFullscreen } from '@vueuse/core'
 import { LocaleOptions } from '@/types/enum'
 import useLocale from '@/hooks/locale'
-import { isString } from 'lodash'
-import { useApplicationStore } from '@/store'
+import { isFunction, isString } from 'lodash'
+import { useApplicationStore, useUserStore } from '@/store'
+import { useRoute, useRouter } from 'vue-router'
+import { logout } from '@/api/user'
+import { removeRouteListener } from '@/utils/routerListener'
+import { clearToken } from '@/utils/auth'
+import { AppRouteName } from '@/utils/routerHelper'
+
+import styles from './style.module.scss'
+import AvatarAndOptions from './AvatarAndOptions'
+import NotificationComponent from './NotificationComponent'
 
 export default defineComponent({
   setup() {
+    const route = useRoute()
     const { isFullscreen, toggle: toggleFullScreen } = useFullscreen()
     const { currentLocale, changeLocale } = useLocale()
     const { t } = useI18n()
     const applicationStore = useApplicationStore()
+    const userStore = useUserStore()
+    const router = useRouter()
 
-    const hanleLocaleChange = (val: unknown) => {
+    const handleLocaleChange = (val: unknown) => {
       if (isString(val)) {
         changeLocale(val)
       }
     }
     const setDropDownVisible = () => {}
-    const setVisible = () => {}
+    const setVisible = () => {
+      applicationStore.updateSettings({ globalSettings: true })
+    }
 
-    const handleLogout = () => {}
-    const dOptionList = [
-      {
-        label: t('messageBox.switchRoles'),
-        onClick: handleLogout,
-        iconFn: () => <IconTag />
-      },
-      {
-        label: t('messageBox.userCenter'),
-        onClick: handleLogout,
-        iconFn: () => <IconUser />
-      },
-      {
-        label: t('messageBox.userSettings'),
-        onClick: handleLogout,
-        iconFn: () => <IconSettings />
-      },
-      {
-        label: t('messageBox.logout'),
-        onClick: handleLogout,
-        iconFn: () => <IconExport />
-      }
-    ]
-    const dropOptionsComponent = () =>
-      dOptionList.map((item) => {
-        return (
-          <Dropdown.Option onClick={item.onClick}>
-            <Space>
-              {item.iconFn()}
-              <span>{item.label}</span>
-            </Space>
-          </Dropdown.Option>
-        )
-      })
     return () => (
       <div
         style={{
@@ -92,14 +74,14 @@ export default defineComponent({
        pl-5  box-border
       "
       >
-        <Space>
-          <img src={Logo} alt="" />
-          <Typography.Title heading={5}>Vtsx Pro</Typography.Title>
+        <Space align="center">
+          <img src={Logo} alt="logo" />
+          <Typography.Title heading={5}>Vue TSX Admin</Typography.Title>
         </Space>
         <Space>
-          <Input placeholder={t('navbar.search.placeholder')}></Input>
+          <Input class={['rounded-2xl']} placeholder={t('navbar.search.placeholder')}></Input>
           <Select
-            onChange={hanleLocaleChange}
+            onChange={handleLocaleChange}
             options={[
               { label: '中文', value: LocaleOptions.cn },
               { label: 'English', value: LocaleOptions.en }
@@ -107,30 +89,29 @@ export default defineComponent({
             triggerProps={{
               position: 'br',
               autoFitPopupMinWidth: true,
-              trigger: 'hover',
+              trigger: 'click',
               autoFitPopupWidth: true
             }}
           >
             {{
               trigger: () => (
-                <Tooltip content={t('settings.language')}>
-                  <Button
-                    class=" !border-[rgb(var(--gray-2))] !text-[rgb(var(--gray-8))] !text-base"
-                    type="outline"
-                    shape="circle"
-                    onClick={setVisible}
-                  >
-                    {{
-                      icon: () => <IconLanguage />
-                    }}
-                  </Button>
-                </Tooltip>
+                <Button class={[styles['nav-btn']]} type="outline" shape="circle">
+                  {{
+                    icon: () => <IconLanguage />
+                  }}
+                </Button>
               )
             }}
           </Select>
-          <Tooltip content={t('settings.title')}>
+          <Tooltip
+            content={
+              applicationStore.isDark
+                ? t('settings.navbar.theme.toLight')
+                : t('settings.navbar.theme.toDark')
+            }
+          >
             <Button
-              class=" !border-[rgb(var(--gray-2))] !text-[rgb(var(--gray-8))] !text-base"
+              class={[styles['nav-btn']]}
               type="outline"
               shape="circle"
               onClick={applicationStore.toggleDarkLightMode}
@@ -142,59 +123,34 @@ export default defineComponent({
               }}
             </Button>
           </Tooltip>
-          <Tooltip content={t('settings.title')}>
-            <Badge count={9} dot>
-              <Button
-                class=" !border-[rgb(var(--gray-2))] !text-[rgb(var(--gray-8))] !text-base"
-                type="outline"
-                shape="circle"
-                onClick={setVisible}
-              >
-                {{
-                  icon: () => <IconNotification />
-                }}
-              </Button>
-            </Badge>
-          </Tooltip>
-
-          <Tooltip content={t('settings.title')}>
+          <NotificationComponent />
+          <Tooltip
+            content={
+              isFullscreen.value
+                ? t('settings.navbar.screen.toExit')
+                : t('settings.navbar.screen.toFull')
+            }
+          >
             <Button
-              class=" !border-[rgb(var(--gray-2))] !text-[rgb(var(--gray-8))] !text-base"
+              class={[styles['nav-btn']]}
               type="outline"
               shape="circle"
               onClick={toggleFullScreen}
             >
               {{
-                icon: () => <IconFullscreen />
+                icon: () => (isFullscreen.value ? <IconFullscreenExit /> : <IconFullscreen />)
               }}
             </Button>
           </Tooltip>
 
           <Tooltip content={t('settings.title')}>
-            <Button
-              class=" !border-[rgb(var(--gray-2))] !text-[rgb(var(--gray-8))] !text-base"
-              type="outline"
-              shape="circle"
-              onClick={setVisible}
-            >
+            <Button class={[styles['nav-btn']]} type="outline" shape="circle" onClick={setVisible}>
               {{
                 icon: () => <IconSettings />
               }}
             </Button>
           </Tooltip>
-          <Dropdown trigger="click">
-            {{
-              default: () => (
-                <Avatar size={32} class={'cursor-pointer mr-2'}>
-                  <img
-                    alt="avatar"
-                    src="https://cdn.jsdelivr.net/gh/manyuemeiquqi/my-image-bed/dist54520846%20(1).jpg"
-                  />
-                </Avatar>
-              ),
-              content: () => dropOptionsComponent()
-            }}
-          </Dropdown>
+          <AvatarAndOptions />
         </Space>
       </div>
     )
