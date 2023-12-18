@@ -51,8 +51,6 @@
   "stepForm.button.submit": "Submit",
   "stepForm.button.again": "Again",
   "stepForm.button.view": "Detail",
-  "stepForm.label.type.web": "web domain",
-  "stepForm.label.type.api": "api domain",
   "stepForm.form.label.activityName": "Activity Name",
   "stepForm.placeholder.activityName": "Enter a maximum of 20 Chinese characters, letters, or digits",
   "stepForm.form.error.activityName.pattern": "Enter a maximum of 20 Chinese characters, letters, or digits",

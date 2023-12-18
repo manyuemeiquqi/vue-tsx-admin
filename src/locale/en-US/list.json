@@ -5,8 +5,6 @@
   "cardList.tab.title.service": "The service",
   "cardList.tab.title.preset": "Rules Preset",
   "cardList.searchInput.placeholder": "Search",
-  "cardList.enable": "Enable",
-  "cardList.disable": "Disable",
   "cardList.content.delete": "Delete",
   "cardList.content.inspection": "Inspection",
   "cardList.content.action": "Click Create Qc Content queue",
