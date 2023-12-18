@@ -1,23 +1,24 @@
 import type { UnitChannelModel } from '@/api/form'
 import {
-  Typography,
+  Button,
   Card,
-  Steps,
+  DatePicker,
   Form,
   Input,
-  Button,
-  Space,
-  Select,
-  DatePicker,
-  Result,
-  Switch,
   InputTag,
-  Textarea
+  Result,
+  Select,
+  Space,
+  Steps,
+  Switch,
+  Textarea,
+  Typography
 } from '@arco-design/web-vue'
 import { defineComponent, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 
 export default defineComponent({
+  name: 'Step',
   setup() {
     const { t } = useI18n()
     const current = ref(1)
@@ -34,8 +35,8 @@ export default defineComponent({
     })
     return () => (
       <Card class="general-card " title={t('stepForm.desc.basicInfo')}>
-        <div class="flex   items-center   flex-col">
-          <Steps class=" mb-8   w-[800px]" line-less current={current.value}>
+        <div class={['flex', 'items-center', 'flex-col']}>
+          <Steps class={['mb-8', 'w-[800px]']} line-less current={current.value}>
             <Steps.Step
               title={t('stepForm.title.basicInfo')}
               description={t('stepForm.desc.basicInfo')}
