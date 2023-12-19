@@ -1,20 +1,36 @@
-import { Button, Card, Input, Link, Option, Select, Space } from '@arco-design/web-vue'
+import { queryChatList, type ChatRecord } from '@/api/list'
+import useLoading from '@/hooks/loading'
+import {
+  Button,
+  Card,
+  Input,
+  Link,
+  Option,
+  Select,
+  Skeleton,
+  SkeletonLine,
+  Space
+} from '@arco-design/web-vue'
 import { IconDownload, IconFaceSmileFill } from '@arco-design/web-vue/es/icon'
 import { defineComponent, ref } from 'vue'
-import MessageItem from './MessageItem'
 import { useI18n } from 'vue-i18n'
-import { queryChatList, type ChatRecord } from '@/api/list'
+import MessageItem from './MessageItem'
+
 export default defineComponent({
+  name: 'ChatPanel',
   setup() {
     const chatData = ref<ChatRecord[]>([])
+
+    const { loading, setLoading } = useLoading(true)
+    const fillList = new Array(8).fill(undefined)
     const fetchData = async () => {
       try {
         const { data } = await queryChatList()
         chatData.value = data
       } catch (err) {
-        // you can report use errorHandler or other
+        /* empty */
       } finally {
-        // you can report use errorHandler or other
+        setLoading(false)
       }
     }
     fetchData()
@@ -30,10 +46,14 @@ export default defineComponent({
             <IconDownload />
           </Link>
         </Space>
-        <div class="mb-4">
-          {chatData.value.map((item) => (
-            <MessageItem data={item} />
-          ))}
+        <div class="mb-4  h-[800px] overflow-auto">
+          {loading.value
+            ? fillList.map(() => (
+                <Skeleton class="mb-4" loading={loading.value} animation>
+                  <SkeletonLine rows={3} widths={['40%', '80%', '40%']}></SkeletonLine>
+                </Skeleton>
+              ))
+            : chatData.value.map((item) => <MessageItem data={item} />)}
         </div>
         <Space>
           <Input>

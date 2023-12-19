@@ -2,6 +2,7 @@ import { Card, Descriptions, Tag, Typography } from '@arco-design/web-vue'
 import { computed, defineComponent } from 'vue'
 import { useI18n } from 'vue-i18n'
 export default defineComponent({
+  name: 'LiveStatus',
   setup() {
     const { t } = useI18n()
     const dataStatus = computed(() => [
@@ -66,7 +67,7 @@ export default defineComponent({
                   column={2}
                 >
                   {{
-                    label: ({ label }: { label: any }) =>
+                    label: ({ label }: { label: string }) =>
                       ['mainstream', 'hotStandby', 'coldStandby'].includes(label) ? (
                         <>
                           <Typography.Text class="whitespace-nowrap  mr-1">

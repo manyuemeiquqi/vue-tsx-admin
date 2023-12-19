@@ -5,6 +5,7 @@ import styles from './style.module.scss'
 
 import { type ChatRecord } from '@/api/list'
 export default defineComponent({
+  name: 'MessageItem',
   props: {
     data: {
       type: Object as PropType<ChatRecord>,

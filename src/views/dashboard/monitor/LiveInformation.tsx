@@ -2,6 +2,7 @@ import { Button, Card, Form, Input } from '@arco-design/web-vue'
 import { defineComponent, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 export default defineComponent({
+  name: 'LiveInformation',
   setup() {
     const { t } = useI18n()
     const formData = ref({})

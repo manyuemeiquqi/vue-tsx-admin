@@ -1,10 +1,10 @@
 import { Grid, Space } from '@arco-design/web-vue'
 import { defineComponent } from 'vue'
 import ChatPanel from './ChatPanel'
-import LivePanel from './LivePanel'
-import QuickOperation from './QuickOperation'
-import LiveStatus from './LiveStatus'
 import LiveInformation from './LiveInformation'
+import LivePanel from './LivePanel'
+import LiveStatus from './LiveStatus'
+import QuickOperation from './QuickOperation'
 
 export default defineComponent({
   setup() {

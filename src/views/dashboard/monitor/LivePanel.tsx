@@ -1,26 +1,44 @@
 import { useUserStore } from '@/store'
 import {
-  RadioGroup,
-  Table,
-  Space,
-  Tabs,
-  Card,
   Avatar,
-  Typography,
-  Radio,
   Button,
+  Card,
+  Grid,
   Link,
+  Radio,
+  RadioGroup,
+  Space,
+  Table,
+  Tabs,
   Tag,
-  Grid
+  Typography
 } from '@arco-design/web-vue'
 import { IconMore } from '@arco-design/web-vue/es/icon'
-import { computed, defineComponent, h, compile } from 'vue'
-import { useI18n } from 'vue-i18n'
 import type { TableColumnData, TableData } from '@arco-design/web-vue/es/table/interface.d'
+import { computed, defineComponent } from 'vue'
+import { useI18n } from 'vue-i18n'
 export default defineComponent({
+  name: 'LivePanel',
   setup() {
-    const userInfo = useUserStore()
+    const userStore = useUserStore()
     const { t } = useI18n()
+    interface PreviewRecord {
+      cover: string
+      name: string
+      duration: string
+      id: string
+      status: number
+    }
+    const tableData: PreviewRecord[] = [
+      {
+        cover:
+          'https://cdn.jsdelivr.net/gh/manyuemeiquqi/my-image-bed/dist/c788fc704d32cf3b1136c7d45afc2669.png~tplv-uwbnlip3yd-webp.webp',
+        name: '视频直播',
+        duration: '00:05:19',
+        id: '54e23ade',
+        status: -1
+      }
+    ]
 
     const columns = computed(() => {
       return [
@@ -34,10 +52,10 @@ export default defineComponent({
           title: t('monitor.list.title.cover'),
           render({ record }: { record: TableData; column: TableColumnData; rowIndex: number }) {
             return (
-              <div class="  h-16  relative">
+              <div class={['h-16', 'relative']}>
                 <img class="h-full" src={record.cover} />
                 {record.status === -1 && (
-                  <Tag color="red" class="absolute top-1 left-1">
+                  <Tag color="red" class={['absolute', 'top-1', 'left-1']}>
                     {t('monitor.list.tag.auditFailed')}
                   </Tag>
                 )}
@@ -59,23 +77,7 @@ export default defineComponent({
         }
       ]
     })
-    interface PreviewRecord {
-      cover: string
-      name: string
-      duration: string
-      id: string
-      status: number
-    }
-    const data: PreviewRecord[] = [
-      {
-        cover:
-          'https://cdn.jsdelivr.net/gh/manyuemeiquqi/my-image-bed/dist/c788fc704d32cf3b1136c7d45afc2669.png~tplv-uwbnlip3yd-webp.webp',
-        name: '视频直播',
-        duration: '00:05:19',
-        id: '54e23ade',
-        status: -1
-      }
-    ]
+
     return () => (
       <Space direction="vertical" size="medium" fill>
         <Card class="general-card" title={t('monitor.title.studioPreview')}>
@@ -83,16 +85,16 @@ export default defineComponent({
             default: () => (
               <div>
                 <img
-                  class=" w-full max-w-xl  block  my-0 mx-auto mb-4  "
+                  class={['w-full', 'max-w-xl', 'block', 'my-0', 'mx-auto', 'mb-4']}
                   src="https://cdn.jsdelivr.net/gh/manyuemeiquqi/my-image-bed/dist/c788fc704d32cf3b1136c7d45afc2669.png~tplv-uwbnlip3yd-webp.webp"
                 />
                 <Grid.Row align="center" justify="space-between">
                   <Space size="small">
                     <Avatar size={24}>
-                      <img src={userInfo.avatar} alt="alt" />
+                      <img src={userStore.userInfo.avatar} alt="alt" />
                     </Avatar>
                     <Typography.Text>
-                      {userInfo.name}
+                      {userStore.userInfo.name}
                       {t('monitor.studioPreview.studio')}
                     </Typography.Text>
                   </Space>
@@ -129,12 +131,12 @@ export default defineComponent({
             class="mb-4"
             columns={columns.value}
             pagination={false}
-            data={data}
+            data={tableData}
             bordered={false}
           ></Table>
 
           <Typography.Text class=" text-center block">
-            {t('monitor.list.tip.rotations')} {data.length}
+            {t('monitor.list.tip.rotations')} {tableData.length}
             {t('monitor.list.tip.rest')}
           </Typography.Text>
         </Card>

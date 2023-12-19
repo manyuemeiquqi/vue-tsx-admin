@@ -3,13 +3,14 @@ import { IconTags, IconStop, IconSwap, IconArrowRight } from '@arco-design/web-v
 import { defineComponent, h } from 'vue'
 import { useI18n } from 'vue-i18n'
 export default defineComponent({
+  name: 'QuickOperation',
   setup() {
     const { t } = useI18n()
     const quickOperationList = [
-      { title: t('monitor.quickOperation.changeClarity'), icon: IconTags },
-      { title: t('monitor.quickOperation.switchStream'), icon: IconSwap },
-      { title: t('monitor.quickOperation.removeClarity'), icon: IconStop },
-      { title: t('monitor.quickOperation.pushFlowGasket'), icon: IconArrowRight }
+      { getTitle: () => t('monitor.quickOperation.changeClarity'), icon: IconTags },
+      { getTitle: () => t('monitor.quickOperation.switchStream'), icon: IconSwap },
+      { getTitle: () => t('monitor.quickOperation.removeClarity'), icon: IconStop },
+      { getTitle: () => t('monitor.quickOperation.pushFlowGasket'), icon: IconArrowRight }
     ]
     return () => (
       <Card class="general-card" title={t('monitor.title.quickOperation')}>
@@ -20,7 +21,7 @@ export default defineComponent({
                 icon: () => {
                   return h(item.icon)
                 },
-                default: () => item.title
+                default: () => item.getTitle()
               }}
             </Button>
           ))}
