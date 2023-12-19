@@ -39,7 +39,6 @@ import { AppRouteName } from '@/utils/routerHelper'
 
 import styles from './style.module.scss'
 import AvatarAndOptions from './AvatarAndOptions'
-import NotificationComponent from './NotificationComponent'
 
 export default defineComponent({
   setup() {
@@ -124,7 +123,6 @@ export default defineComponent({
               }}
             </Button>
           </Tooltip>
-          <NotificationComponent />
           <Tooltip
             content={
               isFullscreen.value
