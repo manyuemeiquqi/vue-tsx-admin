@@ -23,23 +23,23 @@ export default defineComponent({
     const userInfoData = computed(() => [
       {
         label: t('userSetting.label.name'),
-        value: userStore.name
+        value: userStore.userInfo.name
       },
       {
         label: t('userSetting.label.certification'),
-        value: userStore.certification
+        value: userStore.userInfo.certification
       },
       {
         label: t('userSetting.label.accountId'),
-        value: userStore.accountId
+        value: userStore.userInfo.accountId
       },
       {
         label: t('userSetting.label.phone'),
-        value: userStore.phone
+        value: userStore.userInfo.phone
       },
       {
         label: t('userSetting.label.registrationDate'),
-        value: userStore.registrationDate
+        value: userStore.userInfo.registrationDate
       }
     ])
 

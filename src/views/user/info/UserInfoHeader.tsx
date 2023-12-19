@@ -5,7 +5,7 @@ import { defineComponent } from 'vue'
 export default defineComponent({
   name: 'UserInfoHeader',
   setup() {
-    const { userInfo } = useUserStore()
+    const userStore = useUserStore()
     return () => (
       <div
         class={['h-52', 'flex', 'items-center', 'justify-center ']}
@@ -27,19 +27,19 @@ export default defineComponent({
               'trigger-icon': () => <IconCamera />
             }}
           </Avatar>
-          <Typography.Title heading={6}> {userInfo.name}</Typography.Title>
+          <Typography.Title heading={6}> {userStore.userInfo.name}</Typography.Title>
           <Space size={'small'}>
             <div>
               <IconUser class="mr-1" />
-              <Typography.Text>{userInfo.jobName}</Typography.Text>
+              <Typography.Text>{userStore.userInfo.jobName}</Typography.Text>
             </div>
             <div>
               <IconHome class="mr-1" />
-              <Typography.Text>{userInfo.organizationName}</Typography.Text>
+              <Typography.Text>{userStore.userInfo.organizationName}</Typography.Text>
             </div>
             <div>
               <IconLocation class="mr-1" />
-              <Typography.Text>{userInfo.locationName}</Typography.Text>
+              <Typography.Text>{userStore.userInfo.locationName}</Typography.Text>
             </div>
           </Space>
         </Space>
