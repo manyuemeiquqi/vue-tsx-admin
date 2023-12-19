@@ -1,2 +1,1 @@
-# vue3-element-admin
-vue-admin的Vue3版本
+介绍 SVG 静态资源的应用
