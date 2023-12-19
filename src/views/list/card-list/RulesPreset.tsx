@@ -1,81 +1,97 @@
 import { queryRulesPresetList, type ServiceRecord } from '@/api/list'
-import {
-  Button,
-  Card,
-  Descriptions,
-  Grid,
-  Skeleton,
-  Space,
-  Switch,
-  Typography
-} from '@arco-design/web-vue'
+import useLoading from '@/hooks/loading'
+import { Card, Grid, Skeleton, Space, Switch, Tag, Typography } from '@arco-design/web-vue'
+import { IconCheckCircleFill } from '@arco-design/web-vue/es/icon'
 import { defineComponent, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
-import AddCard from './AddCard'
 
 export default defineComponent({
   name: 'RulesPreset',
   setup() {
+    const { t } = useI18n()
+    const { loading, setLoading } = useLoading(true)
+    const fillList = new Array(7).fill(undefined)
+
     const cardList = ref<ServiceRecord[]>([])
     const fetchData = async () => {
-      cardList.value = (await queryRulesPresetList()).data
+      try {
+        const res = await queryRulesPresetList()
+        cardList.value = res.data
+      } catch (error) {
+        /* empty */
+      } finally {
+        setLoading(false)
+      }
     }
-    const { t } = useI18n()
     fetchData()
     return () => (
       <div>
         <Typography.Title heading={6}>{t('cardList.tab.title.preset')}</Typography.Title>
         <Grid colGap={24} rowGap={24}>
-          {cardList.value.map((item) => (
-            <Grid.Item
-              span={{
-                xs: 12,
-                sm: 12,
-                md: 12,
-                lg: 6,
-                xl: 6,
-                xxl: 6
-              }}
-            >
-              <Card hoverable>
-                {{
-                  default: () => (
-                    <Card.Meta>
-                      {{
-                        title: () => (
-                          <>
-                            <Typography.Text>{item.title}</Typography.Text>
-                          </>
-                        ),
-                        description: () => (
-                          <>
-                            {item.description}
-                            <Descriptions
-                              data={item.data}
-                              layout="inline-horizontal"
-                              column={2}
-                              v-slots={{
-                                skeleton: () => (
-                                  <Skeleton animation>
-                                    <Skeleton.Line
-                                      widths={['50%', '50%', '100%', '40%']}
-                                      rows={4}
-                                    ></Skeleton.Line>
-                                    <Skeleton.Line widths={['40%']} rows={1}></Skeleton.Line>
-                                  </Skeleton>
-                                )
-                              }}
-                            ></Descriptions>
-                          </>
-                        )
-                      }}
-                    </Card.Meta>
-                  ),
-                  actions: () => <Switch />
-                }}
-              </Card>
-            </Grid.Item>
-          ))}
+          {loading.value
+            ? fillList.map(() => (
+                <Grid.Item
+                  span={{
+                    xs: 12,
+                    sm: 12,
+                    md: 12,
+                    lg: 6,
+                    xl: 6,
+                    xxl: 6
+                  }}
+                >
+                  <Card>
+                    <Skeleton loading={loading.value} animation>
+                      <Skeleton.Line widths={['100%', '40%']} rows={2}></Skeleton.Line>
+                    </Skeleton>
+                  </Card>
+                </Grid.Item>
+              ))
+            : cardList.value.map((item) => (
+                <Grid.Item
+                  span={{
+                    xs: 12,
+                    sm: 12,
+                    md: 12,
+                    lg: 6,
+                    xl: 6,
+                    xxl: 6
+                  }}
+                >
+                  <Card hoverable>
+                    {{
+                      default: () => (
+                        <Card.Meta>
+                          {{
+                            title: () => (
+                              <Space align="center">
+                                <Typography.Text>{item.title}</Typography.Text>
+                                {item.enable && (
+                                  <Tag
+                                    size="small"
+                                    color="green"
+                                    v-slots={{ icon: () => <IconCheckCircleFill /> }}
+                                  >
+                                    {t('cardList.preset.tag')}
+                                  </Tag>
+                                )}
+                              </Space>
+                            ),
+                            description: () => (
+                              <Typography.Text
+                                class={['text-xs', 'text-[color:var(--color-text-3)]']}
+                              >
+                                {item.description}
+                              </Typography.Text>
+                            )
+                          }}
+                        </Card.Meta>
+                      ),
+                      actions: () => <Switch defaultChecked={item.enable} />
+                    }}
+                  </Card>
+                </Grid.Item>
+              ))}
         </Grid>
       </div>
     )
