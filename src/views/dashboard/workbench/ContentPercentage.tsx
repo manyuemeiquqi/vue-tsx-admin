@@ -5,6 +5,7 @@ import { Card, Link, Spin } from '@arco-design/web-vue'
 import { defineComponent } from 'vue'
 import { useI18n } from 'vue-i18n'
 export default defineComponent({
+  name: 'ContentPercentage',
   setup() {
     const { loading } = useLoading()
     const { chartOption } = useChartOption((isDark) => {

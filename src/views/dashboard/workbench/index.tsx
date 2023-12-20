@@ -8,6 +8,7 @@ import HelpDocs from './HelpDocs'
 import RightTopArea from './RightTopArea'
 
 export default defineComponent({
+  name: 'Workbench',
   setup() {
     const imageSrc = [
       'https://cdn.jsdelivr.net/gh/manyuemeiquqi/my-image-bed/dist/f7e8fc1e09c42e30682526252365be1c.jpg~tplv-uwbnlip3yd-webp.webp',

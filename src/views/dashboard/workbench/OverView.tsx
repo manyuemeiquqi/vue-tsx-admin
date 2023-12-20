@@ -1,24 +1,24 @@
+import { queryContentData } from '@/api/dashboard'
 import ChartComponent from '@/components/chart-component'
 import useChartOption from '@/hooks/chartOption'
+import { useUserStore } from '@/store'
 import {
+  Avatar,
   Card,
-  Space,
-  Typography,
-  Link,
   Divider,
   Grid,
-  Avatar,
-  Statistic
+  Link,
+  Space,
+  Statistic,
+  Typography
 } from '@arco-design/web-vue'
-import { defineComponent, ref } from 'vue'
-
-import { graphic } from 'echarts'
-import axios from 'axios'
-import { useI18n } from 'vue-i18n'
-import { useUserStore } from '@/store'
 import { IconCaretUp } from '@arco-design/web-vue/es/icon'
-import { queryContentData } from '@/api/dashboard'
+import { graphic } from 'echarts'
+import { defineComponent, ref } from 'vue'
+import { useI18n } from 'vue-i18n'
+
 export default defineComponent({
+  name: 'OverView',
   setup() {
     function graphicFactory(side: any) {
       return {
