@@ -13,6 +13,8 @@
 
 .text {
   font-size: 12px;
+  overflow-wrap: normal;
+  color: rgb(var(--gray-8));
 }
 
 .wrapper {
@@ -31,6 +33,9 @@
   }
 }
 
-.arco-card-body {
-  border-color: green !important;
+.area {
+  :global(.arco-card-body) {
+    padding-left: 0;
+    padding-right: 0;
+  }
 }

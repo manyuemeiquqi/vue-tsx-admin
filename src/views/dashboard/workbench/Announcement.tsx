@@ -3,6 +3,7 @@ import { defineComponent } from 'vue'
 import { useI18n } from 'vue-i18n'
 
 export default defineComponent({
+  name: 'Announcement',
   setup() {
     const { t } = useI18n()
     const list = [
@@ -45,9 +46,7 @@ export default defineComponent({
                     {item.label}
                   </Tag>
                   <Typography.Text
-                    class="flex-1 
-                     text-xs
-                  ml-1 text-[color:var(--color-text-2)]"
+                    class={['flex-1', 'text-xs', 'ml-1', 'text-[color:var(--color-text-2)]']}
                     ellipsis
                   >
                     {item.content}

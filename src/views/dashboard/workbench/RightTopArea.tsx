@@ -1,4 +1,4 @@
-import { Button, Card, Divider, Grid, Link, Space, Typography } from '@arco-design/web-vue'
+import { Card, Divider, Grid, Link, Space, Typography } from '@arco-design/web-vue'
 import {
   IconFile,
   IconFire,
@@ -6,37 +6,39 @@ import {
   IconSettings,
   IconStorage
 } from '@arco-design/web-vue/es/icon'
-import { defineComponent } from 'vue'
+import { computed, defineComponent } from 'vue'
 import { useI18n } from 'vue-i18n'
 import styles from './style.module.scss'
+
 export default defineComponent({
+  name: 'RightTopArea',
   setup() {
     const { t } = useI18n()
-    const links = [
-      { text: 'workplace.contentManagement', icon: <IconFile /> },
-      { text: 'workplace.contentStatistical', icon: <IconStorage /> },
-      { text: 'workplace.advanced', icon: <IconSettings /> },
-      { text: 'workplace.onlinePromotion', icon: <IconMobile /> },
-      { text: 'workplace.contentPutIn', icon: <IconFire /> }
-    ]
-    const quickLinks = [
+    const links = computed(() => [
+      { text: t('workplace.contentManagement'), icon: <IconFile /> },
+      { text: t('workplace.contentStatistical'), icon: <IconStorage /> },
+      { text: t('workplace.advanced'), icon: <IconSettings /> },
+      { text: t('workplace.onlinePromotion'), icon: <IconMobile /> },
+      { text: t('workplace.contentPutIn'), icon: <IconFire /> }
+    ])
+    const quickLinks = computed(() => [
       {
-        text: 'workplace.contentManagement',
+        text: t('workplace.contentManagement'),
         icon: <IconStorage />
       },
       {
-        text: 'workplace.contentStatistical',
+        text: t('workplace.contentStatistical'),
         icon: <IconFile />
       },
       {
-        text: 'workplace.advanced',
+        text: t('workplace.advanced'),
         icon: <IconSettings />
       }
-    ]
+    ])
     return () => (
       <Card class="general-card">
         <Card
-          class="general-card"
+          class={['general-card', styles.area]}
           v-slots={{
             extra() {
               return <Link>{t('workplace.quickOperation.setup')}</Link>
@@ -45,7 +47,7 @@ export default defineComponent({
           title={t('workplace.quick.operation')}
         >
           <Grid.Row gutter={16}>
-            {links.map((item) => (
+            {links.value.map((item) => (
               <Grid.Col span={8}>
                 <Space class={[styles.wrapper]} align="center" direction="vertical" size="small">
                   <div class={[styles.icon]}>{item.icon}</div>
@@ -56,9 +58,9 @@ export default defineComponent({
           </Grid.Row>
         </Card>
         <Divider margin={0} />
-        <Card class="general-card" title={t('workplace.recently.visited')}>
+        <Card class={['general-card', styles.area]} title={t('workplace.recently.visited')}>
           <Grid.Row gutter={16}>
-            {quickLinks.map((item) => (
+            {quickLinks.value.map((item) => (
               <Grid.Col span={8}>
                 <Space class={[styles.wrapper]} align="center" direction="vertical" size="small">
                   <div class={[styles.icon]}>{item.icon}</div>

@@ -294,7 +294,7 @@ export default defineComponent({
             extra: () => <Link>{t('workplace.viewMore')}</Link>
           }}
         >
-          <ChartComponent height="298px" options={chartOption.value} />
+          <ChartComponent height="410px" options={chartOption.value} />
         </Card>
       </Card>
     )

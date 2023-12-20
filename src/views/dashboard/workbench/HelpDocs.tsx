@@ -1,8 +1,9 @@
-import { Card, Typography, Link, Grid, Button } from '@arco-design/web-vue'
+import { Card, Grid, Link } from '@arco-design/web-vue'
 import { computed, defineComponent } from 'vue'
 import { useI18n } from 'vue-i18n'
 
 export default defineComponent({
+  name: 'HelpDocs',
   setup() {
     const linkList = computed(() => [
       {
@@ -32,16 +33,9 @@ export default defineComponent({
         }}
       >
         <Grid.Row>
-          {linkList.value.map(({ href, desc }) => (
+          {linkList.value.map(({ desc }) => (
             <Grid.Col span={12}>
-              <Link
-                style={{
-                  color: 'rgb(var(--gray-8))',
-                  marginBottom: '8px'
-                }}
-              >
-                {desc}
-              </Link>
+              <Link class={['text-[rgb(var(--gray-8))]', 'mb-2']}>{desc}</Link>
             </Grid.Col>
           ))}
         </Grid.Row>
