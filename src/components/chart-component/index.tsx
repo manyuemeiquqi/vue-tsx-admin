@@ -23,7 +23,6 @@ export default defineComponent({
   },
   setup(props) {
     const renderChart = ref<boolean>(false)
-
     nextTick(() => {
       renderChart.value = true
     })
