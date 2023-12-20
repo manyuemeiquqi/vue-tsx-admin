@@ -42,6 +42,7 @@
     "@types/lodash": "^4.14.201",
     "@types/mockjs": "^1.0.10",
     "@types/node": "^18.18.5",
+    "@types/sortablejs": "^1.15.7",
     "@vitejs/plugin-vue": "^4.4.0",
     "@vitejs/plugin-vue-jsx": "^3.0.2",
     "@vue/eslint-config-prettier": "^8.0.0",
