@@ -30,11 +30,12 @@ import {
   IconSearch,
   IconSettings
 } from '@arco-design/web-vue/es/icon'
-import { computed, defineComponent, ref } from 'vue'
+import { computed, defineComponent, nextTick, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { type Pagination } from '@/types/global'
-
+import Sortable from 'sortablejs'
 import type { SelectOptionData } from '@arco-design/web-vue/es/select/interface'
+import { cloneDeep } from 'lodash'
 export default defineComponent({
   setup() {
     const basePagination: Pagination = {
@@ -204,6 +205,34 @@ export default defineComponent({
         value: 'offline'
       }
     ])
+    const exchangeArray = <T extends Array<any>>(
+      array: T,
+      beforeIdx: number,
+      newIdx: number,
+      isDeep = false
+    ): T => {
+      const newArray = isDeep ? cloneDeep(array) : array
+      if (beforeIdx > -1 && newIdx > -1) {
+        // 先替换后面的，然后拿到替换的结果替换前面的
+        newArray.splice(beforeIdx, 1, newArray.splice(newIdx, 1, newArray[beforeIdx]).pop())
+      }
+      return newArray
+    }
+
+    const popupVisibleChange = (val: boolean) => {
+      if (val) {
+        nextTick(() => {
+          const el = document.getElementById('tableSetting') as HTMLElement
+          const sortable = new Sortable(el, {
+            onEnd(e: any) {
+              const { oldIndex, newIndex } = e
+              exchangeArray(cloneColumns.value, oldIndex, newIndex)
+              exchangeArray(showColumns.value, oldIndex, newIndex)
+            }
+          })
+        })
+      }
+    }
     fetchData()
     return () => (
       <Card class="general-card " title={t('menu.list.searchTable')}>
