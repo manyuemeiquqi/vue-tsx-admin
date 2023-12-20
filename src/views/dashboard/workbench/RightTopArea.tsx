@@ -51,7 +51,7 @@ export default defineComponent({
               <Grid.Col span={8}>
                 <Space class={[styles.wrapper]} align="center" direction="vertical" size="small">
                   <div class={[styles.icon]}>{item.icon}</div>
-                  <Typography.Paragraph class={[styles.text]}>{t(item.text)}</Typography.Paragraph>
+                  <Typography.Paragraph class={[styles.text]}>{item.text}</Typography.Paragraph>
                 </Space>
               </Grid.Col>
             ))}
@@ -64,7 +64,7 @@ export default defineComponent({
               <Grid.Col span={8}>
                 <Space class={[styles.wrapper]} align="center" direction="vertical" size="small">
                   <div class={[styles.icon]}>{item.icon}</div>
-                  <Typography.Paragraph class={[styles.text]}>{t(item.text)}</Typography.Paragraph>
+                  <Typography.Paragraph class={[styles.text]}>{item.text}</Typography.Paragraph>
                 </Space>
               </Grid.Col>
             ))}

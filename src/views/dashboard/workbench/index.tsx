@@ -17,8 +17,8 @@ export default defineComponent({
       'https://cdn.jsdelivr.net/gh/manyuemeiquqi/my-image-bed/dist/1d1580d2a5a1e27415ff594c756eabd8.jpg~tplv-uwbnlip3yd-webp.webp'
     ]
     return () => (
-      <Grid.Row gutter={16}>
-        <Grid.Col flex={1}>
+      <div class="flex">
+        <div class={['flex-1', 'overflow-auto']}>
           <Space size="medium" direction="vertical" fill>
             <OverView />
             <Grid.Row gutter={16}>
@@ -30,8 +30,8 @@ export default defineComponent({
               </Grid.Col>
             </Grid.Row>
           </Space>
-        </Grid.Col>
-        <Grid.Col flex="288px">
+        </div>
+        <div class="w-72 ml-4">
           <Space size="medium" direction="vertical" fill>
             <RightTopArea />
             <Carousel
@@ -52,8 +52,8 @@ export default defineComponent({
 
             <HelpDocs />
           </Space>
-        </Grid.Col>
-      </Grid.Row>
+        </div>
+      </div>
     )
   }
 })

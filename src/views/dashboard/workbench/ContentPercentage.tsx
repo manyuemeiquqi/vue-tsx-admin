@@ -7,10 +7,11 @@ import { useI18n } from 'vue-i18n'
 export default defineComponent({
   name: 'ContentPercentage',
   setup() {
-    const { loading } = useLoading()
+    const { loading, setLoading } = useLoading(true)
+    setTimeout(() => {
+      setLoading(false)
+    }, 800)
     const { chartOption } = useChartOption((isDark) => {
-      // echarts support https://echarts.apache.org/zh/theme-builder.html
-      // It's not used here
       return {
         legend: {
           left: 'center',
