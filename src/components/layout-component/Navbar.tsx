@@ -34,7 +34,7 @@ import { useApplicationStore, useUserStore } from '@/store'
 import { useRoute, useRouter } from 'vue-router'
 import { logout } from '@/api/user'
 import { removeRouteListener } from '@/utils/routerListener'
-import { clearToken } from '@/utils/auth'
+import { clearToken } from '@/hooks/token'
 
 import styles from './style.module.scss'
 import AvatarAndOptions from './AvatarAndOptions'

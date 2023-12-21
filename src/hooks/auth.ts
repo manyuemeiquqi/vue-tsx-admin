@@ -1,6 +1,6 @@
 import { login, logout, type LoginData } from '@/api/user'
 import { useApplicationStore, useUserStore } from '@/store'
-import { clearToken, setToken } from '@/utils/auth'
+import { clearToken, setToken } from '@/hooks/token'
 import { removeRouteListener } from '@/utils/routerListener'
 
 export default function useAuth() {

@@ -1,8 +1,10 @@
-import type { Router, LocationQueryRaw } from 'vue-router'
+import type { Router } from 'vue-router'
 import NProgress from 'nprogress'
 import { useUserStore } from '@/store'
-import { isLogin } from '@/utils/auth'
+import { isLogin } from '@/hooks/token'
 import { AppRouteNames } from '@/types/constants'
+import useAuth from '@/hooks/auth'
+
 /**
  *
  * @desc userInfo and token guard
@@ -12,6 +14,7 @@ import { AppRouteNames } from '@/types/constants'
  * - - no userInfo update info go
  */
 export default function setupUserLoginInfoGuard(router: Router) {
+  const { logoutApp } = useAuth()
   router.beforeEach(async (to, _from, next) => {
     NProgress.start()
     const userStore = useUserStore()
@@ -23,7 +26,7 @@ export default function setupUserLoginInfoGuard(router: Router) {
           await userStore.refreshUserInfo()
           next()
         } catch (error) {
-          await userStore.logoutApp()
+          await logoutApp()
           next({
             name: AppRouteNames.login
           })

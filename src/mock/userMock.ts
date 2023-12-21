@@ -1,6 +1,6 @@
 import Mock from 'mockjs'
 import { type MockParams } from './type'
-import { isLogin } from '@/utils/auth'
+import { isLogin } from '@/hooks/token'
 import setupMock, { successResponseWrap, failResponseWrap } from '@/mock/setupMock'
 setupMock({
   setup() {

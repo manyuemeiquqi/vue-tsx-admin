@@ -1,6 +1,7 @@
 import { defineStore } from 'pinia'
 import type { UserInfo } from '@/types/global'
 import { StoreName } from '@/types/constants'
+import { getUserInfo } from '@/api/user'
 const useUserStore = defineStore(StoreName.user, {
   state: (): UserInfo => ({
     name: undefined,
@@ -38,6 +39,10 @@ const useUserStore = defineStore(StoreName.user, {
         this.role = this.role === 'user' ? 'admin' : 'user'
         resolve(this.role)
       })
+    },
+    async refreshUserInfo() {
+      const res = await getUserInfo()
+      this.setUserInfo(res.data)
     }
   }
 })

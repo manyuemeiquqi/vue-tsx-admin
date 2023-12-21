@@ -3,8 +3,7 @@
 import { get } from 'lodash'
 import type { RouteRecordNormalized } from 'vue-router'
 
-const innerModules = import.meta.glob('./inner/*.ts', { eager: true })
-
+const innerModules = import.meta.glob('./modules/*.ts', { eager: true })
 const getRoutesFromModules = (_moduleMap: Record<string, unknown>) => {
   const ret: RouteRecordNormalized[] = []
   for (const key in _moduleMap) {
