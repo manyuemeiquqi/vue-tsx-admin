@@ -1,3 +1,4 @@
+import useLoading from '@/hooks/loading'
 import { useUserStore } from '@/store'
 import {
   Avatar,
@@ -8,6 +9,7 @@ import {
   Radio,
   RadioGroup,
   Space,
+  Spin,
   Table,
   Tabs,
   Tag,
@@ -22,6 +24,8 @@ export default defineComponent({
   setup() {
     const userStore = useUserStore()
     const { t } = useI18n()
+    const { loading, setLoading } = useLoading(true)
+
     interface PreviewRecord {
       cover: string
       name: string
@@ -77,17 +81,19 @@ export default defineComponent({
         }
       ]
     })
-
     return () => (
       <Space direction="vertical" size="medium" fill>
         <Card class="general-card" title={t('monitor.title.studioPreview')}>
           {{
             default: () => (
-              <div>
-                <img
-                  class={['w-full', 'max-w-xl', 'block', 'my-0', 'mx-auto', 'mb-4']}
-                  src="https://cdn.jsdelivr.net/gh/manyuemeiquqi/my-image-bed/dist/c788fc704d32cf3b1136c7d45afc2669.png~tplv-uwbnlip3yd-webp.webp"
-                />
+              <>
+                <Spin loading={loading.value}>
+                  <img
+                    onLoad={() => setLoading(false)}
+                    class={['w-full', 'max-w-xl', 'block', 'my-0', 'mx-auto', 'mb-4']}
+                    src="https://cdn.jsdelivr.net/gh/manyuemeiquqi/my-image-bed/dist/c788fc704d32cf3b1136c7d45afc2669.png~tplv-uwbnlip3yd-webp.webp"
+                  />
+                </Spin>
                 <Grid.Row align="center" justify="space-between">
                   <Space size="small">
                     <Avatar size={24}>
@@ -102,7 +108,7 @@ export default defineComponent({
                     36,000 {t('monitor.studioPreview.watching')}
                   </Typography.Text>
                 </Grid.Row>
-              </div>
+              </>
             ),
             extra: () => <IconMore />
           }}
