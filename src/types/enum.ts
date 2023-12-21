@@ -24,6 +24,8 @@ export enum ApplicationInfo {
 
 export enum AppRouteNames {
   login = 'LOGIN',
+  redirect = 'REDIRECT',
+  notFound = 'NOT_FOUND',
 
   // =============== DIVIDER ==================
   dashboard = 'DASHBOARD',

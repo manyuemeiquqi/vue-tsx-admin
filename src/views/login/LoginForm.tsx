@@ -1,18 +1,19 @@
 import { login, type LoginData } from '@/api/user'
+import useAuth from '@/hooks/auth'
 import useLoading from '@/hooks/loading'
-import { LocalStorageKey } from '@/types/enum'
+import { AppRouteNames, LocalStorageKey } from '@/types/enum'
 import { clearToken, setToken } from '@/utils/auth'
 import {
-  Form,
-  Link,
-  Input,
-  Space,
   Button,
   Checkbox,
+  Form,
+  Input,
+  Link,
+  Message,
+  Space,
   Typography,
   type FieldRule,
-  type ValidatedError,
-  Message
+  type ValidatedError
 } from '@arco-design/web-vue'
 import { IconLock, IconUser } from '@arco-design/web-vue/es/icon'
 import { useStorage } from '@vueuse/core'
@@ -24,6 +25,7 @@ export default defineComponent({
     const { t } = useI18n()
     const { loading, setLoading } = useLoading()
     const router = useRouter()
+    const { loginApp } = useAuth()
     const storageLoginInfo = useStorage(LocalStorageKey.loginFormInfo, {
       rememberPassword: true,
       username: 'admin',
@@ -40,16 +42,6 @@ export default defineComponent({
       username: [{ required: true, message: t('login.form.userName.errMsg') }],
       password: [{ required: true, message: t('login.form.password.errMsg') }]
     }
-
-    const performLogin = async (data: LoginData) => {
-      try {
-        const res = await login(data)
-        setToken(res.data.token)
-      } catch (err) {
-        clearToken()
-        throw err
-      }
-    }
     const handleSubmit = async ({
       errors,
       values
@@ -61,9 +53,9 @@ export default defineComponent({
       if (!errors) {
         setLoading(true)
         try {
-          await performLogin(values as LoginData)
+          await loginApp(values as LoginData)
           router.push({
-            name: 'Workplace'
+            name: AppRouteNames.workplace
           })
           Message.success(t('login.form.login.success'))
           const { rememberPassword } = storageLoginInfo.value

@@ -16,6 +16,7 @@
     "prepare": "husky install"
   },
   "dependencies": {
+    "@ckpack/vue-color": "^1.5.0",
     "@vueuse/core": "^10.6.1",
     "axios": "^1.6.2",
     "dayjs": "^1.11.10",
