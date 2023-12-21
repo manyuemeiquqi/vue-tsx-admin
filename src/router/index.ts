@@ -47,7 +47,6 @@ const router = createRouter({
     }
   ]
 })
-console.log(router)
 
 configRouteGuard(router)
 
