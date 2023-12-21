@@ -34,7 +34,7 @@ export default defineComponent({
     const { chartOption } = useChartOption(() => {
       return {
         grid: {
-          left: '2.6%',
+          left: '5.6%',
           right: 0,
           top: '10',
           bottom: '30'
