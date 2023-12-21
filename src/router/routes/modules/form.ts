@@ -1,6 +1,9 @@
-const FORM: any = {
+import { AppRouteNames } from '@/types/enum'
+import type { AppRouteRecordRaw } from '../types'
+
+const FORM: AppRouteRecordRaw = {
   path: '/form',
-  name: 'form',
+  name: AppRouteNames.form,
   component: () => import('@/components/layout-component/index'),
   meta: {
     locale: 'menu.form',
@@ -11,7 +14,7 @@ const FORM: any = {
   children: [
     {
       path: 'step',
-      name: 'Step',
+      name: AppRouteNames._403,
       component: () => import('@/views/form/step/index'),
       meta: {
         locale: 'menu.form.step',
@@ -21,7 +24,7 @@ const FORM: any = {
     },
     {
       path: 'group',
-      name: 'Group',
+      name: AppRouteNames._404,
       component: () => import('@/views/form/group/index'),
       meta: {
         locale: 'menu.form.group',

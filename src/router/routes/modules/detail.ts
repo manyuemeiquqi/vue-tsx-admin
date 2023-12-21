@@ -1,4 +1,6 @@
-const PROFILE: any = {
+import type { AppRouteRecordRaw } from '../types'
+
+const PROFILE: AppRouteRecordRaw = {
   path: '/profile',
   name: 'profile',
   component: () => import('@/components/layout-component/index'),

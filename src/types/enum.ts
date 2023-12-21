@@ -21,3 +21,45 @@ export enum StoreName {
 export enum ApplicationInfo {
   appTitle = 'Vue TSX Admin'
 }
+
+export enum AppRouteNames {
+  login = 'LOGIN',
+
+  // =============== DIVIDER ==================
+  dashboard = 'DASHBOARD',
+  workplace = 'WORKPLACE',
+  monitor = 'MONITOR',
+
+  // =============== DIVIDER ==================
+
+  exception = 'exception',
+  _403 = '403',
+  _404 = '404',
+  _500 = '500',
+
+  // =============== DIVIDER ==================
+  form = 'FORM',
+  step = 'STEP',
+  group = 'GROUP',
+  // =============== DIVIDER ==================
+  profile = 'PROFILE',
+  detail = 'DETAIL',
+
+  // =============== DIVIDER ==================
+
+  list = 'LIST',
+  searchTable = 'SEARCH_TABLE',
+  card = 'CARD',
+  // =============== DIVIDER ==================
+  result = 'RESULT',
+  success = 'SUCCESS',
+  error = 'ERROR',
+
+  // =============== DIVIDER ==================
+
+  user = 'USER',
+  info = 'INFO',
+  setting = 'SETTING'
+
+  // =============== DIVIDER ==================
+}

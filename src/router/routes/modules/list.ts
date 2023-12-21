@@ -1,9 +1,9 @@
-//import { DEFAULT_LAYOUT } from '../base'
-import { type AppRouteRecordRaw } from '@/router/routes/types'
+import { AppRouteNames } from '@/types/enum'
+import type { AppRouteRecordRaw } from '../types'
 
-const LIST: any = {
+const LIST: AppRouteRecordRaw = {
   path: '/list',
-  name: 'list',
+  name: AppRouteNames.list,
   component: () => import('@/components/layout-component/index'),
   meta: {
     locale: 'menu.list',
@@ -13,8 +13,8 @@ const LIST: any = {
   },
   children: [
     {
-      path: 'search-table', // The midline path complies with SEO specifications
-      name: 'SearchTable',
+      path: 'search-table',
+      name: AppRouteNames.searchTable,
       component: () => import('@/views/list/search-table/index'),
       meta: {
         locale: 'menu.list.searchTable',
@@ -24,7 +24,7 @@ const LIST: any = {
     },
     {
       path: 'card',
-      name: 'Card',
+      name: AppRouteNames.card,
       component: () => import('@/views/list/card-list/index'),
       meta: {
         locale: 'menu.list.cardList',

@@ -1,6 +1,9 @@
-const USER: any = {
+import { AppRouteNames } from '@/types/enum'
+import type { AppRouteRecordRaw } from '../types'
+
+const USER: AppRouteRecordRaw = {
   path: '/user',
-  name: 'user',
+  name: AppRouteNames.user,
   component: () => import('@/components/layout-component/index'),
   meta: {
     locale: 'menu.user',
@@ -11,7 +14,7 @@ const USER: any = {
   children: [
     {
       path: 'info',
-      name: 'Info',
+      name: AppRouteNames.info,
       component: () => import('@/views/user/info/index'),
       meta: {
         locale: 'menu.user.info',
@@ -21,7 +24,7 @@ const USER: any = {
     },
     {
       path: 'setting',
-      name: 'Setting',
+      name: AppRouteNames.setting,
       component: () => import('@/views/user/setting/index'),
       meta: {
         locale: 'menu.user.setting',

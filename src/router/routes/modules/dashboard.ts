@@ -1,6 +1,9 @@
-const DASHBOARD: any = {
+import { AppRouteNames } from '@/types/enum'
+import type { AppRouteRecordRaw } from '../types'
+
+const DASHBOARD: AppRouteRecordRaw = {
   path: '/dashboard',
-  name: 'dashboard',
+  name: AppRouteNames.dashboard,
   component: () => import('@/components/layout-component/index'),
   meta: {
     locale: 'menu.dashboard',
@@ -11,7 +14,7 @@ const DASHBOARD: any = {
   children: [
     {
       path: 'workplace',
-      name: 'Workplace',
+      name: AppRouteNames.workplace,
       component: () => import('@/views/dashboard/workbench/index'),
       meta: {
         locale: 'menu.dashboard.workplace',
@@ -22,7 +25,7 @@ const DASHBOARD: any = {
 
     {
       path: 'monitor',
-      name: 'Monitor',
+      name: AppRouteNames.monitor,
       component: () => import('@/views/dashboard/monitor/index'),
       meta: {
         locale: 'menu.dashboard.monitor',

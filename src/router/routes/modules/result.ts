@@ -1,8 +1,9 @@
-// import { DEFAULT_LAYOUT } from '../base'
+import { AppRouteNames } from '@/types/enum'
+import type { AppRouteRecordRaw } from '../types'
 
-const RESULT: any = {
+const RESULT: AppRouteRecordRaw = {
   path: '/result',
-  name: 'result',
+  name: AppRouteNames.result,
   component: () => import('@/components/layout-component/index'),
   meta: {
     locale: 'menu.result',
@@ -13,7 +14,7 @@ const RESULT: any = {
   children: [
     {
       path: 'success',
-      name: 'Success',
+      name: AppRouteNames.success,
       component: () => import('@/views/result/success'),
       meta: {
         locale: 'menu.result.success',
@@ -23,7 +24,7 @@ const RESULT: any = {
     },
     {
       path: 'error',
-      name: 'Error',
+      name: AppRouteNames.error,
       component: () => import('@/views/result/error'),
       meta: {
         locale: 'menu.result.error',
