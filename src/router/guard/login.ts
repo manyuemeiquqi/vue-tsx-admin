@@ -2,7 +2,7 @@ import type { Router, LocationQueryRaw } from 'vue-router'
 import NProgress from 'nprogress'
 import { useUserStore } from '@/store'
 import { isLogin } from '@/utils/auth'
-import { ApplicationRouteName } from '@/types/enum'
+import { AppRouteNames } from '@/types/constants'
 /**
  *
  * @desc userInfo and token guard
@@ -25,17 +25,17 @@ export default function setupUserLoginInfoGuard(router: Router) {
         } catch (error) {
           await userStore.logoutApp()
           next({
-            name: ApplicationRouteName.login
+            name: AppRouteNames.login
           })
         }
       }
     } else {
-      if (to.name === ApplicationRouteName.login) {
+      if (to.name === AppRouteNames.login) {
         next()
         return
       }
       next({
-        name: ApplicationRouteName.login
+        name: AppRouteNames.login
       })
     }
   })

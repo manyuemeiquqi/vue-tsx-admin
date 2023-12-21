@@ -1,7 +1,7 @@
 import { createI18n } from 'vue-i18n'
 import en from './en-US'
 import cn from './zh-CN'
-import { LocalStorageKey, LocaleOptions } from '@/types/enum'
+import { LocalStorageKey, LocaleOptions } from '@/types/constants'
 
 const defaultLocale = localStorage.getItem(LocalStorageKey.localeKey) || LocaleOptions.en
 

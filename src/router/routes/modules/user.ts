@@ -1,4 +1,4 @@
-import { AppRouteNames } from '@/types/enum'
+import { AppRouteNames } from '@/types/constants'
 import type { AppRouteRecordRaw } from '../types'
 
 const USER: AppRouteRecordRaw = {

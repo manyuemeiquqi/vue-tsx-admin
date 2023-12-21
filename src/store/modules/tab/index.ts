@@ -1,7 +1,7 @@
 import type { RouteLocationNormalized } from 'vue-router'
 import { defineStore } from 'pinia'
 import { isString } from 'lodash'
-import { StoreName } from '@/types/enum'
+import { StoreName } from '@/types/constants'
 export const REDIRECT_ROUTE_NAME = 'Redirect'
 
 export const DEFAULT_ROUTE_NAME = 'Workplace'

@@ -27,7 +27,7 @@ import { defineComponent } from 'vue'
 import { useI18n } from 'vue-i18n'
 
 import { useFullscreen } from '@vueuse/core'
-import { LocaleOptions } from '@/types/enum'
+import { LocaleOptions } from '@/types/constants'
 import useLocale from '@/hooks/locale'
 import { isFunction, isString } from 'lodash'
 import { useApplicationStore, useUserStore } from '@/store'

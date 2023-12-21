@@ -1,7 +1,7 @@
 import { login, type LoginData } from '@/api/user'
 import useAuth from '@/hooks/auth'
 import useLoading from '@/hooks/loading'
-import { AppRouteNames, LocalStorageKey } from '@/types/enum'
+import { AppRouteNames, LocalStorageKey } from '@/types/constants'
 import { clearToken, setToken } from '@/utils/auth'
 import {
   Button,

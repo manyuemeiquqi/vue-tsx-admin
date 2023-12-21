@@ -4,7 +4,7 @@ import { RouterView } from 'vue-router'
 
 import zhCN from '@arco-design/web-vue/es/locale/lang/zh-cn'
 import enUS from '@arco-design/web-vue/es/locale/lang/en-us'
-import { ApplicationTheme, LocaleOptions } from './types/enum'
+import { ApplicationTheme, LocaleOptions } from './types/constants'
 import useLocale from './hooks/locale'
 import { useApplicationStore } from './store'
 

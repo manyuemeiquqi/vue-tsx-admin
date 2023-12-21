@@ -3,7 +3,7 @@ import { defineStore } from 'pinia'
 import type { RouteRecordNormalized } from 'vue-router'
 
 import type { NotificationReturn } from '@arco-design/web-vue/es/notification/interface'
-import { ApplicationTheme, LocalStorageKey, StoreName } from '@/types/enum'
+import { ApplicationTheme, LocalStorageKey, StoreName } from '@/types/constants'
 import { isNull } from 'lodash'
 
 export interface ApplicationState {
