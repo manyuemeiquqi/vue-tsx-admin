@@ -79,6 +79,9 @@ devDependencies:
   '@types/node':
     specifier: ^18.18.5
     version: 18.18.5
+  '@types/nprogress':
+    specifier: ^0.2.3
+    version: 0.2.3
   '@types/sortablejs':
     specifier: ^1.15.7
     version: 1.15.7
@@ -1037,6 +1040,10 @@ packages:
 
   /@types/normalize-package-data@2.4.3:
     resolution: {integrity: sha512-ehPtgRgaULsFG8x0NeYJvmyH1hmlfsNLujHe9dQEia/7MAJYdzMSi19JtchUHjmBA6XC/75dK55mzZH+RyieSg==}
+    dev: true
+
+  /@types/nprogress@0.2.3:
+    resolution: {integrity: sha512-k7kRA033QNtC+gLc4VPlfnue58CM1iQLgn1IMAU8VPHGOj7oIHPp9UlhedEnD/Gl8evoCjwkZjlBORtZ3JByUA==}
     dev: true
 
   /@types/semver@7.5.4:
