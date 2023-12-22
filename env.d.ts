@@ -6,3 +6,7 @@ declare module '*.tsx' {
   const component: DefineComponent<{}, {}, any>
   export default component
 }
+
+declare module '@arco-design/color' {
+  export { generate, getRgbStr }
+}
