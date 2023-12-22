@@ -3,9 +3,9 @@ export enum LocaleOptions {
   en = 'en-US'
 }
 export enum LocalStorageKey {
-  localeKey = 'vtsc-locale',
-  applicationTheme = 'vtsc-theme',
-  loginFormInfo = 'login-form-info'
+  localeKey = 'VUE_TSX_ADMIN_LOCALE',
+  applicationTheme = 'VUE_TSX_ADMIN_THEME',
+  loginFormInfo = 'VUE_TSX_ADMIN_LOGIN_FORM_INFO'
 }
 export enum ApplicationTheme {
   light = 'light',

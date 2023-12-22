@@ -69,7 +69,7 @@
   },
   "license": "MIT",
   "repository": {
-    "url": "https://github.com/manyuemeiquqi/Vtsc-admin"
+    "url": "https://github.com/manyuemeiquqi/vue-tsx-admin"
   },
   "keywords": [
     "Vue3",
@@ -80,6 +80,6 @@
     "tsx"
   ],
   "bugs": {
-    "url": "https://github.com/manyuemeiquqi/Vtsc-admin/issues"
+    "url": "https://github.com/manyuemeiquqi/vue-tsx-admin/issues"
   }
 }
