@@ -8,8 +8,9 @@ import {
   Link,
   Radio,
   RadioGroup,
+  Skeleton,
+  SkeletonShape,
   Space,
-  Spin,
   Table,
   Tabs,
   Tag,
@@ -87,13 +88,25 @@ export default defineComponent({
           {{
             default: () => (
               <>
-                <Spin loading={loading.value}>
-                  <img
-                    onLoad={() => setLoading(false)}
-                    class={['w-full', 'max-w-xl', 'block', 'my-0', 'mx-auto', 'mb-4']}
-                    src="https://cdn.jsdelivr.net/gh/manyuemeiquqi/my-image-bed/dist/c788fc704d32cf3b1136c7d45afc2669.png~tplv-uwbnlip3yd-webp.webp"
-                  />
-                </Spin>
+                {loading.value && (
+                  <Skeleton animation loading={loading.value}>
+                    <SkeletonShape class={['w-full', 'h-44', 'mb-2']} shape="square" />
+                  </Skeleton>
+                )}
+                <img
+                  onLoad={() => setLoading(false)}
+                  onError={() => setLoading(false)}
+                  class={[
+                    'w-full',
+                    'max-w-xl',
+                    'block',
+                    'my-0',
+                    'mx-auto',
+                    'mb-4',
+                    loading.value && 'hidden'
+                  ]}
+                  src="https://cdn.jsdelivr.net/gh/manyuemeiquqi/my-image-bed/dist/c788fc704d32cf3b1136c7d45afc2669.png~tplv-uwbnlip3yd-webp.webp"
+                />
                 <Grid.Row align="center" justify="space-between">
                   <Space size="small">
                     <Avatar size={24}>
