@@ -5,18 +5,13 @@ import { useI18n } from 'vue-i18n'
 import styles from './style.module.scss'
 export default defineComponent({
   name: 'AddCard',
-  props: {
-    description: {
-      type: String
-    }
-  },
-  setup(props) {
+  setup() {
     const { t } = useI18n()
     return () => (
-      <Card class={[styles.card]} hoverable>
+      <Card class={[styles['add-card']]} hoverable>
         <Result title={t('cardList.content.action')}>
           {{
-            icon: () => <IconPlus />
+            icon: () => <IconPlus class="cursor-pointer" />
           }}
         </Result>
       </Card>

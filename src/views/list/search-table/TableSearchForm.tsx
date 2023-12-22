@@ -17,6 +17,7 @@ import { useI18n } from 'vue-i18n'
 import styles from './style.module.scss'
 
 export default defineComponent({
+  name: 'TableSearchForm',
   emits: ['onSearch'],
   props: {
     searchQuery: {

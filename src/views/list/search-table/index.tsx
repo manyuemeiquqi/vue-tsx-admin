@@ -32,6 +32,7 @@ import { useI18n } from 'vue-i18n'
 import TableSearchForm from './TableSearchForm'
 
 export default defineComponent({
+  name: 'SearchTable',
   setup() {
     const { t } = useI18n()
     const initPagination: Pagination = {

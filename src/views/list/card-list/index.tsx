@@ -1,10 +1,17 @@
 import { Card, Input, Tabs, Typography } from '@arco-design/web-vue'
 import { defineComponent } from 'vue'
-import QualityInspection from './QualityInspection'
 import { useI18n } from 'vue-i18n'
-import TheService from './TheService'
-
+import QualityInspection from './QualityInspection'
 import RulesPreset from './RulesPreset'
+import TheService from './TheService'
+export const itemSpan = {
+  xs: 12,
+  sm: 12,
+  md: 12,
+  lg: 8,
+  xl: 8,
+  xxl: 6
+} as const
 export default defineComponent({
   name: 'CardList',
   setup() {
@@ -52,7 +59,7 @@ export default defineComponent({
     ]
     return () => (
       <Card
-        class="general-card "
+        class="general-card"
         v-slots={{
           title: () => <Typography.Title heading={6}>{t('menu.list.cardList')}</Typography.Title>
         }}

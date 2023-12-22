@@ -1,9 +1,12 @@
 import { queryRulesPresetList, type ServiceRecord } from '@/api/list'
 import useLoading from '@/hooks/loading'
-import { Card, Grid, Skeleton, Space, Switch, Tag, Typography } from '@arco-design/web-vue'
+import { Card, Grid, Space, Switch, Tag, Typography } from '@arco-design/web-vue'
 import { IconCheckCircleFill } from '@arco-design/web-vue/es/icon'
 import { defineComponent, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
+import SkeletonCard from './SkeletonCard'
+import styles from './style.module.scss'
+import { itemSpan } from '.'
 
 export default defineComponent({
   name: 'RulesPreset',
@@ -27,38 +30,12 @@ export default defineComponent({
     return () => (
       <div>
         <Typography.Title heading={6}>{t('cardList.tab.title.preset')}</Typography.Title>
-        <Grid colGap={24} rowGap={24}>
+        <Grid colGap={16} rowGap={16}>
           {loading.value
-            ? fillList.map(() => (
-                <Grid.Item
-                  span={{
-                    xs: 12,
-                    sm: 12,
-                    md: 12,
-                    lg: 6,
-                    xl: 6,
-                    xxl: 6
-                  }}
-                >
-                  <Card>
-                    <Skeleton loading={loading.value} animation>
-                      <Skeleton.Line widths={['100%', '40%']} rows={2}></Skeleton.Line>
-                    </Skeleton>
-                  </Card>
-                </Grid.Item>
-              ))
+            ? fillList.map(() => <SkeletonCard loading={loading.value} />)
             : cardList.value.map((item) => (
-                <Grid.Item
-                  span={{
-                    xs: 12,
-                    sm: 12,
-                    md: 12,
-                    lg: 6,
-                    xl: 6,
-                    xxl: 6
-                  }}
-                >
-                  <Card hoverable>
+                <Grid.Item span={itemSpan}>
+                  <Card hoverable class={[styles.card]}>
                     {{
                       default: () => (
                         <Card.Meta>
@@ -87,7 +64,7 @@ export default defineComponent({
                           }}
                         </Card.Meta>
                       ),
-                      actions: () => <Switch defaultChecked={item.enable} />
+                      actions: () => <Switch v-model={item.enable} />
                     }}
                   </Card>
                 </Grid.Item>
