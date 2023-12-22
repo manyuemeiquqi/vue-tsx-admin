@@ -1,46 +1,67 @@
-import { queryPolicyList, type PolicyParams, type PolicyRecord } from '@/api/list'
+import { queryPolicyList, type PolicyQuery, type PolicyRecord } from '@/api/list'
 import useLoading from '@/hooks/loading'
 import { type Pagination } from '@/types/global'
+import { exchangeArray } from '@/utils/sort'
 import {
+  Avatar,
+  Badge,
   Button,
   Card,
   Checkbox,
   Divider,
   Dropdown,
+  Link,
   Popover,
   Space,
   Table,
   Tooltip,
   Upload,
-  type TableColumnData,
-  Badge,
-  Link,
-  Avatar,
-  Typography
+  type PaginationProps,
+  type TableColumnData
 } from '@arco-design/web-vue'
 import {
   IconDownload,
   IconDragArrow,
   IconLineHeight,
   IconPlus,
-  IconRefresh,
   IconSettings
 } from '@arco-design/web-vue/es/icon'
-import { cloneDeep } from 'lodash'
 import Sortable from 'sortablejs'
 import { computed, defineComponent, nextTick, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 import TableSearchForm from './TableSearchForm'
+
 export default defineComponent({
   setup() {
-    const basePagination: Pagination = {
+    const { t } = useI18n()
+    const initPagination: Pagination = {
       current: 1,
       pageSize: 20
     }
-    const pagination = ref({
-      ...basePagination
+    const paginationConfig = ref<PaginationProps & Pagination>({
+      ...initPagination,
+      showTotal: true
     })
-    const { t } = useI18n()
+    const resetPagination = () => {
+      paginationConfig.value = {
+        ...paginationConfig.value,
+        ...initPagination
+      }
+    }
+    const handleCurrentChange = (page: number) => {
+      paginationConfig.value.current = page
+      fetchData()
+    }
+    const handlePageSizeChange = (pageSize: number) => {
+      paginationConfig.value.pageSize = pageSize
+      fetchData()
+    }
+    const handleQuerySearch = () => {
+      resetPagination()
+      fetchData()
+    }
+    // =============== DIVIDER ==================
+    // table size change
     type TableSize = 'medium' | 'mini' | 'small' | 'large'
     const tableSize = ref<TableSize>('medium')
     const densityList = computed(() => [
@@ -64,24 +85,45 @@ export default defineComponent({
     const handleSelectDensity = (val: unknown) => {
       tableSize.value = val as TableSize
     }
-    const { loading, setLoading } = useLoading()
+
+    // =============== DIVIDER ==================
+    // fetch data logic
+
     const renderData = ref<PolicyRecord[]>([])
-    const fetchData = async (params: PolicyParams = { current: 1, pageSize: 20 }) => {
+    const searchQuery = ref<PolicyQuery>({
+      number: '',
+      name: '',
+      contentType: '',
+      filterType: '',
+      createdTime: [],
+      status: ''
+    })
+
+    const { loading, setLoading } = useLoading()
+    const fetchData = async () => {
       setLoading(true)
       try {
+        const query = searchQuery.value
+        const params = {
+          ...query,
+          current: paginationConfig.value.current,
+          pageSize: paginationConfig.value.pageSize
+        }
         const { data } = await queryPolicyList(params)
+        console.log(JSON.parse(JSON.stringify(params)))
+
         renderData.value = data.list
-        // pagination.current = params.current
-        // pagination.total = data.total
+        paginationConfig.value.total = data.total
       } catch (err) {
         // you can report use errorHandler or other
       } finally {
         setLoading(false)
       }
     }
-
     fetchData()
-    const handleSearch = () => {}
+    // =============== DIVIDER ==================
+    // table columns render logic
+
     const colList = ref([
       {
         getTitle: () => t('searchTable.columns.number'),
@@ -155,19 +197,7 @@ export default defineComponent({
         checked: true
       }
     ])
-    const exchangeArray = <T extends Array<any>>(
-      array: T,
-      beforeIdx: number,
-      newIdx: number,
-      isDeep = false
-    ): T => {
-      const newArray = isDeep ? cloneDeep(array) : array
-      if (beforeIdx > -1 && newIdx > -1) {
-        // 先替换后面的，然后拿到替换的结果替换前面的
-        newArray.splice(beforeIdx, 1, newArray.splice(newIdx, 1, newArray[beforeIdx]).pop())
-      }
-      return newArray
-    }
+
     const popupVisibleChange = (val: boolean) => {
       if (val) {
         nextTick(() => {
@@ -193,9 +223,14 @@ export default defineComponent({
           return ret
         })
     })
+
     return () => (
       <Card class="general-card " title={t('menu.list.searchTable')}>
-        <TableSearchForm />
+        <TableSearchForm
+          searchLoading={loading.value}
+          searchQuery={searchQuery.value}
+          onOnSearch={handleQuerySearch}
+        />
         <Divider />
         <div class="flex justify-between mb-4">
           <Space>
@@ -221,9 +256,6 @@ export default defineComponent({
             >
               {t('searchTable.operation.download')}
             </Button>
-            <Tooltip content={t('searchTable.actions.refresh')}>
-              <IconRefresh class="cursor-pointer" onClick={handleSearch} size="18" />
-            </Tooltip>
             <Dropdown onSelect={handleSelectDensity}>
               {{
                 default: () => (
@@ -271,7 +303,10 @@ export default defineComponent({
           data={renderData.value}
           bordered={false}
           size={tableSize.value}
+          pagination={paginationConfig.value as PaginationProps}
           columns={tableColumns.value}
+          onPageChange={handleCurrentChange}
+          onPageSizeChange={handlePageSizeChange}
         ></Table>
       </Card>
     )
