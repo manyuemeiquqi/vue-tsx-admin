@@ -3,7 +3,7 @@ import { Button, Card, Descriptions, Grid, Skeleton, Space, Typography } from '@
 import { defineComponent, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 import AddCard from './AddCard'
-
+import styles from './style.module.scss'
 export default defineComponent({
   name: 'QualityInspection',
   setup() {
@@ -40,7 +40,7 @@ export default defineComponent({
                 xxl: 6
               }}
             >
-              <Card>
+              <Card class={[styles.card]} hoverable>
                 {{
                   default: () => (
                     <Card.Meta>
@@ -48,8 +48,12 @@ export default defineComponent({
                         title: () => <Typography.Text>{item.title}</Typography.Text>,
                         description: () => (
                           <>
-                            {item.description}
+                            <div class={['text-[rgb(var(--gray-6))]', 'mb-4', 'mt-4']}>
+                              {' '}
+                              {item.description}{' '}
+                            </div>
                             <Descriptions
+                              class={[styles['card-desc']]}
                               data={item.data}
                               layout="inline-horizontal"
                               column={2}

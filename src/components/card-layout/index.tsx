@@ -1,6 +1,6 @@
-import { defineComponent } from 'vue'
+import { defineComponent, type VNode } from 'vue'
 interface Slots {
-  default: any
+  default: () => VNode
 }
 export default defineComponent({
   name: 'CardLayout',

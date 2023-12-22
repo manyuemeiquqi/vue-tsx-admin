@@ -15,7 +15,7 @@ import { defineComponent, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 import AddCard from './AddCard'
 import { IconCheckCircleFill, IconFilter } from '@arco-design/web-vue/es/icon'
-
+import styles from './style.module.scss'
 export default defineComponent({
   name: 'TheService',
   setup() {
@@ -41,12 +41,12 @@ export default defineComponent({
                 xxl: 6
               }}
             >
-              <Card>
+              <Card class={[styles.card]}>
                 {{
                   default: () => (
                     <Space align="start">
                       {item.icon && (
-                        <Avatar size={24}>
+                        <Avatar size={24} class={['mr-2', 'bg-[#626aea]']}>
                           <IconFilter />
                         </Avatar>
                       )}
@@ -55,14 +55,27 @@ export default defineComponent({
                           title: () => (
                             <>
                               <Typography.Text>{item.title}</Typography.Text>
-
-                              <Tag
-                                size="small"
-                                color="green"
-                                v-slots={{
-                                  icon: () => <IconCheckCircleFill />
-                                }}
-                              ></Tag>
+                              {item.expires ? (
+                                <Tag
+                                  size="small"
+                                  color="red"
+                                  v-slots={{
+                                    icon: () => <IconCheckCircleFill />
+                                  }}
+                                >
+                                  {t('cardList.service.tag')}
+                                </Tag>
+                              ) : (
+                                <Tag
+                                  size="small"
+                                  color="green"
+                                  v-slots={{
+                                    icon: () => <IconCheckCircleFill />
+                                  }}
+                                >
+                                  {t('cardList.service.expiresTag')}
+                                </Tag>
+                              )}
                             </>
                           ),
                           description: () => (
@@ -92,8 +105,11 @@ export default defineComponent({
                   ),
                   actions: () => (
                     <Space>
-                      <Button type="primary">{t('cardList.service.open')}</Button>
-                      <Button>{t('cardList.service.cancel')}</Button>
+                      {item.enable ? (
+                        <Button type="primary">{t('cardList.service.open')}</Button>
+                      ) : (
+                        <Button>{t('cardList.service.cancel')}</Button>
+                      )}
                     </Space>
                   )
                 }}
