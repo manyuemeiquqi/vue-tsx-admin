@@ -35,7 +35,7 @@ export default defineComponent({
           <Space size="medium" direction="vertical" fill>
             <RightTopArea />
             <Carousel
-              class={['h-40', 'rounded', 'overflow-auto']}
+              class={['h-40', 'rounded', 'hidden']}
               indicatorType="slider"
               showArrow="hover"
               autoPlay

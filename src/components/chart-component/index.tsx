@@ -1,6 +1,7 @@
 import { defineComponent, nextTick, ref } from 'vue'
 import VChart from 'vue-echarts'
 export default defineComponent({
+  name: 'ChartComponent',
   props: {
     options: {
       type: Object,

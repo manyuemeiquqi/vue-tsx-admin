@@ -8,6 +8,7 @@ import { useRouter, type RouteRecordRaw } from 'vue-router'
 // 但是能够访问的形式只有一种 就只能放在 menu-item里面，其余的就是放在不同的父级里面
 
 export default defineComponent({
+  name: 'MenuComponent',
   setup() {
     const { t } = useI18n()
     const router = useRouter()

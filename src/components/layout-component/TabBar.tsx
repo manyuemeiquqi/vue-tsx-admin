@@ -7,6 +7,7 @@ import { listenerRouteChange, removeRouteListener } from '@/utils/routerListener
 
 import styles from './style.module.scss'
 export default defineComponent({
+  name: 'TabBar',
   setup() {
     const tabStore = useTabStore()
 

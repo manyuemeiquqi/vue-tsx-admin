@@ -38,9 +38,7 @@ export default defineComponent({
       {
         title: '内容标题',
         dataIndex: 'title',
-        render: ({ record }: { record: TableData }) => (
-          <Typography.Text ellipsis>{record.title}</Typography.Text>
-        )
+        render: ({ record }: { record: TableData }) => <span>{record.title}</span>
       },
       {
         title: '点击量',

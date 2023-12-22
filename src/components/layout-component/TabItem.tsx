@@ -21,6 +21,7 @@ enum TabActionType {
   all = 'all'
 }
 export default defineComponent({
+  name: 'TabItem',
   props: {
     itemData: {
       type: Object as PropType<TagProps>,

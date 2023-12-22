@@ -1,45 +1,27 @@
 import Logo from '@/assets/logo.svg'
+import { Button, Input, Select, Space, Tooltip, Typography } from '@arco-design/web-vue'
 import {
-  Avatar,
-  Badge,
-  Button,
-  Dropdown,
-  Input,
-  Message,
-  Select,
-  Space,
-  Tooltip,
-  Typography
-} from '@arco-design/web-vue'
-import {
-  IconExport,
   IconFullscreen,
   IconFullscreenExit,
   IconLanguage,
   IconMoonFill,
-  IconNotification,
   IconSettings,
-  IconSunFill,
-  IconTag,
-  IconUser
+  IconSunFill
 } from '@arco-design/web-vue/es/icon'
-import { defineComponent } from 'vue'
+import { Teleport, defineComponent } from 'vue'
 import { useI18n } from 'vue-i18n'
-
-import { useFullscreen } from '@vueuse/core'
-import { LocaleOptions } from '@/types/constants'
 import useLocale from '@/hooks/locale'
-import { isFunction, isString } from 'lodash'
 import { useApplicationStore, useUserStore } from '@/store'
+import { LocaleOptions } from '@/types/constants'
+import { useFullscreen } from '@vueuse/core'
+import { isString } from 'lodash'
 import { useRoute, useRouter } from 'vue-router'
-import { logout } from '@/api/user'
-import { removeRouteListener } from '@/utils/routerListener'
-import { clearToken } from '@/hooks/token'
-
-import styles from './style.module.scss'
 import AvatarAndOptions from './AvatarAndOptions'
+import styles from './style.module.scss'
+import AppSetting from '../app-setting'
 
 export default defineComponent({
+  name: 'Navbar',
   setup() {
     const route = useRoute()
     const { isFullscreen, toggle: toggleFullScreen } = useFullscreen()
@@ -150,6 +132,9 @@ export default defineComponent({
           </Tooltip>
           <AvatarAndOptions />
         </Space>
+        <Teleport to="body">
+          <AppSetting />
+        </Teleport>
       </div>
     )
   }

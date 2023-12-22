@@ -6,22 +6,19 @@ import FooterComponent from './FooterComponent'
 import Navbar from './Navbar'
 import TabBar from './TabBar'
 import BreadcrumbComponent from './BreadcrumbComponent'
+import styles from './style.module.scss'
 export default defineComponent({
+  name: 'LayoutComponent',
   setup() {
     return () => {
       return (
         <Layout>
           <Navbar />
           <Layout>
-            <Layout.Sider class="!pt-16   h-full !fixed left-0  z-50">
+            <Layout.Sider class={[styles.sider]}>
               <MenuComponent></MenuComponent>
             </Layout.Sider>
-            <Layout
-              class="!pt-16   !pl-52 min-h-screen  bg-[color:var(--color-fill-2)] 
-            min-w-[1100px]
-            transition-[padding-left] duration-[0.2s]
-            "
-            >
+            <Layout class={[styles.main]}>
               <div class="pt-4 pb-0 px-5">
                 <TabBar />
                 <BreadcrumbComponent />
