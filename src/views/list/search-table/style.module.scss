@@ -1,0 +1,18 @@
+.form {
+  :global(.arco-form-item-label-col-left) {
+    > label {
+      white-space: nowrap;
+    }
+  }
+}
+
+.button-area {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding-left: 20px;
+  margin-bottom: 20px;
+  border-left: 1px solid var(--color-border-2);
+  box-sizing: border-box;
+  margin-left: 20px;
+}
