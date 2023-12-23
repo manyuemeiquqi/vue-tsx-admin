@@ -18,7 +18,7 @@ export default defineComponent({
     ]
     return () => (
       <div class="flex">
-        <div class={['flex-1', 'overflow-auto']}>
+        <div class={['flex-1', 'overflow-hidden']}>
           <Space size="medium" direction="vertical" fill>
             <OverView />
             <Grid.Row gutter={16}>

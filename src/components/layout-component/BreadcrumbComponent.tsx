@@ -3,6 +3,7 @@ import { IconApps } from '@arco-design/web-vue/es/icon'
 import { defineComponent } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { useRoute } from 'vue-router'
+
 export default defineComponent({
   name: 'BreadcrumbComponent',
   setup() {

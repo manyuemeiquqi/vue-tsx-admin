@@ -1,4 +1,6 @@
-import { Doption, Dropdown } from '@arco-design/web-vue'
+import { useTabStore } from '@/store'
+import { type TagProps } from '@/types/global'
+import { Doption, Dropdown, Tag } from '@arco-design/web-vue'
 import {
   IconClose,
   IconFolderDelete,
@@ -7,11 +9,9 @@ import {
   IconToLeft,
   IconToRight
 } from '@arco-design/web-vue/es/icon'
-import { defineComponent, type PropType, withModifiers, computed } from 'vue'
-import { type TagProps } from '@/types/global'
+import { computed, defineComponent, type PropType } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { useRoute, useRouter } from 'vue-router'
-import { useTabStore } from '@/store'
 enum TabActionType {
   reload = 'reload',
   current = 'current',
@@ -68,14 +68,15 @@ export default defineComponent({
       <Dropdown onSelect={handleSelect} trigger="contextMenu" popupMaxHeight={false}>
         {{
           default: () => (
-            <span onClick={() => handleTabClick(props.itemData.name)}>
-              <span>{t(props.itemData.title)}</span>
-              <span
-                onClick={withModifiers(() => handleTabClose(props.index, props.itemData), ['stop'])}
-              >
-                <IconClose />
-              </span>
-            </span>
+            <Tag
+              class={['mr-1']}
+              closable
+              checkable
+              onCheck={() => handleTabClick(props.itemData.name)}
+              onClose={() => handleTabClose(props.index, props.itemData)}
+            >
+              <span class={['text-[var(--color-text-2)]']}>{t(props.itemData.title)}</span>
+            </Tag>
           ),
           content: () => (
             <>

@@ -226,90 +226,92 @@ export default defineComponent({
     })
 
     return () => (
-      <Card class="general-card " title={t('menu.list.searchTable')}>
-        <TableSearchForm
-          searchLoading={loading.value}
-          searchQuery={searchQuery.value}
-          onOnSearch={handleQuerySearch}
-        />
-        <Divider />
-        <div class="flex justify-between mb-4">
-          <Space>
-            <Button
-              v-slots={{
-                icon: () => <IconPlus />
-              }}
-              type="primary"
-            >
-              {t('searchTable.operation.create')}
-            </Button>
-            <Upload action="/" showFileList={false}>
-              {{
-                'upload-button': () => <Button>{t('searchTable.operation.import')}</Button>
-              }}
-            </Upload>
-          </Space>
-          <Space size="medium">
-            <Button
-              v-slots={{
-                icon: () => <IconDownload />
-              }}
-            >
-              {t('searchTable.operation.download')}
-            </Button>
-            <Dropdown onSelect={handleSelectDensity}>
-              {{
-                default: () => (
-                  <Tooltip content={t('searchTable.actions.density')}>
-                    <IconLineHeight class="cursor-pointer" size="18" />
-                  </Tooltip>
-                ),
-                content: () =>
-                  densityList.value.map((item) => (
-                    <Dropdown.Option value={item.value}>
-                      <span>{item.name}</span>
-                    </Dropdown.Option>
-                  ))
-              }}
-            </Dropdown>
-            <Tooltip content={t('searchTable.actions.columnSetting')}>
-              <Popover trigger="click" position="left" onPopupVisibleChange={popupVisibleChange}>
-                {{
-                  content: () => (
-                    <div id="tableSetting">
-                      {colList.value.map((item) => (
-                        <div class="w-32">
-                          <Space>
-                            <IconDragArrow class="cursor-move" />
-                            <Checkbox v-model={item.checked} />
-                            <div
-                              class="text-ellipsis whitespace-nowrap  overflow-hidden w-20"
-                              title={item.getTitle()}
-                            >
-                              {item.getTitle()}
-                            </div>
-                          </Space>
-                        </div>
-                      ))}
-                    </div>
-                  ),
-                  default: () => <IconSettings size="18" class="cursor-pointer" />
+      <div>
+        <Card class="general-card " title={t('menu.list.searchTable')}>
+          <TableSearchForm
+            searchLoading={loading.value}
+            searchQuery={searchQuery.value}
+            onOnSearch={handleQuerySearch}
+          />
+          <Divider />
+          <div class="flex justify-between mb-4">
+            <Space>
+              <Button
+                v-slots={{
+                  icon: () => <IconPlus />
                 }}
-              </Popover>
-            </Tooltip>
-          </Space>
-        </div>
-        <Table
-          loading={loading.value}
-          data={renderData.value}
-          bordered={false}
-          size={tableSize.value}
-          pagination={paginationConfig.value as PaginationProps}
-          columns={tableColumns.value}
-          onPageChange={handleCurrentChange}
-          onPageSizeChange={handlePageSizeChange}
-        ></Table>
-      </Card>
+                type="primary"
+              >
+                {t('searchTable.operation.create')}
+              </Button>
+              <Upload action="/" showFileList={false}>
+                {{
+                  'upload-button': () => <Button>{t('searchTable.operation.import')}</Button>
+                }}
+              </Upload>
+            </Space>
+            <Space size="medium">
+              <Button
+                v-slots={{
+                  icon: () => <IconDownload />
+                }}
+              >
+                {t('searchTable.operation.download')}
+              </Button>
+              <Dropdown onSelect={handleSelectDensity}>
+                {{
+                  default: () => (
+                    <Tooltip content={t('searchTable.actions.density')}>
+                      <IconLineHeight class="cursor-pointer" size="18" />
+                    </Tooltip>
+                  ),
+                  content: () =>
+                    densityList.value.map((item) => (
+                      <Dropdown.Option value={item.value}>
+                        <span>{item.name}</span>
+                      </Dropdown.Option>
+                    ))
+                }}
+              </Dropdown>
+              <Tooltip content={t('searchTable.actions.columnSetting')}>
+                <Popover trigger="click" position="left" onPopupVisibleChange={popupVisibleChange}>
+                  {{
+                    content: () => (
+                      <div id="tableSetting">
+                        {colList.value.map((item) => (
+                          <div class="w-32">
+                            <Space>
+                              <IconDragArrow class="cursor-move" />
+                              <Checkbox v-model={item.checked} />
+                              <div
+                                class="text-ellipsis whitespace-nowrap  overflow-hidden w-20"
+                                title={item.getTitle()}
+                              >
+                                {item.getTitle()}
+                              </div>
+                            </Space>
+                          </div>
+                        ))}
+                      </div>
+                    ),
+                    default: () => <IconSettings size="18" class="cursor-pointer" />
+                  }}
+                </Popover>
+              </Tooltip>
+            </Space>
+          </div>
+          <Table
+            loading={loading.value}
+            data={renderData.value}
+            bordered={false}
+            size={tableSize.value}
+            pagination={paginationConfig.value as PaginationProps}
+            columns={tableColumns.value}
+            onPageChange={handleCurrentChange}
+            onPageSizeChange={handlePageSizeChange}
+          ></Table>
+        </Card>
+      </div>
     )
   }
 })

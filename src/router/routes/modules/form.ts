@@ -14,7 +14,7 @@ const FORM: AppRouteRecordRaw = {
   children: [
     {
       path: 'step',
-      name: AppRouteNames._403,
+      name: AppRouteNames.step,
       component: () => import('@/views/form/step/index'),
       meta: {
         locale: 'menu.form.step',
@@ -24,7 +24,7 @@ const FORM: AppRouteRecordRaw = {
     },
     {
       path: 'group',
-      name: AppRouteNames._404,
+      name: AppRouteNames.group,
       component: () => import('@/views/form/group/index'),
       meta: {
         locale: 'menu.form.group',

@@ -6,7 +6,7 @@ export default defineComponent({
   setup() {
     return () => (
       <LayoutFooter class="flex h-10 justify-center items-center text-center text-[var(--color-text-2)]">
-        {ApplicationInfo.appTitle}
+        {ApplicationInfo.APP_TITLE}
       </LayoutFooter>
     )
   }

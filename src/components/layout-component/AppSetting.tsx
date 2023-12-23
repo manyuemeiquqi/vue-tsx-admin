@@ -15,6 +15,7 @@ import { useApplicationStore } from '@/store'
 import { generate, getRgbStr } from '@arco-design/color'
 import { useToggle } from '@vueuse/core'
 export default defineComponent({
+  name: 'AppSetting',
   setup(props, { expose }) {
     const { t } = useI18n()
     const [settingVisible, toggleVisible] = useToggle()

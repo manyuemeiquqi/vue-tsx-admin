@@ -15,7 +15,7 @@ export default defineComponent({
           backgroundSize: '100%'
         }}
       >
-        <Space direction="vertical" align="center">
+        <Space direction="vertical" size="mini" align="center">
           <Avatar size={64}>
             {{
               default: () => (
@@ -27,7 +27,10 @@ export default defineComponent({
               'trigger-icon': () => <IconCamera />
             }}
           </Avatar>
-          <Typography.Title heading={6}> {userStore.userInfo.name}</Typography.Title>
+          <Typography.Title class="!my-0" heading={6}>
+            {' '}
+            {userStore.userInfo.name}
+          </Typography.Title>
           <Space size={'small'}>
             <div>
               <IconUser class="mr-1" />

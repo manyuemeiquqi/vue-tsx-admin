@@ -1,4 +1,3 @@
-// 定义全局的 class
 * {
   box-sizing: border-box;
 }
@@ -15,84 +14,23 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
-.content-wrapper {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  min-height: calc(100vh - 130px);
-  border-radius: 0.25rem !important;
-  background-color: var(--color-bg-1);
+/* width */
+::-webkit-scrollbar {
+  width: 10px;
 }
 
-.general-card {
-  border-radius: 4px;
-  border: none;
-
-  & > .arco-card-header {
-    height: auto;
-    padding: 20px;
-    border: none;
-  }
-
-  & > .arco-card-body {
-    padding: 0 20px 20px;
-  }
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
 }
 
-.echarts-tooltip-diy {
-  background: linear-gradient(
-    304.17deg,
-    rgba(253, 254, 255, 0.6) -6.04%,
-    rgba(244, 247, 252, 0.6) 85.2%
-  ) !important;
-  border: none !important;
-  backdrop-filter: blur(10px) !important;
-  /* Note: backdrop-filter has minimal browser support */
-
-  border-radius: 6px !important;
-  .content-panel {
-    display: flex;
-    justify-content: space-between;
-    padding: 0 9px;
-    background: rgba(255, 255, 255, 0.8);
-    width: 164px;
-    height: 32px;
-    line-height: 32px;
-    box-shadow: 6px 0px 20px rgba(34, 87, 188, 0.1);
-    border-radius: 4px;
-    margin-bottom: 4px;
-  }
-  .tooltip-title {
-    margin: 0 0 10px 0;
-  }
-  p {
-    margin: 0;
-  }
-  .tooltip-title,
-  .tooltip-value {
-    font-size: 13px;
-    line-height: 15px;
-    display: flex;
-    align-items: center;
-    text-align: right;
-    color: #1d2129;
-    font-weight: bold;
-  }
-  .tooltip-item-icon {
-    display: inline-block;
-    margin-right: 8px;
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-  }
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 5px;
 }
 
-.v-enter-active,
-.v-leave-active {
-  transition: opacity 0.5s ease;
-}
-
-.v-enter-from,
-.v-leave-to {
-  opacity: 0;
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
 }

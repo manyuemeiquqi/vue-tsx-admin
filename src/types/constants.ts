@@ -19,7 +19,7 @@ export enum StoreName {
 }
 
 export enum ApplicationInfo {
-  appTitle = 'Vue TSX Admin'
+  APP_TITLE = 'Vue TSX Admin'
 }
 
 export enum AppRouteNames {

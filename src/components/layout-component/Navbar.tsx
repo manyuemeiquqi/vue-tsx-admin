@@ -47,7 +47,7 @@ export default defineComponent({
         <Space align="center">
           <img src={Logo} alt="logo" class={['w-8', 'h-8']} />
           <Typography.Title class={['!text-lg', '!m-0']} heading={5}>
-            {ApplicationInfo.appTitle}
+            {ApplicationInfo.APP_TITLE}
           </Typography.Title>
         </Space>
         <Space>

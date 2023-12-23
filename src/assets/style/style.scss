@@ -1,6 +1,7 @@
 /* tailwind 自带modern-normalize */
 @import './global';
 @import './normalize';
+@import './generic';
 @tailwind base;
 @tailwind components;
 @tailwind utilities;

@@ -1,14 +1,14 @@
-import { Layout } from '@arco-design/web-vue'
-import { computed, defineComponent } from 'vue'
-import MenuComponent from './MenuComponent'
-import PageComponent from './PageComponent'
-import FooterComponent from './FooterComponent'
-import Navbar from './Navbar'
-import TabBar from './TabBar'
-import BreadcrumbComponent from './BreadcrumbComponent'
-import styles from './style.module.scss'
 import { useApplicationStore } from '@/store'
 import { layoutStyleConfig } from '@/types/constants'
+import { Layout } from '@arco-design/web-vue'
+import { computed, defineComponent } from 'vue'
+import BreadcrumbComponent from './BreadcrumbComponent'
+import FooterComponent from './FooterComponent'
+import MenuComponent from './MenuComponent'
+import Navbar from './Navbar'
+import PageComponent from './PageComponent'
+import TabBar from './TabBar'
+import styles from './style.module.scss'
 export default defineComponent({
   name: 'LayoutComponent',
   setup() {

@@ -58,26 +58,30 @@ export default defineComponent({
       }
     ]
     return () => (
-      <Card
-        class="general-card"
-        v-slots={{
-          title: () => <Typography.Title heading={6}>{t('menu.list.cardList')}</Typography.Title>
-        }}
-      >
-        <Tabs
-          type="rounded"
-          defaultActiveKey={1}
+      <div>
+        <Card
+          class="general-card"
           v-slots={{
-            extra: () => <Input placeholder={t('cardList.searchInput.placeholder')} class="w-60" />
+            title: () => <Typography.Title heading={6}>{t('menu.list.cardList')}</Typography.Title>
           }}
         >
-          {tabList.map((tab) => (
-            <Tabs.TabPane key={tab.value} title={tab.getTitle()}>
-              {tab.pane}
-            </Tabs.TabPane>
-          ))}
-        </Tabs>
-      </Card>
+          <Tabs
+            type="rounded"
+            defaultActiveKey={1}
+            v-slots={{
+              extra: () => (
+                <Input placeholder={t('cardList.searchInput.placeholder')} class="w-60" />
+              )
+            }}
+          >
+            {tabList.map((tab) => (
+              <Tabs.TabPane key={tab.value} title={tab.getTitle()}>
+                {tab.pane}
+              </Tabs.TabPane>
+            ))}
+          </Tabs>
+        </Card>
+      </div>
     )
   }
 })
