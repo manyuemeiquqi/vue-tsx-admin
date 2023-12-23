@@ -6,6 +6,7 @@ import type { RouteLocationNormalized } from 'vue-router'
 import { listenerRouteChange, removeRouteListener } from '@/utils/routerListener'
 
 import styles from './style.module.scss'
+import { layoutStyleConfig } from '@/types/constants'
 export default defineComponent({
   name: 'TabBar',
   setup() {
@@ -30,8 +31,8 @@ export default defineComponent({
       removeRouteListener()
     })
     return () => (
-      <div class={[styles['tab-bar-container']]}>
-        <Affix offsetTop={60}>
+      <div class={['relative', 'bg-[var(--color-bg-2)]']}>
+        <Affix offsetTop={layoutStyleConfig.NAVBAR_HEIGHT}>
           <div class={[styles['tab-bar-box']]}>
             <div class={[styles['tab-bar-scroll']]}>
               <div class={[styles['tab-bar-wrap']]}>
@@ -40,7 +41,7 @@ export default defineComponent({
                 ))}
               </div>
             </div>
-            <div class={[styles['tab-bar-operation']]}></div>
+            <div class={['w-24', 'h-8']}></div>
           </div>
         </Affix>
       </div>

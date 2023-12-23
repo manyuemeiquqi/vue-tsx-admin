@@ -1,4 +1,7 @@
 import Logo from '@/assets/logo.svg'
+import useLocale from '@/hooks/locale'
+import { useApplicationStore } from '@/store'
+import { ApplicationInfo, LocaleOptions, layoutStyleConfig } from '@/types/constants'
 import { Button, Input, Select, Space, Tooltip, Typography } from '@arco-design/web-vue'
 import {
   IconFullscreen,
@@ -8,56 +11,44 @@ import {
   IconSettings,
   IconSunFill
 } from '@arco-design/web-vue/es/icon'
-import { Teleport, defineComponent } from 'vue'
-import { useI18n } from 'vue-i18n'
-import useLocale from '@/hooks/locale'
-import { useApplicationStore, useUserStore } from '@/store'
-import { LocaleOptions } from '@/types/constants'
 import { useFullscreen } from '@vueuse/core'
 import { isString } from 'lodash'
-import { useRoute, useRouter } from 'vue-router'
+import { Teleport, defineComponent, ref } from 'vue'
+import { useI18n } from 'vue-i18n'
+import AppSetting from './AppSetting'
 import AvatarAndOptions from './AvatarAndOptions'
 import styles from './style.module.scss'
-import AppSetting from '../app-setting'
 
 export default defineComponent({
   name: 'Navbar',
   setup() {
-    const route = useRoute()
-    const { isFullscreen, toggle: toggleFullScreen } = useFullscreen()
-    const { currentLocale, changeLocale } = useLocale()
+    const settingRef = ref()
     const { t } = useI18n()
+    const { changeLocale } = useLocale()
     const applicationStore = useApplicationStore()
-    const userStore = useUserStore()
-    const router = useRouter()
+    const { isFullscreen, toggle: toggleFullScreen } = useFullscreen()
 
     const handleLocaleChange = (val: unknown) => {
       if (isString(val)) {
         changeLocale(val)
       }
     }
-    const setDropDownVisible = () => {}
     const setVisible = () => {
-      applicationStore.updateSettings({ globalSettings: true })
+      settingRef.value.openSettingDraw()
     }
 
     return () => (
       <div
+        class={[styles.navbar]}
         style={{
-          borderBottom: '1px solid var(--color-border)',
-          minWidth: '1100px'
+          height: layoutStyleConfig.NAVBAR_HEIGHT + 'px'
         }}
-        class="flex  w-full fixed h-16 justify-between
-         items-center
-       top-0
-     left-0 z-[100]
-     bg-[color:var(--color-bg-2)]
-       pl-5  box-border
-      "
       >
         <Space align="center">
-          <img src={Logo} alt="logo" />
-          <Typography.Title heading={5}>Vue TSX Admin</Typography.Title>
+          <img src={Logo} alt="logo" class={['w-8', 'h-8']} />
+          <Typography.Title class={['!text-lg', '!m-0']} heading={5}>
+            {ApplicationInfo.appTitle}
+          </Typography.Title>
         </Space>
         <Space>
           <Input class={['rounded-2xl']} placeholder={t('navbar.search.placeholder')}></Input>
@@ -70,7 +61,7 @@ export default defineComponent({
             triggerProps={{
               position: 'br',
               autoFitPopupMinWidth: true,
-              trigger: 'click',
+              trigger: 'hover',
               autoFitPopupWidth: true
             }}
           >
@@ -133,7 +124,7 @@ export default defineComponent({
           <AvatarAndOptions />
         </Space>
         <Teleport to="body">
-          <AppSetting />
+          <AppSetting ref={settingRef} />
         </Teleport>
       </div>
     )

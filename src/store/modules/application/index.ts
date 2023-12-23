@@ -11,17 +11,12 @@ export interface ApplicationState {
   colorWeak: boolean
   navbar: boolean
   menu: boolean
-  topMenu: boolean
   hideMenu: boolean
   menuCollapse: boolean
   footer: boolean
   themeColor: string
   menuWidth: number
-  globalSettings: boolean
-  device: string
   tabBar: boolean
-  menuFromServer: boolean
-  serverMenu: RouteRecordNormalized[]
   [key: string]: unknown
 }
 
@@ -44,17 +39,13 @@ export default defineStore(StoreName.application, {
       colorWeak: false,
       navbar: true,
       menu: true,
-      topMenu: false,
       hideMenu: false,
       menuCollapse: false,
       footer: true,
       themeColor: '#165DFF',
       menuWidth: 220,
       globalSettings: false,
-      device: 'desktop',
-      tabBar: false,
-      menuFromServer: false,
-      serverMenu: []
+      tabBar: false
     }
   },
   persist: true,

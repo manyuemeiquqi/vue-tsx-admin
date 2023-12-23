@@ -45,7 +45,6 @@ export enum AppRouteNames {
   group = 'GROUP',
   // =============== DIVIDER ==================
   profile = 'PROFILE',
-  detail = 'DETAIL',
 
   // =============== DIVIDER ==================
 
@@ -69,3 +68,7 @@ export enum AppRouteNames {
 export const NOT_FOUND_ROUTE = {
   name: AppRouteNames.notFound
 }
+
+export const layoutStyleConfig = {
+  NAVBAR_HEIGHT: 64
+} as const

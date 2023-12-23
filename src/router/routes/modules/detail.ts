@@ -1,13 +1,13 @@
+import { AppRouteNames } from '@/types/constants'
 import type { AppRouteRecordRaw } from '../types'
 
 const PROFILE: AppRouteRecordRaw = {
   path: '/profile',
-  name: 'profile',
+  name: AppRouteNames.profile,
   component: () => import('@/components/layout-component/index'),
   meta: {
     locale: 'menu.profile',
     requiresAuth: true,
-    icon: 'icon-file',
     order: 4
   },
   children: [
