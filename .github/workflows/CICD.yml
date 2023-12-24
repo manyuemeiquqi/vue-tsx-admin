@@ -40,6 +40,8 @@ jobs:
         run: pnpm install
       - name: Build with vue-tsx-admin
         run: |
+          pnpm run lint-style
+          pnpm run lint
           pnpm run build
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v2
