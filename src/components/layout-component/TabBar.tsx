@@ -5,17 +5,17 @@ import { Affix } from '@arco-design/web-vue'
 import { computed, defineComponent, onUnmounted } from 'vue'
 import type { RouteLocationNormalized } from 'vue-router'
 import TabItem from './TabItem'
-
+import styles from './style.module.scss'
 export default defineComponent({
   name: 'TabBar',
   setup() {
     const tabStore = useTabStore()
     const tabList = computed(() => {
-      return tabStore.getTabList
+      return tabStore.tabList
     })
 
     listenerRouteChange((route: RouteLocationNormalized) => {
-      if (!route.meta.noAffix && !tabList.value.some((item) => item.name === route.name)) {
+      if (!tabList.value.some((item) => item.name === route.name)) {
         tabStore.updateTabList(route)
       }
     }, true)
@@ -25,15 +25,15 @@ export default defineComponent({
     return () => (
       <Affix offsetTop={layoutStyleConfig.NAVBAR_HEIGHT}>
         <div
+          class={[styles['tab-box']]}
           style={{
-            borderBottom: '1px solid var(--color-border)'
+            height: layoutStyleConfig.TAB_HEIGHT
           }}
-          class={['flex', 'bg-[var(--color-bg-2)]', 'px-4']}
         >
           <div class={['overflow-hidden', 'flex-1']}>
             <div class={['whitespace-nowrap', 'overflow-x-auto', 'px-0', 'py-1']}>
               {tabList.value.map((item, index) => (
-                <TabItem itemData={item} index={index} />
+                <TabItem itemData={item} index={index} key={index} />
               ))}
             </div>
           </div>

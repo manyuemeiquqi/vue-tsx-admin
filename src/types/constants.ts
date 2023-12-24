@@ -34,7 +34,7 @@ export enum AppRouteNames {
 
   // =============== DIVIDER ==================
 
-  exception = 'exception',
+  exception = 'EXCEPTION',
   _403 = '403',
   _404 = '404',
   _500 = '500',
@@ -72,6 +72,6 @@ export const NOT_FOUND_ROUTE = {
 export const layoutStyleConfig = {
   NAVBAR_HEIGHT: 64,
   BREAD_HEIGHT: 52,
-  // TAB_HEIGHT
+  TAB_HEIGHT: 40,
   FOOTER_HEIGHT: 35
 } as const

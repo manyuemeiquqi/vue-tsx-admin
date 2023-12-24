@@ -1,9 +1,7 @@
 import type { RouteLocationNormalized } from 'vue-router'
 import { defineStore } from 'pinia'
 import { AppRouteNames, StoreName } from '@/types/constants'
-
 const BAN_LIST = [AppRouteNames.redirect]
-
 export interface TabItem {
   title: string
   name: string
@@ -17,33 +15,39 @@ const formatRoute = (route: RouteLocationNormalized): TabItem => {
     fullPath
   }
 }
+export const defaultTab = {
+  name: AppRouteNames.workplace,
+  title: 'menu.dashboard.workplace',
+  fullPath: '/dashboard/workplace'
+}
 const useAppStore = defineStore(StoreName.tab, {
   state: (): {
-    defaultTab: TabItem
-    otherTabList: TabItem[]
-    excludeCacheList: string[]
+    tabList: TabItem[]
   } => ({
-    defaultTab: {
-      name: AppRouteNames.workplace,
-      title: 'menu.dashboard.workplace',
-      fullPath: '/dashboard/workplace'
-    },
-    otherTabList: [],
-    excludeCacheList: []
+    tabList: [defaultTab]
   }),
   getters: {
-    getTabList(state): TabItem[] {
-      return [state.defaultTab, ...state.otherTabList]
+    getCacheList(state) {
+      return Array.from(new Set(state.tabList.map((item) => item.name)))
     }
   },
   actions: {
     updateTabList(route: RouteLocationNormalized) {
       if (BAN_LIST.includes(route.name as AppRouteNames)) return
-      this.otherTabList.push(formatRoute(route))
+      this.tabList.push(formatRoute(route))
     },
-    deleteTab(name: AppRouteNames) {},
-    freshTabList(tabs: AppRouteNames[]) {},
-    resetTabList() {}
+    deleteTab(name: AppRouteNames) {
+      const idx = this.tabList.findIndex((item) => item.name === name)
+      console.log(idx)
+
+      this.tabList.splice(idx, 1)
+    },
+    freshTabList(tabs: TabItem[]) {
+      this.tabList = tabs
+    },
+    resetTabList() {
+      this.$reset()
+    }
   }
 })
 

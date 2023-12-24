@@ -1,5 +1,5 @@
 import { useTabStore } from '@/store'
-import type { TabItem } from '@/store/modules/tab'
+import { defaultTab, type TabItem } from '@/store/modules/tab'
 import { AppRouteNames } from '@/types/constants'
 import { Doption, Dropdown, Tag } from '@arco-design/web-vue'
 import {
@@ -11,9 +11,10 @@ import {
   IconToRight
 } from '@arco-design/web-vue/es/icon'
 import { cloneDeep } from 'lodash'
-import { computed, defineComponent, type PropType } from 'vue'
+import { computed, defineComponent, withModifiers, type PropType } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { useRoute, useRouter } from 'vue-router'
+import styles from './style.module.scss'
 enum TabActionType {
   reload = 'reload',
   current = 'current',
@@ -41,22 +42,24 @@ export default defineComponent({
     const tabStore = useTabStore()
 
     const tabList = computed(() => {
-      return tabStore.getTabList
+      return tabStore.tabList
     })
     const findCurrentRouteIndex = () => {
       return tabList.value.findIndex((el) => el.name === route.name)
     }
     const handleTabClick = () => {
+      console.log(tabStore.tabList)
+
       router.push({
         path: props.itemData.fullPath
       })
     }
     const handleTabClose = () => {
-      // tabStore.deleteTab(props.itemData as AppRouteNames)
-      // if (props.itemData === route.name) {
-      //   const prevTab = tabList.value[props.index - 1]
-      //   router.push({ name: prevTab })
-      // }
+      tabStore.deleteTab(props.itemData.name as AppRouteNames)
+      if (props.itemData.name === route.name) {
+        const prevTab = tabList.value[props.index - 1]
+        router.push({ path: prevTab.fullPath })
+      }
     }
 
     const handleSelect = async (value: unknown) => {
@@ -67,43 +70,38 @@ export default defineComponent({
           break
         }
         case TabActionType.others: {
-          // const filterList = tabList.value.filter((el, idx) => {
-          //   return [0, props.index].includes(idx)
-          // })
-          // tabStore.freshTabList(filterList)
-          // router.push({ name: props.itemData })
+          const filterList = tabList.value.filter((el, idx) => {
+            return [0, props.index].includes(idx)
+          })
+          tabStore.freshTabList(filterList)
           break
         }
         case TabActionType.left: {
-          // const currentRouteIdx = findCurrentRouteIndex()
-          // const replaceList = cloneDeep(tabList.value).splice(1, props.index - 1)
-          // tabStore.freshTabList(replaceList)
-          // if (currentRouteIdx < props.index) {
-          //   router.push({ name: props.itemData })
-          // }
+          const currentRouteIdx = findCurrentRouteIndex()
+          const replaceList = cloneDeep(tabList.value).splice(props.index)
+          tabStore.freshTabList([defaultTab, ...replaceList])
+          if (currentRouteIdx < props.index) {
+            router.push({ path: props.itemData.fullPath })
+          }
+
           break
         }
         case TabActionType.right: {
-          // const currentRouteIdx = findCurrentRouteIndex()
-          // const replaceList = cloneDeep(tabList.value).splice(props.index + 1)
-          // tabStore.freshTabList(replaceList)
-          // if (currentRouteIdx > props.index) {
-          //   router.push({ name: props.itemData })
-          // }
+          const currentRouteIdx = findCurrentRouteIndex()
+          const replaceList = cloneDeep(tabList.value).splice(0, props.index)
+          tabStore.freshTabList(replaceList)
+          if (currentRouteIdx > props.index) {
+            router.push({ path: props.itemData.fullPath })
+          }
           break
         }
         case TabActionType.reload: {
-          tabStore.excludeCacheList.push(props.itemData.name)
-          tabStore.excludeCacheList = []
-
-          console.log(tabStore.excludeCacheList)
-
-          // router.replace({
-          //   name: AppRouteNames.redirect,
-          //   params: {
-          //     path: route.fullPath as string
-          //   }
-          // })
+          router.push({
+            name: AppRouteNames.redirect,
+            params: {
+              path: route.fullPath
+            }
+          })
           break
         }
         case TabActionType.current: {
@@ -116,7 +114,10 @@ export default defineComponent({
     }
 
     const disabledRight = computed(() => {
-      return false
+      return props.index === tabStore.tabList.length - 1
+    })
+    const disabledReload = computed(() => {
+      return props.index !== findCurrentRouteIndex()
     })
     const disabledLeft = computed(() => {
       return [0, 1].includes(props.index)
@@ -126,22 +127,33 @@ export default defineComponent({
     return () => (
       <Dropdown onSelect={handleSelect} trigger="contextMenu" popupMaxHeight={false}>
         {{
+          // argo tag exist bug,so use div
           default: () => (
-            <Tag
-              color="arcoblue"
-              class={['mr-1']}
-              closable={shouldClose.value}
-              checkable
-              checked={tagChecked.value}
-              onCheck={handleTabClick}
-              onClose={handleTabClose}
+            <span
+              class={[
+                'arco-tag',
+                'arco-tag-size-medium',
+                'arco-tag-checked',
+                'cursor-pointer',
+                'mr-2',
+                tagChecked.value && styles['link-activated']
+              ]}
+              onClick={handleTabClick}
             >
-              <span class={['text-[var(--color-text-2)]']}>{t(props.itemData.title)}</span>
-            </Tag>
+              <span class={styles['tag-link']}>{t(props.itemData.title)}</span>
+              {shouldClose.value && (
+                <span
+                  class="arco-icon-hover arco-tag-icon-hover arco-icon-hover-size-medium arco-tag-close-btn"
+                  onClick={withModifiers(handleTabClose, ['stop'])}
+                >
+                  <icon-close />
+                </span>
+              )}
+            </span>
           ),
           content: () => (
             <>
-              <Doption value={TabActionType.reload}>
+              <Doption disabled={disabledReload.value} value={TabActionType.reload}>
                 <IconRefresh />
                 <span>重新加载</span>
               </Doption>

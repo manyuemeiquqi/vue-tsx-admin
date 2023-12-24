@@ -10,7 +10,6 @@ declare module 'vue-router' {
     hideChildrenInMenu?: boolean // if set true, the children are not displayed in the side menu
     activeMenu?: string // if set name, the menu will be highlighted according to the name you set
     order?: number // Sort routing menu items. If set key, the higher the value, the more forward it is
-    noAffix?: boolean // if set true, the tag will not affix in the tab-bar
     ignoreCache?: boolean // if set true, the page will not be cached
   }
 }

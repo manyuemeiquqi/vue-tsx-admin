@@ -9,7 +9,10 @@ export default defineComponent({
   setup(_, { slots }) {
     const applicationStore = useApplicationStore()
     const height = computed(() => {
-      let ret = layoutStyleConfig.BREAD_HEIGHT + layoutStyleConfig.FOOTER_HEIGHT
+      let ret =
+        layoutStyleConfig.BREAD_HEIGHT +
+        layoutStyleConfig.FOOTER_HEIGHT +
+        layoutStyleConfig.TAB_HEIGHT
       if (applicationStore.navbar) {
         ret += layoutStyleConfig.NAVBAR_HEIGHT
       }
