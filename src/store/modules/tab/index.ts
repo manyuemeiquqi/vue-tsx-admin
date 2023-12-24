@@ -1,7 +1,7 @@
 import type { RouteLocationNormalized } from 'vue-router'
 import { defineStore } from 'pinia'
 import { AppRouteNames, StoreName } from '@/types/constants'
-const BAN_LIST = [AppRouteNames.redirect]
+const BAN_LIST = [AppRouteNames.redirect, AppRouteNames.notFound]
 export interface TabItem {
   title: string
   name: string
@@ -38,7 +38,6 @@ const useAppStore = defineStore(StoreName.tab, {
     },
     deleteTab(name: AppRouteNames) {
       const idx = this.tabList.findIndex((item) => item.name === name)
-      console.log(idx)
 
       this.tabList.splice(idx, 1)
     },

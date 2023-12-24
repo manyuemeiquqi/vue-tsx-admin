@@ -8,5 +8,5 @@ import '@/mock/listMock'
 import '@/mock/messageMock'
 import '@/mock/formMock'
 Mock.setup({
-  timeout: '600-1000'
+  timeout: '100-300'
 })

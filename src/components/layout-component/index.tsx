@@ -1,7 +1,7 @@
-import { useApplicationStore } from '@/store'
-import { layoutStyleConfig } from '@/types/constants'
+import { useApplicationStore, useUserStore } from '@/store'
+import { AppRouteNames, layoutStyleConfig } from '@/types/constants'
 import { Layout } from '@arco-design/web-vue'
-import { computed, defineComponent } from 'vue'
+import { computed, defineComponent, watch } from 'vue'
 import BreadcrumbComponent from './BreadcrumbComponent'
 import FooterComponent from './FooterComponent'
 import MenuComponent from './MenuComponent'
@@ -10,6 +10,9 @@ import PageComponent from './PageComponent'
 import TabBar from './TabBar'
 import styles from './style.module.scss'
 import AppSetting from './AppSetting'
+import usePermission from '@/hooks/permission'
+import { useRoute, useRouter } from 'vue-router'
+import type { AppRouteRecordRaw } from '@/router/routes/types'
 export default defineComponent({
   name: 'LayoutComponent',
   setup() {
@@ -25,10 +28,20 @@ export default defineComponent({
     const siderWidth = computed(() => {
       return applicationStore.menuCollapse ? 48 : applicationStore.menuWidth
     })
+    const route = useRoute()
+    const router = useRouter()
+    const userStore = useUserStore()
+    const permission = usePermission()
+    watch(
+      () => userStore.role,
+      (roleValue) => {
+        if (roleValue && !permission.routeHasPermission(route))
+          router.push({ name: AppRouteNames.notFound })
+      }
+    )
     return () => {
       return (
         <>
-          <AppSetting />
           <Layout>
             {applicationStore.navbar && <Navbar />}
             <Layout>
@@ -58,6 +71,7 @@ export default defineComponent({
               </Layout>
             </Layout>
           </Layout>
+          <AppSetting />
         </>
       )
     }

@@ -9,6 +9,8 @@ import { computed } from 'vue'
 import type { RouteRecordNormalized, RouteRecordRaw } from 'vue-router'
 
 import { cloneDeep } from 'lodash'
+import usePermission from '@/hooks/permission'
+import type { AppRouteRecordRaw } from './types'
 
 function formatModules(_modules: any, result: RouteRecordNormalized[]) {
   Object.keys(_modules).forEach((key) => {
@@ -34,12 +36,9 @@ const appClientMenus = [
 ]
 
 export default function useMenuTree() {
-  // const permission = usePermission()
+  const permission = usePermission()
   // const appStore = useAppStore()
   const appRoute = computed(() => {
-    // if (appStore.menuFromServer) {
-    //   return appStore.appAsyncMenus
-    // }
     return appClientMenus
   })
 
@@ -53,9 +52,9 @@ export default function useMenuTree() {
 
       const collector: any = _routes.map((element) => {
         // no access
-        // if (!permission.accessRouter(element)) {
-        //   return null
-        // }
+        if (!permission.routeHasPermission(element as AppRouteRecordRaw)) {
+          return null
+        }
 
         // leaf node
         if (element.meta?.hideChildrenInMenu || !element.children) {

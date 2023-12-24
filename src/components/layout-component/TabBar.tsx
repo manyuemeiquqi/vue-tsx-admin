@@ -2,10 +2,11 @@ import useTabStore from '@/store/modules/tab/index'
 import { layoutStyleConfig } from '@/types/constants'
 import { listenerRouteChange, removeRouteListener } from '@/utils/routerListener'
 import { Affix } from '@arco-design/web-vue'
-import { computed, defineComponent, onUnmounted } from 'vue'
+import { computed, defineComponent, onUnmounted, ref, watch } from 'vue'
 import type { RouteLocationNormalized } from 'vue-router'
 import TabItem from './TabItem'
 import styles from './style.module.scss'
+import { useApplicationStore } from '@/store'
 export default defineComponent({
   name: 'TabBar',
   setup() {
@@ -13,7 +14,7 @@ export default defineComponent({
     const tabList = computed(() => {
       return tabStore.tabList
     })
-
+    const affixRef = ref()
     listenerRouteChange((route: RouteLocationNormalized) => {
       if (!tabList.value.some((item) => item.name === route.name)) {
         tabStore.updateTabList(route)
@@ -22,8 +23,18 @@ export default defineComponent({
     onUnmounted(() => {
       removeRouteListener()
     })
+    const applicationStore = useApplicationStore()
+    const offsetTop = computed(() => {
+      return applicationStore.navbar ? layoutStyleConfig.NAVBAR_HEIGHT : 0
+    })
+    watch(
+      () => applicationStore.navbar,
+      () => {
+        affixRef.value.updatePosition()
+      }
+    )
     return () => (
-      <Affix offsetTop={layoutStyleConfig.NAVBAR_HEIGHT}>
+      <Affix ref={affixRef} offsetTop={offsetTop.value}>
         <div
           class={[styles['tab-box']]}
           style={{

@@ -31,11 +31,13 @@ import { computed, defineComponent, nextTick, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 import TableSearchForm from './TableSearchForm'
 import { AppRouteNames } from '@/types/constants'
+import usePermission from '@/hooks/permission'
 
 export default defineComponent({
   name: AppRouteNames.searchTable,
   setup() {
     const { t } = useI18n()
+    const { hasButtonPermission } = usePermission()
     const initPagination: Pagination = {
       current: 1,
       pageSize: 20
@@ -112,7 +114,6 @@ export default defineComponent({
           pageSize: paginationConfig.value.pageSize
         }
         const { data } = await queryPolicyList(params)
-        console.log(JSON.parse(JSON.stringify(params)))
 
         renderData.value = data.list
         paginationConfig.value.total = data.total
@@ -195,7 +196,8 @@ export default defineComponent({
       {
         getTitle: () => t('searchTable.columns.operations'),
         dataIndex: 'operations',
-        render: () => <Link>{t('searchTable.columns.operations.view')}</Link>,
+        render: () =>
+          hasButtonPermission(['admin']) && <Link>{t('searchTable.columns.operations.view')}</Link>,
         checked: true
       }
     ])

@@ -48,8 +48,6 @@ export default defineComponent({
       return tabList.value.findIndex((el) => el.name === route.name)
     }
     const handleTabClick = () => {
-      console.log(tabStore.tabList)
-
       router.push({
         path: props.itemData.fullPath
       })
