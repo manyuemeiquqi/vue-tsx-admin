@@ -88,7 +88,7 @@ export default defineComponent({
         }
         case TabActionType.right: {
           const currentRouteIdx = findCurrentRouteIndex()
-          const replaceList = cloneDeep(tabList.value).splice(0, props.index)
+          const replaceList = cloneDeep(tabList.value).splice(0, props.index + 1)
           tabStore.freshTabList(replaceList)
           if (currentRouteIdx > props.index) {
             router.push({ path: props.itemData.fullPath })

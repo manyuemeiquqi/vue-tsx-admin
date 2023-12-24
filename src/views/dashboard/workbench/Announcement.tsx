@@ -1,5 +1,5 @@
 import { Card, Link, Space, Tag, Typography } from '@arco-design/web-vue'
-import { defineComponent } from 'vue'
+import { defineComponent, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 
 export default defineComponent({
@@ -47,7 +47,6 @@ export default defineComponent({
                   </Tag>
                   <Typography.Text
                     class={['flex-1', 'text-xs', 'ml-1', 'text-[color:var(--color-text-2)]']}
-                    ellipsis
                   >
                     {item.content}
                   </Typography.Text>
