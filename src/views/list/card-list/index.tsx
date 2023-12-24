@@ -4,6 +4,7 @@ import { useI18n } from 'vue-i18n'
 import QualityInspection from './QualityInspection'
 import RulesPreset from './RulesPreset'
 import TheService from './TheService'
+import { AppRouteNames } from '@/types/constants'
 export const itemSpan = {
   xs: 12,
   sm: 12,
@@ -13,7 +14,7 @@ export const itemSpan = {
   xxl: 6
 } as const
 export default defineComponent({
-  name: 'CardList',
+  name: AppRouteNames.card,
   setup() {
     const { t } = useI18n()
     const tabList = [

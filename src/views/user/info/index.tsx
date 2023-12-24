@@ -1,3 +1,4 @@
+import { AppRouteNames } from '@/types/constants'
 import InSiteNotifications from '@/views/user/info/InSiteNotifications'
 import LatestActivities from '@/views/user/info/LatestActivities'
 import MyProject from '@/views/user/info/MyProject'
@@ -6,7 +7,7 @@ import UserInfoHeader from '@/views/user/info/UserInfoHeader'
 import { Grid, Space } from '@arco-design/web-vue'
 import { defineComponent } from 'vue'
 export default defineComponent({
-  name: 'Info',
+  name: AppRouteNames.info,
   setup() {
     return () => (
       <div>

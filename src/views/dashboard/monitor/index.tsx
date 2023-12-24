@@ -5,8 +5,10 @@ import LiveInformation from './LiveInformation'
 import LivePanel from './LivePanel'
 import LiveStatus from './LiveStatus'
 import QuickOperation from './QuickOperation'
+import { AppRouteNames } from '@/types/constants'
 
 export default defineComponent({
+  name: AppRouteNames.monitor,
   setup() {
     return () => (
       <Grid.Row gutter={16}>

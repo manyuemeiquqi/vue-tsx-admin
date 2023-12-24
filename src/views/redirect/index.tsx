@@ -5,10 +5,8 @@ export default defineComponent({
   setup() {
     const router = useRouter()
     const route = useRoute()
-    const redirectRouteName = route.params.name as string
-    console.log('redirectRouteName: ', redirectRouteName)
-
-    router.replace({ name: redirectRouteName })
+    const fullPath = route.params.path as string
+    router.replace({ path: fullPath })
     return () => <div></div>
   }
 })

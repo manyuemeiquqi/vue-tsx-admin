@@ -13,7 +13,7 @@ export default defineComponent({
             {get(route, 'meta.ignoreCache') === true ? (
               Component
             ) : (
-              <KeepAlive exclude={tabStore.excludeCacheList}>{Component}</KeepAlive>
+              <KeepAlive>{Component}</KeepAlive>
             )}
           </Transition>
         )}

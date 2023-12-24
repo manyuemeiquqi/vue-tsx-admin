@@ -10,19 +10,12 @@ export default defineComponent({
   name: 'TabBar',
   setup() {
     const tabStore = useTabStore()
-
     const tabList = computed(() => {
       return tabStore.getTabList
     })
 
-    // watch(
-    //   () => appStore.navbar,
-    //   () => {
-    //     affixRef.value.updatePosition()
-    //   }
-    // )
     listenerRouteChange((route: RouteLocationNormalized) => {
-      if (!route.meta.noAffix && !tabList.value.some((item) => item === route.name)) {
+      if (!route.meta.noAffix && !tabList.value.some((item) => item.name === route.name)) {
         tabStore.updateTabList(route)
       }
     }, true)
@@ -31,7 +24,7 @@ export default defineComponent({
     })
     return () => (
       <Affix offsetTop={layoutStyleConfig.NAVBAR_HEIGHT}>
-        {/* <div
+        <div
           style={{
             borderBottom: '1px solid var(--color-border)'
           }}
@@ -40,12 +33,12 @@ export default defineComponent({
           <div class={['overflow-hidden', 'flex-1']}>
             <div class={['whitespace-nowrap', 'overflow-x-auto', 'px-0', 'py-1']}>
               {tabList.value.map((item, index) => (
-                <TabItem tabName={item} index={index} />
+                <TabItem itemData={item} index={index} />
               ))}
             </div>
           </div>
           <div class={['w-24', 'h-8']}></div>
-        </div> */}
+        </div>
       </Affix>
     )
   }

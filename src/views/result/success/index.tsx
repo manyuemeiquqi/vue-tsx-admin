@@ -1,9 +1,10 @@
 import CardLayout from '@/components/card-layout'
+import { AppRouteNames } from '@/types/constants'
 import { Button, Result, Space, Steps, Typography } from '@arco-design/web-vue'
 import { computed, defineComponent } from 'vue'
 import { useI18n } from 'vue-i18n'
 export default defineComponent({
-  name: 'success',
+  name: AppRouteNames.success,
   setup() {
     const { t } = useI18n()
     const stepList = computed(() => {

@@ -4,33 +4,44 @@ import { AppRouteNames, StoreName } from '@/types/constants'
 
 const BAN_LIST = [AppRouteNames.redirect]
 
+export interface TabItem {
+  title: string
+  name: string
+  fullPath: string
+}
+const formatRoute = (route: RouteLocationNormalized): TabItem => {
+  const { name, meta, fullPath } = route
+  return {
+    title: meta.locale || '',
+    name: String(name),
+    fullPath
+  }
+}
 const useAppStore = defineStore(StoreName.tab, {
   state: (): {
-    defaultTab: AppRouteNames
-    otherTabList: AppRouteNames[]
-    excludeCacheList: AppRouteNames[]
+    defaultTab: TabItem
+    otherTabList: TabItem[]
+    excludeCacheList: string[]
   } => ({
-    defaultTab: AppRouteNames.workplace,
+    defaultTab: {
+      name: AppRouteNames.workplace,
+      title: 'menu.dashboard.workplace',
+      fullPath: '/dashboard/workplace'
+    },
     otherTabList: [],
     excludeCacheList: []
   }),
   getters: {
-    getTabList(): AppRouteNames[] {
-      return [this.defaultTab, ...this.otherTabList]
+    getTabList(state): TabItem[] {
+      return [state.defaultTab, ...state.otherTabList]
     }
   },
   actions: {
     updateTabList(route: RouteLocationNormalized) {
-      const name = route.name as AppRouteNames
-      if (BAN_LIST.includes(name)) return
-      this.otherTabList.push(name)
+      if (BAN_LIST.includes(route.name as AppRouteNames)) return
+      this.otherTabList.push(formatRoute(route))
     },
-    deleteTab(name: AppRouteNames) {
-      this.excludeCacheList = [name]
-      const idx = this.otherTabList.findIndex((item) => item === name)
-      this.otherTabList.splice(idx, 1)
-      this.excludeCacheList = []
-    },
+    deleteTab(name: AppRouteNames) {},
     freshTabList(tabs: AppRouteNames[]) {},
     resetTabList() {}
   }

@@ -1,5 +1,6 @@
 import { submitGroupForm, type GroupFormModel } from '@/api/form'
 import useLoading from '@/hooks/loading'
+import { AppRouteNames } from '@/types/constants'
 import {
   Button,
   Card,
@@ -17,7 +18,7 @@ import { isEmpty } from 'lodash'
 import { defineComponent, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 export default defineComponent({
-  name: 'Group',
+  name: AppRouteNames.group,
   setup() {
     const { t } = useI18n()
     const { loading, setLoading } = useLoading()

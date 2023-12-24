@@ -30,9 +30,10 @@ import Sortable from 'sortablejs'
 import { computed, defineComponent, nextTick, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 import TableSearchForm from './TableSearchForm'
+import { AppRouteNames } from '@/types/constants'
 
 export default defineComponent({
-  name: 'SearchTable',
+  name: AppRouteNames.searchTable,
   setup() {
     const { t } = useI18n()
     const initPagination: Pagination = {

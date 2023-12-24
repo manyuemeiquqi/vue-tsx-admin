@@ -1,4 +1,5 @@
 import { useTabStore } from '@/store'
+import type { TabItem } from '@/store/modules/tab'
 import { AppRouteNames } from '@/types/constants'
 import { Doption, Dropdown, Tag } from '@arco-design/web-vue'
 import {
@@ -24,8 +25,8 @@ enum TabActionType {
 export default defineComponent({
   name: 'TabItem',
   props: {
-    tabName: {
-      type: String,
+    itemData: {
+      type: Object as PropType<TabItem>,
       required: true
     },
     index: {
@@ -43,19 +44,19 @@ export default defineComponent({
       return tabStore.getTabList
     })
     const findCurrentRouteIndex = () => {
-      return tabList.value.findIndex((el) => el === route.name)
+      return tabList.value.findIndex((el) => el.name === route.name)
     }
     const handleTabClick = () => {
       router.push({
-        name: props.tabName
+        path: props.itemData.fullPath
       })
     }
     const handleTabClose = () => {
-      tabStore.deleteTab(props.tabName as AppRouteNames)
-      if (props.tabName === route.name) {
-        const prevTab = tabList.value[props.index - 1]
-        router.push({ name: prevTab })
-      }
+      // tabStore.deleteTab(props.itemData as AppRouteNames)
+      // if (props.itemData === route.name) {
+      //   const prevTab = tabList.value[props.index - 1]
+      //   router.push({ name: prevTab })
+      // }
     }
 
     const handleSelect = async (value: unknown) => {
@@ -66,38 +67,43 @@ export default defineComponent({
           break
         }
         case TabActionType.others: {
-          const filterList = tabList.value.filter((el, idx) => {
-            return [0, props.index].includes(idx)
-          })
-          tabStore.freshTabList(filterList)
-          router.push({ name: props.tabName })
+          // const filterList = tabList.value.filter((el, idx) => {
+          //   return [0, props.index].includes(idx)
+          // })
+          // tabStore.freshTabList(filterList)
+          // router.push({ name: props.itemData })
           break
         }
         case TabActionType.left: {
-          const currentRouteIdx = findCurrentRouteIndex()
-          const replaceList = cloneDeep(tabList.value).splice(1, props.index - 1)
-          tabStore.freshTabList(replaceList)
-          if (currentRouteIdx < props.index) {
-            router.push({ name: props.tabName })
-          }
+          // const currentRouteIdx = findCurrentRouteIndex()
+          // const replaceList = cloneDeep(tabList.value).splice(1, props.index - 1)
+          // tabStore.freshTabList(replaceList)
+          // if (currentRouteIdx < props.index) {
+          //   router.push({ name: props.itemData })
+          // }
           break
         }
         case TabActionType.right: {
-          const currentRouteIdx = findCurrentRouteIndex()
-          const replaceList = cloneDeep(tabList.value).splice(props.index + 1)
-          tabStore.freshTabList(replaceList)
-          if (currentRouteIdx > props.index) {
-            router.push({ name: props.tabName })
-          }
+          // const currentRouteIdx = findCurrentRouteIndex()
+          // const replaceList = cloneDeep(tabList.value).splice(props.index + 1)
+          // tabStore.freshTabList(replaceList)
+          // if (currentRouteIdx > props.index) {
+          //   router.push({ name: props.itemData })
+          // }
           break
         }
         case TabActionType.reload: {
-          router.push({
-            name: AppRouteNames.redirect,
-            params: {
-              name: route.name as string
-            }
-          })
+          tabStore.excludeCacheList.push(props.itemData.name)
+          tabStore.excludeCacheList = []
+
+          console.log(tabStore.excludeCacheList)
+
+          // router.replace({
+          //   name: AppRouteNames.redirect,
+          //   params: {
+          //     path: route.fullPath as string
+          //   }
+          // })
           break
         }
         case TabActionType.current: {
@@ -116,7 +122,7 @@ export default defineComponent({
       return [0, 1].includes(props.index)
     })
     const shouldClose = computed(() => props.index !== 0)
-    const tagChecked = computed(() => props.tabName === route.name)
+    const tagChecked = computed(() => props.itemData.name === route.name)
     return () => (
       <Dropdown onSelect={handleSelect} trigger="contextMenu" popupMaxHeight={false}>
         {{
