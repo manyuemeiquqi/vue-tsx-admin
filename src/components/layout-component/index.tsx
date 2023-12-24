@@ -14,10 +14,7 @@ export default defineComponent({
   setup() {
     const applicationStore = useApplicationStore()
     const paddingStyle = computed(() => {
-      const paddingLeft =
-        applicationStore.menu && !applicationStore.hideMenu
-          ? { paddingLeft: `${siderWidth.value}px` }
-          : {}
+      const paddingLeft = applicationStore.menu ? { paddingLeft: `${siderWidth.value}px` } : {}
       const paddingTop = applicationStore.navbar
         ? { paddingTop: layoutStyleConfig.NAVBAR_HEIGHT + 'px' }
         : {}
@@ -30,19 +27,24 @@ export default defineComponent({
     return () => {
       return (
         <Layout>
-          <Navbar />
+          {applicationStore.navbar && <Navbar />}
           <Layout>
-            <Layout.Sider
-              class={[styles.sider]}
-              width={siderWidth.value}
-              breakpoint="xl"
-              collapsible
-              hideTrigger
-              collapsed={applicationStore.menuCollapse}
-              onCollapse={(val) => (applicationStore.menuCollapse = val)}
-            >
-              <MenuComponent></MenuComponent>
-            </Layout.Sider>
+            {applicationStore.menu && (
+              <Layout.Sider
+                class={[styles.sider]}
+                style={{
+                  paddingTop: paddingStyle.value.paddingTop
+                }}
+                width={siderWidth.value}
+                breakpoint="xl"
+                collapsible
+                hideTrigger
+                collapsed={applicationStore.menuCollapse}
+                onCollapse={(val) => (applicationStore.menuCollapse = val)}
+              >
+                <MenuComponent></MenuComponent>
+              </Layout.Sider>
+            )}
             <Layout class={[styles.main]} style={paddingStyle.value}>
               <TabBar />
               <BreadcrumbComponent class={['px-5']} />

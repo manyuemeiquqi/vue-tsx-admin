@@ -7,9 +7,12 @@ import enUS from '@arco-design/web-vue/es/locale/lang/en-us'
 import { ApplicationTheme, LocaleOptions } from './types/constants'
 import useLocale from './hooks/locale'
 import { useApplicationStore } from './store'
+import { generate, getRgbStr } from '@arco-design/color'
+import AppSetting from './components/layout-component/AppSetting'
 
 export default defineComponent({
   setup() {
+    const applicationStore = useApplicationStore()
     const arcoLocaleMap = {
       [LocaleOptions.cn]: zhCN,
       [LocaleOptions.en]: enUS
@@ -24,7 +27,6 @@ export default defineComponent({
           return enUS
       }
     })
-    const applicationStore = useApplicationStore()
     watch(
       () => applicationStore.theme,
       (theme) => {
@@ -38,10 +40,36 @@ export default defineComponent({
         immediate: true
       }
     )
+    watch(
+      () => applicationStore.themeColor,
+      (newColor) => {
+        const newList = generate(newColor, {
+          list: true,
+          dark: applicationStore.isDark
+        })
+        newList.forEach((l: any, index: number) => {
+          const rgbStr = getRgbStr(l)
+          document.body.style.setProperty(`--arcoblue-${index + 1}`, rgbStr)
+        })
+      },
+      {
+        immediate: true
+      }
+    )
+    watch(
+      () => applicationStore.colorWeak,
+      (colorWeak: boolean) => {
+        document.body.style.filter = colorWeak ? 'invert(80%)' : 'none'
+      },
+      {
+        immediate: true
+      }
+    )
     return () => (
       <>
         <ConfigProvider locale={arcoLocale.value}>
           <RouterView />
+          <AppSetting />
         </ConfigProvider>
       </>
     )

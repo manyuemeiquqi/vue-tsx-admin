@@ -1,6 +1,6 @@
 /* tailwind 自带modern-normalize */
-@import './global';
 @import './normalize';
+@import './resetBrowser';
 @import './generic';
 @tailwind base;
 @tailwind components;

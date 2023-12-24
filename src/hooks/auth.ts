@@ -1,5 +1,5 @@
 import { login, logout, type LoginData } from '@/api/user'
-import { useApplicationStore, useUserStore } from '@/store'
+import { useUserStore } from '@/store'
 import { clearToken, setToken } from '@/hooks/token'
 import { removeRouteListener } from '@/utils/routerListener'
 
@@ -16,12 +16,10 @@ export default function useAuth() {
 
   const logoutApp = async () => {
     const userStore = useUserStore()
-    const applicationStore = useApplicationStore()
     const afterLogout = () => {
       userStore.resetUserInfo()
       clearToken()
       removeRouteListener()
-      applicationStore.clearServerMenu()
     }
     try {
       await logout()

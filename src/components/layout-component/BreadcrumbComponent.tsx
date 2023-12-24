@@ -1,3 +1,4 @@
+import { layoutStyleConfig } from '@/types/constants'
 import { Breadcrumb } from '@arco-design/web-vue'
 import { IconApps } from '@arco-design/web-vue/es/icon'
 import { defineComponent } from 'vue'
@@ -11,14 +12,20 @@ export default defineComponent({
     const { t } = useI18n()
 
     return () => (
-      <Breadcrumb class={['mb-4', 'mt-4']}>
-        <Breadcrumb.Item>
-          <IconApps />
-        </Breadcrumb.Item>
-        {route.matched.map((item) => (
-          <Breadcrumb.Item>{t(item.meta.locale + '')}</Breadcrumb.Item>
-        ))}
-      </Breadcrumb>
+      <div
+        style={{
+          height: layoutStyleConfig.BREAD_HEIGHT + 'px'
+        }}
+      >
+        <Breadcrumb class={['mb-4', 'mt-4']}>
+          <Breadcrumb.Item>
+            <IconApps />
+          </Breadcrumb.Item>
+          {route.matched.map((item) => (
+            <Breadcrumb.Item>{t(item.meta.locale + '')}</Breadcrumb.Item>
+          ))}
+        </Breadcrumb>
+      </div>
     )
   }
 })

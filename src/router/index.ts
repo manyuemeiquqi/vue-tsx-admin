@@ -18,12 +18,9 @@ const router = createRouter({
         requiresAuth: false
       }
     },
-
     ...appRoutes,
-
     {
       path: '/redirect',
-      component: () => import('@/views/login/index'),
       meta: {
         requiresAuth: true,
         hideInMenu: true

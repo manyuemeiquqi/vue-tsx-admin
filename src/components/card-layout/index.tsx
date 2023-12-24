@@ -1,10 +1,29 @@
-import { defineComponent, type VNode } from 'vue'
+import { useApplicationStore } from '@/store'
+import { layoutStyleConfig } from '@/types/constants'
+import { computed, defineComponent, type VNode } from 'vue'
 interface Slots {
   default: () => VNode
 }
 export default defineComponent({
   name: 'CardLayout',
   setup(_, { slots }) {
-    return () => <div class="content-wrapper">{(slots as unknown as Slots).default()}</div>
+    const applicationStore = useApplicationStore()
+    const height = computed(() => {
+      let ret = layoutStyleConfig.BREAD_HEIGHT + layoutStyleConfig.FOOTER_HEIGHT
+      if (applicationStore.navbar) {
+        ret += layoutStyleConfig.NAVBAR_HEIGHT
+      }
+      return ret
+    })
+    return () => (
+      <div
+        class="content-wrapper"
+        style={{
+          minHeight: `calc(100vh - ${height.value}px)`
+        }}
+      >
+        {(slots as unknown as Slots).default()}
+      </div>
+    )
   }
 })

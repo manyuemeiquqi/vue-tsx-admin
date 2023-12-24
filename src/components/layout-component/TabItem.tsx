@@ -1,5 +1,5 @@
 import { useTabStore } from '@/store'
-import { type TagProps } from '@/types/global'
+import { AppRouteNames } from '@/types/constants'
 import { Doption, Dropdown, Tag } from '@arco-design/web-vue'
 import {
   IconClose,
@@ -9,6 +9,7 @@ import {
   IconToLeft,
   IconToRight
 } from '@arco-design/web-vue/es/icon'
+import { cloneDeep } from 'lodash'
 import { computed, defineComponent, type PropType } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { useRoute, useRouter } from 'vue-router'
@@ -23,8 +24,8 @@ enum TabActionType {
 export default defineComponent({
   name: 'TabItem',
   props: {
-    itemData: {
-      type: Object as PropType<TagProps>,
+    tabName: {
+      type: String,
       required: true
     },
     index: {
@@ -41,20 +42,71 @@ export default defineComponent({
     const tabList = computed(() => {
       return tabStore.getTabList
     })
-    const handleTabClose = (idx: number, tabData: TagProps) => {
-      tabStore.deleteTag(idx, tabData)
-      if (props.itemData.fullPath === route.fullPath) {
-        const latest = tabList.value[idx - 1] // 获取队列的前一个tab
-        router.push({ name: latest.name })
+    const findCurrentRouteIndex = () => {
+      return tabList.value.findIndex((el) => el === route.name)
+    }
+    const handleTabClick = () => {
+      router.push({
+        name: props.tabName
+      })
+    }
+    const handleTabClose = () => {
+      tabStore.deleteTab(props.tabName as AppRouteNames)
+      if (props.tabName === route.name) {
+        const prevTab = tabList.value[props.index - 1]
+        router.push({ name: prevTab })
       }
     }
 
-    const handleSelect = () => {}
-    const handleTabClick = (routeName: string) => {
-      router.push({
-        name: routeName
-      })
-      return
+    const handleSelect = async (value: unknown) => {
+      const actionType = value as TabActionType
+      switch (actionType) {
+        case TabActionType.all: {
+          tabStore.resetTabList()
+          break
+        }
+        case TabActionType.others: {
+          const filterList = tabList.value.filter((el, idx) => {
+            return [0, props.index].includes(idx)
+          })
+          tabStore.freshTabList(filterList)
+          router.push({ name: props.tabName })
+          break
+        }
+        case TabActionType.left: {
+          const currentRouteIdx = findCurrentRouteIndex()
+          const replaceList = cloneDeep(tabList.value).splice(1, props.index - 1)
+          tabStore.freshTabList(replaceList)
+          if (currentRouteIdx < props.index) {
+            router.push({ name: props.tabName })
+          }
+          break
+        }
+        case TabActionType.right: {
+          const currentRouteIdx = findCurrentRouteIndex()
+          const replaceList = cloneDeep(tabList.value).splice(props.index + 1)
+          tabStore.freshTabList(replaceList)
+          if (currentRouteIdx > props.index) {
+            router.push({ name: props.tabName })
+          }
+          break
+        }
+        case TabActionType.reload: {
+          router.push({
+            name: AppRouteNames.redirect,
+            params: {
+              name: route.name as string
+            }
+          })
+          break
+        }
+        case TabActionType.current: {
+          handleTabClose()
+          break
+        }
+        default:
+          break
+      }
     }
 
     const disabledRight = computed(() => {
@@ -63,17 +115,20 @@ export default defineComponent({
     const disabledLeft = computed(() => {
       return [0, 1].includes(props.index)
     })
-
+    const shouldClose = computed(() => props.index !== 0)
+    const tagChecked = computed(() => props.tabName === route.name)
     return () => (
       <Dropdown onSelect={handleSelect} trigger="contextMenu" popupMaxHeight={false}>
         {{
           default: () => (
             <Tag
+              color="arcoblue"
               class={['mr-1']}
-              closable
+              closable={shouldClose.value}
               checkable
-              onCheck={() => handleTabClick(props.itemData.name)}
-              onClose={() => handleTabClose(props.index, props.itemData)}
+              checked={tagChecked.value}
+              onCheck={handleTabClick}
+              onClose={handleTabClose}
             >
               <span class={['text-[var(--color-text-2)]']}>{t(props.itemData.title)}</span>
             </Tag>

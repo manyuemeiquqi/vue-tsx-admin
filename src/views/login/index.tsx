@@ -2,15 +2,13 @@ import { defineComponent } from 'vue'
 import LoginForm from '@/views/login/LoginForm'
 import LoginBanner from '@/views/login/LoginBanner'
 import { Space } from '@arco-design/web-vue'
+import Logo from '@/assets/logo.svg'
 export default defineComponent({
   setup() {
     return () => (
       <div class="h-screen flex">
         <Space align="center" class=" top-1  left-1 fixed">
-          <img
-            alt="logo"
-            src="//p3-armor.byteimg.com/tos-cn-i-49unhts6dw/dfdba5317c0c20ce20e64fac803d52bc.svg~tplv-49unhts6dw-image.image"
-          />
+          <img src={Logo} alt="logo" class={['w-8', 'h-8']} />
           <span
             style={{
               color: 'var(--color-fill-1)',

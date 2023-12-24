@@ -70,5 +70,8 @@ export const NOT_FOUND_ROUTE = {
 }
 
 export const layoutStyleConfig = {
-  NAVBAR_HEIGHT: 64
+  NAVBAR_HEIGHT: 64,
+  BREAD_HEIGHT: 52,
+  // TAB_HEIGHT
+  FOOTER_HEIGHT: 35
 } as const

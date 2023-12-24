@@ -1,121 +1,156 @@
+import { useApplicationStore } from '@/store'
 import {
+  Button,
   Divider,
   Drawer,
   Grid,
   InputNumber,
+  Message,
+  Space,
   Switch,
   Trigger,
   Typography
 } from '@arco-design/web-vue'
-import { computed, defineComponent, ref } from 'vue'
-import { useI18n } from 'vue-i18n'
 import { Sketch } from '@ckpack/vue-color'
-import { useApplicationStore } from '@/store'
+import { computed, defineComponent } from 'vue'
+import { useI18n } from 'vue-i18n'
+import { generate } from '@arco-design/color'
+import { IconSettings } from '@arco-design/web-vue/es/icon'
 
-import { generate, getRgbStr } from '@arco-design/color'
-import { useToggle } from '@vueuse/core'
 export default defineComponent({
   name: 'AppSetting',
-  setup(props, { expose }) {
+  setup() {
     const { t } = useI18n()
-    const [settingVisible, toggleVisible] = useToggle()
     const applicationStore = useApplicationStore()
     const handleCancel = () => {
-      toggleVisible()
+      applicationStore.settingVisible = false
     }
     const handleOK = () => {
-      toggleVisible()
+      applicationStore.resetSetting()
+      Message.success('重置成功')
+      applicationStore.settingVisible = false
+    }
+    const handleChangeThemeColor = (val: any) => {
+      applicationStore.themeColor = val.hex
     }
     const colorList = computed(() => generate(applicationStore.themeColor, { list: true }))
-    expose({
-      openSettingDraw: () => {
-        toggleVisible()
-      }
-    })
+
     return () => (
-      <Drawer
-        v-model:visible={settingVisible.value}
-        width={300}
-        cancelText={t('settings.close')}
-        okText={t('settings.resetSettings')}
-        onOk={handleOK}
-        onCancel={handleCancel}
-        unmountOnClose
-      >
-        {{
-          title() {
-            return t('settings.title')
-          },
-          default() {
-            return (
-              <>
-                <Typography.Title heading={5}>{t('settings.themeColor')}</Typography.Title>
-                <Trigger trigger="hover" position="bl">
-                  {{
-                    default() {
-                      return (
-                        <div
-                          class={[
-                            'flex',
-                            'w-full',
-                            'h-8',
-                            'border',
-                            'border-[color:var(--color-border)]',
-                            'box-border',
-                            'p-[3px]',
-                            'border-solid'
-                          ]}
-                        >
-                          <div
-                            class={['w-24', 'h-6', 'mr-2']}
-                            style={{ backgroundColor: applicationStore.themeColor }}
-                          />
-                          <span>{applicationStore.themeColor}</span>
-                        </div>
-                      )
-                    },
-                    content() {
-                      return <Sketch v-model={applicationStore.themeColor} />
-                    }
-                  }}
-                </Trigger>
+      <>
+        {!applicationStore.navbar && (
+          <div class={['fixed', 'top-72', 'right-0']}>
+            <Button type="primary" onClick={() => (applicationStore.settingVisible = true)}>
+              {{
+                icon() {
+                  return <IconSettings />
+                }
+              }}
+            </Button>
+          </div>
+        )}
+        <Drawer
+          v-model:visible={applicationStore.settingVisible}
+          width={300}
+          cancelText={t('settings.close')}
+          okText={t('settings.resetSettings')}
+          onOk={handleOK}
+          onCancel={handleCancel}
+          unmountOnClose
+        >
+          {{
+            title() {
+              return t('settings.title')
+            },
+            default() {
+              return (
+                <>
+                  <Typography.Title class="!font-semibold" heading={6}>
+                    {t('settings.themeColor')}
+                  </Typography.Title>
+                  <Trigger trigger="hover" position="bl">
+                    {{
+                      default() {
+                        return (
+                          <>
+                            <div
+                              class={[
+                                'flex',
+                                'w-full',
+                                'h-8',
+                                'border',
+                                'border-[color:var(--color-border)]',
+                                'box-border',
+                                'p-[3px]',
+                                'border-solid'
+                              ]}
+                            >
+                              <div
+                                class={['w-24', 'h-6', 'mr-2']}
+                                style={{ backgroundColor: applicationStore.themeColor }}
+                              />
+                              <span>{applicationStore.themeColor}</span>
+                            </div>
+                          </>
+                        )
+                      },
+                      content() {
+                        return (
+                          <>
+                            <Sketch
+                              modelValue={applicationStore.themeColor}
+                              onUpdate:modelValue={handleChangeThemeColor}
+                            />
+                          </>
+                        )
+                      }
+                    }}
+                  </Trigger>
 
-                <ul class={['flex', 'list-none', 'p-0']}>
-                  {colorList.value.map((item: any, index: string) => (
-                    <li key={index} class={['w-[10%]', 'h-6']} style={{ backgroundColor: item }} />
-                  ))}
-                </ul>
-                <Divider />
-                <Typography.Title heading={5}>{t('settings.content')}</Typography.Title>
-                <Grid.Row justify="space-between">
-                  <span>{t('settings.navbar')}</span>
-                  <Switch v-model={applicationStore.navbar} />
-                </Grid.Row>
-                <Grid.Row justify="space-between">
-                  <span>{t('settings.menu')}</span>
-                  <Switch v-model={applicationStore.menu} />
-                </Grid.Row>
-                <Grid.Row justify="space-between">
-                  <span>{t('settings.menuFromServer')}</span>
-                  <Switch v-model={applicationStore.menuFromServer} />
-                </Grid.Row>
-                <Grid.Row justify="space-between">
-                  <span>{t('settings.menuWidth')}</span>
-                  <InputNumber v-model={applicationStore.menuWidth} />
-                </Grid.Row>
+                  <ul class={['flex', 'list-none', 'p-0']}>
+                    {colorList.value.map((item: any, index: string) => (
+                      <li
+                        key={index}
+                        class={['w-[10%]', 'h-6']}
+                        style={{ backgroundColor: item }}
+                      />
+                    ))}
+                  </ul>
+                  <span>根据主题颜色生成的 10 个梯度色</span>
 
-                <Divider />
-                <Typography.Title heading={5}>{t('settings.otherSettings')}</Typography.Title>
+                  <Divider />
+                  <Typography.Title class="!font-semibold" heading={6}>
+                    {t('settings.content')}
+                  </Typography.Title>
+                  <Space fill direction="vertical">
+                    <Grid.Row justify="space-between">
+                      <span>{t('settings.navbar')}</span>
+                      <Switch size="small" v-model={applicationStore.navbar} />
+                    </Grid.Row>
+                    <Grid.Row justify="space-between">
+                      <span>{t('settings.menu')}</span>
+                      <Switch size="small" v-model={applicationStore.menu} />
+                    </Grid.Row>
 
-                <Grid.Row justify="space-between">
-                  <span>{t('settings.colorWeak')}</span>
-                  <Switch v-model={applicationStore.colorWeak} />
-                </Grid.Row>
-              </>
-            )
-          }
-        }}
-      </Drawer>
+                    <Grid.Row justify="space-between">
+                      <span>{t('settings.menuWidth')}</span>
+                      <InputNumber size="mini" class="w-20" v-model={applicationStore.menuWidth} />
+                    </Grid.Row>
+                  </Space>
+                  <Divider />
+                  <Typography.Title class="!font-semibold" heading={6}>
+                    {t('settings.otherSettings')}
+                  </Typography.Title>
+
+                  <Grid.Row justify="space-between">
+                    <span>{t('settings.colorWeak')}</span>
+                    <Switch size="small" v-model={applicationStore.colorWeak} />
+                  </Grid.Row>
+                </>
+              )
+            }
+          }}
+        </Drawer>
+      </>
     )
   }
 })

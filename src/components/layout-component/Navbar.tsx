@@ -13,16 +13,14 @@ import {
 } from '@arco-design/web-vue/es/icon'
 import { useFullscreen } from '@vueuse/core'
 import { isString } from 'lodash'
-import { Teleport, defineComponent, ref } from 'vue'
+import { defineComponent, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
-import AppSetting from './AppSetting'
 import AvatarAndOptions from './AvatarAndOptions'
 import styles from './style.module.scss'
 
 export default defineComponent({
   name: 'Navbar',
   setup() {
-    const settingRef = ref()
     const { t } = useI18n()
     const { changeLocale } = useLocale()
     const applicationStore = useApplicationStore()
@@ -34,7 +32,7 @@ export default defineComponent({
       }
     }
     const setVisible = () => {
-      settingRef.value.openSettingDraw()
+      applicationStore.settingVisible = true
     }
 
     return () => (
@@ -123,9 +121,6 @@ export default defineComponent({
           </Tooltip>
           <AvatarAndOptions />
         </Space>
-        <Teleport to="body">
-          <AppSetting ref={settingRef} />
-        </Teleport>
       </div>
     )
   }
