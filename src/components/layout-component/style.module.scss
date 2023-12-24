@@ -3,10 +3,9 @@
   width: 100%;
   align-items: center;
   justify-content: space-between;
-
   position: fixed;
-  top: 0px;
-  left: 0px;
+  top: 0;
+  left: 0;
   z-index: 100;
   background-color: var(--color-bg-2);
   padding-left: 1.25rem /* 20px */;
@@ -28,6 +27,7 @@
   z-index: 50;
   box-sizing: border-box;
 }
+
 .main {
   min-width: 1100px;
   min-height: 100vh;
@@ -35,7 +35,6 @@
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   transition-duration: 150ms;
   transition-duration: 0.2s;
-
   background: var(--color-fill-2);
 }
 
@@ -69,11 +68,14 @@
   color: var(--color-text-2);
   text-decoration: none;
 }
+
 .link-activated {
   color: rgb(var(--link-6));
+
   .tag-link {
     color: rgb(var(--link-6));
   }
+
   & + .arco-tag-close-btn {
     color: rgb(var(--link-6));
   }

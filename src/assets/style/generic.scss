@@ -24,32 +24,37 @@
 .echarts-tooltip-diy {
   background: linear-gradient(
     304.17deg,
-    rgba(253, 254, 255, 0.6) -6.04%,
-    rgba(244, 247, 252, 0.6) 85.2%
+    rgb(253 254 255 / 60%) -6.04%,
+    rgb(244 247 252 / 60%) 85.2%
   ) !important;
   border: none !important;
   backdrop-filter: blur(10px) !important;
+
   /* Note: backdrop-filter has minimal browser support */
 
   border-radius: 6px !important;
+
   .content-panel {
     display: flex;
     justify-content: space-between;
     padding: 0 9px;
-    background: rgba(255, 255, 255, 0.8);
+    background: rgb(255 255 255 / 80%);
     width: 164px;
     height: 32px;
     line-height: 32px;
-    box-shadow: 6px 0px 20px rgba(34, 87, 188, 0.1);
+    box-shadow: 6px 0 20px rgb(34 87 188 / 10%);
     border-radius: 4px;
     margin-bottom: 4px;
   }
+
   .tooltip-title {
-    margin: 0 0 10px 0;
+    margin: 0 0 10px;
   }
+
   p {
     margin: 0;
   }
+
   .tooltip-title,
   .tooltip-value {
     font-size: 13px;
@@ -60,6 +65,7 @@
     color: #1d2129;
     font-weight: bold;
   }
+
   .tooltip-item-icon {
     display: inline-block;
     margin-right: 8px;
