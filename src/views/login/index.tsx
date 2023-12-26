@@ -7,22 +7,15 @@ export default defineComponent({
   setup() {
     return () => (
       <div class="h-screen flex">
-        <Space align="center" class=" top-1  left-1 fixed">
+        <Space align="center" class={['top-1', 'left-1', 'fixed']}>
           <img src={Logo} alt="logo" class={['w-8', 'h-8']} />
-          <span
-            style={{
-              color: 'var(--color-fill-1)',
-              fontSize: '22px'
-            }}
-          >
-            Vue TSX Admin
-          </span>
+          <span class={['text-2xl', 'lg:text-[var(--color-fill-1)]']}>Vue TSX Admin</span>
         </Space>
         <div
           style={{
-            width: '550px',
             background: 'linear-gradient(163.85deg, #1d2129 0%, #00308f 100%)'
           }}
+          class={['hidden', 'lg:block', 'w-[550px]']}
         >
           <LoginBanner></LoginBanner>
         </div>
