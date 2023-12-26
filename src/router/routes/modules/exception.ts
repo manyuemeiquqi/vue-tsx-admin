@@ -1,7 +1,6 @@
 import { CompNameEnum } from '@/types/constants'
-import type { AppRouteRecordRaw } from '../types'
 
-const EXCEPTION: AppRouteRecordRaw = {
+export default {
   path: '/exception',
   name: CompNameEnum.exception,
   component: () => import('@/components/layout-component/index'),
@@ -43,5 +42,3 @@ const EXCEPTION: AppRouteRecordRaw = {
     }
   ]
 }
-
-export default EXCEPTION

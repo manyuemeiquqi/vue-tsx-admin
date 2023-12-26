@@ -12,7 +12,6 @@ import styles from './style.module.scss'
 import AppSetting from './AppSetting'
 import usePermission from '@/hooks/permission'
 import { useRoute, useRouter } from 'vue-router'
-import type { AppRouteRecordRaw } from '@/router/routes/types'
 export default defineComponent({
   name: 'LayoutComponent',
   setup() {

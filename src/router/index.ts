@@ -5,7 +5,7 @@ import configRouteGuard from './guard'
 import { appRoutes } from './routes'
 import NProgress from 'nprogress' // progress bar
 import 'nprogress/nprogress.css'
-NProgress.configure({ showSpinner: false })
+// NProgress.configure({ showSpinner: false })
 const router = createRouter({
   history: createWebHashHistory(import.meta.env.BASE_URL),
   routes: [
@@ -25,8 +25,7 @@ const router = createRouter({
     {
       path: '/redirect',
       meta: {
-        requiresAuth: true,
-        hideInMenu: true
+        requiresAuth: true
       },
       children: [
         {
@@ -34,8 +33,7 @@ const router = createRouter({
           name: CompNameEnum.redirect,
           component: () => import('@/views/redirect/index'),
           meta: {
-            requiresAuth: true,
-            hideInMenu: true
+            requiresAuth: true
           }
         }
       ]

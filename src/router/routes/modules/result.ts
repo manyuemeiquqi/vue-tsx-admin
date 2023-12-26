@@ -1,7 +1,6 @@
 import { CompNameEnum } from '@/types/constants'
-import type { AppRouteRecordRaw } from '../types'
 
-const RESULT: AppRouteRecordRaw = {
+export default {
   path: '/result',
   name: CompNameEnum.result,
   component: () => import('@/components/layout-component/index'),
@@ -34,5 +33,3 @@ const RESULT: AppRouteRecordRaw = {
     }
   ]
 }
-
-export default RESULT

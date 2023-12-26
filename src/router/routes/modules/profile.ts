@@ -1,7 +1,6 @@
 import { CompNameEnum } from '@/types/constants'
-import type { AppRouteRecordRaw } from '../types'
 
-const PROFILE: AppRouteRecordRaw = {
+export default {
   path: '/profile',
   name: CompNameEnum.profile,
   component: () => import('@/components/layout-component/index'),
@@ -23,5 +22,3 @@ const PROFILE: AppRouteRecordRaw = {
     }
   ]
 }
-
-export default PROFILE

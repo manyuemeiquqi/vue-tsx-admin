@@ -1,7 +1,6 @@
 import { CompNameEnum } from '@/types/constants'
-import type { AppRouteRecordRaw } from '../types'
 
-const FORM: AppRouteRecordRaw = {
+export default {
   path: '/form',
   name: CompNameEnum.form,
   component: () => import('@/components/layout-component/index'),
@@ -34,5 +33,3 @@ const FORM: AppRouteRecordRaw = {
     }
   ]
 }
-
-export default FORM
