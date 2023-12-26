@@ -1,7 +1,7 @@
 import { defineStore } from 'pinia'
 import { AppTheme } from '@/types/constants'
 
-export interface AppState {
+export type AppState = {
   theme: AppTheme
   colorWeak: boolean
   navbar: boolean

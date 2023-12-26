@@ -1,4 +1,4 @@
-export interface ProfileBasicRes {
+export type ProfileBasicRes = {
   status: number
   video: {
     mode: string

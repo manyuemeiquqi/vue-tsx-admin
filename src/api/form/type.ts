@@ -1,10 +1,10 @@
-export interface BaseInfoModel {
+export type BaseInfoModel = {
   activityName: string
   channelType: string
   promotionTime: string[]
   promoteLink: string
 }
-export interface ChannelInfoModel {
+export type ChannelInfoModel = {
   advertisingSource: string
   advertisingMedia: string
   keyword: string[]
@@ -12,7 +12,7 @@ export interface ChannelInfoModel {
   advertisingContent: string
 }
 
-export interface GroupFormModel {
+export type GroupFormModel = {
   video: {
     mode: string
     acquisition: {

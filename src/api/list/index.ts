@@ -1,8 +1,8 @@
 import axios from 'axios'
 import qs from 'query-string'
 import type { Pagination } from '@/types/global'
-import type { ServiceRecord, ChatRecord, PolicyQuery, PolicyListRes } from './type'
-export type { ServiceRecord, ChatRecord, PolicyQuery, PolicyListRes }
+import type { ServiceRecord, ChatRecord, PolicyQuery, PolicyListRes, PolicyRecord } from './type'
+export type { ServiceRecord, ChatRecord, PolicyQuery, PolicyListRes, PolicyRecord }
 export function queryInspectionList() {
   return axios.get<ServiceRecord[]>('/api/list/quality-inspection')
 }

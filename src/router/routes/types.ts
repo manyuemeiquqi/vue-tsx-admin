@@ -6,7 +6,7 @@ export type Component<T = VNode> =
   | (() => Promise<typeof import('*.tsx')>)
   | (() => Promise<T>)
 
-export interface AppRouteRecordRaw {
+export type AppRouteRecordRaw = {
   path: string
   name?: string | symbol
   meta?: RouteMeta

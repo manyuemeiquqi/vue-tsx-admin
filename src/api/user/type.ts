@@ -1,4 +1,4 @@
-export interface EnterpriseCertificationModel {
+export type EnterpriseCertificationModel = {
   accountType: number
   status: number
   time: string
@@ -18,7 +18,7 @@ export type Certification = {
 
 export type RoleType = '' | '*' | 'admin' | 'user'
 
-export interface UserInfo {
+export type UserInfo = {
   name?: string
   avatar?: string
   job?: string
@@ -38,18 +38,18 @@ export interface UserInfo {
 }
 export type CertificationRecord = Certification[]
 
-export interface UnitCertification {
+export type UnitCertification = {
   enterpriseInfo: EnterpriseCertificationModel
   record: CertificationRecord
 }
 
-export interface LatestActivity {
+export type LatestActivity = {
   id: number
   title: string
   description: string
   avatar: string
 }
-export interface MyProjectRecord {
+export type MyProjectRecord = {
   id: number
   name: string
   description: string
@@ -61,7 +61,7 @@ export interface MyProjectRecord {
   }[]
 }
 
-export interface BasicInfoModel {
+export type BasicInfoModel = {
   email: string
   nickname: string
   countryRegion: string
@@ -70,19 +70,7 @@ export interface BasicInfoModel {
   profile: string
 }
 
-export interface EnterpriseCertificationModel {
-  accountType: number
-  status: number
-  time: string
-  legalPerson: string
-  certificateType: string
-  authenticationNumber: string
-  enterpriseName: string
-  enterpriseCertificateType: string
-  organizationCode: string
-}
-
-export interface ProjectItem {
+export type ProjectItem = {
   id: number
   name: string
   description: string
@@ -94,18 +82,18 @@ export interface ProjectItem {
   }[]
 }
 
-export interface TeamItem {
+export type TeamItem = {
   id: number
   avatar: string
   name: string
   peopleNumber: number
 }
 
-export interface LoginData {
+export type LoginData = {
   username: string
   password: string
 }
 
-export interface LoginRes {
+export type LoginRes = {
   token: string
 }

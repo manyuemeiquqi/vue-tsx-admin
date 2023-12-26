@@ -6,7 +6,8 @@ import type {
   ProjectItem,
   TeamItem,
   UnitCertification,
-  UserInfo
+  UserInfo,
+  BasicInfoModel
 } from './type'
 export type {
   UserInfo,
@@ -15,7 +16,8 @@ export type {
   LoginRes,
   ProjectItem,
   TeamItem,
-  UnitCertification
+  UnitCertification,
+  BasicInfoModel
 }
 
 export function getUserInfo() {

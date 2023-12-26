@@ -1,29 +1,29 @@
-export interface AnyObject {
+export type AnyObject = {
   [key: string]: unknown
 }
 
-export interface Options {
+export type Options = {
   value: unknown
   label: string
 }
 
-export interface NodeOptions extends Options {
+export type NodeOptions = {
   children?: NodeOptions[]
-}
+} & Options
 
-export interface GetParams {
+export type GetParams = {
   body: null
   type: string
   url: string
 }
 
-export interface PostData {
+export type PostData = {
   body: string
   type: string
   url: string
 }
 
-export interface Pagination {
+export type Pagination = {
   current: number
   pageSize: number
   total?: number
@@ -31,7 +31,7 @@ export interface Pagination {
 
 export type TimeRanger = [string, string]
 
-export interface TagProps {
+export type TagProps = {
   title: string
   name: string
   fullPath: string
@@ -39,13 +39,7 @@ export interface TagProps {
   ignoreCache?: boolean
 }
 
-export interface TabBarState {
+export type TabBarState = {
   tagList: TagProps[]
   cacheTabList: Set<string>
-}
-
-export interface Pagination {
-  current: number
-  pageSize: number
-  total?: number
 }

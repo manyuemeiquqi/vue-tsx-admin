@@ -27,7 +27,7 @@ export default defineComponent({
     const { t } = useI18n()
     const { loading, setLoading } = useLoading(true)
 
-    interface PreviewRecord {
+    type PreviewRecord = {
       cover: string
       name: string
       duration: string

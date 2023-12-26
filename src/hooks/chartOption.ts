@@ -2,7 +2,7 @@ import { computed } from 'vue'
 import { type EChartsOption } from 'echarts'
 import { useAppStore } from '@/store'
 
-interface optionsFn {
+type optionsFn = {
   (isDark: boolean): EChartsOption
 }
 

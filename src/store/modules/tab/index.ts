@@ -2,7 +2,7 @@ import type { RouteLocationNormalized } from 'vue-router'
 import { defineStore } from 'pinia'
 import { CompNameEnum } from '@/types/constants'
 const BAN_LIST = [CompNameEnum.redirect, CompNameEnum.notFound]
-export interface TabItem {
+export type TabItem = {
   title: string
   name: string
   fullPath: string
@@ -10,7 +10,7 @@ export interface TabItem {
 const formatRoute = (route: RouteLocationNormalized): TabItem => {
   const { name, meta, fullPath } = route
   return {
-    title: meta.locale || '',
+    title: meta.locale + '' || '',
     name: String(name),
     fullPath
   }

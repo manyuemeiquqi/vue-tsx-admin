@@ -1,7 +1,7 @@
 import { useAppStore } from '@/store'
 import { layoutStyleConfig } from '@/types/constants'
 import { computed, defineComponent, type VNode } from 'vue'
-interface Slots {
+type Slots = {
   default: () => VNode
 }
 export default defineComponent({

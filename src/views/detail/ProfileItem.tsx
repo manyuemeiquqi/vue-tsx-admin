@@ -46,7 +46,7 @@ export default defineComponent({
   },
   setup(props) {
     const { t } = useI18n()
-    interface BlockData {
+    type BlockData = {
       title: string
       descData: DescData[]
     }

@@ -1,12 +1,12 @@
 import type { DescData } from '@arco-design/web-vue/es/descriptions/interface'
-export interface ChatRecord {
+export type ChatRecord = {
   id: number
   username: string
   content: string
   time: string
   isCollect: boolean
 }
-export interface ServiceRecord {
+export type ServiceRecord = {
   id: number
   title: string
   description: string
@@ -17,7 +17,7 @@ export interface ServiceRecord {
   enable?: boolean
   expires?: boolean
 }
-export interface PolicyRecord {
+export type PolicyRecord = {
   id: string
   number: number
   name: string
@@ -27,7 +27,7 @@ export interface PolicyRecord {
   status: 'online' | 'offline'
   createdTime: string
 }
-export interface PolicyQuery {
+export type PolicyQuery = {
   number: string
   name: string
   createdTime: string | number | Date[]
@@ -35,12 +35,12 @@ export interface PolicyQuery {
   filterType: string
   status: string
 }
-export interface PolicyParams extends Partial<PolicyRecord> {
+export type PolicyParams = {
   current: number
   pageSize: number
-}
+} & Partial<PolicyRecord>
 
-export interface PolicyListRes {
+export type PolicyListRes = {
   list: PolicyRecord[]
   total: number
 }

@@ -1,7 +1,7 @@
 import type { Router } from 'vue-router'
 import NProgress from 'nprogress'
 import { useUserStore } from '@/store'
-import { isLogin } from '@/hooks/token'
+import { isLogin } from '@/utils/token'
 import { CompNameEnum } from '@/types/constants'
 import useAuth from '@/hooks/auth'
 

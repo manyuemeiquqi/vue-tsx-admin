@@ -2,7 +2,7 @@ import { login, type LoginData } from '@/api/user'
 import useAuth from '@/hooks/auth'
 import useLoading from '@/hooks/loading'
 import { ApplicationInfo, CompNameEnum, LocalStorageKey } from '@/types/constants'
-import { clearToken, setToken } from '@/hooks/token'
+import { clearToken, setToken } from '@/utils/token'
 import {
   Button,
   Checkbox,

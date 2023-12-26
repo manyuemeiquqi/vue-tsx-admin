@@ -1,10 +1,10 @@
-export interface PopularRecord {
+export type PopularRecord = {
   key: number
   clickNumber: string
   title: string
   increases: number
 }
-export interface ContentDataRecord {
+export type ContentDataRecord = {
   x: string
   y: number
 }
