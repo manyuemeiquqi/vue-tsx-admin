@@ -54,7 +54,7 @@
   /* Handle */
   ::-webkit-scrollbar-thumb {
     background: var(--color-text-4);
-    border-radius: 5px;
+    border-radius: var(--border-radius-medium);
   }
 
   /* Handle on hover */

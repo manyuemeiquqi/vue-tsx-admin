@@ -2,7 +2,7 @@
   padding: 8px;
   font-size: 12px;
   line-height: 20px;
-  border-radius: 2px;
+  border-radius: var(--border-radius-small);
 
   &-actions {
     display: flex;
@@ -17,7 +17,7 @@
       margin-right: 4px;
       color: var(--color-text-3);
       font-size: 14px;
-      border-radius: 50%;
+      border-radius: var(--border-radius-circle);
       cursor: pointer;
 
       &:hover {
