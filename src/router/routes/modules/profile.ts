@@ -14,7 +14,7 @@ const PROFILE: AppRouteRecordRaw = {
     {
       path: 'basic',
       name: 'Basic',
-      component: () => import('@/views/detail/index'),
+      component: () => import('@/views/profile/index'),
       meta: {
         locale: 'menu.profile.basic',
         requiresAuth: true,

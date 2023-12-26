@@ -1,6 +1,6 @@
 import Mock from 'mockjs'
 
-import '@/mock/detailMock'
+import '@/mock/profileMock'
 import '@/mock/userMock'
 
 import '@/mock/dashboardMock'

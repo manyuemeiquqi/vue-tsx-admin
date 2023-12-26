@@ -23,18 +23,21 @@ export enum CompNameEnum {
 
   // =============== DIVIDER ==================
   dashboard = 'dashboard',
+
   workplace = 'workplace',
   monitor = 'monitor',
 
   // =============== DIVIDER ==================
 
   exception = 'exception',
+
   _403 = '403',
   _404 = '404',
   _500 = '500',
 
   // =============== DIVIDER ==================
   form = 'form',
+
   step = 'step',
   group = 'group',
   // =============== DIVIDER ==================
@@ -43,16 +46,19 @@ export enum CompNameEnum {
   // =============== DIVIDER ==================
 
   list = 'list',
+
   searchTable = 'searchTable',
-  card = 'card',
+  cardList = 'cardList',
   // =============== DIVIDER ==================
   result = 'result',
+
   success = 'success',
   error = 'error',
 
   // =============== DIVIDER ==================
 
   user = 'user',
+
   info = 'info',
   setting = 'setting'
 

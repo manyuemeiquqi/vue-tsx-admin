@@ -3,9 +3,9 @@ import LoginForm from '@/views/login/LoginForm'
 import LoginBanner from '@/views/login/LoginBanner'
 import { Space } from '@arco-design/web-vue'
 import Logo from '@/assets/logo.svg'
-import { ApplicationInfo } from '@/types/constants'
+import { ApplicationInfo, CompNameEnum } from '@/types/constants'
 export default defineComponent({
-  name: 'login',
+  name: CompNameEnum.login,
   setup() {
     return () => (
       <div class="h-screen flex">

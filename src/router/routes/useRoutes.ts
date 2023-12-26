@@ -1,5 +1,5 @@
 import dashboard from '@/router/routes/modules/dashboard'
-import detail from '@/router/routes/modules/detail'
+import detail from '@/router/routes/modules/profile'
 import ExceptionRoutes from '@/router/routes/modules/exception'
 import FormRoutes from '@/router/routes/modules/form'
 import ListRoutes from '@/router/routes/modules/list'

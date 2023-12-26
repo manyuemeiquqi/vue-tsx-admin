@@ -5,7 +5,7 @@ import { defineComponent } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { useRouter } from 'vue-router'
 export default defineComponent({
-  name: CompNameEnum._404,
+  name: CompNameEnum.notFound,
   setup() {
     const { t } = useI18n()
     const router = useRouter()

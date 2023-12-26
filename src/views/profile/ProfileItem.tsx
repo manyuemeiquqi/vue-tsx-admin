@@ -1,4 +1,4 @@
-import type { ProfileBasicRes } from '@/api/detail'
+import type { ProfileBasicRes } from '@/api/profile'
 import { Card, Descriptions, Skeleton, type DescData } from '@arco-design/web-vue'
 import { computed, defineComponent, type PropType } from 'vue'
 import { useI18n } from 'vue-i18n'

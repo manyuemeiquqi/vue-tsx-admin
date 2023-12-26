@@ -14,7 +14,7 @@ const DASHBOARD: AppRouteRecordRaw = {
     {
       path: 'workplace',
       name: CompNameEnum.workplace,
-      component: () => import('@/views/dashboard/workbench/index'),
+      component: () => import('@/views/dashboard/workplace/index'),
       meta: {
         locale: 'menu.dashboard.workplace',
         requiresAuth: true,

@@ -1,4 +1,4 @@
-import { queryOperationLog, type operationLogRes } from '@/api/detail'
+import { queryOperationLog, type operationLogRes } from '@/api/profile'
 import useLoading from '@/hooks/loading'
 import { Badge, Button, Card, Spin, Table } from '@arco-design/web-vue'
 import { defineComponent, ref } from 'vue'

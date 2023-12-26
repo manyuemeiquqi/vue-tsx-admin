@@ -14,7 +14,7 @@ export const itemSpan = {
   xxl: 6
 } as const
 export default defineComponent({
-  name: CompNameEnum.card,
+  name: CompNameEnum.cardList,
   setup() {
     const { t } = useI18n()
     const tabList = [
