@@ -23,12 +23,12 @@ export default defineComponent({
     onUnmounted(() => {
       removeRouteListener()
     })
-    const applicationStore = useAppStore()
+    const appStore = useAppStore()
     const offsetTop = computed(() => {
-      return applicationStore.navbar ? layoutStyleConfig.NAVBAR_HEIGHT : 0
+      return appStore.navbar ? layoutStyleConfig.NAVBAR_HEIGHT : 0
     })
     watch(
-      () => applicationStore.navbar,
+      () => appStore.navbar,
       () => {
         affixRef.value.updatePosition()
       }

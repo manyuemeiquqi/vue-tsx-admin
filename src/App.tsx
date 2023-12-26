@@ -12,7 +12,7 @@ import AppSetting from './components/layout-component/AppSetting'
 
 export default defineComponent({
   setup() {
-    const applicationStore = useAppStore()
+    const appStore = useAppStore()
     const arcoLocaleMap = {
       [LocaleOptions.cn]: zhCN,
       [LocaleOptions.en]: enUS
@@ -28,7 +28,7 @@ export default defineComponent({
       }
     })
     watch(
-      () => applicationStore.theme,
+      () => appStore.theme,
       (theme) => {
         if (theme === AppTheme.dark) {
           document.body.setAttribute('arco-theme', AppTheme.dark)
@@ -41,11 +41,11 @@ export default defineComponent({
       }
     )
     watch(
-      () => applicationStore.themeColor,
+      () => appStore.themeColor,
       (newColor) => {
         const newList = generate(newColor, {
           list: true,
-          dark: applicationStore.isDark
+          dark: appStore.isDark
         })
         newList.forEach((l: any, index: number) => {
           const rgbStr = getRgbStr(l)
@@ -57,7 +57,7 @@ export default defineComponent({
       }
     )
     watch(
-      () => applicationStore.colorWeak,
+      () => appStore.colorWeak,
       (colorWeak: boolean) => {
         document.body.style.filter = colorWeak ? 'invert(80%)' : 'none'
       },

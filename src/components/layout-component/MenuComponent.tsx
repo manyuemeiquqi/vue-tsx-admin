@@ -35,7 +35,7 @@ export default defineComponent({
     const router = useRouter()
     const route = useRoute()
     const { menuTree } = useMenuTree()
-    const applicationStore = useAppStore()
+    const appStore = useAppStore()
     const openKeys = ref<string[]>([])
     const selectedKey = ref<string[]>([])
 
@@ -115,7 +115,7 @@ export default defineComponent({
 
     return () => (
       <Menu
-        v-model:collapsed={applicationStore.menuCollapse}
+        v-model:collapsed={appStore.menuCollapse}
         v-model:open-keys={openKeys.value}
         selected-keys={selectedKey.value}
         mode="vertical"

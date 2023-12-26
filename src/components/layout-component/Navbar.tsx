@@ -23,7 +23,7 @@ export default defineComponent({
   setup() {
     const { t } = useI18n()
     const { changeLocale } = useLocale()
-    const applicationStore = useAppStore()
+    const appStore = useAppStore()
     const { isFullscreen, toggle: toggleFullScreen } = useFullscreen()
 
     const handleLocaleChange = (val: unknown) => {
@@ -32,7 +32,7 @@ export default defineComponent({
       }
     }
     const setVisible = () => {
-      applicationStore.settingVisible = true
+      appStore.settingVisible = true
     }
 
     return () => (
@@ -77,7 +77,7 @@ export default defineComponent({
           </Select>
           <Tooltip
             content={
-              applicationStore.isDark
+              appStore.isDark
                 ? t('settings.navbar.theme.toLight')
                 : t('settings.navbar.theme.toDark')
             }
@@ -86,11 +86,11 @@ export default defineComponent({
               class={[styles['nav-btn']]}
               type="outline"
               shape="circle"
-              onClick={applicationStore.toggleDarkLightMode}
+              onClick={appStore.toggleDarkLightMode}
             >
               {{
                 icon: () => {
-                  return applicationStore.isDark ? <IconMoonFill /> : <IconSunFill />
+                  return appStore.isDark ? <IconMoonFill /> : <IconSunFill />
                 }
               }}
             </Button>

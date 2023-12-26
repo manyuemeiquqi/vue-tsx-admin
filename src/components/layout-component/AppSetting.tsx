@@ -21,25 +21,25 @@ export default defineComponent({
   name: 'AppSetting',
   setup() {
     const { t } = useI18n()
-    const applicationStore = useAppStore()
+    const appStore = useAppStore()
     const handleCancel = () => {
-      applicationStore.settingVisible = false
+      appStore.settingVisible = false
     }
     const handleOK = () => {
-      applicationStore.resetSetting()
+      appStore.resetSetting()
       Message.success('重置成功')
-      applicationStore.settingVisible = false
+      appStore.settingVisible = false
     }
     const handleChangeThemeColor = (val: any) => {
-      applicationStore.themeColor = val.hex
+      appStore.themeColor = val.hex
     }
-    const colorList = computed(() => generate(applicationStore.themeColor, { list: true }))
+    const colorList = computed(() => generate(appStore.themeColor, { list: true }))
 
     return () => (
       <>
-        {!applicationStore.navbar && (
+        {!appStore.navbar && (
           <div class={['fixed', 'top-72', 'right-0']}>
-            <Button type="primary" onClick={() => (applicationStore.settingVisible = true)}>
+            <Button type="primary" onClick={() => (appStore.settingVisible = true)}>
               {{
                 icon() {
                   return <IconSettings />
@@ -49,7 +49,7 @@ export default defineComponent({
           </div>
         )}
         <Drawer
-          v-model:visible={applicationStore.settingVisible}
+          v-model:visible={appStore.settingVisible}
           width={300}
           cancelText={t('settings.close')}
           okText={t('settings.resetSettings')}
@@ -86,9 +86,9 @@ export default defineComponent({
                             >
                               <div
                                 class={['w-24', 'h-6', 'mr-2']}
-                                style={{ backgroundColor: applicationStore.themeColor }}
+                                style={{ backgroundColor: appStore.themeColor }}
                               />
-                              <span>{applicationStore.themeColor}</span>
+                              <span>{appStore.themeColor}</span>
                             </div>
                           </>
                         )
@@ -97,7 +97,7 @@ export default defineComponent({
                         return (
                           <>
                             <Sketch
-                              modelValue={applicationStore.themeColor}
+                              modelValue={appStore.themeColor}
                               onUpdate:modelValue={handleChangeThemeColor}
                             />
                           </>
@@ -124,16 +124,16 @@ export default defineComponent({
                   <Space fill direction="vertical">
                     <Grid.Row justify="space-between">
                       <span>{t('settings.navbar')}</span>
-                      <Switch size="small" v-model={applicationStore.navbar} />
+                      <Switch size="small" v-model={appStore.navbar} />
                     </Grid.Row>
                     <Grid.Row justify="space-between">
                       <span>{t('settings.menu')}</span>
-                      <Switch size="small" v-model={applicationStore.menu} />
+                      <Switch size="small" v-model={appStore.menu} />
                     </Grid.Row>
 
                     <Grid.Row justify="space-between">
                       <span>{t('settings.menuWidth')}</span>
-                      <InputNumber size="mini" class="w-20" v-model={applicationStore.menuWidth} />
+                      <InputNumber size="mini" class="w-20" v-model={appStore.menuWidth} />
                     </Grid.Row>
                   </Space>
                   <Divider />
@@ -143,7 +143,7 @@ export default defineComponent({
 
                   <Grid.Row justify="space-between">
                     <span>{t('settings.colorWeak')}</span>
-                    <Switch size="small" v-model={applicationStore.colorWeak} />
+                    <Switch size="small" v-model={appStore.colorWeak} />
                   </Grid.Row>
                 </>
               )

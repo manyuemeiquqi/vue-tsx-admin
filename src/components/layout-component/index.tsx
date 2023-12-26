@@ -16,17 +16,17 @@ import type { AppRouteRecordRaw } from '@/router/routes/types'
 export default defineComponent({
   name: 'LayoutComponent',
   setup() {
-    const applicationStore = useAppStore()
+    const appStore = useAppStore()
     const paddingStyle = computed(() => {
-      const paddingLeft = applicationStore.menu ? { paddingLeft: `${siderWidth.value}px` } : {}
-      const paddingTop = applicationStore.navbar
+      const paddingLeft = appStore.menu ? { paddingLeft: `${siderWidth.value}px` } : {}
+      const paddingTop = appStore.navbar
         ? { paddingTop: layoutStyleConfig.NAVBAR_HEIGHT + 'px' }
         : {}
 
       return { ...paddingLeft, ...paddingTop }
     })
     const siderWidth = computed(() => {
-      return applicationStore.menuCollapse ? 48 : applicationStore.menuWidth
+      return appStore.menuCollapse ? 48 : appStore.menuWidth
     })
     const route = useRoute()
     const router = useRouter()
@@ -43,9 +43,9 @@ export default defineComponent({
       return (
         <>
           <Layout>
-            {applicationStore.navbar && <Navbar />}
+            {appStore.navbar && <Navbar />}
             <Layout>
-              {applicationStore.menu && (
+              {appStore.menu && (
                 <Layout.Sider
                   class={[styles.sider]}
                   style={{
@@ -55,8 +55,8 @@ export default defineComponent({
                   breakpoint="xl"
                   collapsible
                   hideTrigger
-                  collapsed={applicationStore.menuCollapse}
-                  onCollapse={(val) => (applicationStore.menuCollapse = val)}
+                  collapsed={appStore.menuCollapse}
+                  onCollapse={(val) => (appStore.menuCollapse = val)}
                 >
                   <MenuComponent></MenuComponent>
                 </Layout.Sider>

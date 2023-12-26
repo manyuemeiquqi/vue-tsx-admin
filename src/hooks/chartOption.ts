@@ -7,9 +7,9 @@ interface optionsFn {
 }
 
 export default function useChartOption(sourceOption: optionsFn) {
-  const applicationStore = useAppStore()
+  const appStore = useAppStore()
   const chartOption = computed<EChartsOption>(() => {
-    return sourceOption(applicationStore.isDark)
+    return sourceOption(appStore.isDark)
   })
   return {
     chartOption

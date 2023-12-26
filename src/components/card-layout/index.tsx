@@ -7,13 +7,13 @@ interface Slots {
 export default defineComponent({
   name: 'CardLayout',
   setup(_, { slots }) {
-    const applicationStore = useAppStore()
+    const appStore = useAppStore()
     const height = computed(() => {
       let ret =
         layoutStyleConfig.BREAD_HEIGHT +
         layoutStyleConfig.FOOTER_HEIGHT +
         layoutStyleConfig.TAB_HEIGHT
-      if (applicationStore.navbar) {
+      if (appStore.navbar) {
         ret += layoutStyleConfig.NAVBAR_HEIGHT
       }
       return ret
