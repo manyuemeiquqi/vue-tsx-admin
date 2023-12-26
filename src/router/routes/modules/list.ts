@@ -24,7 +24,7 @@ const LIST: AppRouteRecordRaw = {
     },
     {
       path: 'card',
-      name: CompNameEnum.card,
+      name: CompNameEnum.cardList,
       component: () => import('@/views/list/card-list/index'),
       meta: {
         locale: 'menu.list.cardList',

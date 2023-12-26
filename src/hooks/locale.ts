@@ -8,7 +8,7 @@ import { useI18n } from 'vue-i18n'
  * @desc get project locale state hook
  * >state flow:
  * - i18n read storage to init
- * - proejct read i18n state and prodece reacitve data currentLocale
+ * - app read i18n state and produce reactive data currentLocale
  * - update currentLocale with updating storage and i18n stance
  */
 export default function useLocale() {
