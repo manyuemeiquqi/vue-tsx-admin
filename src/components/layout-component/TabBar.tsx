@@ -6,7 +6,7 @@ import { computed, defineComponent, onUnmounted, ref, watch } from 'vue'
 import type { RouteLocationNormalized } from 'vue-router'
 import TabItem from './TabItem'
 import styles from './style.module.scss'
-import { useApplicationStore } from '@/store'
+import { useAppStore } from '@/store'
 export default defineComponent({
   name: 'TabBar',
   setup() {
@@ -23,7 +23,7 @@ export default defineComponent({
     onUnmounted(() => {
       removeRouteListener()
     })
-    const applicationStore = useApplicationStore()
+    const applicationStore = useAppStore()
     const offsetTop = computed(() => {
       return applicationStore.navbar ? layoutStyleConfig.NAVBAR_HEIGHT : 0
     })

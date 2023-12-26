@@ -1,5 +1,5 @@
 import { createPinia } from 'pinia'
-import useApplicationStore from './modules/application'
+import useAppStore from './modules/app'
 import useTabStore from './modules/tab'
 import useUserStore from './modules/user'
 
@@ -8,6 +8,6 @@ const pinia = createPinia()
 
 pinia.use(piniaPluginPersistedstate)
 
-export { useApplicationStore, useTabStore, useUserStore }
+export { useAppStore, useTabStore, useUserStore }
 
 export default pinia

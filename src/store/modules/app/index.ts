@@ -1,8 +1,8 @@
 import { defineStore } from 'pinia'
-import { ApplicationTheme, StoreName, layoutStyleConfig } from '@/types/constants'
+import { AppTheme } from '@/types/constants'
 
-export interface ApplicationState {
-  theme: ApplicationTheme
+export interface AppState {
+  theme: AppTheme
   colorWeak: boolean
   navbar: boolean
   menu: boolean
@@ -11,15 +11,14 @@ export interface ApplicationState {
   themeColor: string
   menuWidth: number
   tabBar: boolean
-
   settingVisible: boolean
   [key: string]: unknown
 }
 
-export default defineStore(StoreName.application, {
-  state(): ApplicationState {
+export default defineStore('appStore', {
+  state(): AppState {
     return {
-      theme: ApplicationTheme.light,
+      theme: AppTheme.light,
       colorWeak: false,
       navbar: true,
       menu: true,
@@ -28,18 +27,17 @@ export default defineStore(StoreName.application, {
       themeColor: '#165DFF',
       menuWidth: 220,
       tabBar: false,
-      // ------------DIVIDER----------
       settingVisible: false
     }
   },
   persist: true,
   getters: {
-    isDark(state: ApplicationState) {
-      return state.theme === ApplicationTheme.dark
+    isDark(state: AppState) {
+      return state.theme === AppTheme.dark
     }
   },
   actions: {
-    updateSettings(partial: Partial<ApplicationState>) {
+    updateSettings(partial: Partial<AppState>) {
       // @ts-ignore-next-line
       this.$patch(partial)
     },
@@ -48,9 +46,9 @@ export default defineStore(StoreName.application, {
     },
     toggleDarkLightMode() {
       if (this.isDark) {
-        this.theme = ApplicationTheme.light
+        this.theme = AppTheme.light
       } else {
-        this.theme = ApplicationTheme.dark
+        this.theme = AppTheme.dark
       }
     }
   }

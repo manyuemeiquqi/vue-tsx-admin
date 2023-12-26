@@ -14,7 +14,7 @@ import {
   IconSettings,
   IconUser
 } from '@arco-design/web-vue/es/icon'
-import { useApplicationStore } from '@/store'
+import { useAppStore } from '@/store'
 import { listenerRouteChange } from '@/utils/routerListener'
 // import { openWindow, regexUrl } from '@/utils';
 //menu 有三种形式
@@ -35,7 +35,7 @@ export default defineComponent({
     const router = useRouter()
     const route = useRoute()
     const { menuTree } = useMenuTree()
-    const applicationStore = useApplicationStore()
+    const applicationStore = useAppStore()
     const openKeys = ref<string[]>([])
     const selectedKey = ref<string[]>([])
 

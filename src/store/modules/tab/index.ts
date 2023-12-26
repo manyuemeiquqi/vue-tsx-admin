@@ -1,6 +1,6 @@
 import type { RouteLocationNormalized } from 'vue-router'
 import { defineStore } from 'pinia'
-import { AppRouteNames, StoreName } from '@/types/constants'
+import { AppRouteNames } from '@/types/constants'
 const BAN_LIST = [AppRouteNames.redirect, AppRouteNames.notFound]
 export interface TabItem {
   title: string
@@ -20,7 +20,8 @@ export const defaultTab = {
   title: 'menu.dashboard.workplace',
   fullPath: '/dashboard/workplace'
 }
-const useAppStore = defineStore(StoreName.tab, {
+
+export default defineStore('tabStore', {
   state: (): {
     tabList: TabItem[]
   } => ({
@@ -49,5 +50,3 @@ const useAppStore = defineStore(StoreName.tab, {
     }
   }
 })
-
-export default useAppStore

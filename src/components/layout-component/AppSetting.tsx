@@ -1,4 +1,4 @@
-import { useApplicationStore } from '@/store'
+import { useAppStore } from '@/store'
 import {
   Button,
   Divider,
@@ -21,7 +21,7 @@ export default defineComponent({
   name: 'AppSetting',
   setup() {
     const { t } = useI18n()
-    const applicationStore = useApplicationStore()
+    const applicationStore = useAppStore()
     const handleCancel = () => {
       applicationStore.settingVisible = false
     }

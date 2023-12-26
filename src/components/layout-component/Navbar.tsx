@@ -1,6 +1,6 @@
 import Logo from '@/assets/logo.svg'
 import useLocale from '@/hooks/locale'
-import { useApplicationStore } from '@/store'
+import { useAppStore } from '@/store'
 import { ApplicationInfo, LocaleOptions, layoutStyleConfig } from '@/types/constants'
 import { Button, Input, Select, Space, Tooltip, Typography } from '@arco-design/web-vue'
 import {
@@ -23,7 +23,7 @@ export default defineComponent({
   setup() {
     const { t } = useI18n()
     const { changeLocale } = useLocale()
-    const applicationStore = useApplicationStore()
+    const applicationStore = useAppStore()
     const { isFullscreen, toggle: toggleFullScreen } = useFullscreen()
 
     const handleLocaleChange = (val: unknown) => {
@@ -42,12 +42,14 @@ export default defineComponent({
           height: layoutStyleConfig.NAVBAR_HEIGHT + 'px'
         }}
       >
-        <Space align="center">
-          <img src={Logo} alt="logo" class={['w-8', 'h-8']} />
-          <Typography.Title class={['!text-lg', '!m-0']} heading={5}>
-            {ApplicationInfo.APP_TITLE}
-          </Typography.Title>
-        </Space>
+        <div class={['hidden', 'md:block']}>
+          <Space align="center">
+            <img src={Logo} alt="logo" class={['w-8', 'h-8']} />
+            <Typography.Title class={['!text-lg', '!m-0']} heading={5}>
+              {ApplicationInfo.APP_TITLE}
+            </Typography.Title>
+          </Space>
+        </div>
         <Space>
           <Input class={['rounded-2xl']} placeholder={t('navbar.search.placeholder')}></Input>
           <Select

@@ -4,15 +4,15 @@ import { RouterView } from 'vue-router'
 
 import zhCN from '@arco-design/web-vue/es/locale/lang/zh-cn'
 import enUS from '@arco-design/web-vue/es/locale/lang/en-us'
-import { ApplicationTheme, LocaleOptions } from './types/constants'
+import { AppTheme, LocaleOptions } from './types/constants'
 import useLocale from './hooks/locale'
-import { useApplicationStore } from './store'
+import { useAppStore } from './store'
 import { generate, getRgbStr } from '@arco-design/color'
 import AppSetting from './components/layout-component/AppSetting'
 
 export default defineComponent({
   setup() {
-    const applicationStore = useApplicationStore()
+    const applicationStore = useAppStore()
     const arcoLocaleMap = {
       [LocaleOptions.cn]: zhCN,
       [LocaleOptions.en]: enUS
@@ -30,8 +30,8 @@ export default defineComponent({
     watch(
       () => applicationStore.theme,
       (theme) => {
-        if (theme === ApplicationTheme.dark) {
-          document.body.setAttribute('arco-theme', ApplicationTheme.dark)
+        if (theme === AppTheme.dark) {
+          document.body.setAttribute('arco-theme', AppTheme.dark)
         } else {
           document.body.removeAttribute('arco-theme')
         }

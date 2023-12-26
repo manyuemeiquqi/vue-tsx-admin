@@ -1,8 +1,8 @@
 import { defineStore } from 'pinia'
 import type { UserInfo } from '@/types/global'
-import { StoreName } from '@/types/constants'
 import { getUserInfo } from '@/api/user'
-const useUserStore = defineStore(StoreName.user, {
+
+export default defineStore('userStore', {
   state: (): UserInfo => ({
     name: undefined,
     avatar: undefined,
@@ -46,5 +46,3 @@ const useUserStore = defineStore(StoreName.user, {
     }
   }
 })
-
-export default useUserStore

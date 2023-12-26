@@ -1,4 +1,4 @@
-import { useApplicationStore, useUserStore } from '@/store'
+import { useAppStore, useUserStore } from '@/store'
 import { AppRouteNames, layoutStyleConfig } from '@/types/constants'
 import { Layout } from '@arco-design/web-vue'
 import { computed, defineComponent, watch } from 'vue'
@@ -16,7 +16,7 @@ import type { AppRouteRecordRaw } from '@/router/routes/types'
 export default defineComponent({
   name: 'LayoutComponent',
   setup() {
-    const applicationStore = useApplicationStore()
+    const applicationStore = useAppStore()
     const paddingStyle = computed(() => {
       const paddingLeft = applicationStore.menu ? { paddingLeft: `${siderWidth.value}px` } : {}
       const paddingTop = applicationStore.navbar

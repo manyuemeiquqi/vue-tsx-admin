@@ -1,4 +1,4 @@
-import { useApplicationStore } from '@/store'
+import { useAppStore } from '@/store'
 import { layoutStyleConfig } from '@/types/constants'
 import { computed, defineComponent, type VNode } from 'vue'
 interface Slots {
@@ -7,7 +7,7 @@ interface Slots {
 export default defineComponent({
   name: 'CardLayout',
   setup(_, { slots }) {
-    const applicationStore = useApplicationStore()
+    const applicationStore = useAppStore()
     const height = computed(() => {
       let ret =
         layoutStyleConfig.BREAD_HEIGHT +
