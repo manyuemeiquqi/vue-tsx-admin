@@ -2,10 +2,10 @@ import { defineComponent } from 'vue'
 import { Button, Result } from '@arco-design/web-vue'
 import { useI18n } from 'vue-i18n'
 import CardLayout from '@/components/card-layout'
-import { AppRouteNames } from '@/types/constants'
+import { CompNameEnum } from '@/types/constants'
 
 export default defineComponent({
-  name: AppRouteNames._500,
+  name: CompNameEnum._500,
   setup() {
     const { t } = useI18n()
     return () => (

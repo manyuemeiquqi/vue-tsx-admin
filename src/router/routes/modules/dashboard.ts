@@ -1,9 +1,9 @@
-import { AppRouteNames } from '@/types/constants'
+import { CompNameEnum } from '@/types/constants'
 import type { AppRouteRecordRaw } from '../types'
 
 const DASHBOARD: AppRouteRecordRaw = {
   path: '/dashboard',
-  name: AppRouteNames.dashboard,
+  name: CompNameEnum.dashboard,
   component: () => import('@/components/layout-component/index'),
   meta: {
     locale: 'menu.dashboard',
@@ -13,7 +13,7 @@ const DASHBOARD: AppRouteRecordRaw = {
   children: [
     {
       path: 'workplace',
-      name: AppRouteNames.workplace,
+      name: CompNameEnum.workplace,
       component: () => import('@/views/dashboard/workbench/index'),
       meta: {
         locale: 'menu.dashboard.workplace',
@@ -24,7 +24,7 @@ const DASHBOARD: AppRouteRecordRaw = {
 
     {
       path: 'monitor',
-      name: AppRouteNames.monitor,
+      name: CompNameEnum.monitor,
       component: () => import('@/views/dashboard/monitor/index'),
       meta: {
         locale: 'menu.dashboard.monitor',

@@ -1,6 +1,6 @@
 import { queryProfileBasic, type ProfileBasicRes } from '@/api/detail'
 import useLoading from '@/hooks/loading'
-import { AppRouteNames } from '@/types/constants'
+import { CompNameEnum } from '@/types/constants'
 import DataUpdateRecord from '@/views/detail/DataUpdateRecord'
 import ProfileItem from '@/views/detail/ProfileItem'
 import { Button, Card, Space, Steps } from '@arco-design/web-vue'
@@ -8,7 +8,7 @@ import { computed, defineComponent, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 
 export default defineComponent({
-  name: AppRouteNames.profile,
+  name: CompNameEnum.profile,
   setup() {
     const { t } = useI18n()
     const step = ref(1)

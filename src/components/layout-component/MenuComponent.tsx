@@ -4,7 +4,7 @@ import { computed, defineComponent, ref, type VNode } from 'vue'
 import { get } from 'lodash'
 import { useI18n } from 'vue-i18n'
 import { useRouter, type RouteRecordRaw, type RouteMeta, useRoute } from 'vue-router'
-import { AppRouteNames } from '@/types/constants'
+import { CompNameEnum } from '@/types/constants'
 import {
   IconCheckCircle,
   IconDashboard,
@@ -19,14 +19,14 @@ import { listenerRouteChange } from '@/utils/routerListener'
 // import { openWindow, regexUrl } from '@/utils';
 //menu 有三种形式
 // 但是能够访问的形式只有一种 就只能放在 menu-item里面，其余的就是放在不同的父级里面
-const sumMenuRenderMap: Record<AppRouteNames[number], VNode> = {
-  [AppRouteNames.dashboard]: <IconDashboard />,
-  [AppRouteNames.profile]: <IconFile />,
-  [AppRouteNames.exception]: <IconExclamationCircle />,
-  [AppRouteNames.form]: <IconSettings />,
-  [AppRouteNames.list]: <IconList />,
-  [AppRouteNames.result]: <IconCheckCircle />,
-  [AppRouteNames.user]: <IconUser />
+const sumMenuRenderMap: Record<CompNameEnum[number], VNode> = {
+  [CompNameEnum.dashboard]: <IconDashboard />,
+  [CompNameEnum.profile]: <IconFile />,
+  [CompNameEnum.exception]: <IconExclamationCircle />,
+  [CompNameEnum.form]: <IconSettings />,
+  [CompNameEnum.list]: <IconList />,
+  [CompNameEnum.result]: <IconCheckCircle />,
+  [CompNameEnum.user]: <IconUser />
 }
 export default defineComponent({
   name: 'MenuComponent',

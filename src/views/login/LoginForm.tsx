@@ -1,7 +1,7 @@
 import { login, type LoginData } from '@/api/user'
 import useAuth from '@/hooks/auth'
 import useLoading from '@/hooks/loading'
-import { AppRouteNames, LocalStorageKey } from '@/types/constants'
+import { CompNameEnum, LocalStorageKey } from '@/types/constants'
 import { clearToken, setToken } from '@/hooks/token'
 import {
   Button,
@@ -26,7 +26,7 @@ export default defineComponent({
     const { loading, setLoading } = useLoading()
     const router = useRouter()
     const { loginApp } = useAuth()
-    const storageLoginInfo = useStorage(LocalStorageKey.loginFormInfo, {
+    const storageLoginInfo = useStorage(LocalStorageKey.loginFormKey, {
       rememberPassword: true,
       username: 'admin',
       password: 'admin'
@@ -55,7 +55,7 @@ export default defineComponent({
         try {
           await loginApp(values as LoginData)
           router.push({
-            name: AppRouteNames.workplace
+            name: CompNameEnum.workplace
           })
           Message.success(t('login.form.login.success'))
           const { rememberPassword } = storageLoginInfo.value

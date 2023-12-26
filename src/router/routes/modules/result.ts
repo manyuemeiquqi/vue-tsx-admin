@@ -1,9 +1,9 @@
-import { AppRouteNames } from '@/types/constants'
+import { CompNameEnum } from '@/types/constants'
 import type { AppRouteRecordRaw } from '../types'
 
 const RESULT: AppRouteRecordRaw = {
   path: '/result',
-  name: AppRouteNames.result,
+  name: CompNameEnum.result,
   component: () => import('@/components/layout-component/index'),
   meta: {
     locale: 'menu.result',
@@ -14,7 +14,7 @@ const RESULT: AppRouteRecordRaw = {
   children: [
     {
       path: 'success',
-      name: AppRouteNames.success,
+      name: CompNameEnum.success,
       component: () => import('@/views/result/success'),
       meta: {
         locale: 'menu.result.success',
@@ -24,7 +24,7 @@ const RESULT: AppRouteRecordRaw = {
     },
     {
       path: 'error',
-      name: AppRouteNames.error,
+      name: CompNameEnum.error,
       component: () => import('@/views/result/error'),
       meta: {
         locale: 'menu.result.error',

@@ -1,9 +1,9 @@
-import { AppRouteNames } from '@/types/constants'
+import { CompNameEnum } from '@/types/constants'
 import type { AppRouteRecordRaw } from '../types'
 
 const LIST: AppRouteRecordRaw = {
   path: '/list',
-  name: AppRouteNames.list,
+  name: CompNameEnum.list,
   component: () => import('@/components/layout-component/index'),
   meta: {
     locale: 'menu.list',
@@ -14,7 +14,7 @@ const LIST: AppRouteRecordRaw = {
   children: [
     {
       path: 'search-table',
-      name: AppRouteNames.searchTable,
+      name: CompNameEnum.searchTable,
       component: () => import('@/views/list/search-table/index'),
       meta: {
         locale: 'menu.list.searchTable',
@@ -24,7 +24,7 @@ const LIST: AppRouteRecordRaw = {
     },
     {
       path: 'card',
-      name: AppRouteNames.card,
+      name: CompNameEnum.card,
       component: () => import('@/views/list/card-list/index'),
       meta: {
         locale: 'menu.list.cardList',

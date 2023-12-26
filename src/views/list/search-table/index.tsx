@@ -30,11 +30,11 @@ import Sortable from 'sortablejs'
 import { computed, defineComponent, nextTick, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 import TableSearchForm from './TableSearchForm'
-import { AppRouteNames } from '@/types/constants'
+import { CompNameEnum } from '@/types/constants'
 import usePermission from '@/hooks/permission'
 
 export default defineComponent({
-  name: AppRouteNames.searchTable,
+  name: CompNameEnum.searchTable,
   setup() {
     const { t } = useI18n()
     const { hasButtonPermission } = usePermission()

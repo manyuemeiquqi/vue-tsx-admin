@@ -1,6 +1,6 @@
 import { useTabStore } from '@/store'
 import { defaultTab, type TabItem } from '@/store/modules/tab'
-import { AppRouteNames } from '@/types/constants'
+import { CompNameEnum } from '@/types/constants'
 import { Doption, Dropdown, Tag } from '@arco-design/web-vue'
 import {
   IconClose,
@@ -53,7 +53,7 @@ export default defineComponent({
       })
     }
     const handleTabClose = () => {
-      tabStore.deleteTab(props.itemData.name as AppRouteNames)
+      tabStore.deleteTab(props.itemData.name as CompNameEnum)
       if (props.itemData.name === route.name) {
         const prevTab = tabList.value[props.index - 1]
         router.push({ path: prevTab.fullPath })
@@ -95,7 +95,7 @@ export default defineComponent({
         }
         case TabActionType.reload: {
           router.push({
-            name: AppRouteNames.redirect,
+            name: CompNameEnum.redirect,
             params: {
               path: route.fullPath
             }

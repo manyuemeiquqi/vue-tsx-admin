@@ -2,7 +2,7 @@ import type { Router } from 'vue-router'
 import NProgress from 'nprogress'
 import { useUserStore } from '@/store'
 import { isLogin } from '@/hooks/token'
-import { AppRouteNames } from '@/types/constants'
+import { CompNameEnum } from '@/types/constants'
 import useAuth from '@/hooks/auth'
 
 /**
@@ -28,17 +28,17 @@ export default function setupUserLoginInfoGuard(router: Router) {
         } catch (error) {
           await logoutApp()
           next({
-            name: AppRouteNames.login
+            name: CompNameEnum.login
           })
         }
       }
     } else {
-      if (to.name === AppRouteNames.login) {
+      if (to.name === CompNameEnum.login) {
         next()
         return
       }
       next({
-        name: AppRouteNames.login
+        name: CompNameEnum.login
       })
     }
   })

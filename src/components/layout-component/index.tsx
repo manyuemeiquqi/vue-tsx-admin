@@ -1,5 +1,5 @@
 import { useAppStore, useUserStore } from '@/store'
-import { AppRouteNames, layoutStyleConfig } from '@/types/constants'
+import { CompNameEnum, layoutStyleConfig } from '@/types/constants'
 import { Layout } from '@arco-design/web-vue'
 import { computed, defineComponent, watch } from 'vue'
 import BreadcrumbComponent from './BreadcrumbComponent'
@@ -36,7 +36,7 @@ export default defineComponent({
       () => userStore.role,
       (roleValue) => {
         if (roleValue && !permission.routeHasPermission(route))
-          router.push({ name: AppRouteNames.notFound })
+          router.push({ name: CompNameEnum.notFound })
       }
     )
     return () => {

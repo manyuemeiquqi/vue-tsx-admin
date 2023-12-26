@@ -1,17 +1,17 @@
 import CardLayout from '@/components/card-layout'
-import { AppRouteNames } from '@/types/constants'
+import { CompNameEnum } from '@/types/constants'
 import { Button, Result, Space } from '@arco-design/web-vue'
 import { defineComponent } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { useRouter } from 'vue-router'
 export default defineComponent({
-  name: AppRouteNames._404,
+  name: CompNameEnum._404,
   setup() {
     const { t } = useI18n()
     const router = useRouter()
     const handleBack = () => {
       router.push({
-        name: AppRouteNames.workplace
+        name: CompNameEnum.workplace
       })
     }
     return () => (

@@ -1,9 +1,9 @@
-import { AppRouteNames } from '@/types/constants'
+import { CompNameEnum } from '@/types/constants'
 import type { AppRouteRecordRaw } from '../types'
 
 const USER: AppRouteRecordRaw = {
   path: '/user',
-  name: AppRouteNames.user,
+  name: CompNameEnum.user,
   component: () => import('@/components/layout-component/index'),
   meta: {
     locale: 'menu.user',
@@ -14,7 +14,7 @@ const USER: AppRouteRecordRaw = {
   children: [
     {
       path: 'info',
-      name: AppRouteNames.info,
+      name: CompNameEnum.info,
       component: () => import('@/views/user/info/index'),
       meta: {
         locale: 'menu.user.info',
@@ -24,7 +24,7 @@ const USER: AppRouteRecordRaw = {
     },
     {
       path: 'setting',
-      name: AppRouteNames.setting,
+      name: CompNameEnum.setting,
       component: () => import('@/views/user/setting/index'),
       meta: {
         locale: 'menu.user.setting',

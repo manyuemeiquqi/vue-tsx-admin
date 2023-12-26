@@ -1,9 +1,9 @@
-import { AppRouteNames } from '@/types/constants'
+import { CompNameEnum } from '@/types/constants'
 import type { AppRouteRecordRaw } from '../types'
 
 const EXCEPTION: AppRouteRecordRaw = {
   path: '/exception',
-  name: AppRouteNames.exception,
+  name: CompNameEnum.exception,
   component: () => import('@/components/layout-component/index'),
   meta: {
     locale: 'menu.exception',
@@ -13,7 +13,7 @@ const EXCEPTION: AppRouteRecordRaw = {
   children: [
     {
       path: '403',
-      name: AppRouteNames._403,
+      name: CompNameEnum._403,
       component: () => import('@/views/exception/403/index'),
       meta: {
         locale: 'menu.exception.403',
@@ -23,7 +23,7 @@ const EXCEPTION: AppRouteRecordRaw = {
     },
     {
       path: '404',
-      name: AppRouteNames._404,
+      name: CompNameEnum._404,
       component: () => import('@/views/exception/404/index'),
       meta: {
         locale: 'menu.exception.404',
@@ -33,7 +33,7 @@ const EXCEPTION: AppRouteRecordRaw = {
     },
     {
       path: '500',
-      name: AppRouteNames._500,
+      name: CompNameEnum._500,
       component: () => import('@/views/exception/500/index'),
       meta: {
         locale: 'menu.exception.500',

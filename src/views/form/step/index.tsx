@@ -1,6 +1,6 @@
 import { submitChannelForm, type UnitChannelModel } from '@/api/form'
 import useLoading from '@/hooks/loading'
-import { AppRouteNames } from '@/types/constants'
+import { CompNameEnum } from '@/types/constants'
 import {
   Button,
   Card,
@@ -23,7 +23,7 @@ import { defineComponent, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 
 export default defineComponent({
-  name: AppRouteNames.step,
+  name: CompNameEnum.step,
   setup() {
     const { loading, setLoading } = useLoading(false)
     const { t } = useI18n()

@@ -4,7 +4,7 @@ export enum LocaleOptions {
 }
 export enum LocalStorageKey {
   localeKey = 'VUE_TSX_ADMIN_LOCALE',
-  loginFormInfo = 'VUE_TSX_ADMIN_LOGIN_FORM_INFO'
+  loginFormKey = 'VUE_TSX_ADMIN_LOGIN_FORM_INFO'
 }
 export enum AppTheme {
   light = 'light',
@@ -15,51 +15,51 @@ export enum ApplicationInfo {
   APP_TITLE = 'Vue TSX Admin'
 }
 
-export enum AppRouteNames {
-  login = 'LOGIN',
-  redirect = 'REDIRECT',
-  notFound = 'NOT_FOUND',
+export enum CompNameEnum {
+  login = 'login',
+  redirect = 'redirect',
+  notFound = 'notFound',
 
   // =============== DIVIDER ==================
-  dashboard = 'DASHBOARD',
-  workplace = 'WORKPLACE',
-  monitor = 'MONITOR',
+  dashboard = 'dashboard',
+  workplace = 'workplace',
+  monitor = 'monitor',
 
   // =============== DIVIDER ==================
 
-  exception = 'EXCEPTION',
+  exception = 'exception',
   _403 = '403',
   _404 = '404',
   _500 = '500',
 
   // =============== DIVIDER ==================
-  form = 'FORM',
-  step = 'STEP',
-  group = 'GROUP',
+  form = 'form',
+  step = 'step',
+  group = 'group',
   // =============== DIVIDER ==================
-  profile = 'PROFILE',
+  profile = 'profile',
 
   // =============== DIVIDER ==================
 
-  list = 'LIST',
-  searchTable = 'SEARCH_TABLE',
-  card = 'CARD',
+  list = 'list',
+  searchTable = 'searchTable',
+  card = 'card',
   // =============== DIVIDER ==================
-  result = 'RESULT',
-  success = 'SUCCESS',
-  error = 'ERROR',
+  result = 'result',
+  success = 'success',
+  error = 'error',
 
   // =============== DIVIDER ==================
 
-  user = 'USER',
-  info = 'INFO',
-  setting = 'SETTING'
+  user = 'user',
+  info = 'info',
+  setting = 'setting'
 
   // =============== DIVIDER ==================
 }
 
 export const NOT_FOUND_ROUTE = {
-  name: AppRouteNames.notFound
+  name: CompNameEnum.notFound
 }
 
 export const layoutStyleConfig = {

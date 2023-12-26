@@ -1,9 +1,9 @@
-import { AppRouteNames } from '@/types/constants'
+import { CompNameEnum } from '@/types/constants'
 import type { AppRouteRecordRaw } from '../types'
 
 const PROFILE: AppRouteRecordRaw = {
   path: '/profile',
-  name: AppRouteNames.profile,
+  name: CompNameEnum.profile,
   component: () => import('@/components/layout-component/index'),
   meta: {
     locale: 'menu.profile',

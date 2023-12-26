@@ -1,10 +1,10 @@
 import CardLayout from '@/components/card-layout'
-import { AppRouteNames } from '@/types/constants'
+import { CompNameEnum } from '@/types/constants'
 import { Button, Result, Space } from '@arco-design/web-vue'
 import { defineComponent } from 'vue'
 import { useI18n } from 'vue-i18n'
 export default defineComponent({
-  name: AppRouteNames._403,
+  name: CompNameEnum._403,
   setup() {
     const { t } = useI18n()
     return () => (

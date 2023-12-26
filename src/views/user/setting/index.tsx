@@ -5,9 +5,9 @@ import BasicInformation from './BasicInformation'
 import Certification from './Certification'
 import SecuritySettings from './SecuritySettings'
 import UserPanel from './UserPanel'
-import { AppRouteNames } from '@/types/constants'
+import { CompNameEnum } from '@/types/constants'
 export default defineComponent({
-  name: AppRouteNames.setting,
+  name: CompNameEnum.setting,
   setup() {
     const { t } = useI18n()
     const componentList = [

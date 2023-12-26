@@ -1,9 +1,9 @@
-import { AppRouteNames } from '@/types/constants'
+import { CompNameEnum } from '@/types/constants'
 import type { AppRouteRecordRaw } from '../types'
 
 const FORM: AppRouteRecordRaw = {
   path: '/form',
-  name: AppRouteNames.form,
+  name: CompNameEnum.form,
   component: () => import('@/components/layout-component/index'),
   meta: {
     locale: 'menu.form',
@@ -14,7 +14,7 @@ const FORM: AppRouteRecordRaw = {
   children: [
     {
       path: 'step',
-      name: AppRouteNames.step,
+      name: CompNameEnum.step,
       component: () => import('@/views/form/step/index'),
       meta: {
         locale: 'menu.form.step',
@@ -24,7 +24,7 @@ const FORM: AppRouteRecordRaw = {
     },
     {
       path: 'group',
-      name: AppRouteNames.group,
+      name: CompNameEnum.group,
       component: () => import('@/views/form/group/index'),
       meta: {
         locale: 'menu.form.group',

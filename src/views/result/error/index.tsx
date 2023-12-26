@@ -1,11 +1,11 @@
 import CardLayout from '@/components/card-layout'
-import { AppRouteNames } from '@/types/constants'
+import { CompNameEnum } from '@/types/constants'
 import { Button, Link, Result, Space, Typography } from '@arco-design/web-vue'
 import { IconLink } from '@arco-design/web-vue/es/icon'
 import { defineComponent } from 'vue'
 import { useI18n } from 'vue-i18n'
 export default defineComponent({
-  name: AppRouteNames.error,
+  name: CompNameEnum.error,
   setup() {
     const { t } = useI18n()
     return () => (

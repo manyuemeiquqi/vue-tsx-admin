@@ -1,6 +1,6 @@
 import useAuth from '@/hooks/auth'
 import { useAppStore, useUserStore } from '@/store'
-import { AppRouteNames } from '@/types/constants'
+import { CompNameEnum } from '@/types/constants'
 import { Avatar, Dropdown, Message, Space } from '@arco-design/web-vue'
 import { IconExport, IconSettings, IconTag, IconUser } from '@arco-design/web-vue/es/icon'
 import { computed, defineComponent } from 'vue'
@@ -17,7 +17,7 @@ export default defineComponent({
       try {
         await logoutApp()
         Message.success('登出成功')
-        router.push({ name: AppRouteNames.login })
+        router.push({ name: CompNameEnum.login })
       } finally {
         /* empty */
       }
@@ -42,14 +42,14 @@ export default defineComponent({
       {
         label: t('messageBox.userCenter'),
         onClick: () => {
-          router.push({ name: AppRouteNames.info })
+          router.push({ name: CompNameEnum.info })
         },
         icon: <IconUser />
       },
       {
         label: t('messageBox.userSettings'),
         onClick: () => {
-          router.push({ name: AppRouteNames.setting })
+          router.push({ name: CompNameEnum.setting })
         },
         icon: <IconSettings />
       },

@@ -1,6 +1,6 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
 
-import { AppRouteNames } from '@/types/constants'
+import { CompNameEnum } from '@/types/constants'
 import configRouteGuard from './guard'
 import { appRoutes } from './routes'
 import NProgress from 'nprogress' // progress bar
@@ -11,11 +11,11 @@ const router = createRouter({
   routes: [
     {
       path: '/',
-      redirect: { name: AppRouteNames.login }
+      redirect: { name: CompNameEnum.login }
     },
     {
       path: '/login',
-      name: AppRouteNames.login,
+      name: CompNameEnum.login,
       component: () => import('@/views/login/index'),
       meta: {
         requiresAuth: false
@@ -31,7 +31,7 @@ const router = createRouter({
       children: [
         {
           path: '/redirect/:path',
-          name: AppRouteNames.redirect,
+          name: CompNameEnum.redirect,
           component: () => import('@/views/redirect/index'),
           meta: {
             requiresAuth: true,
@@ -42,7 +42,7 @@ const router = createRouter({
     },
     {
       path: '/:pathMatch(.*)*',
-      name: AppRouteNames.notFound,
+      name: CompNameEnum.notFound,
       component: () => import('@/views/not-found/index')
     }
   ]
