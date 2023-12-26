@@ -25,7 +25,7 @@ export default defineComponent({
     })
     const appStore = useAppStore()
     const offsetTop = computed(() => {
-      return appStore.navbar ? layoutStyleConfig.NAVBAR_HEIGHT : 0
+      return appStore.navbar ? layoutStyleConfig.navbarHeight : 0
     })
     watch(
       () => appStore.navbar,
@@ -38,7 +38,7 @@ export default defineComponent({
         <div
           class={[styles['tab-box']]}
           style={{
-            height: layoutStyleConfig.TAB_HEIGHT
+            height: layoutStyleConfig.tabHeight
           }}
         >
           <div class={['overflow-hidden', 'flex-1']}>

@@ -7,7 +7,7 @@ export default defineComponent({
     return () => (
       <LayoutFooter
         style={{
-          height: layoutStyleConfig.FOOTER_HEIGHT + 'px !important'
+          height: layoutStyleConfig.footerHeight + 'px !important'
         }}
         class="flex justify-center items-center text-center text-[var(--color-text-2)]"
       >

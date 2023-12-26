@@ -14,7 +14,7 @@ export default defineComponent({
     return () => (
       <div
         style={{
-          height: layoutStyleConfig.BREAD_HEIGHT + 'px'
+          height: layoutStyleConfig.breadcrumbHeight + 'px'
         }}
       >
         <Breadcrumb class={['mb-4', 'mt-4']}>

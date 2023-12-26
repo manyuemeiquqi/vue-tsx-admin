@@ -8,7 +8,6 @@ import { AppTheme, LocaleOptions } from './types/constants'
 import useLocale from './hooks/locale'
 import { useAppStore } from './store'
 import { generate, getRgbStr } from '@arco-design/color'
-import AppSetting from './components/layout-component/AppSetting'
 
 export default defineComponent({
   setup() {

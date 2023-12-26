@@ -20,7 +20,7 @@ export default defineComponent({
     const paddingStyle = computed(() => {
       const paddingLeft = appStore.menu ? { paddingLeft: `${siderWidth.value}px` } : {}
       const paddingTop = appStore.navbar
-        ? { paddingTop: layoutStyleConfig.NAVBAR_HEIGHT + 'px' }
+        ? { paddingTop: layoutStyleConfig.navbarHeight + 'px' }
         : {}
 
       return { ...paddingLeft, ...paddingTop }

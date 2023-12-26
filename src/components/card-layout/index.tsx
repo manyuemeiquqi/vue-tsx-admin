@@ -10,11 +10,11 @@ export default defineComponent({
     const appStore = useAppStore()
     const height = computed(() => {
       let ret =
-        layoutStyleConfig.BREAD_HEIGHT +
-        layoutStyleConfig.FOOTER_HEIGHT +
-        layoutStyleConfig.TAB_HEIGHT
+        layoutStyleConfig.breadcrumbHeight +
+        layoutStyleConfig.footerHeight +
+        layoutStyleConfig.tabHeight
       if (appStore.navbar) {
-        ret += layoutStyleConfig.NAVBAR_HEIGHT
+        ret += layoutStyleConfig.navbarHeight
       }
       return ret
     })

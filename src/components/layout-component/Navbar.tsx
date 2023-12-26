@@ -39,7 +39,7 @@ export default defineComponent({
       <div
         class={[styles.navbar]}
         style={{
-          height: layoutStyleConfig.NAVBAR_HEIGHT + 'px'
+          height: layoutStyleConfig.navbarHeight + 'px'
         }}
       >
         <div class={['hidden', 'md:block']}>
