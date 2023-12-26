@@ -11,7 +11,7 @@ export default defineComponent({
         }}
         class="flex justify-center items-center text-center text-[var(--color-text-2)]"
       >
-        {ApplicationInfo.APP_TITLE}
+        {ApplicationInfo.appTitle}
       </LayoutFooter>
     )
   }

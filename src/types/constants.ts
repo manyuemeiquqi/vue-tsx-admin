@@ -12,7 +12,7 @@ export enum AppTheme {
 }
 
 export enum ApplicationInfo {
-  APP_TITLE = 'Vue TSX Admin'
+  appTitle = 'Vue TSX Admin'
 }
 
 export enum CompNameEnum {
