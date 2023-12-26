@@ -10,6 +10,7 @@ import { useAppStore } from './store'
 import { generate, getRgbStr } from '@arco-design/color'
 
 export default defineComponent({
+  name: 'app',
   setup() {
     const appStore = useAppStore()
     const arcoLocaleMap = {

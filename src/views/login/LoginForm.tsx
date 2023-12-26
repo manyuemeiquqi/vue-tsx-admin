@@ -21,6 +21,7 @@ import { defineComponent, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { useRouter } from 'vue-router'
 export default defineComponent({
+  name: 'loginForm',
   setup() {
     const { t } = useI18n()
     const { loading, setLoading } = useLoading()
