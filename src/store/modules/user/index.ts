@@ -1,6 +1,5 @@
 import { defineStore } from 'pinia'
-import type { UserInfo } from '@/types/global'
-import { getUserInfo } from '@/api/user'
+import { getUserInfo, type UserInfo } from '@/api/user'
 
 export default defineStore('userStore', {
   state: (): UserInfo => ({

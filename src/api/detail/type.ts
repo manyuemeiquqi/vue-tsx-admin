@@ -1,16 +1,3 @@
-import axios from 'axios'
-export type operationLogRes = Array<{
-  key: string
-  contentNumber: string
-  updateContent: string
-  status: number
-  updateTime: string
-}>
-
-export function queryOperationLog() {
-  return axios.get<operationLogRes>('/api/operation/log')
-}
-
 export interface ProfileBasicRes {
   status: number
   video: {
@@ -42,6 +29,11 @@ export interface ProfileBasicRes {
     }
   }
 }
-export function queryProfileBasic() {
-  return axios.get<ProfileBasicRes>('/api/profile/basic')
-}
+
+export type operationLogRes = Array<{
+  key: string
+  contentNumber: string
+  updateContent: string
+  status: number
+  updateTime: string
+}>

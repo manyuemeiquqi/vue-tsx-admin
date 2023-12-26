@@ -1,5 +1,3 @@
-import axios from 'axios'
-
 export interface BaseInfoModel {
   activityName: string
   channelType: string
@@ -12,12 +10,6 @@ export interface ChannelInfoModel {
   keyword: string[]
   pushNotify: boolean
   advertisingContent: string
-}
-
-export type UnitChannelModel = BaseInfoModel & ChannelInfoModel
-
-export function submitChannelForm(data: UnitChannelModel) {
-  return axios.post('/api/channel-form/submit', { data })
 }
 
 export interface GroupFormModel {
@@ -50,7 +42,4 @@ export interface GroupFormModel {
       profile: string
     }
   }
-}
-export function submitGroupForm(data: GroupFormModel) {
-  return axios.post('/api/channel-form/group', { data })
 }

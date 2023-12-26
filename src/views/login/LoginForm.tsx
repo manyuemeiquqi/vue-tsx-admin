@@ -1,7 +1,7 @@
 import { login, type LoginData } from '@/api/user'
 import useAuth from '@/hooks/auth'
 import useLoading from '@/hooks/loading'
-import { CompNameEnum, LocalStorageKey } from '@/types/constants'
+import { ApplicationInfo, CompNameEnum, LocalStorageKey } from '@/types/constants'
 import { clearToken, setToken } from '@/hooks/token'
 import {
   Button,
@@ -73,7 +73,7 @@ export default defineComponent({
     return () => (
       <div class="w-80">
         <Space direction="vertical">
-          <Typography.Title heading={4}>Vue TSX Admin</Typography.Title>
+          <Typography.Title heading={4}>{ApplicationInfo.appTitle}</Typography.Title>
           <Typography.Text class={'text-[color:var(--color-text-3)] '}>
             {t('login.form.title')}
           </Typography.Text>

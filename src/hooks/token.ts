@@ -1,19 +1,21 @@
-const TOKEN_KEY = 'token'
+import { LocalStorageKey } from '@/types/constants'
+
+const tokenKey = LocalStorageKey.tokenKey
 
 const isLogin = () => {
-  return !!localStorage.getItem(TOKEN_KEY)
+  return !!localStorage.getItem(tokenKey)
 }
 
 const getToken = () => {
-  return localStorage.getItem(TOKEN_KEY)
+  return localStorage.getItem(tokenKey)
 }
 
 const setToken = (token: string) => {
-  localStorage.setItem(TOKEN_KEY, token)
+  localStorage.setItem(tokenKey, token)
 }
 
 const clearToken = () => {
-  localStorage.removeItem(TOKEN_KEY)
+  localStorage.removeItem(tokenKey)
 }
 
 export { isLogin, getToken, setToken, clearToken }

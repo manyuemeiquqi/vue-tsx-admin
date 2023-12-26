@@ -3,13 +3,16 @@ import LoginForm from '@/views/login/LoginForm'
 import LoginBanner from '@/views/login/LoginBanner'
 import { Space } from '@arco-design/web-vue'
 import Logo from '@/assets/logo.svg'
+import { ApplicationInfo } from '@/types/constants'
 export default defineComponent({
   setup() {
     return () => (
       <div class="h-screen flex">
         <Space align="center" class={['top-1', 'left-1', 'fixed']}>
           <img src={Logo} alt="logo" class={['w-8', 'h-8']} />
-          <span class={['text-2xl', 'lg:text-[var(--color-fill-1)]']}>Vue TSX Admin</span>
+          <span class={['text-2xl', 'lg:text-[var(--color-fill-1)]']}>
+            {ApplicationInfo.appTitle}
+          </span>
         </Space>
         <div
           style={{
