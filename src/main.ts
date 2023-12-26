@@ -8,7 +8,7 @@ import './assets/style/style.scss'
 
 import App from './App'
 import router from './router'
-import '@/mock/mock'
+import '@/mock'
 
 import i18n from './locale'
 import ArcoVueIcon from '@arco-design/web-vue/es/icon'
