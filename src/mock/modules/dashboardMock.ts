@@ -3,6 +3,7 @@ import dayjs from 'dayjs'
 
 import qs from 'query-string'
 import setupMock, { successResponseWrap } from '@/mock/setupMock'
+import type { GetParams } from '@/types/global'
 const textList = [
   {
     key: 1,
@@ -99,112 +100,8 @@ const videoList = [
     increases: 2
   }
 ]
-const haveReadIds: number[] = []
-const getMessageList = () => {
-  return [
-    {
-      id: 1,
-      type: 'message',
-      title: '郑曦月',
-      subTitle: '的私信',
-      avatar: 'https://cdn.jsdelivr.net/gh/manyuemeiquqi/my-image-bed/dist/avatar1.webp',
-      content: '审批请求已发送，请查收',
-      time: '今天 12:30:01'
-    },
-    {
-      id: 2,
-      type: 'message',
-      title: '宁波',
-      subTitle: '的回复',
-      avatar: 'https://cdn.jsdelivr.net/gh/manyuemeiquqi/my-image-bed/dist/avatar2.webp',
-      content: '此处 bug 已经修复',
-      time: '今天 12:30:01'
-    },
-    {
-      id: 3,
-      type: 'message',
-      title: '宁波',
-      subTitle: '的回复',
-      avatar: 'https://cdn.jsdelivr.net/gh/manyuemeiquqi/my-image-bed/dist/avatar2.webp',
-      content: '此处 bug 已经修复',
-      time: '今天 12:20:01'
-    },
-    {
-      id: 4,
-      type: 'notice',
-      title: '续费通知',
-      subTitle: '',
-      avatar: '',
-      content: '您的产品使用期限即将截止，如需继续使用产品请前往购…',
-      time: '今天 12:20:01',
-      messageType: 3
-    },
-    {
-      id: 5,
-      type: 'notice',
-      title: '规则开通成功',
-      subTitle: '',
-      avatar: '',
-      content: '内容屏蔽规则于 2021-12-01 开通成功并生效',
-      time: '今天 12:20:01',
-      messageType: 1
-    },
-    {
-      id: 6,
-      type: 'todo',
-      title: '质检队列变更',
-      subTitle: '',
-      avatar: '',
-      content: '内容质检队列于 2021-12-01 19:50:23 进行变更，请重新…',
-      time: '今天 12:20:01',
-      messageType: 0
-    }
-  ].map((item) => ({
-    ...item,
-    status: haveReadIds.indexOf(item.id) === -1 ? 0 : 1
-  }))
-}
 setupMock({
   setup() {
-    Mock.mock(new RegExp('/api/data-chain-growth'), (params: any) => {
-      const { quota } = JSON.parse(params.body)
-      const getLineData = () => {
-        return {
-          xAxis: new Array(12).fill(0).map((_item, index) => `${index + 1}日`),
-          data: {
-            name: quota,
-            value: new Array(12).fill(0).map(() => Mock.Random.natural(1000, 3000))
-          }
-        }
-      }
-      return successResponseWrap({
-        count: Mock.Random.natural(1000, 3000),
-        growth: Mock.Random.float(20, 100, 2, 2),
-        chartData: getLineData()
-      })
-    })
-    // v2
-    Mock.mock(new RegExp('/api/data-overview'), () => {
-      const generateLineData = (name: string) => {
-        return {
-          name,
-          count: Mock.Random.natural(20, 2000),
-          value: new Array(8).fill(0).map(() => Mock.Random.natural(800, 4000))
-        }
-      }
-      const xAxis = new Array(8).fill(0).map((_item, index) => {
-        return `12.1${index}`
-      })
-      return successResponseWrap({
-        xAxis,
-        data: [
-          generateLineData('内容生产量'),
-          generateLineData('内容点击量'),
-          generateLineData('内容曝光量'),
-          generateLineData('活跃用户数')
-        ]
-      })
-    })
     Mock.mock(new RegExp('/api/content-data'), () => {
       const presetData = [58, 81, 53, 90, 64, 88, 49, 79]
       const getLineData = () => {
@@ -218,7 +115,7 @@ setupMock({
       }
       return successResponseWrap([...getLineData()])
     })
-    Mock.mock(new RegExp('/api/popular/list'), (params: any) => {
+    Mock.mock(new RegExp('/api/popular/list'), (params: GetParams) => {
       const { type = 'text' } = qs.parseUrl(params.url).query
       if (type === 'image') {
         return successResponseWrap([...videoList])
@@ -228,64 +125,24 @@ setupMock({
       }
       return successResponseWrap([...textList])
     })
-    Mock.mock(new RegExp('/api/message/list'), () => {
-      return successResponseWrap(getMessageList())
-    })
+  }
+})
 
-    Mock.mock(new RegExp('/api/message/read'), (params: { body: string }) => {
-      const { ids } = JSON.parse(params.body)
-      haveReadIds.push(...(ids || []))
-      return successResponseWrap(true)
-    })
-
-    Mock.mock(new RegExp('/api/content-period-analysis'), () => {
-      const getLineData = (name: string) => {
-        return {
-          name,
-          value: new Array(12).fill(0).map(() => Mock.Random.natural(30, 90))
-        }
-      }
-      return successResponseWrap({
-        xAxis: new Array(12).fill(0).map((_item, index) => `${index * 2}:00`),
-        data: [getLineData('纯文本'), getLineData('图文类'), getLineData('视频类')]
+setupMock({
+  setup() {
+    Mock.mock(new RegExp('/api/chat/list'), () => {
+      const data = Mock.mock({
+        'data|4-6': [
+          {
+            'id|+1': 1,
+            username: '用户7352772',
+            content: '马上就开始了，好激动！',
+            time: '13:09:12',
+            'isCollect|2': true
+          }
+        ]
       })
-    })
-
-    Mock.mock(new RegExp('/api/content-publish'), () => {
-      const generateLineData = (name: string) => {
-        const result = {
-          name,
-          x: [] as string[],
-          y: [] as number[]
-        }
-        new Array(12).fill(0).forEach((_item, index) => {
-          result.x.push(`${index * 2}:00`)
-          result.y.push(Mock.Random.natural(1000, 3000))
-        })
-        return result
-      }
-      return successResponseWrap([
-        generateLineData('纯文本'),
-        generateLineData('图文类'),
-        generateLineData('视频类')
-      ])
-    })
-
-    Mock.mock(new RegExp('/api/popular-author/list'), () => {
-      const generateData = () => {
-        const list = new Array(7).fill(0).map((_item, index) => ({
-          ranking: index + 1,
-          author: Mock.mock('@ctitle(5)'),
-          contentCount: Mock.mock(/[0-9]{4}/),
-          clickCount: Mock.mock(/[0-9]{4}/)
-        }))
-        return {
-          list
-        }
-      }
-      return successResponseWrap({
-        ...generateData()
-      })
+      return successResponseWrap(data.data)
     })
   }
 })
