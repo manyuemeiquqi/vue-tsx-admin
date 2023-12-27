@@ -1,6 +1,6 @@
 import { submitGroupForm, type GroupFormModel } from '@/api/form'
 import useLoading from '@/hooks/loading'
-import { CompNameEnum } from '@/types/constants'
+import { ViewNames } from '@/types/constants'
 import {
   Button,
   Card,
@@ -18,7 +18,7 @@ import { isEmpty } from 'lodash'
 import { defineComponent, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 export default defineComponent({
-  name: CompNameEnum.group,
+  name: ViewNames.group,
   setup() {
     const { t } = useI18n()
     const { loading, setLoading } = useLoading()

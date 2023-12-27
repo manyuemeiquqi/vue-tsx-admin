@@ -5,10 +5,10 @@ import LiveInformation from './LiveInformation'
 import LivePanel from './LivePanel'
 import LiveStatus from './LiveStatus'
 import QuickOperation from './QuickOperation'
-import { CompNameEnum } from '@/types/constants'
+import { ViewNames } from '@/types/constants'
 
 export default defineComponent({
-  name: CompNameEnum.monitor,
+  name: ViewNames.monitor,
   setup() {
     return () => (
       <Grid.Row gutter={16}>

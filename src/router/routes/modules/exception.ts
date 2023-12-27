@@ -1,8 +1,8 @@
-import { CompNameEnum } from '@/types/constants'
+import { ViewNames } from '@/types/constants'
 
 export default {
   path: '/exception',
-  name: CompNameEnum.exception,
+  name: ViewNames.exception,
   component: () => import('@/components/layout-component/index'),
   meta: {
     locale: 'menu.exception',
@@ -12,7 +12,7 @@ export default {
   children: [
     {
       path: '403',
-      name: CompNameEnum._403,
+      name: ViewNames._403,
       component: () => import('@/views/exception/403/index'),
       meta: {
         locale: 'menu.exception.403',
@@ -22,7 +22,7 @@ export default {
     },
     {
       path: '404',
-      name: CompNameEnum._404,
+      name: ViewNames._404,
       component: () => import('@/views/exception/404/index'),
       meta: {
         locale: 'menu.exception.404',
@@ -32,7 +32,7 @@ export default {
     },
     {
       path: '500',
-      name: CompNameEnum._500,
+      name: ViewNames._500,
       component: () => import('@/views/exception/500/index'),
       meta: {
         locale: 'menu.exception.500',

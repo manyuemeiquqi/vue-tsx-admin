@@ -1,7 +1,7 @@
 import type { RouteLocationNormalized } from 'vue-router'
 import { defineStore } from 'pinia'
-import { CompNameEnum } from '@/types/constants'
-const BAN_LIST = [CompNameEnum.redirect, CompNameEnum.notFound]
+import { ViewNames } from '@/types/constants'
+const BAN_LIST = [ViewNames.redirect, ViewNames.notFound]
 export type TabItem = {
   title: string
   name: string
@@ -16,7 +16,7 @@ const formatRoute = (route: RouteLocationNormalized): TabItem => {
   }
 }
 export const defaultTab = {
-  name: CompNameEnum.workplace,
+  name: ViewNames.workplace,
   title: 'menu.dashboard.workplace',
   fullPath: '/dashboard/workplace'
 }
@@ -34,10 +34,10 @@ export default defineStore('tabStore', {
   },
   actions: {
     updateTabList(route: RouteLocationNormalized) {
-      if (BAN_LIST.includes(route.name as CompNameEnum)) return
+      if (BAN_LIST.includes(route.name as ViewNames)) return
       this.tabList.push(formatRoute(route))
     },
-    deleteTab(name: CompNameEnum) {
+    deleteTab(name: ViewNames) {
       const idx = this.tabList.findIndex((item) => item.name === name)
 
       this.tabList.splice(idx, 1)

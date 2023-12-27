@@ -4,7 +4,6 @@ import type { Router } from 'vue-router'
 import usePermission from '@/hooks/permission'
 import { useAppStore, useUserStore } from '@/store'
 import { appRoutes } from '../routes'
-import type { AppRouteRecordRaw } from '../routes/types'
 import { NOT_FOUND_ROUTE } from '@/types/constants'
 
 export default function setupPermissionGuard(router: Router) {
@@ -12,7 +11,7 @@ export default function setupPermissionGuard(router: Router) {
     const appStore = useAppStore()
     const userStore = useUserStore()
     const Permission = usePermission()
-    const permissionsAllow = Permission.routeHasPermission(to as unknown as AppRouteRecordRaw)
+    const permissionsAllow = Permission.checkRoutePermission(to)
 
     // eslint-disable-next-line no-lonely-if
     if (permissionsAllow) next()

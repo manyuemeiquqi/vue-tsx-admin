@@ -1,8 +1,8 @@
-import { CompNameEnum } from '@/types/constants'
+import { ViewNames } from '@/types/constants'
 
 export default {
   path: '/form',
-  name: CompNameEnum.form,
+  name: ViewNames.form,
   component: () => import('@/components/layout-component/index'),
   meta: {
     locale: 'menu.form',
@@ -13,7 +13,7 @@ export default {
   children: [
     {
       path: 'step',
-      name: CompNameEnum.step,
+      name: ViewNames.step,
       component: () => import('@/views/form/step/index'),
       meta: {
         locale: 'menu.form.step',
@@ -23,7 +23,7 @@ export default {
     },
     {
       path: 'group',
-      name: CompNameEnum.group,
+      name: ViewNames.group,
       component: () => import('@/views/form/group/index'),
       meta: {
         locale: 'menu.form.group',

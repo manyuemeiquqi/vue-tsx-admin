@@ -4,7 +4,7 @@ import { useI18n } from 'vue-i18n'
 import QualityInspection from './QualityInspection'
 import RulesPreset from './RulesPreset'
 import TheService from './TheService'
-import { CompNameEnum } from '@/types/constants'
+import { ViewNames } from '@/types/constants'
 export const itemSpan = {
   xs: 12,
   sm: 12,
@@ -14,7 +14,7 @@ export const itemSpan = {
   xxl: 6
 } as const
 export default defineComponent({
-  name: CompNameEnum.cardList,
+  name: ViewNames.cardList,
   setup() {
     const { t } = useI18n()
     const tabList = [

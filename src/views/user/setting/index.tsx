@@ -5,9 +5,9 @@ import BasicInformation from './BasicInformation'
 import Certification from './Certification'
 import SecuritySettings from './SecuritySettings'
 import UserPanel from './UserPanel'
-import { CompNameEnum } from '@/types/constants'
+import { ViewNames } from '@/types/constants'
 export default defineComponent({
-  name: CompNameEnum.setting,
+  name: ViewNames.setting,
   setup() {
     const { t } = useI18n()
     const componentList = [

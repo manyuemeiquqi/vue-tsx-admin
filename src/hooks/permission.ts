@@ -1,14 +1,13 @@
 import { useUserStore } from '@/store'
 import { cloneDeep, get } from 'lodash'
-import { type AppRouteRecordRaw } from '@/router/routes/types'
-import type { RouteLocationNormalized } from 'vue-router'
+import type { RouteRecordRaw } from 'vue-router'
 
 export default function usePermission() {
   const userStore = useUserStore()
   return {
-    routeHasPermission(route: AppRouteRecordRaw | RouteLocationNormalized) {
+    checkRoutePermission(route: RouteRecordRaw) {
       const requiresAuth = get(route, 'meta.requiresAuth')
-      const needRoles = get(route, 'meta.roles') || []
+      const needRoles = (get(route, 'meta.roles') || []) as string[]
       return (
         !requiresAuth ||
         needRoles.length === 0 ||
@@ -16,7 +15,7 @@ export default function usePermission() {
         needRoles.includes(userStore.userInfo.role)
       )
     },
-    // 层序遍历寻找第一个有权限 route
+
     findFirstPermissionRoute(_routes: any, role = 'admin') {
       const cloneRouters = cloneDeep(_routes)
       while (cloneRouters.length) {
@@ -33,7 +32,8 @@ export default function usePermission() {
       }
       return null
     },
-    hasButtonPermission(needPermission: string[]): boolean {
+
+    checkButtonPermission(needPermission: string[]): boolean {
       const userStore = useUserStore()
       return needPermission.includes(userStore.role)
     }

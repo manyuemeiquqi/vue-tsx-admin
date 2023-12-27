@@ -30,14 +30,14 @@ import Sortable from 'sortablejs'
 import { computed, defineComponent, nextTick, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 import TableSearchForm from './TableSearchForm'
-import { CompNameEnum } from '@/types/constants'
+import { ViewNames } from '@/types/constants'
 import usePermission from '@/hooks/permission'
 
 export default defineComponent({
-  name: CompNameEnum.searchTable,
+  name: ViewNames.searchTable,
   setup() {
     const { t } = useI18n()
-    const { hasButtonPermission } = usePermission()
+    const { checkButtonPermission } = usePermission()
     const initPagination: Pagination = {
       current: 1,
       pageSize: 20
@@ -197,7 +197,9 @@ export default defineComponent({
         getTitle: () => t('searchTable.columns.operations'),
         dataIndex: 'operations',
         render: () =>
-          hasButtonPermission(['admin']) && <Link>{t('searchTable.columns.operations.view')}</Link>,
+          checkButtonPermission(['admin']) && (
+            <Link>{t('searchTable.columns.operations.view')}</Link>
+          ),
         checked: true
       }
     ])

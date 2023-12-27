@@ -1,10 +1,10 @@
 import CardLayout from '@/components/card-layout'
-import { CompNameEnum } from '@/types/constants'
+import { ViewNames } from '@/types/constants'
 import { Button, Result, Space, Steps, Typography } from '@arco-design/web-vue'
 import { computed, defineComponent } from 'vue'
 import { useI18n } from 'vue-i18n'
 export default defineComponent({
-  name: CompNameEnum.success,
+  name: ViewNames.success,
   setup() {
     const { t } = useI18n()
     const stepList = computed(() => {

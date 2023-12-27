@@ -1,44 +1,25 @@
-import useMenuTree from '@/router/routes/useRoutes'
-import { Button, Menu } from '@arco-design/web-vue'
-import { computed, defineComponent, ref, type VNode } from 'vue'
+import { Menu } from '@arco-design/web-vue'
 import { get } from 'lodash'
+import { defineComponent, h, ref, toRaw } from 'vue'
 import { useI18n } from 'vue-i18n'
-import { useRouter, type RouteRecordRaw, type RouteMeta, useRoute } from 'vue-router'
-import { CompNameEnum } from '@/types/constants'
-import {
-  IconCheckCircle,
-  IconDashboard,
-  IconExclamationCircle,
-  IconFile,
-  IconList,
-  IconSettings,
-  IconUser
-} from '@arco-design/web-vue/es/icon'
+import { useRoute, useRouter, type RouteRecordRaw } from 'vue-router'
+import useAppRoute from '@/hooks/appRoute'
 import { useAppStore } from '@/store'
 import { listenerRouteChange } from '@/utils/routerListener'
-// import { openWindow, regexUrl } from '@/utils';
-//menu 有三种形式
-// 但是能够访问的形式只有一种 就只能放在 menu-item里面，其余的就是放在不同的父级里面
-const sumMenuRenderMap: Record<CompNameEnum[number], VNode> = {
-  [CompNameEnum.dashboard]: <IconDashboard />,
-  [CompNameEnum.profile]: <IconFile />,
-  [CompNameEnum.exception]: <IconExclamationCircle />,
-  [CompNameEnum.form]: <IconSettings />,
-  [CompNameEnum.list]: <IconList />,
-  [CompNameEnum.result]: <IconCheckCircle />,
-  [CompNameEnum.user]: <IconUser />
-}
+
 export default defineComponent({
   name: 'MenuComponent',
   setup() {
     const { t } = useI18n()
     const router = useRouter()
     const route = useRoute()
-    const { menuTree } = useMenuTree()
+    const { appRouteTree } = useAppRoute()
+
     const appStore = useAppStore()
     const openKeys = ref<string[]>([])
     const selectedKey = ref<string[]>([])
-
+    if (route.name) {
+    }
     const renderMenuContent = () => {
       const dfs = (_route: any, nodes = []) => {
         if (_route) {
@@ -46,13 +27,18 @@ export default defineComponent({
             const curRoute = _route[i]
             let node
             const title = get(curRoute, 'meta.locale') || ''
-
+            // if (curRoute.icon as any) {
+            //   curRoute.icon().then((res) => {
+            //     console.log('res: ', res)
+            //   })
+            //   icon = await curRoute.icon()
+            // }
             if (curRoute.children && curRoute.children.length) {
               node = (
                 <Menu.SubMenu
                   key={curRoute.name}
                   v-slots={{
-                    icon: () => sumMenuRenderMap[curRoute.name] || null,
+                    icon: () => h(curRoute.icon),
                     title: () => t(title)
                   }}
                 >
@@ -72,7 +58,7 @@ export default defineComponent({
         }
         return nodes
       }
-      return dfs(menuTree.value)
+      return dfs(appRouteTree.value.tree)
     }
 
     const handleMenuItemClick = (item: RouteRecordRaw) => {
@@ -80,36 +66,14 @@ export default defineComponent({
         name: item.name
       })
     }
-    const findMenuOpenKeys = (target: string) => {
-      const result: string[] = []
-      let isFind = false
-      const backtrack = (item: RouteRecordRaw, keys: string[]) => {
-        if (item.name === target) {
-          isFind = true
-          result.push(...keys)
-          return
-        }
-        if (item.children?.length) {
-          item.children.forEach((el) => {
-            backtrack(el, [...keys, el.name as string])
-          })
-        }
-      }
-      menuTree.value.forEach((el: RouteRecordRaw) => {
-        if (isFind) return // Performance optimization
-        backtrack(el, [el.name as string])
-      })
-      return result
-    }
     listenerRouteChange((newRoute) => {
-      const { requiresAuth, activeMenu, hideInMenu } = newRoute.meta
-      if (requiresAuth && (!hideInMenu || activeMenu)) {
-        const menuOpenKeys = findMenuOpenKeys((activeMenu || newRoute.name) as string)
-
-        const keySet = new Set([...menuOpenKeys, ...openKeys.value])
-        openKeys.value = [...keySet]
-
-        selectedKey.value = [activeMenu || menuOpenKeys[menuOpenKeys.length - 1]]
+      if (newRoute.name) {
+        const routeNamePath = appRouteTree.value.map[newRoute.name].routeNamePath
+        if (Array.isArray(routeNamePath)) {
+          openKeys.value = routeNamePath
+          const stackTopName = routeNamePath[routeNamePath.length - 1]
+          if (stackTopName) selectedKey.value = [stackTopName]
+        }
       }
     }, true)
 

@@ -1,8 +1,8 @@
-import { CompNameEnum } from '@/types/constants'
+import { ViewNames } from '@/types/constants'
 
 export default {
   path: '/dashboard',
-  name: CompNameEnum.dashboard,
+  name: ViewNames.dashboard,
   component: () => import('@/components/layout-component/index'),
   meta: {
     locale: 'menu.dashboard',
@@ -12,7 +12,7 @@ export default {
   children: [
     {
       path: 'workplace',
-      name: CompNameEnum.workplace,
+      name: ViewNames.workplace,
       component: () => import('@/views/dashboard/workplace/index'),
       meta: {
         locale: 'menu.dashboard.workplace',
@@ -23,7 +23,7 @@ export default {
 
     {
       path: 'monitor',
-      name: CompNameEnum.monitor,
+      name: ViewNames.monitor,
       component: () => import('@/views/dashboard/monitor/index'),
       meta: {
         locale: 'menu.dashboard.monitor',

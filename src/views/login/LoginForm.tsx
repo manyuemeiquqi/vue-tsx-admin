@@ -1,7 +1,7 @@
 import { login, type LoginData } from '@/api/user'
 import useAuth from '@/hooks/auth'
 import useLoading from '@/hooks/loading'
-import { ApplicationInfo, CompNameEnum, LocalStorageKey } from '@/types/constants'
+import { ApplicationInfo, ViewNames, LocalStorageKey } from '@/types/constants'
 import { clearToken, setToken } from '@/utils/token'
 import {
   Button,
@@ -56,7 +56,7 @@ export default defineComponent({
         try {
           await loginApp(values as LoginData)
           router.push({
-            name: CompNameEnum.workplace
+            name: ViewNames.workplace
           })
           Message.success(t('login.form.login.success'))
           const { rememberPassword } = storageLoginInfo.value

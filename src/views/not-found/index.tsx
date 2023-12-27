@@ -1,17 +1,17 @@
 import CardLayout from '@/components/card-layout'
-import { CompNameEnum } from '@/types/constants'
+import { ViewNames } from '@/types/constants'
 import { Button, Result, Space } from '@arco-design/web-vue'
 import { defineComponent } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { useRouter } from 'vue-router'
 export default defineComponent({
-  name: CompNameEnum.notFound,
+  name: ViewNames.notFound,
   setup() {
     const { t } = useI18n()
     const router = useRouter()
     const handleBack = () => {
       router.push({
-        name: CompNameEnum.workplace
+        name: ViewNames.workplace
       })
     }
     return () => (

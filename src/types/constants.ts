@@ -16,7 +16,10 @@ export enum ApplicationInfo {
   appTitle = 'Vue TSX Admin'
 }
 
-export enum CompNameEnum {
+// component name
+// route name
+// keepalive require component name to same
+export enum ViewNames {
   login = 'login',
   redirect = 'redirect',
   notFound = 'notFound',
@@ -66,7 +69,7 @@ export enum CompNameEnum {
 }
 
 export const NOT_FOUND_ROUTE = {
-  name: CompNameEnum.notFound
+  name: ViewNames.notFound
 }
 
 export const layoutStyleConfig = {

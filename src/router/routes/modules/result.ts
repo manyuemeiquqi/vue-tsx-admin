@@ -1,8 +1,8 @@
-import { CompNameEnum } from '@/types/constants'
+import { ViewNames } from '@/types/constants'
 
 export default {
   path: '/result',
-  name: CompNameEnum.result,
+  name: ViewNames.result,
   component: () => import('@/components/layout-component/index'),
   meta: {
     locale: 'menu.result',
@@ -13,7 +13,7 @@ export default {
   children: [
     {
       path: 'success',
-      name: CompNameEnum.success,
+      name: ViewNames.success,
       component: () => import('@/views/result/success'),
       meta: {
         locale: 'menu.result.success',
@@ -23,7 +23,7 @@ export default {
     },
     {
       path: 'error',
-      name: CompNameEnum.error,
+      name: ViewNames.error,
       component: () => import('@/views/result/error'),
       meta: {
         locale: 'menu.result.error',

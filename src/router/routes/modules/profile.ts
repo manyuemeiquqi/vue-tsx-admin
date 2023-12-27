@@ -1,8 +1,8 @@
-import { CompNameEnum } from '@/types/constants'
+import { ViewNames } from '@/types/constants'
 
 export default {
   path: '/profile',
-  name: CompNameEnum.profile,
+  name: ViewNames.profile,
   component: () => import('@/components/layout-component/index'),
   meta: {
     locale: 'menu.profile',

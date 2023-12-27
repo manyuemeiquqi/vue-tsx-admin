@@ -1,8 +1,8 @@
-import { CompNameEnum } from '@/types/constants'
+import { ViewNames } from '@/types/constants'
 
 export default {
   path: '/list',
-  name: CompNameEnum.list,
+  name: ViewNames.list,
   component: () => import('@/components/layout-component/index'),
   meta: {
     locale: 'menu.list',
@@ -13,7 +13,7 @@ export default {
   children: [
     {
       path: 'search-table',
-      name: CompNameEnum.searchTable,
+      name: ViewNames.searchTable,
       component: () => import('@/views/list/search-table/index'),
       meta: {
         locale: 'menu.list.searchTable',
@@ -23,7 +23,7 @@ export default {
     },
     {
       path: 'card',
-      name: CompNameEnum.cardList,
+      name: ViewNames.cardList,
       component: () => import('@/views/list/card-list/index'),
       meta: {
         locale: 'menu.list.cardList',
