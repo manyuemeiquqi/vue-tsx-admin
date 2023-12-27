@@ -16,6 +16,7 @@ export type GetParams = {
   type: string
   url: string
 }
+export type OKResponse = 'ok'
 
 export type PostData = {
   body: string
