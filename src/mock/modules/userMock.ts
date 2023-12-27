@@ -6,9 +6,7 @@ setupMock({
   setup() {
     // 用户信息
     Mock.mock(new RegExp('/api/user/info'), () => {
-      // if (isLogin()) {
-      const a = true
-      if (a) {
+      if (isLogin()) {
         const role = window.localStorage.getItem('userRole') || 'admin'
         return successResponseWrap({
           name: '蔓越莓曲奇',
@@ -237,6 +235,10 @@ setupMock({
     })
 
     Mock.mock(new RegExp('/api/user/upload'), () => {
+      return successResponseWrap('ok')
+    })
+
+    Mock.mock(new RegExp('/api/user/save-info'), () => {
       return successResponseWrap('ok')
     })
   }

@@ -125,11 +125,7 @@ setupMock({
       }
       return successResponseWrap([...textList])
     })
-  }
-})
 
-setupMock({
-  setup() {
     Mock.mock(new RegExp('/api/chat/list'), () => {
       const data = Mock.mock({
         'data|4-6': [

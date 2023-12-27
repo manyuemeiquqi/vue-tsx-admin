@@ -9,6 +9,7 @@ import type {
   UserInfo,
   BasicInfoModel
 } from './type'
+import type { OKResponse } from '@/types/global'
 export type {
   UserInfo,
   LatestActivity,
@@ -24,22 +25,6 @@ export function getUserInfo() {
   return axios.post<UserInfo>('/api/user/info')
 }
 
-export function queryCertification() {
-  return axios.post<UnitCertification>('/api/user/certification')
-}
-
-export function queryLatestActivity() {
-  return axios.post<LatestActivity[]>('/api/user/latest-activity')
-}
-
-export function queryMyProjectList() {
-  return axios.post<ProjectItem[]>('/api/user/my-project/list')
-}
-
-export function queryMyTeamList() {
-  return axios.post<TeamItem[]>('/api/user/my-team/list')
-}
-
 export function login(data: LoginData) {
   return axios.post<LoginRes>('/api/user/login', data)
 }
@@ -48,10 +33,25 @@ export function logout() {
   return axios.post<LoginRes>('/api/user/logout')
 }
 
-export function saveUserInfo() {
-  return axios.post('/api/user/save-info')
+export function userUploadApi(data: FormData) {
+  return axios.post<OKResponse>('/api/user/upload', data)
 }
 
-export function userUploadApi(data: FormData) {
-  return axios.post('/api/user/upload', data)
+export function queryMyProjectList() {
+  return axios.post<ProjectItem[]>('/api/user/my-project/list')
+}
+export function queryMyTeamList() {
+  return axios.post<TeamItem[]>('/api/user/my-team/list')
+}
+
+export function queryLatestActivity() {
+  return axios.post<LatestActivity[]>('/api/user/latest-activity')
+}
+
+export function saveUserInfo() {
+  return axios.post<OKResponse>('/api/user/save-info')
+}
+
+export function queryCertification() {
+  return axios.post<UnitCertification>('/api/user/certification')
 }

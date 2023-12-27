@@ -1,11 +1,5 @@
 import type { DescData } from '@arco-design/web-vue/es/descriptions/interface'
-export type ChatRecord = {
-  id: number
-  username: string
-  content: string
-  time: string
-  isCollect: boolean
-}
+
 export type ServiceRecord = {
   id: number
   title: string
