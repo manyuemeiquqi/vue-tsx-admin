@@ -66,11 +66,9 @@ export default defineComponent({
       }
     )
     return () => (
-      <>
-        <ConfigProvider locale={arcoLocale.value}>
-          <RouterView />
-        </ConfigProvider>
-      </>
+      <ConfigProvider locale={arcoLocale.value}>
+        <RouterView />
+      </ConfigProvider>
     )
   }
 })
