@@ -7,8 +7,7 @@ export default {
   meta: {
     locale: 'menu.form',
     icon: 'icon-settings',
-    requiresAuth: true,
-    order: 3
+    requiresAuth: true
   },
   children: [
     {

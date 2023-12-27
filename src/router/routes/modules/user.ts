@@ -7,8 +7,7 @@ export default {
   meta: {
     locale: 'menu.user',
     icon: 'icon-user',
-    requiresAuth: true,
-    order: 7
+    requiresAuth: true
   },
   children: [
     {

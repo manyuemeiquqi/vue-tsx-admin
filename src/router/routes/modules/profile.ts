@@ -6,8 +6,7 @@ export default {
   component: () => import('@/components/layout-component/index'),
   meta: {
     locale: 'menu.profile',
-    requiresAuth: true,
-    order: 4
+    requiresAuth: true
   },
   children: [
     {

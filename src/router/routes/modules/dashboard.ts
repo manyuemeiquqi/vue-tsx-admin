@@ -6,8 +6,7 @@ export default {
   component: () => import('@/components/layout-component/index'),
   meta: {
     locale: 'menu.dashboard',
-    requiresAuth: true,
-    order: 0
+    requiresAuth: true
   },
   children: [
     {

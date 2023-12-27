@@ -6,8 +6,7 @@ export default {
   component: () => import('@/components/layout-component/index'),
   meta: {
     locale: 'menu.exception',
-    requiresAuth: true,
-    order: 6
+    requiresAuth: true
   },
   children: [
     {

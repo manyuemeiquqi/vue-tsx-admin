@@ -14,7 +14,7 @@ import {
   IconUser
 } from '@arco-design/web-vue/es/icon'
 
-type AppRoute = {
+export type AppRoute = {
   icon?: typeof IconDashboard
   routeNamePath?: string[]
   localePath?: string[]
@@ -42,7 +42,7 @@ const routeIconMap: Record<RouteRecordName, typeof IconDashboard> = {
 type AppRouteMap = Record<RouteRecordName, AppRoute>
 export default function useAppRoute() {
   const permission = usePermission()
-  const appRouteTree = computed(() => {
+  const transformedRoutes = computed(() => {
     const appRouteMap: AppRouteMap = {}
     const copyRoutes = cloneDeep(appRoutes)
     transform(copyRoutes, appRouteMap)
@@ -128,6 +128,6 @@ export default function useAppRoute() {
     }
   }
   return {
-    appRouteTree
+    transformedRoutes
   }
 }
