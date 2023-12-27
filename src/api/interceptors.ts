@@ -1,12 +1,23 @@
-import { Message } from '@arco-design/web-vue'
+import useAuth from '@/hooks/auth'
+import { ResCode } from '@/types/constants'
+import { getToken } from '@/utils/token'
+import { Message, Modal } from '@arco-design/web-vue'
 import axios, { type AxiosResponse, type InternalAxiosRequestConfig } from 'axios'
 
 // InternalAxiosRequestConfig
+export interface HttpResponse<T = unknown> extends AxiosResponse {
+  status: number
+  msg: string
+  code: number
+  data: T
+}
+if (import.meta.env.VITE_API_BASE_URL) {
+  axios.defaults.baseURL = import.meta.env.VITE_API_BASE_URL
+}
 
-// 请求封装
-let token: string
 axios.interceptors.request.use(
   (config: InternalAxiosRequestConfig) => {
+    const token = getToken()
     if (token) {
       config.headers.Authorization = `Bearer ${token}`
     }
@@ -17,27 +28,30 @@ axios.interceptors.request.use(
   }
 )
 axios.interceptors.response.use(
-  (response: AxiosResponse) => {
+  (response: AxiosResponse<HttpResponse>) => {
     const { data: responseData } = response
-    if (responseData.code !== 20000) {
+
+    if (responseData.code !== ResCode.success) {
       Message.error({
         content: responseData.msg || 'Error',
         duration: 5 * 1000
       })
       if (
-        [50008, 50012, 50014].includes(responseData.code) &&
+        [ResCode.illegalToken, ResCode.expiredToken, ResCode.otherLogin].includes(
+          responseData.code
+        ) &&
         response.config.url !== '/api/user/info'
       ) {
-        // Modal.error({
-        //   title: 'Confirm logout',
-        //   content: 'You have been logged out, you can cancel to stay on this page, or log in again',
-        //   okText: 'Re-Login',
-        //   async onOk() {
-        //     const userStore = useUserStore()
-        //     await userStore.logout()
-        //     window.location.reload()
-        //   }
-        // })
+        Modal.error({
+          title: 'Confirm logout',
+          content: 'You have been logged out, you can cancel to stay on this page, or log in again',
+          okText: 'Re-Login',
+          async onOk() {
+            const { logoutApp } = useAuth()
+            await logoutApp()
+            window.location.reload()
+          }
+        })
       }
       return Promise.reject(new Error(responseData.msg || 'Error'))
     }
@@ -46,8 +60,8 @@ axios.interceptors.response.use(
   },
   (error) => {
     Message.error({
-      content: error.msg || 'Request Error'
-      //   duration: 5 * 1000
+      content: error.msg || 'Request Error',
+      duration: 5 * 1000
     })
     return Promise.reject(error)
   }

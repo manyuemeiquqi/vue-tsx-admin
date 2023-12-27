@@ -2,6 +2,7 @@ import Mock from 'mockjs'
 import { isLogin } from '@/utils/token'
 import setupMock, { successResponseWrap, failResponseWrap } from '@/mock/setupMock'
 import type { GetParams } from '@/types/global'
+import { ResCode } from '@/types/constants'
 setupMock({
   setup() {
     // 用户信息
@@ -27,17 +28,17 @@ setupMock({
           role
         })
       }
-      return failResponseWrap(null, '未登录', 50008)
+      return failResponseWrap(null, '未登录', ResCode.illegalToken)
     })
 
     // 登录
     Mock.mock(new RegExp('/api/user/login'), (params: GetParams) => {
       const { username, password } = JSON.parse(params.body)
       if (!username) {
-        return failResponseWrap(null, '用户名不能为空', 50000)
+        return failResponseWrap(null, '用户名不能为空', ResCode.error)
       }
       if (!password) {
-        return failResponseWrap(null, '密码不能为空', 50000)
+        return failResponseWrap(null, '密码不能为空', ResCode.error)
       }
       if (username === 'admin' && password === 'admin') {
         window.localStorage.setItem('userRole', 'admin')
@@ -51,7 +52,7 @@ setupMock({
           token: '54321'
         })
       }
-      return failResponseWrap(null, '账号或者密码错误', 50000)
+      return failResponseWrap(null, '账号或者密码错误', ResCode.error)
     })
 
     // 登出

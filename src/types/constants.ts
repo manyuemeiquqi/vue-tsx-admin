@@ -78,3 +78,12 @@ export const layoutStyleConfig = {
   tabHeight: 40,
   footerHeight: 35
 } as const
+
+export enum ResCode {
+  success = 20000,
+  error = 50000,
+  illegalToken = 50008,
+  expiredToken = 50014,
+  // Other clients logged
+  otherLogin = 50012
+}

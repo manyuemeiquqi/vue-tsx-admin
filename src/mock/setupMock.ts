@@ -1,3 +1,5 @@
+import { ResCode } from '@/types/constants'
+
 const isDEV = import.meta.env.MODE === 'development'
 
 export default ({ mock, setup }: { mock?: boolean; setup: () => void }) => {
@@ -10,11 +12,11 @@ export const successResponseWrap = (data: unknown) => {
     data,
     status: 'ok',
     msg: '请求成功',
-    code: 20000
+    code: ResCode.success
   }
 }
 
-export const failResponseWrap = (data: unknown, msg: string, code = 50000) => {
+export const failResponseWrap = (data: unknown, msg: string, code = ResCode.error) => {
   return {
     data,
     status: 'fail',
