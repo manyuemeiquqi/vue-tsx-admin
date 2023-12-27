@@ -2,8 +2,7 @@ import { Grid, Space, Typography } from '@arco-design/web-vue'
 import { IconCommand, IconStar } from '@arco-design/web-vue/es/icon'
 import { defineComponent, type PropType } from 'vue'
 import styles from './style.module.scss'
-
-import { type ChatRecord } from '@/api/list'
+import type { ChatRecord } from '@/api/dashboard/type'
 export default defineComponent({
   name: 'MessageItem',
   props: {

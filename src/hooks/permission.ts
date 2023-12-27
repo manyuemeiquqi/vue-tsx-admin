@@ -1,11 +1,17 @@
 import { useUserStore } from '@/store'
 import { cloneDeep, get } from 'lodash'
-import type { RouteRecordRaw } from 'vue-router'
+import type {
+  RouteLocationNormalizedLoaded,
+  RouteRecordNormalized,
+  RouteRecordRaw
+} from 'vue-router'
 
 export default function usePermission() {
   const userStore = useUserStore()
   return {
-    checkRoutePermission(route: RouteRecordRaw) {
+    checkRoutePermission(
+      route: RouteRecordRaw | RouteRecordNormalized | RouteLocationNormalizedLoaded
+    ) {
       const requiresAuth = get(route, 'meta.requiresAuth')
       const needRoles = (get(route, 'meta.roles') || []) as string[]
       return (
