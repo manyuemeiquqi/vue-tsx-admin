@@ -13,7 +13,7 @@ import {
 } from '@arco-design/web-vue/es/icon'
 import { useFullscreen } from '@vueuse/core'
 import { isString } from 'lodash'
-import { defineComponent, ref } from 'vue'
+import { defineComponent } from 'vue'
 import { useI18n } from 'vue-i18n'
 import AvatarAndOptions from './AvatarAndOptions'
 import styles from './style.module.scss'

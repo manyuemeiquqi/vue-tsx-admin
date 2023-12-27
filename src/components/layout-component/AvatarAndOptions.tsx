@@ -1,5 +1,5 @@
 import useAuth from '@/hooks/auth'
-import { useAppStore, useUserStore } from '@/store'
+import { useUserStore } from '@/store'
 import { ViewNames } from '@/types/constants'
 import { Avatar, Dropdown, Message, Space } from '@arco-design/web-vue'
 import { IconExport, IconSettings, IconTag, IconUser } from '@arco-design/web-vue/es/icon'

@@ -8,7 +8,7 @@ const defaultLocale = localStorage.getItem(LocalStorageKey.localeKey) || LocaleO
 const getMessageFromModules = (_moduleMap: Record<string, unknown>) => {
   const ret = {}
   for (const key in _moduleMap) {
-    let exportContent = get(_moduleMap[key], 'default')
+    const exportContent = get(_moduleMap[key], 'default')
     if (exportContent) {
       Object.assign(ret, exportContent)
     }

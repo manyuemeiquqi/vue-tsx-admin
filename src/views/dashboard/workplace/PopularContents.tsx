@@ -1,6 +1,6 @@
 import { queryPopularList } from '@/api/dashboard'
 import useLoading from '@/hooks/loading'
-import { Card, Link, RadioGroup, Space, Spin, Table, Typography } from '@arco-design/web-vue'
+import { Card, Link, RadioGroup, Space, Spin, Table } from '@arco-design/web-vue'
 import { IconCaretDown, IconCaretUp } from '@arco-design/web-vue/es/icon'
 import type { TableData } from '@arco-design/web-vue/es/table/interface'
 import { defineComponent, ref, watch } from 'vue'

@@ -1,8 +1,7 @@
-import { login, type LoginData } from '@/api/user'
+import { type LoginData } from '@/api/user'
 import useAuth from '@/hooks/auth'
 import useLoading from '@/hooks/loading'
-import { ApplicationInfo, ViewNames, LocalStorageKey } from '@/types/constants'
-import { clearToken, setToken } from '@/utils/token'
+import { ApplicationInfo, LocalStorageKey, ViewNames } from '@/types/constants'
 import {
   Button,
   Checkbox,

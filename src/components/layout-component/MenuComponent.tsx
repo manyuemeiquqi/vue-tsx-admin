@@ -1,8 +1,8 @@
 import { Menu } from '@arco-design/web-vue'
 import { get } from 'lodash'
-import { defineComponent, h, ref, toRaw } from 'vue'
+import { defineComponent, h, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
-import { useRoute, useRouter, type RouteRecordRaw } from 'vue-router'
+import { useRouter, type RouteRecordRaw } from 'vue-router'
 import useAppRoute from '@/hooks/appRoute'
 import { useAppStore } from '@/store'
 import { listenerRouteChange } from '@/utils/routerListener'
@@ -12,14 +12,12 @@ export default defineComponent({
   setup() {
     const { t } = useI18n()
     const router = useRouter()
-    const route = useRoute()
     const { appRouteTree } = useAppRoute()
 
     const appStore = useAppStore()
     const openKeys = ref<string[]>([])
     const selectedKey = ref<string[]>([])
-    if (route.name) {
-    }
+
     const renderMenuContent = () => {
       const dfs = (_route: any, nodes = []) => {
         if (_route) {

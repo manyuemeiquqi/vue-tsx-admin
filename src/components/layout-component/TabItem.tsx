@@ -1,7 +1,7 @@
 import { useTabStore } from '@/store'
 import { defaultTab, type TabItem } from '@/store/modules/tab'
 import { ViewNames } from '@/types/constants'
-import { Doption, Dropdown, Tag } from '@arco-design/web-vue'
+import { Doption, Dropdown } from '@arco-design/web-vue'
 import {
   IconClose,
   IconFolderDelete,

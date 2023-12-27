@@ -5,7 +5,7 @@ import configRouteGuard from './guard'
 import { appRoutes } from './routes'
 import NProgress from 'nprogress' // progress bar
 import 'nprogress/nprogress.css'
-// NProgress.configure({ showSpinner: false })
+NProgress.configure({ showSpinner: false })
 const router = createRouter({
   history: createWebHashHistory(import.meta.env.BASE_URL),
   routes: [
