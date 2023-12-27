@@ -56,11 +56,11 @@ export default defineComponent({
       }
     })
     const handleSubmit = async () => {
-      formRef.value?.validate().then((errors) => {
+      formRef.value?.validate().then(async (errors) => {
         if (isEmpty(errors)) {
           try {
             setLoading(true)
-            submitGroupForm(formData.value as unknown as GroupFormModel)
+            await submitGroupForm(formData.value as unknown as GroupFormModel)
             Message.success('提交成功')
           } catch (e) {
             /* empty */
