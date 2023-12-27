@@ -61,7 +61,7 @@ export default defineComponent({
     }
 
     const handleSelect = async (value: unknown) => {
-      const actionType = value as TabActionType
+      const actionType = value
       switch (actionType) {
         case TabActionType.all: {
           tabStore.resetTabList()
