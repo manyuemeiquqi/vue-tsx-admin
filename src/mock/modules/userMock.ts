@@ -1,7 +1,7 @@
 import Mock from 'mockjs'
-import { type MockParams } from '../type'
 import { isLogin } from '@/utils/token'
 import setupMock, { successResponseWrap, failResponseWrap } from '@/mock/setupMock'
+import type { GetParams } from '@/types/global'
 setupMock({
   setup() {
     // 用户信息
@@ -31,7 +31,7 @@ setupMock({
     })
 
     // 登录
-    Mock.mock(new RegExp('/api/user/login'), (params: MockParams) => {
+    Mock.mock(new RegExp('/api/user/login'), (params: GetParams) => {
       const { username, password } = JSON.parse(params.body)
       if (!username) {
         return failResponseWrap(null, '用户名不能为空', 50000)
