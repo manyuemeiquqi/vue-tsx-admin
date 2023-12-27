@@ -1,4 +1,3 @@
-import { queryChatList, type ChatRecord } from '@/api/list'
 import useLoading from '@/hooks/loading'
 import {
   Button,
@@ -15,6 +14,8 @@ import { IconDownload, IconFaceSmileFill } from '@arco-design/web-vue/es/icon'
 import { defineComponent, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 import MessageItem from './MessageItem'
+import { queryChatList } from '@/api/dashboard'
+import type { ChatRecord } from '@/api/dashboard/type'
 
 export default defineComponent({
   name: 'ChatPanel',

@@ -19,6 +19,7 @@ import { useStorage } from '@vueuse/core'
 import { defineComponent, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { useRouter } from 'vue-router'
+import Logo from '@/assets/logo.svg'
 export default defineComponent({
   name: 'loginForm',
   setup() {
@@ -71,9 +72,14 @@ export default defineComponent({
     }
 
     return () => (
-      <div class="w-80">
+      <div class="w-96">
         <Space direction="vertical">
-          <Typography.Title heading={4}>{ApplicationInfo.appTitle}</Typography.Title>
+          <Space align="center">
+            <img src={Logo} alt="logo" class={['w-8', 'h-8']} />
+            <span class={['text-2xl', 'text-[var(--color-text-1)]']}>
+              {ApplicationInfo.appTitle}
+            </span>
+          </Space>
           <Typography.Text class={'text-[color:var(--color-text-3)] '}>
             {t('login.form.title')}
           </Typography.Text>

@@ -1,7 +1,8 @@
-const isDEV = import.meta.env.MODE !== 'development'
+const isDEV = import.meta.env.MODE === 'development'
 
 export default ({ mock, setup }: { mock?: boolean; setup: () => void }) => {
-  if (!mock && isDEV) setup()
+  //  if (!mock && isDEV) setup() // correct
+  if (!mock) setup()
 }
 
 export const successResponseWrap = (data: unknown) => {

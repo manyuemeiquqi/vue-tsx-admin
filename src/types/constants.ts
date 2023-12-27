@@ -13,7 +13,7 @@ export enum AppTheme {
 }
 
 export enum ApplicationInfo {
-  appTitle = 'Vue TSX Admin'
+  appTitle = import.meta.env.VITE_APP_TITLE
 }
 
 // component name
