@@ -19,47 +19,39 @@ export default defineComponent({
     const selectedKey = ref<string[]>([])
 
     const renderMenuContent = () => {
-      const dfs = (_route: any, nodes = []) => {
-        if (_route) {
-          for (let i = 0; i < _route.length; i++) {
-            const curRoute = _route[i]
-            let node
-            const title = get(curRoute, 'meta.locale') || ''
-            // if (curRoute.icon as any) {
-            //   curRoute.icon().then((res) => {
-            //     console.log('res: ', res)
-            //   })
-            //   icon = await curRoute.icon()
-            // }
-            if (curRoute.children && curRoute.children.length) {
-              node = (
+      const traverse = (routeList: any[]) => {
+        const list = []
+        for (let i = 0; i < routeList.length; i++) {
+          const route = routeList[i]
+          if (route.children === undefined) {
+            list.push(
+              <Menu.Item key={route.name as string} onClick={() => handleMenuItemClick(route)}>
+                {t(route.meta.locale)}
+              </Menu.Item>
+            )
+          } else {
+            if (route.children.length > 0) {
+              list.push(
                 <Menu.SubMenu
-                  key={curRoute.name}
+                  key={route.name as string}
                   v-slots={{
-                    icon: () => h(curRoute.icon),
-                    title: () => t(title)
+                    icon: () => h(route.icon),
+                    title: () => t(route.meta.locale || '')
                   }}
                 >
-                  {dfs(curRoute.children)}
+                  {traverse(route.children)}
                 </Menu.SubMenu>
               )
-            } else {
-              node = (
-                <Menu.Item key={curRoute.name} onClick={() => handleMenuItemClick(curRoute)}>
-                  {t(title)}
-                </Menu.Item>
-              )
             }
-
-            nodes.push(node as never)
           }
         }
-        return nodes
+        return list
       }
-      return dfs(appRouteTree.value.tree)
+      return traverse(appRouteTree.value.tree)
     }
 
     const handleMenuItemClick = (item: RouteRecordRaw) => {
+      console.log('item: ', item)
       router.push({
         name: item.name
       })
@@ -67,9 +59,11 @@ export default defineComponent({
     listenerRouteChange((newRoute) => {
       if (newRoute.name) {
         const routeNamePath = appRouteTree.value.map[newRoute.name].routeNamePath
+        console.log('routeNamePath: ', routeNamePath)
         if (Array.isArray(routeNamePath)) {
           openKeys.value = routeNamePath
           const stackTopName = routeNamePath[routeNamePath.length - 1]
+          console.log('stackTopName: ', stackTopName)
           if (stackTopName) selectedKey.value = [stackTopName]
         }
       }
