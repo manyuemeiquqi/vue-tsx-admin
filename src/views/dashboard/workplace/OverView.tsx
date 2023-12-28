@@ -70,7 +70,7 @@ export default defineComponent({
         <Typography.Title class="!mt-0" heading={5}>
           {t('workplace.welcome')}
           &nbsp;
-          {userStore.userInfo.name}
+          {userStore.name}
         </Typography.Title>
         <Divider margin={20} />
         <Grid rowGap={16}>

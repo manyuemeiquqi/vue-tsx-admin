@@ -1,5 +1,5 @@
 import { Menu } from '@arco-design/web-vue'
-import { get } from 'lodash'
+import { get, isString } from 'lodash'
 import { defineComponent, h, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { useRouter, type RouteRecordRaw } from 'vue-router'
@@ -12,7 +12,7 @@ export default defineComponent({
   setup() {
     const { t } = useI18n()
     const router = useRouter()
-    const { appRouteTree } = useAppRoute()
+    const { appRouteData } = useAppRoute()
 
     const appStore = useAppStore()
     const openKeys = ref<string[]>([])
@@ -26,7 +26,7 @@ export default defineComponent({
           if (route.children === undefined) {
             list.push(
               <Menu.Item key={route.name as string} onClick={() => handleMenuItemClick(route)}>
-                {t(route.meta.locale)}
+                {t(route.locale)}
               </Menu.Item>
             )
           } else {
@@ -36,7 +36,7 @@ export default defineComponent({
                   key={route.name as string}
                   v-slots={{
                     icon: () => h(route.icon),
-                    title: () => t(route.meta.locale || '')
+                    title: () => t(route.locale || '')
                   }}
                 >
                   {traverse(route.children)}
@@ -47,24 +47,23 @@ export default defineComponent({
         }
         return list
       }
-      return traverse(appRouteTree.value.tree)
+
+      return traverse(appRouteData.value.tree)
     }
 
     const handleMenuItemClick = (item: RouteRecordRaw) => {
-      console.log('item: ', item)
       router.push({
         name: item.name
       })
     }
     listenerRouteChange((newRoute) => {
       if (newRoute.name) {
-        const routeNamePath = appRouteTree.value.map[newRoute.name].routeNamePath
-        console.log('routeNamePath: ', routeNamePath)
-        if (Array.isArray(routeNamePath)) {
-          openKeys.value = routeNamePath
-          const stackTopName = routeNamePath[routeNamePath.length - 1]
-          console.log('stackTopName: ', stackTopName)
-          if (stackTopName) selectedKey.value = [stackTopName]
+        const appRoute = appRouteData.value.map[newRoute.name]
+        if (appRoute) {
+          const namePath = appRoute.namePath
+          openKeys.value = Array.from(new Set([...namePath, ...openKeys.value]))
+          const stackTopName = namePath[namePath.length - 1]
+          selectedKey.value = [stackTopName]
         }
       }
     }, true)

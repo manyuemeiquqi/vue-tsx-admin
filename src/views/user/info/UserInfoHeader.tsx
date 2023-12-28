@@ -28,21 +28,20 @@ export default defineComponent({
             }}
           </Avatar>
           <Typography.Title class="!my-0" heading={6}>
-            {' '}
-            {userStore.userInfo.name}
+            {userStore.name}
           </Typography.Title>
           <Space size={'small'}>
             <div>
               <IconUser class="mr-1" />
-              <Typography.Text>{userStore.userInfo.jobName}</Typography.Text>
+              <Typography.Text>{userStore.jobName}</Typography.Text>
             </div>
             <div>
               <IconHome class="mr-1" />
-              <Typography.Text>{userStore.userInfo.organizationName}</Typography.Text>
+              <Typography.Text>{userStore.organizationName}</Typography.Text>
             </div>
             <div>
               <IconLocation class="mr-1" />
-              <Typography.Text>{userStore.userInfo.locationName}</Typography.Text>
+              <Typography.Text>{userStore.locationName}</Typography.Text>
             </div>
           </Space>
         </Space>

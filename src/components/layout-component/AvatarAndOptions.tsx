@@ -27,7 +27,7 @@ export default defineComponent({
       userStore
         .switchRoles()
         .then((res) => {
-          Message.success(res)
+          if (res) Message.success(res)
         })
         .catch(() => {
           Message.error('切换失败')

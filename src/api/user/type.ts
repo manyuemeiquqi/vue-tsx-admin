@@ -97,3 +97,7 @@ export type LoginData = {
 export type LoginRes = {
   token: string
 }
+
+export type RoleRes = {
+  role: RoleType
+}

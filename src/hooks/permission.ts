@@ -18,7 +18,7 @@ export default function usePermission() {
         !requiresAuth ||
         needRoles.length === 0 ||
         needRoles.includes('*') ||
-        needRoles.includes(userStore.userInfo.role)
+        needRoles.includes(userStore.role)
       )
     },
 

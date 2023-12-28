@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia'
-import { getUserInfo, type UserInfo } from '@/api/user'
+import { getUserInfo, requestSwitchRole, type UserInfo } from '@/api/user'
 
 export default defineStore('userStore', {
   state: (): UserInfo => ({
@@ -20,11 +20,7 @@ export default defineStore('userStore', {
     certification: undefined,
     role: ''
   }),
-  getters: {
-    userInfo(state: UserInfo): UserInfo {
-      return { ...state }
-    }
-  },
+
   actions: {
     setUserInfo(payload: Partial<UserInfo>) {
       this.$patch(payload)
@@ -33,11 +29,15 @@ export default defineStore('userStore', {
       this.$reset()
     },
 
-    switchRoles() {
-      return new Promise<string>((resolve) => {
-        this.role = this.role === 'user' ? 'admin' : 'user'
-        resolve(this.role)
-      })
+    async switchRoles() {
+      try {
+        const res = await requestSwitchRole()
+        const role = res.data.role
+        this.role = role
+        return role
+      } catch (e) {
+        /* empty */
+      }
     },
     async refreshUserInfo() {
       const res = await getUserInfo()

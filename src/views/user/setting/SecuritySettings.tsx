@@ -20,9 +20,7 @@ export default defineComponent({
       },
       {
         title: t('userSetting.security.phone'),
-        value: userStore.userInfo.phone
-          ? `${t('userSetting.security.phone.tips')} ${userStore.userInfo.phone}`
-          : ''
+        value: userStore.phone ? `${t('userSetting.security.phone.tips')} ${userStore.phone}` : ''
       },
       {
         title: t('userSetting.security.email'),

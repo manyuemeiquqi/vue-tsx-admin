@@ -8,7 +8,7 @@ setupMock({
     // 用户信息
     Mock.mock(new RegExp('/api/user/info'), () => {
       if (isLogin()) {
-        const role = window.localStorage.getItem('userRole') || 'admin'
+        const role = window.localStorage.getItem('data-base-role') || 'admin'
         return successResponseWrap({
           name: '蔓越莓曲奇',
           avatar: 'https://cdn.jsdelivr.net/gh/manyuemeiquqi/my-image-bed/dist/54520846%20(1).jpg',
@@ -41,13 +41,13 @@ setupMock({
         return failResponseWrap(null, '密码不能为空', ResCode.error)
       }
       if (username === 'admin' && password === 'admin') {
-        window.localStorage.setItem('userRole', 'admin')
+        window.localStorage.setItem('data-base-role', 'admin')
         return successResponseWrap({
           token: '12345'
         })
       }
       if (username === 'user' && password === 'user') {
-        window.localStorage.setItem('userRole', 'user')
+        window.localStorage.setItem('data-base-role', 'user')
         return successResponseWrap({
           token: '54321'
         })
@@ -241,6 +241,15 @@ setupMock({
 
     Mock.mock(new RegExp('/api/user/save-info'), () => {
       return successResponseWrap('ok')
+    })
+
+    Mock.mock(new RegExp('/api/user/switch-user-role'), () => {
+      const role = window.localStorage.getItem('data-base-role') || 'admin'
+      const roleValue = role === 'admin' ? 'user' : 'admin'
+      window.localStorage.setItem('data-base-role', roleValue)
+      return successResponseWrap({
+        role: roleValue
+      })
     })
   }
 })

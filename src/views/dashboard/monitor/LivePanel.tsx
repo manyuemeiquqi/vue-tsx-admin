@@ -110,10 +110,10 @@ export default defineComponent({
                 <Grid.Row align="center" justify="space-between">
                   <Space size="small">
                     <Avatar size={24}>
-                      <img src={userStore.userInfo.avatar} alt="alt" />
+                      <img src={userStore.avatar} alt="alt" />
                     </Avatar>
                     <Typography.Text>
-                      {userStore.userInfo.name}
+                      {userStore.name}
                       {t('monitor.studioPreview.studio')}
                     </Typography.Text>
                   </Space>

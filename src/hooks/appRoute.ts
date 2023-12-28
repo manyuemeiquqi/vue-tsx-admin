@@ -1,8 +1,4 @@
 import { appRoutes } from '@/router/routes'
-import { cloneDeep, isString } from 'lodash'
-import type { RouteRecordName, RouteRecordRaw } from 'vue-router'
-import usePermission from './permission'
-import { computed } from 'vue'
 import { ViewNames } from '@/types/constants'
 import {
   IconCloseCircle,
@@ -13,8 +9,12 @@ import {
   IconSettings,
   IconUser
 } from '@arco-design/web-vue/es/icon'
+import { computed } from 'vue'
+import type { RouteRecordName, RouteRecordRaw } from 'vue-router'
+import usePermission from './permission'
+import { isString } from 'lodash'
 
-const routeIconMap: Record<RouteRecordName, typeof IconDashboard> = {
+const routeIconMap: Record<RouteRecordName, typeof IconDashboard | undefined> = {
   [ViewNames.dashboard]: IconDashboard,
   [ViewNames.profile]: IconFile,
   [ViewNames.exception]: IconExclamationCircle,
@@ -25,65 +25,60 @@ const routeIconMap: Record<RouteRecordName, typeof IconDashboard> = {
 }
 
 type Context = {
-  currentNode: AppRouteInfo | null
-  parent: AppRouteInfo | null
+  currentNode: MenuData | null
+  parent: MenuData | null
 }
-type AppRouteInfo = {
+
+type MenuData = {
   name: string
   icon?: typeof IconDashboard
   namePath: string[]
+  locale: string
   localePath: string[]
-  children?: AppRouteInfo[]
+  children?: MenuData[]
 }
 export default function useAppRoute() {
   const permission = usePermission()
-  const appRouteTree = computed(() => {
-    const appRouteMap: Record<string, AppRouteInfo> = {}
-    const menuTree = []
-
-    const generateRenderNode = (route: RouteRecordRaw, context: Context) => {
-      const ret: AppRouteInfo = {
-        name: '',
-        namePath: [],
-        localePath: []
+  const appRouteData = computed(() => {
+    const getMenuData = (route: RouteRecordRaw, context: Context) => {
+      const ret: MenuData = {
+        name: isString(route.name) ? route.name : '',
+        locale: typeof route.meta?.locale === 'string' ? route.meta.locale : '',
+        localePath: [],
+        namePath: []
       }
-      if (route.name && isString(route.name)) {
-        if (route.name in ViewNames) {
-          ret.name = route.name
-          ret.namePath.push(route.name)
-          ret.icon = routeIconMap[route.name]
-        }
-      }
-      if (isString(route.meta?.locale)) {
-        ret.localePath.push(route.meta.locale)
-      }
+      ret.namePath.push(ret.name)
+      ret.localePath.push(ret.locale)
       if (context.parent?.localePath) {
         ret.localePath = context.parent.localePath.concat(ret.localePath)
       }
       if (context.parent?.namePath) {
-        ret.namePath = context.parent.localePath.concat(ret.namePath)
+        ret.namePath = context.parent.namePath.concat(ret.namePath)
+      }
+      if (ret.name in routeIconMap) {
+        ret.icon = routeIconMap[ret.name]
       }
       return ret
     }
-    function getMenuNode(node: RouteRecordRaw, context: Context) {
+
+    const getMenuNode = (node: RouteRecordRaw, context: Context) => {
       if (permission.checkRoutePermission(node)) {
-        const renderData = generateRenderNode(node, context)
-        context.currentNode = renderData
+        const menuData = getMenuData(node, context)
+        context.currentNode = menuData
         if (node.children === undefined) {
-          appRouteMap[renderData.name] = renderData
-          return renderData
+          _map[menuData.name] = menuData
+          return menuData
         } else {
-          const list: AppRouteInfo[] = []
+          const list: MenuData[] = []
           for (let j = 0; j < node.children.length; j++) {
-            context.parent = renderData
-            const child = getMenuNode(node, context)
+            context.parent = menuData
+            const child = getMenuNode(node.children[j], context)
             if (child) list.push(child)
           }
-          list.filter(Boolean)
           if (list.length) {
-            renderData.children = list
-            appRouteMap[renderData.name] = renderData
-            return renderData
+            menuData.children = list
+            _map[menuData.name] = menuData
+            return menuData
           }
           return null
         }
@@ -91,20 +86,21 @@ export default function useAppRoute() {
         return null
       }
     }
+    const _map: Record<RouteRecordName, MenuData | undefined> = {}
+    const nodeList = []
     for (let i = 0; i < appRoutes.length; i++) {
       const context: Context = {
         currentNode: null,
         parent: null
       }
-      const menuChild = getMenuNode(appRoutes[i], context)
-      if (menuChild) {
-        menuTree.push(menuChild)
+      const menuNode = getMenuNode(appRoutes[i], context)
+      if (menuNode) {
+        nodeList.push(menuNode)
       }
     }
-    return { tree: menuTree, map: appRouteMap }
+    return { tree: nodeList, map: _map }
   })
-
   return {
-    transformedRoutes
+    appRouteData
   }
 }

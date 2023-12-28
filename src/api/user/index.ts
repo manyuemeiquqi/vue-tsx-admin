@@ -7,7 +7,8 @@ import type {
   TeamItem,
   UnitCertification,
   UserInfo,
-  BasicInfoModel
+  BasicInfoModel,
+  RoleRes
 } from './type'
 import type { OKResponse } from '@/types/global'
 export type {
@@ -54,4 +55,8 @@ export function saveUserInfo() {
 
 export function queryCertification() {
   return axios.post<UnitCertification>('/api/user/certification')
+}
+
+export function requestSwitchRole() {
+  return axios.post<RoleRes>('/api/user/switch-user-role')
 }

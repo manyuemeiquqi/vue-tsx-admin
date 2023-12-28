@@ -23,23 +23,23 @@ export default defineComponent({
     const userInfoData = computed(() => [
       {
         label: t('userSetting.label.name'),
-        value: userStore.userInfo.name
+        value: userStore.name
       },
       {
         label: t('userSetting.label.certification'),
-        value: userStore.userInfo.certification
+        value: userStore.certification
       },
       {
         label: t('userSetting.label.accountId'),
-        value: userStore.userInfo.accountId
+        value: userStore.accountId
       },
       {
         label: t('userSetting.label.phone'),
-        value: userStore.userInfo.phone
+        value: userStore.phone
       },
       {
         label: t('userSetting.label.registrationDate'),
-        value: userStore.userInfo.registrationDate
+        value: userStore.registrationDate
       }
     ])
 
@@ -51,7 +51,7 @@ export default defineComponent({
       if (fileList.value) {
         return fileList.value[0].url
       }
-      return userStore.userInfo.avatar
+      return userStore.avatar
     })
     const customRequest = (options: RequestOption) => {
       const controller = new AbortController()
