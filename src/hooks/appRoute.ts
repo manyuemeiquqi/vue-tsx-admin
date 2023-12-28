@@ -61,7 +61,7 @@ export default function useAppRoute() {
       return ret
     }
 
-    const getMenuNode = (node: RouteRecordRaw, context: Context) => {
+    const getSubMenu = (node: RouteRecordRaw, context: Context) => {
       if (permission.checkRoutePermission(node)) {
         const menuData = getMenuData(node, context)
         context.currentNode = menuData
@@ -72,7 +72,7 @@ export default function useAppRoute() {
           const list: MenuData[] = []
           for (let j = 0; j < node.children.length; j++) {
             context.parent = menuData
-            const child = getMenuNode(node.children[j], context)
+            const child = getSubMenu(node.children[j], context)
             if (child) list.push(child)
           }
           if (list.length) {
@@ -93,7 +93,7 @@ export default function useAppRoute() {
         currentNode: null,
         parent: null
       }
-      const menuNode = getMenuNode(appRoutes[i], context)
+      const menuNode = getSubMenu(appRoutes[i], context)
       if (menuNode) {
         nodeList.push(menuNode)
       }
