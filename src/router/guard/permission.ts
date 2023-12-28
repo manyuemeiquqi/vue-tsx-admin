@@ -2,23 +2,22 @@ import NProgress from 'nprogress' // progress bar
 import type { RouteRecord, Router } from 'vue-router'
 
 import usePermission from '@/hooks/permission'
-import { useUserStore } from '@/store'
-import { appRoutes } from '../routes'
-import { NOT_FOUND_ROUTE } from '@/types/constants'
+
+import { ViewNames } from '@/types/constants'
+import useAppRoute from '@/hooks/appRoute'
 
 export default function setupPermissionGuard(router: Router) {
+  console.log('router: ', router)
   router.beforeEach(async (to, from, next) => {
-    const userStore = useUserStore()
     const Permission = usePermission()
     const permissionsAllow = Permission.checkRoutePermission(to as unknown as RouteRecord)
-
+    const { appRouteData } = useAppRoute()
     // eslint-disable-next-line no-lonely-if
     if (permissionsAllow) next()
     else {
-      const destination =
-        Permission.findFirstPermissionRoute(appRoutes, userStore.role) ?? NOT_FOUND_ROUTE
+      const destination = appRouteData.value.treeInfo.leftFirstLeaf?.name || ViewNames.notFound
 
-      next(destination)
+      next({ name: destination })
     }
     NProgress.done()
   })

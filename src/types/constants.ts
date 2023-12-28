@@ -68,10 +68,6 @@ export enum ViewNames {
   // =============== DIVIDER ==================
 }
 
-export const NOT_FOUND_ROUTE = {
-  name: ViewNames.notFound
-}
-
 export const layoutStyleConfig = {
   navbarHeight: 64,
   breadcrumbHeight: 52,

@@ -12,7 +12,7 @@ import {
 import { computed } from 'vue'
 import type { RouteRecordName, RouteRecordRaw } from 'vue-router'
 import usePermission from './permission'
-import { isString } from 'lodash'
+import { isNull, isString } from 'lodash'
 
 const routeIconMap: Record<RouteRecordName, typeof IconDashboard | undefined> = {
   [ViewNames.dashboard]: IconDashboard,
@@ -36,6 +36,9 @@ type MenuData = {
   locale: string
   localePath: string[]
   children?: MenuData[]
+}
+type TreeInfo = {
+  leftFirstLeaf: MenuData | null
 }
 export default function useAppRoute() {
   const permission = usePermission()
@@ -67,6 +70,9 @@ export default function useAppRoute() {
         context.currentNode = menuData
         if (node.children === undefined) {
           _map[menuData.name] = menuData
+          if (isNull(treeInfo.leftFirstLeaf)) {
+            treeInfo.leftFirstLeaf = menuData
+          }
           return menuData
         } else {
           const list: MenuData[] = []
@@ -88,6 +94,9 @@ export default function useAppRoute() {
     }
     const _map: Record<RouteRecordName, MenuData | undefined> = {}
     const nodeList = []
+    const treeInfo: TreeInfo = {
+      leftFirstLeaf: null
+    }
     for (let i = 0; i < appRoutes.length; i++) {
       const context: Context = {
         currentNode: null,
@@ -98,7 +107,7 @@ export default function useAppRoute() {
         nodeList.push(menuNode)
       }
     }
-    return { tree: nodeList, map: _map }
+    return { tree: nodeList, map: _map, treeInfo }
   })
   return {
     appRouteData
