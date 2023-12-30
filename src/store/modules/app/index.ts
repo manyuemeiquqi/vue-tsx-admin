@@ -10,7 +10,6 @@ export type AppState = {
   footer: boolean
   themeColor: string
   menuWidth: number
-  tabBar: boolean
   settingVisible: boolean
   [key: string]: unknown
 }
@@ -26,7 +25,6 @@ export default defineStore('appStore', {
       footer: true,
       themeColor: '#165DFF',
       menuWidth: 220,
-      tabBar: false,
       settingVisible: false
     }
   },
