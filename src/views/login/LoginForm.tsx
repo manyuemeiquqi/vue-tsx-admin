@@ -20,6 +20,7 @@ import { defineComponent, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { useRouter } from 'vue-router'
 import Logo from '@/assets/logo.svg'
+import { firstPermissionRoute } from '@/hooks/appRoute'
 export default defineComponent({
   name: 'loginForm',
   setup() {
@@ -56,7 +57,7 @@ export default defineComponent({
         try {
           await loginApp(values as LoginData)
           router.push({
-            name: ViewNames.workplace
+            name: firstPermissionRoute.name
           })
           Message.success(t('login.form.login.success'))
           const { rememberPassword } = storageLoginInfo.value

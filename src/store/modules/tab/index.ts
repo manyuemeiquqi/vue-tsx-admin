@@ -1,6 +1,8 @@
 import type { RouteLocationNormalized } from 'vue-router'
 import { defineStore } from 'pinia'
 import { ViewNames } from '@/types/constants'
+import { cloneDeep } from 'lodash'
+import { firstPermissionRoute } from '@/hooks/appRoute'
 const BAN_LIST = [ViewNames.redirect, ViewNames.notFound]
 export type TabItem = {
   title: string
@@ -15,12 +17,14 @@ const formatRoute = (route: RouteLocationNormalized): TabItem => {
     fullPath
   }
 }
+const firstRoute = cloneDeep(firstPermissionRoute)
 export const defaultTab = {
-  name: ViewNames.workplace,
-  title: 'menu.dashboard.workplace',
-  fullPath: '/dashboard/workplace'
+  title: firstRoute.title,
+  name: firstRoute.name,
+  fullPath: firstRoute.fullPath
 }
 
+//  tab list doesn't process permission limit, if you want to use in project, add test case according to requirement and develop
 export default defineStore('tabStore', {
   state: (): {
     tabList: TabItem[]

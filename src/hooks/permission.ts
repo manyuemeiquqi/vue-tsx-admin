@@ -22,23 +22,6 @@ export default function usePermission() {
       )
     },
 
-    findFirstPermissionRoute(_routes: any, role = 'admin') {
-      const cloneRouters = cloneDeep(_routes)
-      while (cloneRouters.length) {
-        const firstElement = cloneRouters.shift()
-        if (
-          firstElement?.meta?.roles?.find((el: string[]) => {
-            return el.includes('*') || el.includes(role)
-          })
-        )
-          return { name: firstElement.name }
-        if (firstElement?.children) {
-          cloneRouters.push(...firstElement.children)
-        }
-      }
-      return null
-    },
-
     checkButtonPermission(needPermission: string[]): boolean {
       const userStore = useUserStore()
       return needPermission.includes(userStore.role)

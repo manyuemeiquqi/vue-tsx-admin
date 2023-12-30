@@ -38,6 +38,41 @@ type MenuData = {
   children?: MenuData[]
 }
 
+/**
+ * @desc convention
+ *  dashboard is fixed no permission view, if you want dynamic ,use following and complete other logic
+ */
+export const firstPermissionRoute = {
+  name: ViewNames.workplace,
+  title: 'menu.dashboard.workplace',
+  fullPath: '/dashboard/workplace'
+}
+//  computed to memo
+// const firstPermissionRoute = (() => {
+//   const getFirstChild = (node: RouteRecordRaw): null | RouteRecordRaw => {
+//     if (permission.checkRoutePermission(node)) {
+//       if (node.children === undefined) {
+//         return node
+//       } else {
+//         for (let i = 0; i < node.children.length; i++) {
+//           const findRes = getFirstChild(node.children[i])
+//           if (findRes) {
+//             return findRes
+//           }
+//         }
+//       }
+//     }
+//     return null
+//   }
+//   for (let i = 0; i < appRoutes.length; i++) {
+//     const findRes = getFirstChild(appRoutes[i])
+//     if (findRes) {
+//       return findRes
+//     }
+//   }
+//   return null
+// })
+
 export default function useAppRoute() {
   const permission = usePermission()
   const appRouteData = computed(() => {
@@ -102,33 +137,7 @@ export default function useAppRoute() {
     return { tree: nodeList, map: _map }
   })
 
-  //  computed to optimize
-  const firstPermissionRoute = computed(() => {
-    const getFirstChild = (node: RouteRecordRaw): null | RouteRecordRaw => {
-      if (permission.checkRoutePermission(node)) {
-        if (node.children === undefined) {
-          return node
-        } else {
-          for (let i = 0; i < node.children.length; i++) {
-            const findRes = getFirstChild(node.children[i])
-            if (findRes) {
-              return findRes
-            }
-          }
-        }
-      }
-      return null
-    }
-    for (let i = 0; i < appRoutes.length; i++) {
-      const findRes = getFirstChild(appRoutes[i])
-      if (findRes) {
-        return findRes
-      }
-    }
-    return null
-  })
   return {
-    appRouteData,
-    firstPermissionRoute
+    appRouteData
   }
 }

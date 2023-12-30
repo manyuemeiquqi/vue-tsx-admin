@@ -1,4 +1,5 @@
 import CardLayout from '@/components/card-layout'
+import { firstPermissionRoute } from '@/hooks/appRoute'
 import { ViewNames } from '@/types/constants'
 import { Button, Result, Space } from '@arco-design/web-vue'
 import { defineComponent } from 'vue'
@@ -11,7 +12,7 @@ export default defineComponent({
     const router = useRouter()
     const handleBack = () => {
       router.push({
-        name: ViewNames.workplace
+        name: firstPermissionRoute.name
       })
     }
     return () => (
