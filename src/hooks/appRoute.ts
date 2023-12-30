@@ -9,10 +9,10 @@ import {
   IconSettings,
   IconUser
 } from '@arco-design/web-vue/es/icon'
+import { isString } from 'lodash'
 import { computed } from 'vue'
 import type { RouteRecordName, RouteRecordRaw } from 'vue-router'
 import usePermission from './permission'
-import { isNull, isString } from 'lodash'
 
 const routeIconMap: Record<RouteRecordName, typeof IconDashboard | undefined> = {
   [ViewNames.dashboard]: IconDashboard,

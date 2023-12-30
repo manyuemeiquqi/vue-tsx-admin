@@ -1,11 +1,10 @@
-import { Menu } from '@arco-design/web-vue'
-import { get, isString } from 'lodash'
-import { defineComponent, h, ref } from 'vue'
-import { useI18n } from 'vue-i18n'
-import { useRouter, type RouteRecordRaw } from 'vue-router'
 import useAppRoute from '@/hooks/appRoute'
 import { useAppStore } from '@/store'
 import { listenerRouteChange } from '@/utils/routerListener'
+import { Menu } from '@arco-design/web-vue'
+import { defineComponent, h, ref } from 'vue'
+import { useI18n } from 'vue-i18n'
+import { useRouter, type RouteRecordRaw } from 'vue-router'
 
 export default defineComponent({
   name: 'MenuComponent',
