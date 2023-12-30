@@ -37,9 +37,7 @@ type MenuData = {
   localePath: string[]
   children?: MenuData[]
 }
-type TreeInfo = {
-  leftFirstLeaf: MenuData | null
-}
+
 export default function useAppRoute() {
   const permission = usePermission()
   const appRouteData = computed(() => {
@@ -70,9 +68,6 @@ export default function useAppRoute() {
         context.currentNode = menuData
         if (node.children === undefined) {
           _map[menuData.name] = menuData
-          if (isNull(treeInfo.leftFirstLeaf)) {
-            treeInfo.leftFirstLeaf = menuData
-          }
           return menuData
         } else {
           const list: MenuData[] = []
@@ -94,9 +89,6 @@ export default function useAppRoute() {
     }
     const _map: Record<RouteRecordName, MenuData | undefined> = {}
     const nodeList = []
-    const treeInfo: TreeInfo = {
-      leftFirstLeaf: null
-    }
     for (let i = 0; i < appRoutes.length; i++) {
       const context: Context = {
         currentNode: null,
@@ -107,9 +99,36 @@ export default function useAppRoute() {
         nodeList.push(menuNode)
       }
     }
-    return { tree: nodeList, map: _map, treeInfo }
+    return { tree: nodeList, map: _map }
+  })
+
+  //  computed to optimize
+  const firstPermissionRoute = computed(() => {
+    const getFirstChild = (node: RouteRecordRaw): null | RouteRecordRaw => {
+      if (permission.checkRoutePermission(node)) {
+        if (node.children === undefined) {
+          return node
+        } else {
+          for (let i = 0; i < node.children.length; i++) {
+            const findRes = getFirstChild(node.children[i])
+            if (findRes) {
+              return findRes
+            }
+          }
+        }
+      }
+      return null
+    }
+    for (let i = 0; i < appRoutes.length; i++) {
+      const findRes = getFirstChild(appRoutes[i])
+      if (findRes) {
+        return findRes
+      }
+    }
+    return null
   })
   return {
-    appRouteData
+    appRouteData,
+    firstPermissionRoute
   }
 }
