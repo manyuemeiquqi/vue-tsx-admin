@@ -1,4 +1,4 @@
-[中文](https://github.com/manyuemeiquqi/vue-tsx-admin/blob/master/README.zh-CN.md) | English
+English | [中文](https://github.com/manyuemeiquqi/vue-tsx-admin/blob/master/README.zh-CN.md)
 
 ## What is the Vue TSX Admin?
 
@@ -44,16 +44,16 @@ The main development solutions are as follows:
 - use
 
 ```javascript
-
+# clone
 git clone https://github.com/manyuemeiquqi/vue-tsx-admin.git
 
-
+# cd project
 cd vue-tsx-admin
 
-
+# install dependency
 pnpm install
 
-
+# start project
 pnpm run dev
 ```
 
@@ -62,22 +62,23 @@ Browser access: [http://localhost: 5173/vue-tsx-admin/ ](http://localhost:5173/v
 - Publish
 
 ```javascript
+# build project
 pnpm run build
 ```
 
 - Others
 
 ```javascript
-
+# install husky
 pnpm run husky
 
-
+# format code
 pnpm run format
 
-
+# lint and fix code
 pnpm run lint
 
-
+# lint and fix style
 pnpm run lint-style
 ```
 
