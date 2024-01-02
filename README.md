@@ -6,7 +6,7 @@ English | [中文](https://github.com/manyuemeiquqi/vue-tsx-admin/blob/master/RE
 
 ### Overview
 
-[Vue TSX Admin ](https://github.com/manyuemeiquqi/vue-tsx-admin)it is a free open source mid-end and back-end management system module version. The UI is referred to acro design pro + ant design pro. It uses the latest front-end technology stack and uses the Vue3 + TSX mode for development. It provides out-of-the-box mid-end and back-end solutions. It has built-in i18n internationalized solutions, configurable layout, theme color modification, permission verification, and refined typical business models, it can help you quickly build a middle-end and back-end project.
+[Vue TSX Admin ](https://github.com/manyuemeiquqi/vue-tsx-admin)it is a free open source mid-end and back-end management system module template. The UI is referred to acro design pro + ant design pro. It uses the latest front-end technology stack and uses the Vue3 + TSX mode for development. It provides out-of-the-box mid-end and back-end solutions. It has built-in i18n internationalized solutions, configurable layout, theme color modification, permission verification, and refined typical business models, it can help you quickly build a middle-end and back-end project.
 
 The main development solutions are as follows:
 
