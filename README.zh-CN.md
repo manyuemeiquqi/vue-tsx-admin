@@ -1,4 +1,4 @@
-中文 | [English](https://manyuemeiquqi.github.io/vue-tsx-admin/)
+中文 | [English]([https://manyuemeiquqi.github.io/vue-tsx-admin/](https://github.com/manyuemeiquqi/vue-tsx-admin/blob/master/README.md))
 
 ## Vue TSX Admin
 
