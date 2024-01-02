@@ -6,7 +6,7 @@
 
 ### 简介
 
-[Vue TSX Admin](https://github.com/manyuemeiquqi/vue-tsx-admin) 是一个免费开源的中后台管理系统模块版本，UI 参考 acro design pro + ant design pro，它使用了最新的前端技术栈，完全采用 Vue3 + TSX 的模式进行开发，提供了开箱即用的中后台前端解决方案，内置了 i18n 国际化解决方案，可配置化布局，主题色修改，权限验证，提炼了典型的业务模型，可以帮助你快速搭建起一个中后台前端项目。
+[Vue TSX Admin](https://github.com/manyuemeiquqi/vue-tsx-admin) 是一个免费开源的中后台管理系统模块，UI 参考 acro design pro + ant design pro，它使用了最新的前端技术栈，完全采用 Vue3 + TSX 的模式进行开发，提供了开箱即用的中后台前端解决方案，内置了 i18n 国际化解决方案，可配置化布局，主题色修改，权限验证，提炼了典型的业务模型，可以帮助你快速搭建起一个中后台前端项目。
 
 主要的开发方案为：
 
