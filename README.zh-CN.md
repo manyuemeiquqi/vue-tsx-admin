@@ -90,6 +90,8 @@ pnpm run lint-style
 
 可参考 [https://github.com/krausest/js-framework-benchmark/pull/1546#issuecomment-1872904990](https://github.com/krausest/js-framework-benchmark/pull/1546#issuecomment-1872904990)
 
+如果你对为什么使用 Vue + TSX 进行中后台开发感兴趣，可参考 [🎉Vue TSX Admin, 中后台管理系统开发的新方向](https://juejin.cn/post/7318446251631804467)
+
 ### 演示
 
 ![动画.gif](https://cdn.nlark.com/yuque/0/2024/gif/22817409/1704072677179-76719f50-5e8a-4f7f-aaab-b1e3952ef6d5.gif#averageHue=%23d5c9b1&clientId=uf128b628-9083-4&from=drop&id=u79f05bb4&originHeight=1007&originWidth=1919&originalType=binary&ratio=1&rotation=0&showTitle=false&size=2616308&status=done&style=none&taskId=u01bc0557-2a52-4e92-8d81-02530d08ada&title=)
