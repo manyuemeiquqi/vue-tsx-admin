@@ -10,7 +10,7 @@ English | [中文](https://github.com/manyuemeiquqi/vue-tsx-admin/blob/master/RE
 
 The main development solutions are as follows:
 
-- CSS solution： modules css + tailwind
+- CSS solution：modules css + tailwind
 - Network request: axios
 - Authentication scheme: token + jwt
 - Fake data: mockjs
