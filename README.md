@@ -10,15 +10,15 @@ English | [中文](https://github.com/manyuemeiquqi/vue-tsx-admin/blob/master/RE
 
 The main development solutions are as follows:
 
-- CSS solution modules css + tailwind
-- network request axios
-- authentication scheme token + jwt
-- fake data mockjs
-- store manager pinia
-- ui component library arco desigin vue
-- tool Library lodash vue-use
-- internationalization switching solution vue-i18n
-- packaging Solution + static server vite
+- CSS solution： modules css + tailwind
+- Network request: axios
+- Authentication scheme: token + jwt
+- Fake data: mockjs
+- Store manager: pinia
+- UI component library: arco desigin vue
+- Tool Library: lodash + vue-use
+- Internationalization switching solution: vue-i18n
+- Packaging solution and locale static server: vite
 
 ### Preview address
 
